@@ -1,31 +1,22 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ShoppingBag, Sparkles, MapPin, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const steps = [
   {
-    icon: ShoppingBag,
-    title: "Elige tu torta favorita",
-    description: "Explora nuestro catálogo y selecciona tu sabor preferido",
+    title: "Elige tu favorita.",
+    description: "Mira los sabores y tamaños que tenemos.",
   },
   {
-    icon: Sparkles,
-    title: "Personalízala a tu gusto",
-    description: "Indícanos el tamaño, relleno o dedicatoria especial.",
-  },
-  {
-    icon: MapPin,
-    title: "Ubica tu dirección",
+    title: "Personalízala.",
     description:
-      "Marca tu ubicación o escribe la dirección de entrega en el mapa dinámico",
+      "¿Tienes una idea diferente? ¡Contáctanos por WhatsApp y la hacemos realidad!",
   },
   {
-    icon: MessageCircle,
-    title: "Recibe tu cotización por WhatsApp",
+    title: "Haz tu pedido.",
     description:
-      "Confirma tu pedido y recibe los detalles finales en nuestro chat.",
+      "Confirma los detalles y listo, nosotros nos encargamos del resto.",
   },
 ];
 
@@ -51,46 +42,38 @@ const HowToBuy = () => {
           className="text-center mb-12 md:mb-16"
         >
           <h2 className="mb-6 text-4xl font-serif italic md:text-5xl text-foreground">
-            Cómo Comprar tu Torta ZAFTA
+            ¿cómo pido mi torta?
           </h2>
-          <p className="text-lg md:text-xl text-muted-foreground font-sans max-w-2xl mx-auto leading-relaxed">
-            Un proceso fácil, dulce y lleno de amor. Como debe ser.
-          </p>
         </motion.div>
 
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4 mb-12">
+        <div className="grid gap-8 md:grid-cols-3 mb-12 max-w-4xl mx-auto">
           {steps.map((step, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 30, scale: 0.95 }}
-              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{
                 duration: 0.6,
-                delay: index * 0.1,
+                delay: index * 0.15,
                 ease: [0.4, 0, 0.2, 1],
               }}
-              className="group text-center"
+              className="text-center"
             >
-              <motion.div
-                className="relative mb-6"
-                whileHover={{ scale: 1.05, rotate: 2 }}
-                transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
-              >
-                <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-card border-2 border-secondary/40 shadow-warm transition-all duration-300 group-hover:border-secondary group-hover:shadow-medium">
-                  <step.icon
-                    className="h-12 w-12 text-primary transition-transform duration-300 group-hover:scale-110"
-                    strokeWidth={1.5}
-                  />
-                </div>
-                <div className="absolute -top-2 -right-2 h-8 w-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold shadow-warm">
+              {/* Número simple */}
+              <div className="mb-6">
+                <span className="inline-flex items-center justify-center text-5xl md:text-6xl font-serif italic text-primary">
                   {index + 1}
-                </div>
-              </motion.div>
-              <h3 className="mb-4 text-xl md:text-2xl font-serif italic text-foreground">
+                </span>
+              </div>
+
+              {/* Título */}
+              <h3 className="mb-3 text-xl md:text-2xl font-serif italic text-foreground">
                 {step.title}
               </h3>
-              <p className="text-base md:text-lg text-muted-foreground font-sans leading-relaxed px-2">
+
+              {/* Descripción */}
+              <p className="text-base md:text-lg text-muted-foreground font-sans leading-relaxed">
                 {step.description}
               </p>
             </motion.div>
