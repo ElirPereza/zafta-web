@@ -110,14 +110,12 @@ const Navigation = () => {
             <motion.div
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.2 }}
-              className="cursor-pointer relative -mt-2"
+              className="cursor-pointer flex items-center justify-center"
             >
-              {/* Círculo de fondo */}
-              <div className="absolute -inset-3 rounded-full bg-white shadow-xl border-2 border-secondary/20" />
-              {/* Logo completo: cake + ZAFTA + tagline */}
-              <div className="relative p-5">
-                <Logo variant="banner-color-1" width={200} height={162} className="w-40 lg:w-44 h-auto" />
-              </div>
+              {/* Círculo de fondo - DESACTIVADO */}
+              {/* <div className="absolute -inset-3 rounded-full bg-white shadow-xl border-2 border-secondary/20" /> */}
+              {/* Logo ZAFTA text optimizado */}
+              <Logo variant="zafta-text" width={180} height={42} className="w-44 lg:w-48 h-auto" />
             </motion.div>
           </Link>
 
@@ -184,9 +182,9 @@ const Navigation = () => {
             <motion.div
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.2 }}
-              className="cursor-pointer"
+              className="cursor-pointer flex items-center"
             >
-              <Logo variant="banner-color-1" width={200} height={162} className="w-32 h-auto" />
+              <Logo variant="zafta-text" width={160} height={42} className="w-36 h-auto" />
             </motion.div>
           </Link>
 
@@ -209,7 +207,7 @@ const Navigation = () => {
               </SheetTrigger>
             <SheetContent side="right" className="w-[300px] sm:w-[400px]">
               <SheetTitle className="mb-6 flex justify-start">
-                <Logo variant="header" width={100} height={81} className="w-20 h-auto" />
+                <Logo variant="zafta-text" width={140} height={42} className="w-32 h-auto" />
               </SheetTitle>
               <nav className="flex flex-col gap-4">
                 {navItems.map((item) => {
