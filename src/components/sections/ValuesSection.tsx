@@ -1,29 +1,24 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Heart, Sparkles, Clock, Camera } from "lucide-react";
 
 const values = [
   {
-    icon: Clock,
     title: "Tradición",
     description:
       "Recetas transmitidas de generación en generación, preservando los sabores auténticos que nuestras familias aman.",
   },
   {
-    icon: Heart,
     title: "Amor",
     description:
       "Cada torta se hace con cuidado, dedicación y la calidez de una receta familiar.",
   },
   {
-    icon: Sparkles,
     title: "Creatividad",
     description:
       "Combinando técnicas tradicionales con sabores modernos para crear experiencias únicas.",
   },
   {
-    icon: Camera,
     title: "Memoria",
     description:
       "Cada bocado cuenta una historia — celebrando momentos que se convierten en recuerdos atesorados.",
@@ -59,32 +54,23 @@ const ValuesSection = () => {
           {values.map((value, index) => (
             <motion.div
               key={value.title}
-              initial={{ opacity: 0, y: 30, scale: 0.95 }}
-              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{
                 duration: 0.6,
                 delay: index * 0.1,
                 ease: [0.4, 0, 0.2, 1],
               }}
-              className="group text-center"
+              className="text-center"
             >
-              <motion.div
-                className="mb-6"
-                whileHover={{ scale: 1.05, rotate: 5 }}
-                transition={{ duration: 0.3 }}
-              >
-                <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-card border-2 border-secondary/40 shadow-warm transition-all duration-300 group-hover:border-secondary group-hover:shadow-medium">
-                  <value.icon
-                    className="h-10 w-10 text-primary transition-transform duration-300 group-hover:scale-110"
-                    strokeWidth={1.5}
-                  />
-                </div>
-              </motion.div>
-              <h3 className="mb-3 text-xl md:text-2xl font-serif italic text-foreground">
+              {/* Título */}
+              <h3 className="mb-4 text-2xl md:text-3xl font-serif italic text-foreground">
                 {value.title}
               </h3>
-              <p className="text-base text-muted-foreground font-sans leading-relaxed px-2">
+
+              {/* Descripción */}
+              <p className="text-base md:text-lg text-muted-foreground font-sans leading-relaxed">
                 {value.description}
               </p>
             </motion.div>
