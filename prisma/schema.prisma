@@ -1,0 +1,154 @@
+// ZAFTA E-commerce Database Schema
+// Prisma schema for Supabase PostgreSQL
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================================================
+// PRODUCTO MODELS
+// ============================================================================
+
+model Product {
+  id           String      @id @default(cuid())
+  name         String
+  slug         String      @unique
+  description  String?     @db.Text
+  price        Decimal     @db.Decimal(10, 2)
+  comparePrice Decimal?    @db.Decimal(10, 2)
+  images       String[]
+  category     String
+  inStock      Boolean     @default(true)
+  featured     Boolean     @default(false)
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  orderItems   OrderItem[]
+
+  @@index([category])
+  @@index([featured])
+  @@index([slug])
+}
+
+// ============================================================================
+// ORDER MODELS
+// ============================================================================
+
+model Order {
+  id                     String        @id @default(cuid())
+  orderNumber            String        @unique
+  userId                 String?       // Optional for guest checkout
+  customerName           String        // Guest customer name
+  customerEmail          String        // Guest customer email
+  customerPhone          String        // Guest customer phone
+  shippingAddress        String        // Shipping address as string
+  shippingCity           String        // Shipping city
+  shippingDepartment     String        // Shipping department
+  deliveryNotes          String?       // Optional delivery notes
+  status                 OrderStatus   @default(PENDING)
+  paymentMethod          String
+  paymentStatus          PaymentStatus @default(PENDING)
+  paymentTransactionId   String?       // Wompi transaction ID
+  subtotal               Decimal       @db.Decimal(10, 2)
+  shippingCost           Decimal       @db.Decimal(10, 2) @default(0)
+  total                  Decimal       @db.Decimal(10, 2)
+  items                  OrderItem[]
+  invoice                Invoice?
+  createdAt              DateTime      @default(now())
+  updatedAt              DateTime      @updatedAt
+
+  @@index([userId])
+  @@index([orderNumber])
+  @@index([status])
+  @@index([paymentStatus])
+}
+
+model OrderItem {
+  id        String   @id @default(cuid())
+  orderId   String
+  productId String
+  name      String
+  price     Decimal  @db.Decimal(10, 2)
+  quantity  Int
+  imageUrl  String?
+  order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product   Product  @relation(fields: [productId], references: [id])
+  createdAt DateTime @default(now())
+
+  @@index([orderId])
+  @@index([productId])
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  PREPARING
+  IN_TRANSIT
+  DELIVERED
+  CANCELLED
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+  REFUNDED
+}
+
+// ============================================================================
+// INVOICE MODELS
+// ============================================================================
+
+model Invoice {
+  id              String   @id @default(cuid())
+  invoiceNumber   String   @unique
+  orderId         String   @unique
+  userId          String
+  customerName    String
+  customerEmail   String
+  customerPhone   String
+  customerAddress Json
+  taxId           String?
+  companyName     String?
+  items           Json
+  subtotal        Decimal  @db.Decimal(10, 2)
+  tax             Decimal  @db.Decimal(10, 2) @default(0)
+  shippingCost    Decimal  @db.Decimal(10, 2) @default(0)
+  total           Decimal  @db.Decimal(10, 2)
+  issuedAt        DateTime @default(now())
+  dueDate         DateTime?
+  paidAt          DateTime?
+  pdfUrl          String?
+  order           Order    @relation(fields: [orderId], references: [id])
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([userId])
+  @@index([invoiceNumber])
+  @@index([orderId])
+}
+
+// ============================================================================
+// USER MANAGEMENT MODELS (Clerk integration)
+// ============================================================================
+
+model UserMetadata {
+  id        String   @id @default(cuid())
+  clerkId   String   @unique
+  role      UserRole @default(CUSTOMER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([clerkId])
+  @@index([role])
+}
+
+enum UserRole {
+  SUPER_ADMIN
+  ADMIN
+  CUSTOMER
+}

@@ -1,0 +1,31 @@
+import { ProductsTable } from "@/components/admin/products/ProductsTable";
+import { Button } from "@/components/ui/button";
+import { Plus } from "lucide-react";
+import Link from "next/link";
+
+export default function ProductsPage() {
+  return (
+    <div className="space-y-6">
+      {/* Header */}
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-serif font-semibold text-foreground">
+            Productos
+          </h1>
+          <p className="text-sm text-muted-foreground font-sans mt-1">
+            Gestiona el catálogo de productos de ZAFTA
+          </p>
+        </div>
+        <Link href="/admin/productos/nuevo">
+          <Button className="gap-2">
+            <Plus className="h-4 w-4" />
+            Nuevo Producto
+          </Button>
+        </Link>
+      </div>
+
+      {/* Products Table */}
+      <ProductsTable />
+    </div>
+  );
+}

@@ -1,36 +1,157 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🍰 Zafta - Tortas Artesanales
 
-## Getting Started
+> Más que un postre, un legado auténtico.
 
-First, run the development server:
+Sitio web oficial de Zafta, pastelería artesanal con más de 30 años de tradición familiar.
+
+## 🚀 Inicio Rápido
+
+### Desarrollo
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
+# Instalar dependencias
+bun install
+
+# Iniciar servidor de desarrollo
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abre [http://localhost:3000](http://localhost:3000) en tu navegador.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Build de Producción
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+# Crear build optimizado
+bun run build
 
-## Learn More
+# Iniciar servidor de producción
+bun start
+```
 
-To learn more about Next.js, take a look at the following resources:
+### Code Quality
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+# Linter (Biome)
+bun run lint
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# Formatear código
+bun run format
+```
 
-## Deploy on Vercel
+## 🛠️ Stack Tecnológico
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Framework:** [Next.js 16](https://nextjs.org) (App Router)
+- **Runtime:** React 19.2
+- **Lenguaje:** TypeScript
+- **Estilos:** Tailwind CSS v4
+- **UI Components:** shadcn/ui
+- **Fuentes:** Lust + Fredoka (BrandBook oficial)
+- **Linter/Formatter:** Biome
+- **Package Manager:** Bun
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📚 Documentación
+
+Toda la documentación del proyecto está en la carpeta [`docs/`](./docs):
+
+- **[Plan de Migración](./docs/PLAN-DE-MIGRACION.md)** - Roadmap completo del proyecto
+- **[Requirements](./docs/requirements.md)** - Especificación y BrandBook
+- **[Estilos](./docs/ESTILOS-COMPATIBILIDAD.md)** - Compatibilidad de design system
+- **[Fuentes](./docs/FUENTES-BRANDBOOK.md)** - Tipografía oficial (Lust + Fredoka)
+
+### Para Desarrolladores
+
+Lee **[CLAUDE.md](./CLAUDE.md)** para:
+- Arquitectura del proyecto
+- Comandos comunes
+- Reglas de desarrollo
+- Uso de agentes especializados
+
+## 🎨 Design System
+
+### Colores de Marca
+
+```css
+Rose Gold:     #E5B097
+Rich Burgundy: #80011F
+Midnight Navy: #111C3B
+Ivory Cream:   #FFFBEF
+```
+
+### Tipografía
+
+- **Lust** - Font principal (títulos, alto contraste)
+- **Fredoka** - Font secundaria (cuerpo, UI)
+
+## 📂 Estructura del Proyecto
+
+```
+zafta-web/
+├── docs/                    # Documentación completa
+├── public/                  # Assets estáticos
+│   ├── fonts/lust/         # Fuente Lust (local)
+│   └── zafta_assets/       # Imágenes de productos
+├── src/
+│   ├── app/                # Next.js App Router
+│   │   ├── (site)/        # Route group - páginas públicas
+│   │   ├── layout.tsx     # Root layout
+│   │   └── globals.css    # Estilos globales
+│   ├── components/         # Componentes React
+│   │   ├── ui/            # shadcn/ui components
+│   │   ├── layout/        # Navigation, Footer
+│   │   └── sections/      # Hero, ProductGallery, etc.
+│   └── lib/               # Utilidades
+└── pagina_components/      # Referencia (Lovable/Vite)
+```
+
+## 🎯 Estado del Proyecto
+
+### ✅ Completado
+
+- [x] Fase 1: Fundamentos y Configuración
+  - [x] Design system migrado (Tailwind v4)
+  - [x] Fuentes configuradas (Lust + Fredoka)
+  - [x] shadcn/ui instalado
+  - [x] Estructura de carpetas creada
+
+### 🔄 En Progreso
+
+- [ ] Fase 2: Componentes de Layout (Navigation, Footer)
+- [ ] Fase 3-5: Migración de componentes y páginas
+- [ ] Fase 6: Optimizaciones Next.js
+- [ ] Fase 7: Testing y QA
+- [ ] Fase 8: Deploy a producción
+
+Ver progreso completo en [PLAN-DE-MIGRACION.md](./docs/PLAN-DE-MIGRACION.md)
+
+## 🌐 Deploy
+
+El proyecto está optimizado para deploy en [Vercel](https://vercel.com):
+
+```bash
+# Deploy automático conectando el repositorio a Vercel
+# o manualmente:
+vercel
+```
+
+## 📝 Notas Importantes
+
+- **Package Manager:** Este proyecto usa **Bun**. No usar npm/yarn/pnpm.
+- **Linter:** Usa **Biome**, no ESLint/Prettier.
+- **Fuentes:** Lust requiere archivos locales en `public/fonts/lust/`
+- **Compatibilidad:** 100% compatible con componentes de `pagina_components/`
+
+## 🤝 Contribuir
+
+1. Fork el proyecto
+2. Crea una rama feature (`git checkout -b feature/nueva-funcionalidad`)
+3. Commit cambios (`git commit -m 'Agregar nueva funcionalidad'`)
+4. Push a la rama (`git push origin feature/nueva-funcionalidad`)
+5. Abre un Pull Request
+
+## 📄 Licencia
+
+Proyecto privado - Zafta © 2024
+
+---
+
+**Built with ❤️ using Next.js and Tailwind CSS**
