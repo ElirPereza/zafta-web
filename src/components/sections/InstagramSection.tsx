@@ -55,7 +55,7 @@ const InstagramSection = ({ onOpenOrder }: InstagramSectionProps) => {
           className="text-center mb-12 md:mb-14"
         >
           <h2 className="mb-4 text-4xl font-serif italic md:text-5xl text-foreground">
-            Desde Nuestro Instagram
+            Nuestras tortas personalizadas
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground font-sans max-w-2xl mx-auto leading-relaxed">
             Descubre nuestros momentos más dulces y creaciones.
