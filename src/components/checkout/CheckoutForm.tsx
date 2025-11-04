@@ -80,6 +80,13 @@ export function CheckoutForm({ onShippingCostChange }: CheckoutFormProps) {
       const subtotal = getTotalPrice;
       const total = subtotal + shippingData.shippingCost;
 
+      console.log("📦 Creating order with:", {
+        itemsCount: items.length,
+        subtotal,
+        shippingCost: shippingData.shippingCost,
+        total,
+      });
+
       // Create order
       const orderResponse = await fetch("/api/orders", {
         method: "POST",
@@ -97,15 +104,19 @@ export function CheckoutForm({ onShippingCostChange }: CheckoutFormProps) {
           total,
           items: items.map((item) => ({
             productId: item.id,
-            quantity: item.quantity,
+            name: item.name,
             price: item.price,
+            quantity: item.quantity,
+            imageUrl: item.image,
           })),
           paymentMethod,
         }),
       });
 
       if (!orderResponse.ok) {
-        throw new Error("Error al crear el pedido");
+        const errorData = await orderResponse.json();
+        console.error("Order creation failed:", errorData);
+        throw new Error(errorData.error || errorData.details || "Error al crear el pedido");
       }
 
       const order = await orderResponse.json();
