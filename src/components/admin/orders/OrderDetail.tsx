@@ -208,7 +208,7 @@ export function OrderDetail({ order: initialOrder }: OrderDetailProps) {
                       </p>
                     </div>
                     <div className="text-right">
-                      <p className="font-sans font-medium">{formatPrice(item.price)}</p>
+                      <p className="font-sans font-medium">{formatPrice(Number(item.price))}</p>
                       <p className="text-sm text-muted-foreground font-sans">
                         Subtotal: {formatPrice(Number(item.price) * item.quantity)}
                       </p>
@@ -230,15 +230,15 @@ export function OrderDetail({ order: initialOrder }: OrderDetailProps) {
             <CardContent className="space-y-3">
               <div>
                 <p className="text-sm text-muted-foreground font-sans">Nombre</p>
-                <p className="font-sans font-medium">{order.userName}</p>
+                <p className="font-sans font-medium">{order.customerName}</p>
               </div>
               <div>
                 <p className="text-sm text-muted-foreground font-sans">Email</p>
-                <p className="font-sans">{order.userEmail}</p>
+                <p className="font-sans">{order.customerEmail}</p>
               </div>
               <div>
                 <p className="text-sm text-muted-foreground font-sans">Teléfono</p>
-                <p className="font-sans">{order.userPhone}</p>
+                <p className="font-sans">{order.customerPhone}</p>
               </div>
             </CardContent>
           </Card>
@@ -283,10 +283,10 @@ export function OrderDetail({ order: initialOrder }: OrderDetailProps) {
                   {PAYMENT_STATUS_LABELS[order.paymentStatus]}
                 </Badge>
               </div>
-              {order.transactionId && (
+              {order.paymentTransactionId && (
                 <div>
                   <p className="text-sm text-muted-foreground font-sans">ID Transacción</p>
-                  <p className="text-sm font-sans font-mono">{order.transactionId}</p>
+                  <p className="text-sm font-sans font-mono">{order.paymentTransactionId}</p>
                 </div>
               )}
             </CardContent>
@@ -300,16 +300,16 @@ export function OrderDetail({ order: initialOrder }: OrderDetailProps) {
             <CardContent className="space-y-2">
               <div className="flex items-center justify-between font-sans">
                 <span className="text-muted-foreground">Subtotal</span>
-                <span>{formatPrice(order.subtotal)}</span>
+                <span>{formatPrice(Number(order.subtotal))}</span>
               </div>
               <div className="flex items-center justify-between font-sans">
                 <span className="text-muted-foreground">Envío</span>
-                <span>{formatPrice(order.shippingCost)}</span>
+                <span>{formatPrice(Number(order.shippingCost))}</span>
               </div>
               <div className="border-t pt-2 mt-2">
                 <div className="flex items-center justify-between font-sans font-semibold text-lg">
                   <span>Total</span>
-                  <span>{formatPrice(order.total)}</span>
+                  <span>{formatPrice(Number(order.total))}</span>
                 </div>
               </div>
               <div className="text-xs text-muted-foreground font-sans pt-2 border-t mt-2">

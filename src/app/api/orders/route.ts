@@ -68,10 +68,13 @@ export async function POST(request: Request) {
       data: {
         orderNumber,
         userId: body.userId,
-        userName: body.userName,
-        userEmail: body.userEmail,
-        userPhone: body.userPhone,
+        customerName: body.customerName || body.userName, // Support both field names
+        customerEmail: body.customerEmail || body.userEmail,
+        customerPhone: body.customerPhone || body.userPhone,
         shippingAddress: body.shippingAddress,
+        shippingCity: body.shippingCity || "Bogotá",
+        shippingDepartment: body.shippingDepartment || "Cundinamarca",
+        deliveryNotes: body.deliveryNotes,
         paymentMethod: body.paymentMethod,
         subtotal: body.subtotal,
         shippingCost: body.shippingCost || 0,

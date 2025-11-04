@@ -134,7 +134,7 @@ export function ProductsTable() {
                 </Badge>
               </TableCell>
               <TableCell className="font-sans">
-                {formatPrice(product.price)}
+                {formatPrice(Number(product.price))}
               </TableCell>
               <TableCell className="font-sans">
                 <Badge

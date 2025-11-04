@@ -4,9 +4,10 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { Instagram } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 interface InstagramSectionProps {
-  onOpenOrder: () => void;
+  onOpenOrder?: () => void;
 }
 
 const instagramPosts = [
@@ -102,14 +103,25 @@ const InstagramSection = ({ onOpenOrder }: InstagramSectionProps) => {
           transition={{ duration: 0.6, delay: 0.3, ease: [0.4, 0, 0.2, 1] }}
           className="text-center"
         >
-          <Button
-            variant="default"
-            size="lg"
-            onClick={onOpenOrder}
-            className="shadow-warm hover:shadow-medium transition-all duration-300"
-          >
-            Haz tu pedido personalizado
-          </Button>
+          {onOpenOrder ? (
+            <Button
+              variant="default"
+              size="lg"
+              onClick={onOpenOrder}
+              className="shadow-warm hover:shadow-medium transition-all duration-300"
+            >
+              Haz tu pedido personalizado
+            </Button>
+          ) : (
+            <Button
+              variant="default"
+              size="lg"
+              asChild
+              className="shadow-warm hover:shadow-medium transition-all duration-300"
+            >
+              <Link href="/productos">Haz tu pedido personalizado</Link>
+            </Button>
+          )}
         </motion.div>
       </div>
     </section>

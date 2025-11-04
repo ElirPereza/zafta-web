@@ -171,15 +171,15 @@ export function OrdersTable() {
                 </TableCell>
                 <TableCell className="font-sans">
                   <div>
-                    <p className="font-medium">{order.userName}</p>
-                    <p className="text-sm text-muted-foreground">{order.userEmail}</p>
+                    <p className="font-medium">{order.customerName}</p>
+                    <p className="text-sm text-muted-foreground">{order.customerEmail}</p>
                   </div>
                 </TableCell>
                 <TableCell className="font-sans text-sm">
                   {formatDate(order.createdAt)}
                 </TableCell>
                 <TableCell className="font-sans font-medium">
-                  {formatPrice(order.total)}
+                  {formatPrice(Number(order.total))}
                 </TableCell>
                 <TableCell>
                   <Badge

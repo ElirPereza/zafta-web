@@ -10,19 +10,25 @@ import { useCartStore } from "@/store/cartStore";
 import { useState } from "react";
 import { CartDrawer } from "@/components/cart/CartDrawer";
 
+// Tipo más flexible que acepta tanto Decimal como number
+type ProductWithNumberPrice = Omit<Product, "price" | "comparePrice"> & {
+  price: number;
+  comparePrice: number | null;
+};
+
 interface ProductGridProps {
-  products: Product[];
+  products: ProductWithNumberPrice[];
 }
 
 export function ProductGrid({ products }: ProductGridProps) {
   const [cartOpen, setCartOpen] = useState(false);
   const addItem = useCartStore((state) => state.addItem);
 
-  const handleAddToCart = (product: Product) => {
+  const handleAddToCart = (product: ProductWithNumberPrice) => {
     addItem({
       id: product.id,
       name: product.name,
-      price: Number(product.price),
+      price: product.price, // Ya es number
       image: product.images[0] || "/placeholder.png",
       slug: product.slug,
     });
@@ -114,7 +120,7 @@ export function ProductGrid({ products }: ProductGridProps) {
                 {/* Price & Button */}
                 <div className="flex items-center justify-between pt-4 border-t border-border/50">
                   <div>
-                    {product.comparePrice && Number(product.comparePrice) > Number(product.price) && (
+                    {product.comparePrice && product.comparePrice > product.price && (
                       <p className="text-sm text-muted-foreground font-sans line-through">
                         {formatPrice(product.comparePrice)}
                       </p>

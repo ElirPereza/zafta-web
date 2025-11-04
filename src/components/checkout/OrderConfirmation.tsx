@@ -173,7 +173,7 @@ export function OrderConfirmation({ order }: OrderConfirmationProps) {
                     {item.product.name}
                   </h4>
                   <p className="text-sm text-muted-foreground font-sans">
-                    Cantidad: {item.quantity} × {formatPrice(item.price)}
+                    Cantidad: {item.quantity} × {formatPrice(Number(item.price))}
                   </p>
                 </div>
 
@@ -193,17 +193,17 @@ export function OrderConfirmation({ order }: OrderConfirmationProps) {
           <div className="space-y-2">
             <div className="flex justify-between text-sm font-sans">
               <span className="text-muted-foreground">Subtotal</span>
-              <span className="font-medium">{formatPrice(order.subtotal)}</span>
+              <span className="font-medium">{formatPrice(Number(order.subtotal))}</span>
             </div>
             <div className="flex justify-between text-sm font-sans">
               <span className="text-muted-foreground">Envío</span>
-              <span className="font-medium">{formatPrice(order.shippingCost)}</span>
+              <span className="font-medium">{formatPrice(Number(order.shippingCost))}</span>
             </div>
             <Separator />
             <div className="flex justify-between text-lg font-sans">
               <span className="font-semibold">Total</span>
               <span className="font-bold text-primary text-xl">
-                {formatPrice(order.total)}
+                {formatPrice(Number(order.total))}
               </span>
             </div>
           </div>
