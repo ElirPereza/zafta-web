@@ -59,6 +59,7 @@ export function WompiCheckout({
               email: data.customerEmail,
               fullName: data.customerName,
               phoneNumber: data.customerPhone,
+              phoneNumberPrefix: data.phoneNumberPrefix || "+57",
             },
           });
 

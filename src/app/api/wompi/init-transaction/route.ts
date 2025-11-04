@@ -51,6 +51,16 @@ export async function POST(request: NextRequest) {
       },
     });
 
+    // Procesar teléfono para Wompi (separar prefijo y número)
+    // Remover espacios, guiones y el símbolo +
+    let phoneNumber = order.customerPhone.replace(/[\s\-+]/g, "");
+    let phonePrefix = "+57"; // Colombia por defecto
+
+    // Si el número empieza con 57, extraerlo
+    if (phoneNumber.startsWith("57")) {
+      phoneNumber = phoneNumber.substring(2);
+    }
+
     // Retornar datos para el widget de Wompi
     return NextResponse.json({
       publicKey: process.env.NEXT_PUBLIC_WOMPI_PUBLIC_KEY,
@@ -61,7 +71,8 @@ export async function POST(request: NextRequest) {
       redirectUrl: `${process.env.NEXT_PUBLIC_APP_URL}/pedido-confirmado/${orderId}`,
       customerEmail: order.customerEmail,
       customerName: order.customerName,
-      customerPhone: order.customerPhone,
+      customerPhone: phoneNumber,
+      phoneNumberPrefix: phonePrefix,
     });
   } catch (error) {
     console.error("Error initializing Wompi transaction:", error);

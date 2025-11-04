@@ -219,9 +219,12 @@ export function CheckoutForm({ onShippingCostChange }: CheckoutFormProps) {
               type="tel"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
-              placeholder="+57 300 123 4567"
+              placeholder="300 123 4567"
               required
             />
+            <p className="text-xs text-muted-foreground font-sans">
+              Número celular colombiano (sin +57)
+            </p>
           </div>
         </div>
       </Card>
