@@ -1,33 +1,21 @@
-"use client";
+import NuestrasTortasClient from "./NuestrasTortasClient";
+import { generateMetadata as genMetadata } from "@/lib/metadata";
 
-import { useState } from "react";
-import ProductGallery from "@/components/sections/ProductGallery";
-import OrderSidebar from "@/components/sections/OrderSidebar";
+export const metadata = genMetadata({
+  title: "Nuestras Tortas",
+  description:
+    "Explora nuestro catálogo de tortas artesanales: chocolate, frutas, celebraciones y personalizadas. Cada torta es única y hecha con amor en Bogotá.",
+  path: "/nuestras-tortas",
+  keywords: [
+    "catálogo tortas",
+    "tipos de tortas",
+    "tortas chocolate",
+    "tortas frutas",
+    "tortas celebración",
+    "menú",
+  ],
+});
 
 export default function NuestrasTortasPage() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState<any>(null);
-
-  const handleOpenOrder = (product?: any) => {
-    setSelectedProduct(product || null);
-    setIsSidebarOpen(true);
-  };
-
-  const handleCloseSidebar = () => {
-    setIsSidebarOpen(false);
-    setSelectedProduct(null);
-  };
-
-  return (
-    <>
-      <div className="pt-20">
-        <ProductGallery onOpenOrder={handleOpenOrder} />
-      </div>
-      <OrderSidebar
-        isOpen={isSidebarOpen}
-        onClose={handleCloseSidebar}
-        initialProduct={selectedProduct}
-      />
-    </>
-  );
+  return <NuestrasTortasClient />;
 }

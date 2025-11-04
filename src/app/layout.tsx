@@ -41,34 +41,28 @@ const fredoka = Fredoka({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  title: "Zafta - Tortas Artesanales con Legado Familiar",
-  description:
-    "Más que un postre, un legado auténtico. Tortas artesanales hechas con amor y tradición familiar de más de 30 años.",
-  keywords: [
-    "tortas artesanales",
-    "repostería",
-    "tortas personalizadas",
-    "Zafta",
-    "tortas caseras",
-  ],
-  authors: [{ name: "Zafta" }],
-  openGraph: {
-    title: "Zafta - Tortas Artesanales",
-    description: "Más que un postre, un legado auténtico",
-    type: "website",
-    locale: "es_ES",
-  },
-};
+import { generateMetadata as genMetadata, generateOrganizationSchema } from "@/lib/metadata";
+
+export const metadata: Metadata = genMetadata({});
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const organizationSchema = generateOrganizationSchema();
+
   return (
     <ClerkProvider localization={esES}>
       <html lang="es" className={`${lust.variable} ${fredoka.variable}`}>
+        <head>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(organizationSchema),
+            }}
+          />
+        </head>
         <body className="antialiased">
           {children}
           <Toaster />

@@ -1,10 +1,21 @@
 import { Phone, Instagram } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { generateMetadata as genMetadata } from "@/lib/metadata";
 
-export const metadata = {
-  title: "Contacto - Zafta Tortas Artesanales",
-  description: "Contáctanos por WhatsApp o Instagram para hacer tu pedido o resolver tus dudas.",
-};
+export const metadata = genMetadata({
+  title: "Contacto",
+  description:
+    "Contáctanos por WhatsApp o Instagram para hacer tu pedido o resolver tus dudas. Estamos en Bogotá, Colombia. Respuesta rápida garantizada.",
+  path: "/contacto",
+  keywords: [
+    "contacto",
+    "WhatsApp",
+    "Instagram",
+    "teléfono",
+    "hacer pedido",
+    "atención al cliente",
+  ],
+});
 
 export default function ContactoPage() {
   return (

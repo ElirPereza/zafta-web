@@ -1,6 +1,21 @@
 import { ProductGrid } from "@/components/products/ProductGrid";
 import { prisma } from "@/lib/prisma";
 import { motion } from "framer-motion";
+import { generateMetadata as genMetadata } from "@/lib/metadata";
+
+export const metadata = genMetadata({
+  title: "Nuestras Delicias",
+  description:
+    "Descubre nuestra selección de tortas artesanales. Chocolate, frutas, personalizadas y más. Hechas con amor y los mejores ingredientes en Bogotá.",
+  path: "/productos",
+  keywords: [
+    "comprar tortas",
+    "tortas en línea",
+    "pedidos tortas",
+    "tortas a domicilio",
+    "catálogo tortas",
+  ],
+});
 
 export const revalidate = 60; // Revalidar cada 60 segundos
 
