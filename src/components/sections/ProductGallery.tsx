@@ -23,7 +23,7 @@ const products = [
     name: "Torta Tradicional",
     description: "Receta original de Fanny, con el sabor de siempre.",
     image:
-      "https://images.unsplash.com/photo-1588195538326-c5b1e5b80c7f?w=800&q=80",
+      "https://images.unsplash.com/photo-1535254973040-607b474cb50d?w=800&q=80",
   },
   {
     name: "Torta de Zanahoria",

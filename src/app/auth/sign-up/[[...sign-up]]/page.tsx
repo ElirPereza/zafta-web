@@ -8,6 +8,8 @@ export default function SignUpPage() {
       subtitle="Crea tu cuenta para realizar pedidos"
     >
       <SignUp
+        fallbackRedirectUrl="/inicio"
+        signInUrl="/auth/sign-in"
         appearance={{
           elements: {
             rootBox: "w-full flex justify-center",

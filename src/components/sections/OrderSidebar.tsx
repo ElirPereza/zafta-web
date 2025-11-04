@@ -46,7 +46,7 @@ const products: Product[] = [
     id: "3",
     name: "Torta Tradicional",
     price: 42000,
-    image: "https://images.unsplash.com/photo-1588195538326-c5b1e5b80c7f?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1535254973040-607b474cb50d?w=800&q=80",
   },
   {
     id: "4",

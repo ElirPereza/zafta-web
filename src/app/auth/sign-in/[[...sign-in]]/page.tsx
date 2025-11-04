@@ -8,6 +8,8 @@ export default function SignInPage() {
       subtitle="Inicia sesión para continuar"
     >
       <SignIn
+        fallbackRedirectUrl="/inicio"
+        signUpUrl="/auth/sign-up"
         appearance={{
           elements: {
             rootBox: "w-full flex justify-center",

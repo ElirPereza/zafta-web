@@ -18,7 +18,7 @@ const instagramPosts = [
   },
   {
     id: 2,
-    image: "https://images.unsplash.com/photo-1588195538326-c5aeb790a8c3?w=400&h=400&fit=crop",
+    image: "https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=400&h=400&fit=crop",
     alt: "Vanilla cake with cream frosting",
   },
   {
