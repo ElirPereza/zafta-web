@@ -3,6 +3,9 @@ import { prisma } from "@/lib/prisma";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://zafta.com";
 
+// Make sitemap dynamic to avoid build-time DB access issues
+export const dynamic = "force-dynamic";
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Static routes
   const staticRoutes = [

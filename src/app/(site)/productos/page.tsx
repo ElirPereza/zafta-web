@@ -17,6 +17,7 @@ export const metadata = genMetadata({
   ],
 });
 
+export const dynamic = "force-dynamic"; // Forzar renderizado dinámico
 export const revalidate = 60; // Revalidar cada 60 segundos
 
 export default async function ProductosPage() {
