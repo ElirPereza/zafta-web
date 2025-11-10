@@ -6,7 +6,6 @@ import ProductGallery from "@/components/sections/ProductGallery";
 import HowToBuy from "@/components/sections/HowToBuy";
 import InstagramSection from "@/components/sections/InstagramSection";
 import OrderSidebar from "@/components/sections/OrderSidebar";
-import { AdminRedirect } from "@/components/auth/AdminRedirect";
 
 export default function InicioClient() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -23,19 +22,16 @@ export default function InicioClient() {
   };
 
   return (
-    <>
-      <AdminRedirect />
-      <div className="overflow-x-hidden">
-        <Hero />
-        <HowToBuy />
-        <ProductGallery onOpenOrder={handleOpenOrder} />
-        <InstagramSection onOpenOrder={() => handleOpenOrder()} />
-        <OrderSidebar
-          isOpen={isSidebarOpen}
-          onClose={handleCloseSidebar}
-          initialProduct={selectedProduct}
-        />
-      </div>
-    </>
+    <div className="overflow-x-hidden">
+      <Hero />
+      <HowToBuy />
+      <ProductGallery onOpenOrder={handleOpenOrder} />
+      <InstagramSection onOpenOrder={() => handleOpenOrder()} />
+      <OrderSidebar
+        isOpen={isSidebarOpen}
+        onClose={handleCloseSidebar}
+        initialProduct={selectedProduct}
+      />
+    </div>
   );
 }

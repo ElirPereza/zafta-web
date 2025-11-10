@@ -15,6 +15,7 @@ const isPublicRoute = createRouteMatcher([
   "/pedido-confirmado(.*)", // Order confirmation page
   "/auth/sign-in(.*)",
   "/auth/sign-up(.*)",
+  "/acceso-denegado", // Access denied page
   "/api/webhooks(.*)", // All webhooks (Clerk, Wompi, etc.)
   "/api/products(.*)", // Public product API
   "/api/orders(.*)", // Public orders API for guest checkout
@@ -25,7 +26,7 @@ const isPublicRoute = createRouteMatcher([
 
 export default clerkMiddleware(async (auth, request) => {
   // Protect all routes except public routes
-  // Admin routes require authentication but role checking is done at page level
+  // Admin routes require authentication here, but email validation is done at page level
   if (!isPublicRoute(request)) {
     await auth.protect();
   }
