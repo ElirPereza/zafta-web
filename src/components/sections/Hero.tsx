@@ -56,8 +56,8 @@ const Hero = () => {
         </motion.div>
       </AnimatePresence>
 
-      {/* Bottom Gradient Overlay - Transitions to background color */}
-      <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-[hsl(var(--background))] via-[hsl(var(--background))]/60 to-transparent z-[5]" />
+      {/* Bottom Gradient Overlay - Subtle transition to background color */}
+      <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-[hsl(var(--background))] via-[hsl(var(--background))]/40 to-transparent z-[5]" />
 
       {/* Content */}
       <div className="relative z-10 flex min-h-screen items-center justify-center px-6 pb-16">
@@ -66,23 +66,25 @@ const Hero = () => {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
-            className="flex justify-center"
+            className="flex justify-center mb-8"
           >
             <Logo
               variant="banner-orange"
               width={700}
               height={566}
-              className="w-96 md:w-[34rem] lg:w-[44rem] h-auto"
+              className="w-96 md:w-[34rem] lg:w-[44rem] h-auto drop-shadow-2xl"
             />
           </motion.div>
-          <motion.p
+          <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.15, ease: [0.4, 0, 0.2, 1] }}
-            className="mb-10 text-xl md:text-2xl lg:text-3xl text-background font-sans font-bold max-w-3xl leading-relaxed mx-auto tracking-wide bg-black/40 backdrop-blur-sm px-8 py-4 rounded-2xl"
+            className="mb-10"
           >
-            Nuestra Historia en cada bocado
-          </motion.p>
+            <p className="text-2xl md:text-3xl lg:text-4xl text-white font-sans font-bold max-w-3xl mx-auto tracking-wide drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
+              Nuestra Historia en cada bocado
+            </p>
+          </motion.div>
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
