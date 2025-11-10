@@ -26,7 +26,7 @@ export default function InicioClient() {
     <>
       <AdminRedirect />
       <div className="overflow-x-hidden">
-        <Hero onOpenOrder={() => handleOpenOrder()} />
+        <Hero />
         <HowToBuy />
         <ProductGallery onOpenOrder={handleOpenOrder} />
         <InstagramSection onOpenOrder={() => handleOpenOrder()} />

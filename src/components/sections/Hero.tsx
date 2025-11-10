@@ -3,12 +3,9 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/ui/logo";
-
-interface HeroProps {
-  onOpenOrder: () => void;
-}
 
 const bannerImages = [
   {
@@ -25,7 +22,7 @@ const bannerImages = [
   },
 ];
 
-const Hero = ({ onOpenOrder }: HeroProps) => {
+const Hero = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
@@ -93,14 +90,15 @@ const Hero = ({ onOpenOrder }: HeroProps) => {
             transition={{ duration: 0.8, delay: 0.3, ease: [0.4, 0, 0.2, 1] }}
             className="flex justify-center"
           >
-            <Button
-              variant="hero"
-              size="lg"
-              onClick={onOpenOrder}
-              className="text-lg md:text-xl font-sans font-medium shadow-warm hover:shadow-medium"
-            >
-              Haz tu pedido
-            </Button>
+            <Link href="/productos">
+              <Button
+                variant="hero"
+                size="lg"
+                className="text-lg md:text-xl font-sans font-medium shadow-warm hover:shadow-medium"
+              >
+                Haz tu pedido
+              </Button>
+            </Link>
           </motion.div>
         </div>
       </div>
