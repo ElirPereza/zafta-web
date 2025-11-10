@@ -6,54 +6,50 @@ import { Instagram } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
-interface InstagramSectionProps {
-  onOpenOrder?: () => void;
-}
-
-const instagramPosts = [
+const eventosPhotos = [
   {
     id: 1,
     image:
-      "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&h=400&fit=crop",
-    alt: "Delicious chocolate cake with berries",
+      "https://images.unsplash.com/photo-1464347744102-11db6282f854?w=400&h=400&fit=crop",
+    alt: "Boda elegante con torta de varios pisos",
   },
   {
     id: 2,
     image:
-      "https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=400&h=400&fit=crop",
-    alt: "Vanilla cake with cream frosting",
+      "https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=400&h=400&fit=crop",
+    alt: "Celebración de cumpleaños especial",
   },
   {
     id: 3,
     image:
-      "https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=400&h=400&fit=crop",
-    alt: "Red velvet cake slice",
+      "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=400&h=400&fit=crop",
+    alt: "Evento corporativo con mesa de dulces",
   },
   {
     id: 4,
     image:
-      "https://images.unsplash.com/photo-1576618148400-f54bed99fcfd?w=400&h=400&fit=crop",
-    alt: "Lemon cake with fresh lemons",
+      "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=400&h=400&fit=crop",
+    alt: "Baby shower con decoración temática",
   },
   {
     id: 5,
     image:
-      "https://images.unsplash.com/photo-1621303837174-89787a7d4729?w=400&h=400&fit=crop",
-    alt: "Carrot cake with cream cheese frosting",
+      "https://images.unsplash.com/photo-1481391319762-47dff72954d9?w=400&h=400&fit=crop",
+    alt: "Quinceañera con torta espectacular",
   },
   {
     id: 6,
     image:
-      "https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?w=400&h=400&fit=crop",
-    alt: "Traditional birthday cake",
+      "https://images.unsplash.com/photo-1478145046317-39f10e56b5e9?w=400&h=400&fit=crop",
+    alt: "Primera comunión con dulces decorados",
   },
 ];
 
-const InstagramSection = ({ onOpenOrder }: InstagramSectionProps) => {
+const EventosSection = () => {
   return (
     <section
-      id="instagram"
-      className="py-16 md:py-20 px-6 md:px-8 bg-background"
+      id="eventos"
+      className="py-16 md:py-20 px-6 md:px-8 bg-gradient-to-b from-background to-beige-100"
     >
       <div className="container mx-auto max-w-6xl">
         <motion.div
@@ -64,17 +60,17 @@ const InstagramSection = ({ onOpenOrder }: InstagramSectionProps) => {
           className="text-center mb-12 md:mb-14"
         >
           <h2 className="mb-4 text-4xl font-sans font-bold md:text-5xl text-foreground">
-            Tortas Personalizadas
+            Eventos Especiales
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground font-sans max-w-2xl mx-auto leading-relaxed">
-            Creamos la torta de tus sueños. Cada diseño es único y hecho con amor.
+            Hacemos de tu evento un momento inolvidable con tortas y dulces diseñados especialmente para la ocasión.
           </p>
         </motion.div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 mb-12">
-          {instagramPosts.map((post, index) => (
+          {eventosPhotos.map((photo, index) => (
             <motion.a
-              key={post.id}
+              key={photo.id}
               href="https://instagram.com/zafta_reposteria"
               target="_blank"
               rel="noopener noreferrer"
@@ -89,8 +85,8 @@ const InstagramSection = ({ onOpenOrder }: InstagramSectionProps) => {
               className="group relative aspect-square overflow-hidden rounded-2xl shadow-card hover:shadow-medium transition-all duration-300"
             >
               <Image
-                src={post.image}
-                alt={post.alt}
+                src={photo.image}
+                alt={photo.alt}
                 fill
                 sizes="(max-width: 768px) 50vw, 33vw"
                 className="object-cover transition-transform duration-500 group-hover:scale-110"
@@ -112,29 +108,18 @@ const InstagramSection = ({ onOpenOrder }: InstagramSectionProps) => {
           transition={{ duration: 0.6, delay: 0.3, ease: [0.4, 0, 0.2, 1] }}
           className="text-center"
         >
-          {onOpenOrder ? (
-            <Button
-              variant="default"
-              size="lg"
-              onClick={onOpenOrder}
-              className="shadow-warm hover:shadow-medium transition-all duration-300"
-            >
-              Haz tu pedido personalizado
-            </Button>
-          ) : (
-            <Button
-              variant="default"
-              size="lg"
-              asChild
-              className="shadow-warm hover:shadow-medium transition-all duration-300"
-            >
-              <Link href="/productos">Haz tu pedido personalizado</Link>
-            </Button>
-          )}
+          <Button
+            variant="default"
+            size="lg"
+            asChild
+            className="shadow-warm hover:shadow-medium transition-all duration-300"
+          >
+            <Link href="/contacto">Cotiza tu evento</Link>
+          </Button>
         </motion.div>
       </div>
     </section>
   );
 };
 
-export default InstagramSection;
+export default EventosSection;

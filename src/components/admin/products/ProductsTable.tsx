@@ -1,7 +1,7 @@
 "use client";
 
 import type { Product } from "@prisma/client";
-import { Eye, Pencil, Trash2 } from "lucide-react";
+import { Eye, Pencil, Trash2, GripVertical } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
@@ -15,16 +15,144 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import {
+  DndContext,
+  closestCenter,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+  type DragEndEvent,
+} from "@dnd-kit/core";
+import {
+  arrayMove,
+  SortableContext,
+  sortableKeyboardCoordinates,
+  useSortable,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
+
+interface SortableRowProps {
+  product: Product;
+  onDelete: (id: string) => void;
+  formatPrice: (price: number | string) => string;
+}
+
+function SortableRow({ product, onDelete, formatPrice }: SortableRowProps) {
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({ id: product.id });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    opacity: isDragging ? 0.5 : 1,
+  };
+
+  return (
+    <TableRow ref={setNodeRef} style={style} className={isDragging ? "bg-beige-100" : ""}>
+      <TableCell>
+        <button
+          className="cursor-grab active:cursor-grabbing p-2 hover:bg-beige-100 rounded-md transition-colors"
+          {...attributes}
+          {...listeners}
+        >
+          <GripVertical className="h-5 w-5 text-muted-foreground" />
+        </button>
+      </TableCell>
+      <TableCell>
+        <div className="relative w-16 h-16 rounded-lg overflow-hidden bg-beige-100">
+          {product.images && product.images.length > 0 ? (
+            <Image
+              src={product.images[0]}
+              alt={product.name}
+              fill
+              className="object-cover"
+            />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center">
+              <Eye className="h-6 w-6 text-muted-foreground" />
+            </div>
+          )}
+        </div>
+      </TableCell>
+      <TableCell className="font-sans font-medium">
+        {product.name}
+      </TableCell>
+      <TableCell className="font-sans">
+        {product.category ? (
+          <Badge variant="outline" className="font-sans">
+            {product.category}
+          </Badge>
+        ) : (
+          <span className="text-muted-foreground text-sm">-</span>
+        )}
+      </TableCell>
+      <TableCell className="font-sans">
+        {formatPrice(Number(product.price))}
+      </TableCell>
+      <TableCell className="font-sans">
+        <Badge
+          variant={product.inStock ? "default" : "secondary"}
+          className="font-sans"
+        >
+          {product.inStock ? "En Stock" : "Agotado"}
+        </Badge>
+      </TableCell>
+      <TableCell>
+        <Badge
+          variant={product.featured ? "default" : "outline"}
+          className="font-sans"
+        >
+          {product.featured ? "Destacado" : "-"}
+        </Badge>
+      </TableCell>
+      <TableCell className="text-right">
+        <div className="flex items-center justify-end gap-2">
+          <Link href={`/admin/productos/${product.id}/editar`}>
+            <Button variant="ghost" size="icon">
+              <Pencil className="h-4 w-4" />
+            </Button>
+          </Link>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => onDelete(product.id)}
+          >
+            <Trash2 className="h-4 w-4 text-red-600" />
+          </Button>
+        </div>
+      </TableCell>
+    </TableRow>
+  );
+}
 
 export function ProductsTable() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
+
   const fetchProducts = useCallback(async () => {
     try {
       const response = await fetch("/api/products");
       const data = await response.json();
-      setProducts(data);
+      // Sort by displayOrder
+      const sorted = data.sort((a: Product, b: Product) =>
+        (a.displayOrder || 0) - (b.displayOrder || 0)
+      );
+      setProducts(sorted);
     } catch (error) {
       console.error("Error fetching products:", error);
     } finally {
@@ -35,6 +163,40 @@ export function ProductsTable() {
   useEffect(() => {
     fetchProducts();
   }, [fetchProducts]);
+
+  const handleDragEnd = async (event: DragEndEvent) => {
+    const { active, over } = event;
+
+    if (!over || active.id === over.id) {
+      return;
+    }
+
+    const oldIndex = products.findIndex((p) => p.id === active.id);
+    const newIndex = products.findIndex((p) => p.id === over.id);
+
+    const newProducts = arrayMove(products, oldIndex, newIndex);
+    setProducts(newProducts);
+
+    // Update displayOrder in database
+    try {
+      const updates = newProducts.map((product, index) => ({
+        id: product.id,
+        displayOrder: index,
+      }));
+
+      await fetch("/api/products/reorder", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ updates }),
+      });
+    } catch (error) {
+      console.error("Error updating product order:", error);
+      // Revert on error
+      fetchProducts();
+    }
+  };
 
   const handleDelete = async (id: string) => {
     if (!confirm("¿Estás seguro de que quieres eliminar este producto?")) {
@@ -77,7 +239,7 @@ export function ProductsTable() {
   if (products.length === 0) {
     return (
       <div className="text-center py-12 border border-dashed border-beige-400 rounded-lg bg-beige-50">
-        <h3 className="text-lg font-serif font-semibold text-foreground mb-2">
+        <h3 className="text-lg font-sans font-semibold text-foreground mb-2">
           No hay productos
         </h3>
         <p className="text-sm text-muted-foreground font-sans mb-4">
@@ -92,86 +254,43 @@ export function ProductsTable() {
 
   return (
     <div className="border border-beige-400 rounded-lg overflow-hidden bg-white">
-      <Table>
-        <TableHeader>
-          <TableRow className="bg-beige-100">
-            <TableHead className="font-sans font-semibold">Imagen</TableHead>
-            <TableHead className="font-sans font-semibold">Nombre</TableHead>
-            <TableHead className="font-sans font-semibold">Categoría</TableHead>
-            <TableHead className="font-sans font-semibold">Precio</TableHead>
-            <TableHead className="font-sans font-semibold">Stock</TableHead>
-            <TableHead className="font-sans font-semibold">Destacado</TableHead>
-            <TableHead className="font-sans font-semibold text-right">
-              Acciones
-            </TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {products.map((product) => (
-            <TableRow key={product.id}>
-              <TableCell>
-                <div className="relative w-16 h-16 rounded-lg overflow-hidden bg-beige-100">
-                  {product.images && product.images.length > 0 ? (
-                    <Image
-                      src={product.images[0]}
-                      alt={product.name}
-                      fill
-                      className="object-cover"
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center">
-                      <Eye className="h-6 w-6 text-muted-foreground" />
-                    </div>
-                  )}
-                </div>
-              </TableCell>
-              <TableCell className="font-sans font-medium">
-                {product.name}
-              </TableCell>
-              <TableCell className="font-sans">
-                <Badge variant="outline" className="font-sans">
-                  {product.category}
-                </Badge>
-              </TableCell>
-              <TableCell className="font-sans">
-                {formatPrice(Number(product.price))}
-              </TableCell>
-              <TableCell className="font-sans">
-                <Badge
-                  variant={product.inStock ? "default" : "secondary"}
-                  className="font-sans"
-                >
-                  {product.inStock ? "En Stock" : "Agotado"}
-                </Badge>
-              </TableCell>
-              <TableCell>
-                <Badge
-                  variant={product.featured ? "default" : "outline"}
-                  className="font-sans"
-                >
-                  {product.featured ? "Destacado" : "-"}
-                </Badge>
-              </TableCell>
-              <TableCell className="text-right">
-                <div className="flex items-center justify-end gap-2">
-                  <Link href={`/admin/productos/${product.id}/editar`}>
-                    <Button variant="ghost" size="icon">
-                      <Pencil className="h-4 w-4" />
-                    </Button>
-                  </Link>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={() => handleDelete(product.id)}
-                  >
-                    <Trash2 className="h-4 w-4 text-red-600" />
-                  </Button>
-                </div>
-              </TableCell>
+      <DndContext
+        sensors={sensors}
+        collisionDetection={closestCenter}
+        onDragEnd={handleDragEnd}
+      >
+        <Table>
+          <TableHeader>
+            <TableRow className="bg-beige-100">
+              <TableHead className="font-sans font-semibold w-12"></TableHead>
+              <TableHead className="font-sans font-semibold">Imagen</TableHead>
+              <TableHead className="font-sans font-semibold">Nombre</TableHead>
+              <TableHead className="font-sans font-semibold">Categoría</TableHead>
+              <TableHead className="font-sans font-semibold">Precio</TableHead>
+              <TableHead className="font-sans font-semibold">Stock</TableHead>
+              <TableHead className="font-sans font-semibold">Destacado</TableHead>
+              <TableHead className="font-sans font-semibold text-right">
+                Acciones
+              </TableHead>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHeader>
+          <TableBody>
+            <SortableContext
+              items={products.map((p) => p.id)}
+              strategy={verticalListSortingStrategy}
+            >
+              {products.map((product) => (
+                <SortableRow
+                  key={product.id}
+                  product={product}
+                  onDelete={handleDelete}
+                  formatPrice={formatPrice}
+                />
+              ))}
+            </SortableContext>
+          </TableBody>
+        </Table>
+      </DndContext>
     </div>
   );
 }
