@@ -59,7 +59,7 @@ export function WompiCheckout({
 
         // Crear instancia del Widget de Wompi
         if (window.WidgetCheckout) {
-          checkoutRef.current = new window.WidgetCheckout({
+          const widgetConfig = {
             currency: data.currency,
             amountInCents: data.amountInCents,
             reference: data.reference,
@@ -74,7 +74,11 @@ export function WompiCheckout({
               phoneNumber: data.customerPhone,
               phoneNumberPrefix: data.phoneNumberPrefix || "+57",
             },
-          });
+          };
+
+          console.log("🎯 Wompi Widget Config:", JSON.stringify(widgetConfig, null, 2));
+
+          checkoutRef.current = new window.WidgetCheckout(widgetConfig);
 
           setLoading(false);
         }
