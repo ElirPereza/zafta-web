@@ -46,17 +46,6 @@ export function WompiCheckout({
 
         const data = await response.json();
 
-        console.log("📦 Creating order with:", {
-          currency: data.currency,
-          amountInCents: data.amountInCents,
-          reference: data.reference,
-          publicKey: data.publicKey,
-          signature: data.signature,
-          redirectUrl: data.redirectUrl,
-          customerEmail: data.customerEmail,
-          customerName: data.customerName,
-        });
-
         // Crear instancia del Widget de Wompi
         if (window.WidgetCheckout) {
           const widgetConfig = {
@@ -75,8 +64,6 @@ export function WompiCheckout({
               phoneNumberPrefix: data.phoneNumberPrefix || "+57",
             },
           };
-
-          console.log("🎯 Wompi Widget Config:", JSON.stringify(widgetConfig, null, 2));
 
           checkoutRef.current = new window.WidgetCheckout(widgetConfig);
 
