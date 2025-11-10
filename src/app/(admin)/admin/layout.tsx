@@ -19,7 +19,7 @@ export default async function AdminLayout({
 
   if (!adminEmail) {
     console.error("ADMIN_EMAIL not configured in environment variables");
-    redirect("/inicio");
+    redirect("/acceso-denegado");
   }
 
   // Get user's primary email
@@ -29,7 +29,7 @@ export default async function AdminLayout({
 
   // Only allow access if user's email matches the admin email
   if (!userEmail || userEmail.toLowerCase() !== adminEmail.toLowerCase()) {
-    redirect("/inicio");
+    redirect("/acceso-denegado");
   }
 
   return (
