@@ -5,15 +5,41 @@ import { prisma } from "@/lib/prisma";
 export const runtime = "nodejs";
 
 // GET - List all products (public)
-export async function GET() {
+export async function GET(request: Request) {
   try {
+    const { searchParams } = new URL(request.url);
+    const featured = searchParams.get("featured");
+    const limit = searchParams.get("limit");
+    const category = searchParams.get("category");
+
+    const where: {
+      featured?: boolean;
+      category?: string;
+      inStock?: boolean;
+    } = {};
+
+    // Filter by featured status
+    if (featured === "true") {
+      where.featured = true;
+    }
+
+    // Filter by category
+    if (category) {
+      where.category = category;
+    }
+
+    // Only show in-stock products
+    where.inStock = true;
+
     const products = await prisma.product.findMany({
+      where,
       orderBy: {
-        createdAt: "desc",
+        displayOrder: "asc",
       },
+      take: limit ? Number.parseInt(limit) : undefined,
     });
 
-    return NextResponse.json(products);
+    return NextResponse.json({ products, count: products.length });
   } catch (error) {
     console.error("Error fetching products:", error);
     return NextResponse.json(
@@ -47,10 +73,10 @@ export async function POST(request: Request) {
 
     const body = await request.json();
 
-    // Validate required fields
-    if (!body.name || !body.slug || !body.price || !body.category) {
+    // Validate required fields (category is now optional)
+    if (!body.name || !body.slug || !body.price) {
       return NextResponse.json(
-        { error: "Missing required fields: name, slug, price, category" },
+        { error: "Missing required fields: name, slug, price" },
         { status: 400 },
       );
     }
@@ -63,7 +89,7 @@ export async function POST(request: Request) {
         price: body.price,
         comparePrice: body.comparePrice || null,
         images: body.images || [],
-        category: body.category,
+        category: body.category || null,
         inStock: body.inStock ?? true,
         featured: body.featured ?? false,
       },
