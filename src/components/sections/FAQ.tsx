@@ -61,7 +61,7 @@ const FAQ = () => {
   return (
     <section
       id="faq"
-      className="py-32 px-6 md:px-8 bg-gradient-to-b from-background via-secondary/10 to-background relative overflow-hidden"
+      className="py-32 px-6 md:px-8 bg-gradient-to-b from-background via-primary/5 to-background relative overflow-hidden"
     >
       {/* Decorative elements */}
       <motion.div

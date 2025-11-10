@@ -81,7 +81,7 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.15, ease: [0.4, 0, 0.2, 1] }}
             className="mb-10"
           >
-            <p className="text-2xl md:text-3xl lg:text-4xl text-white font-sans font-bold max-w-3xl mx-auto tracking-wide drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
+            <p className="text-2xl md:text-3xl lg:text-4xl text-[hsl(224,55%,15%)] font-sans font-bold max-w-3xl mx-auto tracking-wide drop-shadow-[0_4px_12px_rgba(255,255,255,0.9)] bg-background/80 backdrop-blur-sm px-8 py-4 rounded-2xl">
               Nuestra Historia en cada bocado
             </p>
           </motion.div>

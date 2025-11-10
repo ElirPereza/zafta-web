@@ -40,7 +40,7 @@ export default async function ProductosPage() {
   }));
 
   return (
-    <div className="pt-20 min-h-screen bg-gradient-to-b from-background via-secondary/10 to-background">
+    <div className="pt-20 min-h-screen bg-gradient-to-b from-background via-primary/5 to-background">
       <section className="py-16 md:py-20 px-6 md:px-8">
         <div className="container mx-auto max-w-7xl">
           {/* Header */}

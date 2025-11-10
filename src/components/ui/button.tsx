@@ -14,16 +14,16 @@ const buttonVariants = cva(
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/90 shadow-soft",
         outline:
-          "border-2 border-border bg-card hover:bg-secondary hover:text-secondary-foreground hover:border-secondary shadow-soft",
+          "border-2 border-border bg-card hover:bg-beige-200 hover:text-foreground hover:border-primary shadow-soft",
         secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80 shadow-soft hover:shadow-medium",
+          "bg-primary text-primary-foreground hover:bg-primary/80 shadow-soft hover:shadow-medium",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
         hero: "bg-primary text-primary-foreground hover:bg-primary/90 shadow-warm hover:shadow-medium hover:scale-[1.02] transition-smooth font-medium tracking-wide",
         "hero-outline":
           "border-2 border-primary-foreground bg-primary-foreground/10 backdrop-blur-sm text-primary-foreground hover:bg-primary-foreground hover:text-primary shadow-soft hover:shadow-warm hover:scale-105 transition-smooth font-medium tracking-wide",
         whatsapp:
-          "bg-secondary text-secondary-foreground shadow-warm hover:bg-secondary/80 hover:scale-105 transition-smooth",
+          "bg-[#25D366] text-white shadow-warm hover:bg-[#128C7E] hover:scale-105 transition-smooth",
       },
       size: {
         default: "h-11 px-6 py-2.5",

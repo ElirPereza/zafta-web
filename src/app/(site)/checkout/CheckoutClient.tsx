@@ -23,7 +23,7 @@ export default function CheckoutClient() {
 
   if (items.length === 0) {
     return (
-      <div className="pt-32 min-h-screen bg-gradient-to-b from-background via-secondary/10 to-background">
+      <div className="pt-32 min-h-screen bg-gradient-to-b from-background via-primary/5 to-background">
         <div className="container mx-auto px-6 py-16">
           <div className="max-w-md mx-auto text-center">
             <ShoppingBag className="h-16 w-16 text-muted-foreground mx-auto mb-6" />
@@ -43,7 +43,7 @@ export default function CheckoutClient() {
   }
 
   return (
-    <div className="pt-32 min-h-screen bg-gradient-to-b from-background via-secondary/10 to-background">
+    <div className="pt-32 min-h-screen bg-gradient-to-b from-background via-primary/5 to-background">
       <div className="container mx-auto px-6 py-8 md:py-12">
         {/* Header */}
         <div className="text-center mb-8">

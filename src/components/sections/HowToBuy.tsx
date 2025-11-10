@@ -31,7 +31,7 @@ const HowToBuy = () => {
       id="how-to-buy"
       className="relative py-16 md:py-20 px-6 md:px-8 bg-background"
     >
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/15 to-background" />
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/8 to-background" />
 
       <div className="container mx-auto max-w-6xl relative z-10">
         <motion.div

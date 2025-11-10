@@ -70,7 +70,7 @@ const OurStory = () => {
   return (
     <section
       id="our-story"
-      className="py-16 md:py-20 px-6 md:px-8 bg-gradient-to-br from-secondary/20 via-background to-secondary/10"
+      className="py-16 md:py-20 px-6 md:px-8 bg-gradient-to-br from-primary/10 via-background to-primary/8"
     >
       <div className="container mx-auto max-w-6xl">
         {/* Header */}

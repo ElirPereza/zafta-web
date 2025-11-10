@@ -68,7 +68,7 @@ export function OrderConfirmation({ order }: OrderConfirmationProps) {
   };
 
   return (
-    <div className="pt-32 min-h-screen bg-gradient-to-b from-background via-secondary/10 to-background">
+    <div className="pt-32 min-h-screen bg-gradient-to-b from-background via-primary/5 to-background">
       <div className="container mx-auto px-6 py-8 md:py-12 max-w-4xl">
         {/* Success Message */}
         <div className="text-center mb-8">

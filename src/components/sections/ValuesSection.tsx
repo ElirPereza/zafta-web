@@ -29,7 +29,7 @@ const ValuesSection = () => {
   return (
     <section
       id="values"
-      className="py-32 px-6 md:px-8 bg-gradient-to-b from-background via-secondary/10 to-background"
+      className="py-32 px-6 md:px-8 bg-gradient-to-b from-background via-primary/5 to-background"
     >
       <div className="container mx-auto max-w-6xl">
         {/* Our Values */}
