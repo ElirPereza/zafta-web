@@ -79,10 +79,9 @@ const Hero = () => {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.15, ease: [0.4, 0, 0.2, 1] }}
-            className="mb-10 text-xl md:text-2xl lg:text-3xl text-background font-sans font-medium max-w-3xl leading-relaxed mx-auto tracking-wide"
+            className="mb-10 text-xl md:text-2xl lg:text-3xl text-background font-sans font-bold max-w-3xl leading-relaxed mx-auto tracking-wide bg-black/40 backdrop-blur-sm px-8 py-4 rounded-2xl"
           >
-            En cada bocado, una historia. Desde 1995, Zafta celebra la tradición
-            del sabor hecho con amor.
+            Nuestra Historia en cada bocado
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 40 }}
