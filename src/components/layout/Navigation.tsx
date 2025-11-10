@@ -4,7 +4,8 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu } from "lucide-react";
+import { Menu, LayoutDashboard } from "lucide-react";
+import { useUser } from "@clerk/nextjs";
 import {
   Sheet,
   SheetContent,
@@ -26,6 +27,7 @@ const navItems = [
 
 const Navigation = () => {
   const pathname = usePathname();
+  const { user, isLoaded } = useUser();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -33,6 +35,18 @@ const Navigation = () => {
 
   // Check if we're on the home page
   const isHomePage = pathname === "/inicio" || pathname === "/";
+
+  // Check if current user is admin
+  const isAdmin = isLoaded && user && (() => {
+    const adminEmail = process.env.NEXT_PUBLIC_ADMIN_EMAIL;
+    if (!adminEmail) return false;
+
+    const userEmail = user.emailAddresses.find(
+      (email) => email.id === user.primaryEmailAddressId
+    )?.emailAddress;
+
+    return userEmail?.toLowerCase() === adminEmail.toLowerCase();
+  })();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -149,6 +163,26 @@ const Navigation = () => {
               );
             })}
 
+            {/* Admin Panel Button - Only visible for admin users */}
+            {isAdmin && (
+              <Link href="/admin">
+                <motion.div
+                  className="px-4 py-2 rounded-full text-sm font-sans font-medium transition-all duration-300 flex items-center gap-2"
+                  style={{
+                    color: "#FFFBEF",
+                    backgroundColor: "#80011f",
+                  }}
+                  whileHover={{
+                    scale: 1.05,
+                  }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <LayoutDashboard className="h-4 w-4" />
+                  Panel Admin
+                </motion.div>
+              </Link>
+            )}
+
             {/* Cart Button */}
             <motion.div
               whileHover={{ scale: 1.05 }}
@@ -221,6 +255,18 @@ const Navigation = () => {
                       </Link>
                     );
                   })}
+
+                  {/* Admin Panel Button - Mobile */}
+                  {isAdmin && (
+                    <Link
+                      href="/admin"
+                      onClick={() => setIsOpen(false)}
+                      className="px-4 py-3 rounded-lg text-base font-sans font-medium transition-all bg-primary text-primary-foreground flex items-center gap-2"
+                    >
+                      <LayoutDashboard className="h-5 w-5" />
+                      Panel Admin
+                    </Link>
+                  )}
                 </nav>
               </SheetContent>
             </Sheet>
