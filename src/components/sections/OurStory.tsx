@@ -152,7 +152,7 @@ const OurStory = () => {
                     >
                       {isLeft ? (
                         // Image on left
-                        <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden border-4 border-secondary/40 shadow-warm hover:shadow-medium transition-all duration-300 group">
+                        <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden border-4 border-primary/40 shadow-warm hover:shadow-medium transition-all duration-300 group">
                           <Image
                             src={item.image}
                             alt={`${item.year} - ${item.title}`}
@@ -210,7 +210,7 @@ const OurStory = () => {
                           delay: index * 0.3,
                         }}
                       />
-                      <div className="relative w-4 h-4 rounded-full bg-primary border-4 border-secondary shadow-soft" />
+                      <div className="relative w-4 h-4 rounded-full bg-primary border-4 border-primary shadow-soft" />
                     </motion.div>
 
                     {/* Right side - Text on even, Image on odd */}
@@ -240,7 +240,7 @@ const OurStory = () => {
                         </div>
                       ) : (
                         // Image on right
-                        <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden border-4 border-secondary/40 shadow-warm hover:shadow-medium transition-all duration-300 group">
+                        <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden border-4 border-primary/40 shadow-warm hover:shadow-medium transition-all duration-300 group">
                           <Image
                             src={item.image}
                             alt={`${item.year} - ${item.title}`}
@@ -302,7 +302,7 @@ const OurStory = () => {
                 whileHover={{ scale: 1.05, rotate: 5 }}
                 transition={{ duration: 0.3 }}
               >
-                <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-card border-2 border-secondary/40 shadow-warm transition-all duration-300 group-hover:border-secondary group-hover:shadow-medium">
+                <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-card border-2 border-primary/40 shadow-warm transition-all duration-300 group-hover:border-primary group-hover:shadow-medium">
                   <value.icon
                     className="h-10 w-10 text-primary transition-transform duration-300 group-hover:scale-110"
                     strokeWidth={1.5}
@@ -357,7 +357,7 @@ const OurStory = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="relative pl-6 border-l-4 border-secondary"
+              className="relative pl-6 border-l-4 border-primary"
             >
               <h4 className="text-xl md:text-2xl font-sans italic text-primary mb-4">
                 Visión

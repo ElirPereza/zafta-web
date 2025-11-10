@@ -274,7 +274,7 @@ const OrderSidebar = ({
 
               {/* Resumen del pedido - Solo para productos específicos */}
               {!isCustomOrder && (
-                <div className="space-y-3 p-5 bg-gradient-to-br from-secondary/20 to-secondary/30 rounded-xl border border-secondary/40 shadow-warm">
+                <div className="space-y-3 p-5 bg-gradient-to-br from-primary/20 to-primary/30 rounded-xl border border-secondary/40 shadow-warm">
                   <h3 className="text-lg font-sans italic text-foreground">
                     Resumen del pedido
                   </h3>
@@ -309,7 +309,7 @@ const OrderSidebar = ({
 
               {/* Info adicional - Solo para pedidos personalizados */}
               {isCustomOrder && (
-                <div className="space-y-3 p-5 bg-gradient-to-br from-secondary/20 to-secondary/30 rounded-xl border border-secondary/40 shadow-warm">
+                <div className="space-y-3 p-5 bg-gradient-to-br from-primary/20 to-primary/30 rounded-xl border border-secondary/40 shadow-warm">
                   <h3 className="text-lg font-sans italic text-foreground">
                     ¿Cómo funciona?
                   </h3>

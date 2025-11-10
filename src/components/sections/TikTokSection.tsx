@@ -91,9 +91,9 @@ const TikTokSection = () => {
                 sizes="(max-width: 768px) 50vw, 33vw"
                 className="object-cover transition-transform duration-500 group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-secondary/0 group-hover:bg-secondary/40 transition-all duration-300 flex flex-col items-center justify-center gap-2">
-                <Music className="w-10 h-10 text-background opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <span className="text-background font-sans font-medium text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/30 transition-all duration-300 flex flex-col items-center justify-center gap-2">
+                <Music className="w-10 h-10 text-foreground opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <span className="text-foreground font-sans font-medium text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   Ver en TikTok
                 </span>
               </div>
@@ -109,7 +109,7 @@ const TikTokSection = () => {
           className="text-center"
         >
           <Button
-            variant="secondary"
+            variant="default"
             size="lg"
             asChild
             className="shadow-warm hover:shadow-medium transition-all duration-300"

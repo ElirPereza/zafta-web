@@ -50,7 +50,7 @@ const ProductGallery = ({ onOpenOrder }: ProductGalleryProps) => {
   return (
     <section
       id="our-cakes"
-      className="py-16 md:py-20 px-6 md:px-8 bg-gradient-to-b from-background via-secondary/10 to-background"
+      className="py-16 md:py-20 px-6 md:px-8 bg-gradient-to-b from-background via-primary/5 to-background"
     >
       <div className="container mx-auto max-w-7xl">
         {/* Header */}

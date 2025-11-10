@@ -9,7 +9,7 @@ const Footer = () => {
   return (
     <footer
       id="contact"
-      className="py-8 md:py-10 px-6 md:px-8 border-t-2 border-secondary/30"
+      className="py-8 md:py-10 px-6 md:px-8 border-t-2 border-primary/20"
       style={{
         background: `linear-gradient(135deg, hsl(var(--beige-500)) 0%, hsl(var(--beige-400)) 50%, hsl(var(--beige-500)) 100%)`,
       }}
@@ -63,7 +63,7 @@ const Footer = () => {
                   <motion.span
                     whileHover={{ x: 5 }}
                     transition={{ duration: 0.2 }}
-                    className="text-muted-foreground hover:text-primary transition-all duration-300 hover:underline decoration-secondary inline-block cursor-pointer"
+                    className="text-muted-foreground hover:text-primary transition-all duration-300 hover:underline decoration-primary inline-block cursor-pointer"
                   >
                     Productos
                   </motion.span>
@@ -74,7 +74,7 @@ const Footer = () => {
                   <motion.span
                     whileHover={{ x: 5 }}
                     transition={{ duration: 0.2 }}
-                    className="text-muted-foreground hover:text-primary transition-all duration-300 hover:underline decoration-secondary inline-block cursor-pointer"
+                    className="text-muted-foreground hover:text-primary transition-all duration-300 hover:underline decoration-primary inline-block cursor-pointer"
                   >
                     Nuestra Historia
                   </motion.span>
@@ -85,7 +85,7 @@ const Footer = () => {
                   <motion.span
                     whileHover={{ x: 5 }}
                     transition={{ duration: 0.2 }}
-                    className="text-muted-foreground hover:text-primary transition-all duration-300 hover:underline decoration-secondary inline-block cursor-pointer"
+                    className="text-muted-foreground hover:text-primary transition-all duration-300 hover:underline decoration-primary inline-block cursor-pointer"
                   >
                     Preguntas Frecuentes
                   </motion.span>
@@ -96,7 +96,7 @@ const Footer = () => {
                   <motion.span
                     whileHover={{ x: 5 }}
                     transition={{ duration: 0.2 }}
-                    className="text-muted-foreground hover:text-primary transition-all duration-300 hover:underline decoration-secondary inline-block cursor-pointer"
+                    className="text-muted-foreground hover:text-primary transition-all duration-300 hover:underline decoration-primary inline-block cursor-pointer"
                   >
                     Contacto
                   </motion.span>
@@ -124,7 +124,7 @@ const Footer = () => {
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 text-base text-muted-foreground hover:text-primary transition-all duration-300 group"
               >
-                <Phone className="h-5 w-5 text-secondary group-hover:text-primary transition-colors" />
+                <Phone className="h-5 w-5 text-primary group-hover:text-primary-dark transition-colors" />
                 <span>WhatsApp: +57 311 747 9392</span>
               </motion.a>
               <motion.a
@@ -135,7 +135,7 @@ const Footer = () => {
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 text-base text-muted-foreground hover:text-primary transition-all duration-300 group"
               >
-                <Instagram className="h-5 w-5 text-secondary group-hover:text-primary transition-colors" />
+                <Instagram className="h-5 w-5 text-primary group-hover:text-primary-dark transition-colors" />
                 <span>@zafta_reposteria</span>
               </motion.a>
             </div>
@@ -148,7 +148,7 @@ const Footer = () => {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.4, ease: [0.4, 0, 0.2, 1] }}
-          className="border-t border-secondary/30 pt-6 text-center space-y-2"
+          className="border-t border-primary/20 pt-6 text-center space-y-2"
         >
           <p className="text-sm text-muted-foreground font-sans">
             © 2025 ZAFTA Repostería & Panadería. Todos los derechos reservados.
@@ -159,7 +159,7 @@ const Footer = () => {
               href="https://www.instagram.com/soraia.web/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-primary font-medium hover:text-secondary transition-colors duration-300 hover:underline"
+              className="text-primary font-medium hover:text-primary-dark transition-colors duration-300 hover:underline"
             >
               Sora
             </a>

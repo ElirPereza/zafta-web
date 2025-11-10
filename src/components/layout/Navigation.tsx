@@ -248,7 +248,7 @@ const Navigation = () => {
                         className={`px-4 py-3 rounded-lg text-base font-sans font-medium transition-all ${
                           active
                             ? "bg-primary text-primary-foreground"
-                            : "text-foreground hover:bg-secondary"
+                            : "text-foreground hover:bg-beige-200"
                         }`}
                       >
                         {item.label}

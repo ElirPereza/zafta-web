@@ -112,12 +112,12 @@ const FAQ = () => {
                 <AccordionItem
                   key={faq.id}
                   value={faq.id}
-                  className="bg-card border border-border rounded-2xl shadow-warm overflow-hidden transition-all duration-300 hover:shadow-medium data-[state=open]:bg-secondary/30 data-[state=open]:border-secondary/50"
+                  className="bg-card border border-border rounded-2xl shadow-warm overflow-hidden transition-all duration-300 hover:shadow-medium data-[state=open]:bg-primary/30 data-[state=open]:border-primary/50"
                   style={{ animationDelay: `${0.1 * index}s` }}
                 >
                   <AccordionTrigger className="px-6 py-5 text-left hover:no-underline group">
                     <div className="flex items-start gap-4 flex-1">
-                      <div className="flex-shrink-0 w-8 h-8 rounded-full bg-secondary/60 flex items-center justify-center group-data-[state=open]:bg-secondary transition-colors">
+                      <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary/60 flex items-center justify-center group-data-[state=open]:bg-primary transition-colors">
                         <ChevronDown className="h-4 w-4 text-primary transition-transform duration-300 group-data-[state=open]:rotate-180" />
                       </div>
                       <span className="text-base md:text-lg font-semibold text-foreground pr-4 font-sans">
@@ -148,12 +148,12 @@ const FAQ = () => {
                 <AccordionItem
                   key={faq.id}
                   value={faq.id}
-                  className="bg-card border border-border rounded-2xl shadow-warm overflow-hidden transition-all duration-300 hover:shadow-medium data-[state=open]:bg-secondary/30 data-[state=open]:border-secondary/50"
+                  className="bg-card border border-border rounded-2xl shadow-warm overflow-hidden transition-all duration-300 hover:shadow-medium data-[state=open]:bg-primary/30 data-[state=open]:border-primary/50"
                   style={{ animationDelay: `${0.1 * index}s` }}
                 >
                   <AccordionTrigger className="px-6 py-5 text-left hover:no-underline group">
                     <div className="flex items-start gap-4 flex-1">
-                      <div className="flex-shrink-0 w-8 h-8 rounded-full bg-secondary/60 flex items-center justify-center group-data-[state=open]:bg-secondary transition-colors">
+                      <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary/60 flex items-center justify-center group-data-[state=open]:bg-primary transition-colors">
                         <ChevronDown className="h-4 w-4 text-primary transition-transform duration-300 group-data-[state=open]:rotate-180" />
                       </div>
                       <span className="text-base md:text-lg font-semibold text-foreground pr-4 font-sans">

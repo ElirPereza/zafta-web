@@ -83,7 +83,7 @@ export function OrderSummary({ shippingCost = 0 }: OrderSummaryProps) {
       </div>
 
       {/* Note */}
-      <div className="mt-6 p-4 bg-secondary/30 rounded-lg">
+      <div className="mt-6 p-4 bg-primary/30 rounded-lg">
         <p className="text-xs font-sans text-muted-foreground leading-relaxed">
           El costo de envío se calculará automáticamente según tu dirección.
         </p>

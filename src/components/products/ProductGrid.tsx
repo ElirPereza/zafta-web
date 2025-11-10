@@ -90,7 +90,7 @@ export function ProductGrid({ products }: ProductGridProps) {
                 )}
 
                 {/* Category Badge */}
-                <div className="absolute top-4 left-4 bg-secondary/90 backdrop-blur-sm px-3 py-1 rounded-full">
+                <div className="absolute top-4 left-4 bg-primary/90 backdrop-blur-sm px-3 py-1 rounded-full">
                   <span className="text-xs font-sans font-medium text-foreground">
                     {product.category}
                   </span>
