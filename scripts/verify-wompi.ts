@@ -16,7 +16,8 @@ let allConfigured = true;
 
 for (const varName of requiredEnvVars) {
   const value = process.env[varName];
-  const isConfigured = value && !value.includes("your_") && !value.includes("REEMPLAZA");
+  const isConfigured =
+    value && !value.includes("your_") && !value.includes("REEMPLAZA");
 
   if (isConfigured) {
     console.log(`✅ ${varName}: Configurado`);
@@ -24,9 +25,13 @@ for (const varName of requiredEnvVars) {
     // Verificar formato
     if (varName === "NEXT_PUBLIC_WOMPI_PUBLIC_KEY") {
       if (value.startsWith("pub_test_") || value.startsWith("pub_prod_")) {
-        console.log(`   ✓ Formato válido (${value.startsWith("pub_test_") ? "SANDBOX" : "PRODUCCIÓN"})`);
+        console.log(
+          `   ✓ Formato válido (${value.startsWith("pub_test_") ? "SANDBOX" : "PRODUCCIÓN"})`,
+        );
       } else {
-        console.log(`   ⚠️  Formato inválido. Debe empezar con pub_test_ o pub_prod_`);
+        console.log(
+          `   ⚠️  Formato inválido. Debe empezar con pub_test_ o pub_prod_`,
+        );
         allConfigured = false;
       }
     }
@@ -38,7 +43,6 @@ for (const varName of requiredEnvVars) {
         console.log(`   ⚠️  Debe contener 'integrity' en el nombre`);
       }
     }
-
   } else {
     console.log(`❌ ${varName}: NO configurado`);
     allConfigured = false;

@@ -11,7 +11,9 @@ interface EditProductPageProps {
   }>;
 }
 
-export default async function EditProductPage({ params }: EditProductPageProps) {
+export default async function EditProductPage({
+  params,
+}: EditProductPageProps) {
   const { id } = await params;
 
   const product = await prisma.product.findUnique({

@@ -9,7 +9,9 @@ interface OrderDetailPageProps {
   }>;
 }
 
-export default async function OrderDetailPage({ params }: OrderDetailPageProps) {
+export default async function OrderDetailPage({
+  params,
+}: OrderDetailPageProps) {
   const { userId } = await auth();
   const { id } = await params;
 

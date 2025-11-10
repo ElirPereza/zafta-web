@@ -120,16 +120,20 @@ export function ProductGrid({ products }: ProductGridProps) {
                 {/* Price & Button */}
                 <div className="flex items-center justify-between pt-4 border-t border-border/50">
                   <div>
-                    {product.comparePrice && product.comparePrice > product.price && (
-                      <p className="text-sm text-muted-foreground font-sans line-through">
-                        {formatPrice(product.comparePrice)}
-                      </p>
-                    )}
+                    {product.comparePrice &&
+                      product.comparePrice > product.price && (
+                        <p className="text-sm text-muted-foreground font-sans line-through">
+                          {formatPrice(product.comparePrice)}
+                        </p>
+                      )}
                     <p className="text-2xl md:text-3xl font-bold text-primary">
                       {formatPrice(product.price)}
                     </p>
                   </div>
-                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
                     <Button
                       onClick={() => handleAddToCart(product)}
                       className="gap-2 shadow-warm hover:shadow-medium transition-all duration-300"

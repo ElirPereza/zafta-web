@@ -34,37 +34,43 @@ const products: Product[] = [
     id: "1",
     name: "Torta de Chocolate",
     price: 45000,
-    image: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=800&q=80",
+    image:
+      "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=800&q=80",
   },
   {
     id: "2",
     name: "Torta de Vainilla",
     price: 40000,
-    image: "https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=800&q=80",
+    image:
+      "https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=800&q=80",
   },
   {
     id: "3",
     name: "Torta Tradicional",
     price: 42000,
-    image: "https://images.unsplash.com/photo-1535254973040-607b474cb50d?w=800&q=80",
+    image:
+      "https://images.unsplash.com/photo-1535254973040-607b474cb50d?w=800&q=80",
   },
   {
     id: "4",
     name: "Torta de Zanahoria",
     price: 43000,
-    image: "https://images.unsplash.com/photo-1621303837174-89787a7d4729?w=800&q=80",
+    image:
+      "https://images.unsplash.com/photo-1621303837174-89787a7d4729?w=800&q=80",
   },
   {
     id: "5",
     name: "Torta Red Velvet",
     price: 48000,
-    image: "https://images.unsplash.com/photo-1586985289688-ca3cf47d3e6e?w=800&q=80",
+    image:
+      "https://images.unsplash.com/photo-1586985289688-ca3cf47d3e6e?w=800&q=80",
   },
   {
     id: "6",
     name: "Torta de Limón",
     price: 41000,
-    image: "https://images.unsplash.com/photo-1519915212116-7cfef71f1d3e?w=800&q=80",
+    image:
+      "https://images.unsplash.com/photo-1519915212116-7cfef71f1d3e?w=800&q=80",
   },
 ];
 
@@ -244,7 +250,8 @@ const OrderSidebar = ({
                 />
                 {isCustomOrder && (
                   <p className="text-sm text-muted-foreground">
-                    Incluye todos los detalles que consideres importantes para tu torta ideal.
+                    Incluye todos los detalles que consideres importantes para
+                    tu torta ideal.
                   </p>
                 )}
               </div>
@@ -307,18 +314,10 @@ const OrderSidebar = ({
                     ¿Cómo funciona?
                   </h3>
                   <div className="space-y-3 text-base text-foreground/80 font-sans leading-relaxed">
-                    <p>
-                      1️⃣ Envíanos tu solicitud por WhatsApp
-                    </p>
-                    <p>
-                      2️⃣ Te responderemos con una cotización personalizada
-                    </p>
-                    <p>
-                      3️⃣ Ajustamos los detalles según tus preferencias
-                    </p>
-                    <p>
-                      4️⃣ ¡Creamos tu torta perfecta con amor!
-                    </p>
+                    <p>1️⃣ Envíanos tu solicitud por WhatsApp</p>
+                    <p>2️⃣ Te responderemos con una cotización personalizada</p>
+                    <p>3️⃣ Ajustamos los detalles según tus preferencias</p>
+                    <p>4️⃣ ¡Creamos tu torta perfecta con amor!</p>
                   </div>
                 </div>
               )}
@@ -331,7 +330,8 @@ const OrderSidebar = ({
                 className="w-full gap-3 text-base font-semibold h-14 shadow-warm hover:shadow-medium"
               >
                 <Send className="h-5 w-5" />
-                {isCustomOrder ? "Enviar solicitud" : "Enviar cotización"} por WhatsApp
+                {isCustomOrder ? "Enviar solicitud" : "Enviar cotización"} por
+                WhatsApp
               </Button>
             </div>
           </motion.div>

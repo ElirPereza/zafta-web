@@ -6,7 +6,7 @@ import { MessageCircle } from "lucide-react";
 export function FloatingWhatsApp() {
   const handleClick = () => {
     const message = encodeURIComponent(
-      "¡Hola! Me gustaría hacer un pedido de tortas Zafta 🍰"
+      "¡Hola! Me gustaría hacer un pedido de tortas Zafta 🍰",
     );
     window.open(`https://wa.me/573117479392?text=${message}`, "_blank");
   };

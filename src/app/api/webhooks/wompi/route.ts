@@ -50,10 +50,7 @@ export async function POST(request: NextRequest) {
     // Verificar firma del webhook
     if (!signature || !verifyWompiSignature(rawBody, signature)) {
       console.error("Invalid webhook signature");
-      return NextResponse.json(
-        { error: "Invalid signature" },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: "Invalid signature" }, { status: 401 });
     }
 
     const event: WompiEvent = JSON.parse(rawBody);
@@ -74,10 +71,7 @@ export async function POST(request: NextRequest) {
 
     if (!order) {
       console.error(`Order not found for reference: ${transaction.reference}`);
-      return NextResponse.json(
-        { error: "Order not found" },
-        { status: 404 }
-      );
+      return NextResponse.json({ error: "Order not found" }, { status: 404 });
     }
 
     // Actualizar estado del pago según el status de Wompi
@@ -124,7 +118,7 @@ export async function POST(request: NextRequest) {
     console.error("Webhook processing error:", error);
     return NextResponse.json(
       { error: "Webhook processing failed" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

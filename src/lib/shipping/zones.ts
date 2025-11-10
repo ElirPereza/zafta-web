@@ -14,20 +14,20 @@ export const SHIPPING_ZONES: ShippingZone[] = [
   {
     department: "Antioquia",
     cities: [
-      { name: "Medellín", cost: 10000 },       // Dentro de la ciudad
-      { name: "Envigado", cost: 12000 },      // Área metropolitana cercana
-      { name: "Bello", cost: 12000 },         // Área metropolitana cercana
-      { name: "Itagüí", cost: 12000 },        // Área metropolitana cercana
-      { name: "Sabaneta", cost: 12000 },      // Área metropolitana cercana
-      { name: "La Estrella", cost: 15000 },   // Un poco más lejos
-      { name: "Caldas", cost: 15000 },        // Un poco más lejos
-      { name: "Copacabana", cost: 15000 },    // Un poco más lejos
-      { name: "Girardota", cost: 18000 },     // Más lejos
-      { name: "Barbosa", cost: 20000 },       // Más lejos
-      { name: "Rionegro", cost: 20000 },      // Oriente cercano
-      { name: "Marinilla", cost: 25000 },     // Oriente
-      { name: "El Retiro", cost: 25000 },     // Oriente
-      { name: "Guarne", cost: 25000 },        // Oriente
+      { name: "Medellín", cost: 10000 }, // Dentro de la ciudad
+      { name: "Envigado", cost: 12000 }, // Área metropolitana cercana
+      { name: "Bello", cost: 12000 }, // Área metropolitana cercana
+      { name: "Itagüí", cost: 12000 }, // Área metropolitana cercana
+      { name: "Sabaneta", cost: 12000 }, // Área metropolitana cercana
+      { name: "La Estrella", cost: 15000 }, // Un poco más lejos
+      { name: "Caldas", cost: 15000 }, // Un poco más lejos
+      { name: "Copacabana", cost: 15000 }, // Un poco más lejos
+      { name: "Girardota", cost: 18000 }, // Más lejos
+      { name: "Barbosa", cost: 20000 }, // Más lejos
+      { name: "Rionegro", cost: 20000 }, // Oriente cercano
+      { name: "Marinilla", cost: 25000 }, // Oriente
+      { name: "El Retiro", cost: 25000 }, // Oriente
+      { name: "Guarne", cost: 25000 }, // Oriente
     ],
     defaultCost: 30000, // Otras ciudades de Antioquia
   },
@@ -45,7 +45,7 @@ export interface ShippingCalculation {
  */
 export function calculateShippingCost(
   department: string,
-  city: string
+  city: string,
 ): ShippingCalculation {
   // Normalizar strings (quitar acentos, mayúsculas, espacios extra)
   const normalizedDepartment = normalizeString(department);
@@ -53,7 +53,7 @@ export function calculateShippingCost(
 
   // Buscar la zona que corresponde al departamento
   const zone = SHIPPING_ZONES.find(
-    (z) => normalizeString(z.department) === normalizedDepartment
+    (z) => normalizeString(z.department) === normalizedDepartment,
   );
 
   if (!zone) {
@@ -68,7 +68,7 @@ export function calculateShippingCost(
 
   // Buscar la ciudad específica dentro de la zona
   const cityConfig = zone.cities.find(
-    (c) => normalizeString(c.name) === normalizedCity
+    (c) => normalizeString(c.name) === normalizedCity,
   );
 
   const cost = cityConfig ? cityConfig.cost : zone.defaultCost;
@@ -106,7 +106,7 @@ export function getDepartments(): string[] {
 export function getCitiesForDepartment(department: string): string[] {
   const normalizedDepartment = normalizeString(department);
   const zone = SHIPPING_ZONES.find(
-    (z) => normalizeString(z.department) === normalizedDepartment
+    (z) => normalizeString(z.department) === normalizedDepartment,
   );
 
   if (!zone) {

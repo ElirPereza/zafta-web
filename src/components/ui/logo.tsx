@@ -1,7 +1,14 @@
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 
-export type LogoVariant = "header" | "banner" | "banner-color-1" | "isotipo-burgundy" | "isotipo-rose" | "zafta-text" | "isotipo-optimized";
+export type LogoVariant =
+  | "header"
+  | "banner"
+  | "banner-color-1"
+  | "isotipo-burgundy"
+  | "isotipo-rose"
+  | "zafta-text"
+  | "isotipo-optimized";
 
 interface LogoProps {
   variant?: LogoVariant;
@@ -26,7 +33,7 @@ export function Logo({
   variant = "header",
   className,
   width,
-  height
+  height,
 }: LogoProps) {
   const logoSources: Record<LogoVariant, string> = {
     header: "/SVG/logo-header.svg",
@@ -39,7 +46,10 @@ export function Logo({
   };
 
   // Default dimensions based on variant
-  const defaultDimensions: Record<LogoVariant, { width: number; height: number }> = {
+  const defaultDimensions: Record<
+    LogoVariant,
+    { width: number; height: number }
+  > = {
     header: { width: 180, height: 145 },
     banner: { width: 180, height: 145 },
     "banner-color-1": { width: 200, height: 162 },

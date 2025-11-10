@@ -108,7 +108,13 @@ export function ShippingForm({ onShippingChange }: ShippingFormProps) {
             disabled={!department || loadingCities}
           >
             <SelectTrigger>
-              <SelectValue placeholder={department ? "Selecciona ciudad" : "Primero selecciona departamento"} />
+              <SelectValue
+                placeholder={
+                  department
+                    ? "Selecciona ciudad"
+                    : "Primero selecciona departamento"
+                }
+              />
             </SelectTrigger>
             <SelectContent>
               {cities.map((c) => (
@@ -152,8 +158,12 @@ export function ShippingForm({ onShippingChange }: ShippingFormProps) {
         <Alert className="bg-green-50 border-green-200">
           <MapPin className="h-4 w-4 text-green-600" />
           <AlertDescription className="text-green-800">
-            <span className="font-semibold">Costo de envío a {city}, {department}:</span>{" "}
-            <span className="text-lg font-bold">{shippingCalculation.formattedCost}</span>
+            <span className="font-semibold">
+              Costo de envío a {city}, {department}:
+            </span>{" "}
+            <span className="text-lg font-bold">
+              {shippingCalculation.formattedCost}
+            </span>
           </AlertDescription>
         </Alert>
       )}

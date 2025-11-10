@@ -35,7 +35,9 @@ export function ProductForm({ product }: ProductFormProps) {
     slug: product?.slug || "",
     description: product?.description || "",
     price: product?.price ? Number(product.price) : ("" as any),
-    comparePrice: product?.comparePrice ? Number(product.comparePrice) : ("" as any),
+    comparePrice: product?.comparePrice
+      ? Number(product.comparePrice)
+      : ("" as any),
     category: product?.category || "",
     inStock: product?.inStock ?? true,
     featured: product?.featured ?? false,
@@ -105,7 +107,9 @@ export function ProductForm({ product }: ProductFormProps) {
         body: JSON.stringify({
           ...formData,
           price: Number(formData.price) || 0,
-          comparePrice: formData.comparePrice ? Number(formData.comparePrice) : null,
+          comparePrice: formData.comparePrice
+            ? Number(formData.comparePrice)
+            : null,
           slug,
           images,
         }),
@@ -227,7 +231,10 @@ export function ProductForm({ product }: ProductFormProps) {
               onChange={(e) =>
                 setFormData({
                   ...formData,
-                  price: e.target.value === "" ? "" as any : Number(e.target.value)
+                  price:
+                    e.target.value === ""
+                      ? ("" as any)
+                      : Number(e.target.value),
                 })
               }
               placeholder="50000"
@@ -248,7 +255,10 @@ export function ProductForm({ product }: ProductFormProps) {
               onChange={(e) =>
                 setFormData({
                   ...formData,
-                  comparePrice: e.target.value === "" ? "" as any : Number(e.target.value),
+                  comparePrice:
+                    e.target.value === ""
+                      ? ("" as any)
+                      : Number(e.target.value),
                 })
               }
               placeholder="70000"

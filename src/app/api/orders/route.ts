@@ -50,7 +50,7 @@ export async function GET() {
     console.error("Error fetching orders:", error);
     return NextResponse.json(
       { error: "Error fetching orders" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -71,7 +71,7 @@ export async function POST(request: Request) {
       console.error("❌ Missing required customer fields");
       return NextResponse.json(
         { error: "Faltan campos requeridos de cliente" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -79,7 +79,7 @@ export async function POST(request: Request) {
       console.error("❌ Missing required shipping fields");
       return NextResponse.json(
         { error: "Faltan campos requeridos de envío" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -87,7 +87,7 @@ export async function POST(request: Request) {
       console.error("❌ No items in order");
       return NextResponse.json(
         { error: "El pedido debe tener al menos un producto" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -97,7 +97,7 @@ export async function POST(request: Request) {
         console.error("❌ Invalid item data:", item);
         return NextResponse.json(
           { error: "Datos de producto incompletos" },
-          { status: 400 }
+          { status: 400 },
         );
       }
     }
@@ -144,15 +144,17 @@ export async function POST(request: Request) {
     console.error("❌ Error creating order:", error);
 
     // Proporcionar más detalle del error
-    const errorMessage = error instanceof Error ? error.message : "Unknown error";
+    const errorMessage =
+      error instanceof Error ? error.message : "Unknown error";
     console.error("Error details:", errorMessage);
 
     return NextResponse.json(
       {
         error: "Error creating order",
-        details: process.env.NODE_ENV === "development" ? errorMessage : undefined
+        details:
+          process.env.NODE_ENV === "development" ? errorMessage : undefined,
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

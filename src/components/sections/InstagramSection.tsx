@@ -13,39 +13,48 @@ interface InstagramSectionProps {
 const instagramPosts = [
   {
     id: 1,
-    image: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&h=400&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&h=400&fit=crop",
     alt: "Delicious chocolate cake with berries",
   },
   {
     id: 2,
-    image: "https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=400&h=400&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=400&h=400&fit=crop",
     alt: "Vanilla cake with cream frosting",
   },
   {
     id: 3,
-    image: "https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=400&h=400&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=400&h=400&fit=crop",
     alt: "Red velvet cake slice",
   },
   {
     id: 4,
-    image: "https://images.unsplash.com/photo-1576618148400-f54bed99fcfd?w=400&h=400&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1576618148400-f54bed99fcfd?w=400&h=400&fit=crop",
     alt: "Lemon cake with fresh lemons",
   },
   {
     id: 5,
-    image: "https://images.unsplash.com/photo-1621303837174-89787a7d4729?w=400&h=400&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1621303837174-89787a7d4729?w=400&h=400&fit=crop",
     alt: "Carrot cake with cream cheese frosting",
   },
   {
     id: 6,
-    image: "https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?w=400&h=400&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?w=400&h=400&fit=crop",
     alt: "Traditional birthday cake",
   },
 ];
 
 const InstagramSection = ({ onOpenOrder }: InstagramSectionProps) => {
   return (
-    <section id="instagram" className="py-16 md:py-20 px-6 md:px-8 bg-background">
+    <section
+      id="instagram"
+      className="py-16 md:py-20 px-6 md:px-8 bg-background"
+    >
       <div className="container mx-auto max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

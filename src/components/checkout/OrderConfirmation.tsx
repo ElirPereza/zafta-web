@@ -80,7 +80,8 @@ export function OrderConfirmation({ order }: OrderConfirmationProps) {
             Gracias por tu compra, {order.customerName}
           </p>
           <p className="text-sm text-muted-foreground font-sans">
-            Número de pedido: <span className="font-semibold">{order.orderNumber}</span>
+            Número de pedido:{" "}
+            <span className="font-semibold">{order.orderNumber}</span>
           </p>
         </div>
 
@@ -88,14 +89,16 @@ export function OrderConfirmation({ order }: OrderConfirmationProps) {
         <Card className="p-6 mb-6">
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-xl font-serif italic mb-2">Estado del Pedido</h2>
+              <h2 className="text-xl font-serif italic mb-2">
+                Estado del Pedido
+              </h2>
               <p className="text-sm text-muted-foreground font-sans">
                 Pedido realizado el {formatDate(order.createdAt)}
               </p>
             </div>
             <div
               className={`px-4 py-2 rounded-full border font-sans font-medium ${getStatusColor(
-                order.status
+                order.status,
               )}`}
             >
               {getStatusLabel(order.status)}
@@ -113,11 +116,15 @@ export function OrderConfirmation({ order }: OrderConfirmationProps) {
             <div className="space-y-2 font-sans text-sm">
               <div className="flex items-start gap-2">
                 <Mail className="h-4 w-4 text-muted-foreground mt-0.5" />
-                <span className="text-muted-foreground break-all">{order.customerEmail}</span>
+                <span className="text-muted-foreground break-all">
+                  {order.customerEmail}
+                </span>
               </div>
               <div className="flex items-start gap-2">
                 <Phone className="h-4 w-4 text-muted-foreground mt-0.5" />
-                <span className="text-muted-foreground">{order.customerPhone}</span>
+                <span className="text-muted-foreground">
+                  {order.customerPhone}
+                </span>
               </div>
             </div>
           </Card>
@@ -135,7 +142,8 @@ export function OrderConfirmation({ order }: OrderConfirmationProps) {
               </p>
               {order.deliveryNotes && (
                 <p className="mt-2 text-xs">
-                  <span className="font-medium">Notas:</span> {order.deliveryNotes}
+                  <span className="font-medium">Notas:</span>{" "}
+                  {order.deliveryNotes}
                 </p>
               )}
             </div>
@@ -173,7 +181,8 @@ export function OrderConfirmation({ order }: OrderConfirmationProps) {
                     {item.product.name}
                   </h4>
                   <p className="text-sm text-muted-foreground font-sans">
-                    Cantidad: {item.quantity} × {formatPrice(Number(item.price))}
+                    Cantidad: {item.quantity} ×{" "}
+                    {formatPrice(Number(item.price))}
                   </p>
                 </div>
 
@@ -193,11 +202,15 @@ export function OrderConfirmation({ order }: OrderConfirmationProps) {
           <div className="space-y-2">
             <div className="flex justify-between text-sm font-sans">
               <span className="text-muted-foreground">Subtotal</span>
-              <span className="font-medium">{formatPrice(Number(order.subtotal))}</span>
+              <span className="font-medium">
+                {formatPrice(Number(order.subtotal))}
+              </span>
             </div>
             <div className="flex justify-between text-sm font-sans">
               <span className="text-muted-foreground">Envío</span>
-              <span className="font-medium">{formatPrice(Number(order.shippingCost))}</span>
+              <span className="font-medium">
+                {formatPrice(Number(order.shippingCost))}
+              </span>
             </div>
             <Separator />
             <div className="flex justify-between text-lg font-sans">
@@ -216,20 +229,22 @@ export function OrderConfirmation({ order }: OrderConfirmationProps) {
             <li className="flex items-start gap-2">
               <span className="text-primary font-bold">1.</span>
               <span>
-                Recibirás un correo de confirmación en <strong>{order.customerEmail}</strong>
+                Recibirás un correo de confirmación en{" "}
+                <strong>{order.customerEmail}</strong>
               </span>
             </li>
             <li className="flex items-start gap-2">
               <span className="text-primary font-bold">2.</span>
               <span>
-                Te contactaremos por WhatsApp al <strong>{order.customerPhone}</strong> para
-                coordinar la entrega
+                Te contactaremos por WhatsApp al{" "}
+                <strong>{order.customerPhone}</strong> para coordinar la entrega
               </span>
             </li>
             <li className="flex items-start gap-2">
               <span className="text-primary font-bold">3.</span>
               <span>
-                Tu pedido será preparado con amor y entregado en la dirección indicada
+                Tu pedido será preparado con amor y entregado en la dirección
+                indicada
               </span>
             </li>
           </ul>
@@ -238,7 +253,11 @@ export function OrderConfirmation({ order }: OrderConfirmationProps) {
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link href="/productos">
-            <Button variant="outline" size="lg" className="w-full sm:w-auto font-sans">
+            <Button
+              variant="outline"
+              size="lg"
+              className="w-full sm:w-auto font-sans"
+            >
               Seguir Comprando
             </Button>
           </Link>

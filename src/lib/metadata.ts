@@ -56,10 +56,7 @@ export function generateMetadata({
     ? `${SITE_CONFIG.url}${image}`
     : `${SITE_CONFIG.url}${SITE_CONFIG.ogImage}`;
 
-  const allKeywords = [
-    ...SITE_CONFIG.keywords,
-    ...keywords,
-  ];
+  const allKeywords = [...SITE_CONFIG.keywords, ...keywords];
 
   return {
     title: pageTitle,
@@ -150,7 +147,9 @@ export function generateOrganizationSchema() {
 }
 
 // Generate JSON-LD structured data for breadcrumbs
-export function generateBreadcrumbSchema(items: { name: string; url: string }[]) {
+export function generateBreadcrumbSchema(
+  items: { name: string; url: string }[],
+) {
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",

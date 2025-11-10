@@ -6,9 +6,5 @@ export default function AuthLayout({
 }: {
   readonly children: React.ReactNode;
 }) {
-  return (
-    <ClerkProvider localization={esES}>
-      {children}
-    </ClerkProvider>
-  );
+  return <ClerkProvider localization={esES}>{children}</ClerkProvider>;
 }

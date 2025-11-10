@@ -8,13 +8,13 @@ import crypto from "crypto";
 export function generateWompiSignature(
   reference: string,
   amountInCents: number,
-  currency: string = "COP"
+  currency: string = "COP",
 ): string {
   const integritySecret = process.env.WOMPI_INTEGRITY_SECRET;
 
   if (!integritySecret) {
     throw new Error(
-      "WOMPI_INTEGRITY_SECRET no está configurado en las variables de entorno"
+      "WOMPI_INTEGRITY_SECRET no está configurado en las variables de entorno",
     );
   }
 

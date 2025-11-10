@@ -331,7 +331,8 @@ const OurStory = () => {
             Nuestro Propósito
           </h3>
           <p className="text-lg md:text-xl text-center text-muted-foreground font-sans leading-relaxed mb-12 max-w-3xl mx-auto">
-            Más que una empresa, somos guardianes de tradiciones dulces que unen familias.
+            Más que una empresa, somos guardianes de tradiciones dulces que unen
+            familias.
           </p>
 
           <div className="grid gap-12 md:grid-cols-2">
@@ -346,7 +347,8 @@ const OurStory = () => {
                 Misión
               </h4>
               <p className="text-base md:text-lg text-foreground font-sans leading-relaxed">
-                Horneamos como si cada producto fuera para nuestra familia, así como lo hacía Fanny, creando recuerdos llenos de dulzura.
+                Horneamos como si cada producto fuera para nuestra familia, así
+                como lo hacía Fanny, creando recuerdos llenos de dulzura.
               </p>
             </motion.div>
 
@@ -361,7 +363,8 @@ const OurStory = () => {
                 Visión
               </h4>
               <p className="text-base md:text-lg text-foreground font-sans leading-relaxed">
-                Acompañar momentos inolvidables con sabores hechos con amor en casa.
+                Acompañar momentos inolvidables con sabores hechos con amor en
+                casa.
               </p>
             </motion.div>
           </div>

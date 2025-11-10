@@ -11,7 +11,7 @@ export async function POST(req: Request) {
 
   if (!WEBHOOK_SECRET) {
     throw new Error(
-      "Please add CLERK_WEBHOOK_SECRET to your environment variables"
+      "Please add CLERK_WEBHOOK_SECRET to your environment variables",
     );
   }
 
@@ -64,8 +64,9 @@ export async function POST(req: Request) {
     const isSuperAdmin = adminEmail && userEmail === adminEmail;
 
     // Also check if user has admin role in metadata
-    const hasAdminMetadata = public_metadata?.role === "admin" ||
-                             public_metadata?.role === "super_admin";
+    const hasAdminMetadata =
+      public_metadata?.role === "admin" ||
+      public_metadata?.role === "super_admin";
 
     // Determine role
     let role: "SUPER_ADMIN" | "ADMIN" | "CUSTOMER" = "CUSTOMER";
@@ -84,7 +85,9 @@ export async function POST(req: Request) {
         },
       });
 
-      console.log(`✅ User created in database: ${email_addresses[0].email_address} with role: ${role}`);
+      console.log(
+        `✅ User created in database: ${email_addresses[0].email_address} with role: ${role}`,
+      );
     } catch (error) {
       console.error("Error creating user in database:", error);
       return new Response("Error creating user", {
@@ -97,8 +100,9 @@ export async function POST(req: Request) {
     const { id, public_metadata } = evt.data;
 
     // Check if role was updated in metadata
-    const hasAdminMetadata = public_metadata?.role === "admin" ||
-                             public_metadata?.role === "super_admin";
+    const hasAdminMetadata =
+      public_metadata?.role === "admin" ||
+      public_metadata?.role === "super_admin";
 
     // Determine role
     let role: "SUPER_ADMIN" | "ADMIN" | "CUSTOMER" = "CUSTOMER";

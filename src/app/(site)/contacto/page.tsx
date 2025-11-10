@@ -40,9 +40,7 @@ export default function ContactoPage() {
               <div className="p-8 bg-card rounded-2xl shadow-soft hover:shadow-warm transition-all duration-300 hover:-translate-y-1">
                 <Phone className="w-12 h-12 text-primary mx-auto mb-4" />
                 <h3 className="text-xl font-serif italic mb-2">WhatsApp</h3>
-                <p className="text-muted-foreground mb-4">
-                  +57 311 747 9392
-                </p>
+                <p className="text-muted-foreground mb-4">+57 311 747 9392</p>
                 <Button variant="default" className="w-full">
                   Enviar mensaje
                 </Button>
@@ -58,9 +56,7 @@ export default function ContactoPage() {
               <div className="p-8 bg-card rounded-2xl shadow-soft hover:shadow-warm transition-all duration-300 hover:-translate-y-1">
                 <Instagram className="w-12 h-12 text-primary mx-auto mb-4" />
                 <h3 className="text-xl font-serif italic mb-2">Instagram</h3>
-                <p className="text-muted-foreground mb-4">
-                  @zafta_reposteria
-                </p>
+                <p className="text-muted-foreground mb-4">@zafta_reposteria</p>
                 <Button variant="default" className="w-full">
                   Seguir
                 </Button>

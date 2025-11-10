@@ -96,9 +96,10 @@ export function OrdersTable() {
     });
   };
 
-  const filteredOrders = statusFilter === "ALL"
-    ? orders
-    : orders.filter(order => order.status === statusFilter);
+  const filteredOrders =
+    statusFilter === "ALL"
+      ? orders
+      : orders.filter((order) => order.status === statusFilter);
 
   if (loading) {
     return (
@@ -126,7 +127,9 @@ export function OrdersTable() {
       {/* Filters */}
       <div className="flex items-center gap-4">
         <div className="flex items-center gap-2">
-          <label className="text-sm font-sans font-medium">Filtrar por estado:</label>
+          <label className="text-sm font-sans font-medium">
+            Filtrar por estado:
+          </label>
           <Select value={statusFilter} onValueChange={setStatusFilter}>
             <SelectTrigger className="w-[200px]">
               <SelectValue />
@@ -143,7 +146,8 @@ export function OrdersTable() {
           </Select>
         </div>
         <div className="text-sm text-muted-foreground font-sans">
-          {filteredOrders.length} {filteredOrders.length === 1 ? 'pedido' : 'pedidos'}
+          {filteredOrders.length}{" "}
+          {filteredOrders.length === 1 ? "pedido" : "pedidos"}
         </div>
       </div>
 
@@ -156,8 +160,12 @@ export function OrdersTable() {
               <TableHead className="font-sans font-semibold">Cliente</TableHead>
               <TableHead className="font-sans font-semibold">Fecha</TableHead>
               <TableHead className="font-sans font-semibold">Total</TableHead>
-              <TableHead className="font-sans font-semibold">Estado del Pedido</TableHead>
-              <TableHead className="font-sans font-semibold">Estado del Pago</TableHead>
+              <TableHead className="font-sans font-semibold">
+                Estado del Pedido
+              </TableHead>
+              <TableHead className="font-sans font-semibold">
+                Estado del Pago
+              </TableHead>
               <TableHead className="font-sans font-semibold text-right">
                 Acciones
               </TableHead>
@@ -172,7 +180,9 @@ export function OrdersTable() {
                 <TableCell className="font-sans">
                   <div>
                     <p className="font-medium">{order.customerName}</p>
-                    <p className="text-sm text-muted-foreground">{order.customerEmail}</p>
+                    <p className="text-sm text-muted-foreground">
+                      {order.customerEmail}
+                    </p>
                   </div>
                 </TableCell>
                 <TableCell className="font-sans text-sm">

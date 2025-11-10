@@ -12,7 +12,7 @@ export async function POST(request: NextRequest) {
     if (!orderId) {
       return NextResponse.json(
         { error: "Order ID is required" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
     if (order.paymentStatus === "PAID") {
       return NextResponse.json(
         { error: "Order already paid" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -78,7 +78,7 @@ export async function POST(request: NextRequest) {
     console.error("Error initializing Wompi transaction:", error);
     return NextResponse.json(
       { error: "Failed to initialize transaction" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

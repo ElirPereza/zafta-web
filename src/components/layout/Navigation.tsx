@@ -4,8 +4,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, LogIn } from "lucide-react";
-import { useAuth } from "@clerk/nextjs";
+import { Menu } from "lucide-react";
 import {
   Sheet,
   SheetContent,
@@ -27,7 +26,6 @@ const navItems = [
 
 const Navigation = () => {
   const pathname = usePathname();
-  const { isSignedIn } = useAuth();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -67,7 +65,7 @@ const Navigation = () => {
       initial={{ y: isHomePage ? -150 : 0, opacity: isHomePage ? 0 : 1 }}
       animate={{
         y: isVisible ? 0 : -150,
-        opacity: isVisible ? 1 : 0
+        opacity: isVisible ? 1 : 0,
       }}
       transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -115,7 +113,12 @@ const Navigation = () => {
               {/* Círculo de fondo - DESACTIVADO */}
               {/* <div className="absolute -inset-3 rounded-full bg-white shadow-xl border-2 border-secondary/20" /> */}
               {/* Logo ZAFTA text optimizado */}
-              <Logo variant="zafta-text" width={180} height={42} className="w-44 lg:w-48 h-auto" />
+              <Logo
+                variant="zafta-text"
+                width={180}
+                height={42}
+                className="w-44 lg:w-48 h-auto"
+              />
             </motion.div>
           </Link>
 
@@ -153,25 +156,6 @@ const Navigation = () => {
             >
               <CartButton onClick={() => setCartOpen(true)} />
             </motion.div>
-
-            {/* Sign In Button */}
-            {!isSignedIn && (
-              <Link href="/auth/sign-in">
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <Button
-                    variant="default"
-                    size="sm"
-                    className="gap-2 bg-primary hover:bg-primary/90 text-primary-foreground"
-                  >
-                    <LogIn className="h-4 w-4" />
-                    Iniciar Sesión
-                  </Button>
-                </motion.div>
-              </Link>
-            )}
           </div>
         </div>
 
@@ -184,7 +168,12 @@ const Navigation = () => {
               transition={{ duration: 0.2 }}
               className="cursor-pointer flex items-center"
             >
-              <Logo variant="zafta-text" width={160} height={42} className="w-36 h-auto" />
+              <Logo
+                variant="zafta-text"
+                width={160}
+                height={42}
+                className="w-36 h-auto"
+              />
             </motion.div>
           </Link>
 
@@ -205,31 +194,36 @@ const Navigation = () => {
                   <Menu className="w-6 h-6" />
                 </motion.button>
               </SheetTrigger>
-            <SheetContent side="right" className="w-[300px] sm:w-[400px]">
-              <SheetTitle className="mb-6 flex justify-start">
-                <Logo variant="zafta-text" width={140} height={42} className="w-32 h-auto" />
-              </SheetTitle>
-              <nav className="flex flex-col gap-4">
-                {navItems.map((item) => {
-                  const active = isActive(item.href);
-                  return (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      onClick={() => setIsOpen(false)}
-                      className={`px-4 py-3 rounded-lg text-base font-sans font-medium transition-all ${
-                        active
-                          ? "bg-primary text-primary-foreground"
-                          : "text-foreground hover:bg-secondary"
-                      }`}
-                    >
-                      {item.label}
-                    </Link>
-                  );
-                })}
-              </nav>
-            </SheetContent>
-          </Sheet>
+              <SheetContent side="right" className="w-[300px] sm:w-[400px]">
+                <SheetTitle className="mb-6 flex justify-start">
+                  <Logo
+                    variant="zafta-text"
+                    width={140}
+                    height={42}
+                    className="w-32 h-auto"
+                  />
+                </SheetTitle>
+                <nav className="flex flex-col gap-4">
+                  {navItems.map((item) => {
+                    const active = isActive(item.href);
+                    return (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        onClick={() => setIsOpen(false)}
+                        className={`px-4 py-3 rounded-lg text-base font-sans font-medium transition-all ${
+                          active
+                            ? "bg-primary text-primary-foreground"
+                            : "text-foreground hover:bg-secondary"
+                        }`}
+                      >
+                        {item.label}
+                      </Link>
+                    );
+                  })}
+                </nav>
+              </SheetContent>
+            </Sheet>
           </div>
         </div>
       </div>

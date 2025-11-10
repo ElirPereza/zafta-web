@@ -63,7 +63,12 @@ export function CheckoutForm({ onShippingCostChange }: CheckoutFormProps) {
       return;
     }
 
-    if (!shippingData || !shippingData.address || !shippingData.department || !shippingData.city) {
+    if (
+      !shippingData ||
+      !shippingData.address ||
+      !shippingData.department ||
+      !shippingData.city
+    ) {
       setError("Por favor completa todos los campos de dirección de envío");
       return;
     }
@@ -116,7 +121,9 @@ export function CheckoutForm({ onShippingCostChange }: CheckoutFormProps) {
       if (!orderResponse.ok) {
         const errorData = await orderResponse.json();
         console.error("Order creation failed:", errorData);
-        throw new Error(errorData.error || errorData.details || "Error al crear el pedido");
+        throw new Error(
+          errorData.error || errorData.details || "Error al crear el pedido",
+        );
       }
 
       const order = await orderResponse.json();
@@ -133,7 +140,7 @@ export function CheckoutForm({ onShippingCostChange }: CheckoutFormProps) {
     } catch (err) {
       console.error("Error processing order:", err);
       setError(
-        "Hubo un error al procesar tu pedido. Por favor intenta nuevamente."
+        "Hubo un error al procesar tu pedido. Por favor intenta nuevamente.",
       );
       setLoading(false);
     }
@@ -287,9 +294,7 @@ export function CheckoutForm({ onShippingCostChange }: CheckoutFormProps) {
             Procesando...
           </>
         ) : (
-          <>
-            {paymentMethod === "wompi" ? "Ir a Pagar" : "Confirmar Pedido"}
-          </>
+          <>{paymentMethod === "wompi" ? "Ir a Pagar" : "Confirmar Pedido"}</>
         )}
       </Button>
 

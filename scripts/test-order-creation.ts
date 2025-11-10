@@ -97,7 +97,6 @@ async function testOrderCreation() {
     console.log(`   - Products: Available ✅`);
     console.log(`   - Order Creation: Working ✅`);
     console.log(`   - Order Items: Working ✅`);
-
   } catch (error) {
     console.error("\n❌ Test failed!");
     console.error("\nError details:");

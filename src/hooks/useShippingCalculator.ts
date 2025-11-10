@@ -9,7 +9,10 @@ interface ShippingCalculation {
   error: string | null;
 }
 
-export function useShippingCalculator(department: string | null, city: string | null) {
+export function useShippingCalculator(
+  department: string | null,
+  city: string | null,
+) {
   const [calculation, setCalculation] = useState<ShippingCalculation>({
     cost: 0,
     formattedCost: "$0",
@@ -108,7 +111,7 @@ export function useCities(department: string | null) {
       setLoading(true);
       try {
         const response = await fetch(
-          `/api/shipping/calculate?department=${encodeURIComponent(department)}`
+          `/api/shipping/calculate?department=${encodeURIComponent(department)}`,
         );
         const data = await response.json();
         setCities(data.cities || []);

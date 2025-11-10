@@ -53,14 +53,14 @@
 
     /* Zafta Beige/Ivory Gradient Scale - From lightest to richest */
     /* Perfecto para crear jerarquía visual sutil en diferentes secciones */
-    --beige-50: 45 100% 99%;    /* Casi blanco, muy sutil - para highlights */
-    --beige-100: 45 100% 97%;   /* Ivory principal (background actual) - navegación */
-    --beige-200: 42 80% 95%;    /* Beige muy claro - secciones alternas */
-    --beige-300: 40 60% 93%;    /* Beige claro - cards, contenedores */
-    --beige-400: 38 50% 90%;    /* Beige medio-claro - bordes, separadores */
-    --beige-500: 36 45% 87%;    /* Beige medio - footer, áreas de énfasis */
-    --beige-600: 34 40% 84%;    /* Beige medio-fuerte - hover states */
-    --beige-700: 32 35% 80%;    /* Beige fuerte - texto muted, detalles */
+    --beige-50: 45 100% 99%; /* Casi blanco, muy sutil - para highlights */
+    --beige-100: 45 100% 97%; /* Ivory principal (background actual) - navegación */
+    --beige-200: 42 80% 95%; /* Beige muy claro - secciones alternas */
+    --beige-300: 40 60% 93%; /* Beige claro - cards, contenedores */
+    --beige-400: 38 50% 90%; /* Beige medio-claro - bordes, separadores */
+    --beige-500: 36 45% 87%; /* Beige medio - footer, áreas de énfasis */
+    --beige-600: 34 40% 84%; /* Beige medio-fuerte - hover states */
+    --beige-700: 32 35% 80%; /* Beige fuerte - texto muted, detalles */
 
     /* Radius - rounded for soft, handcrafted feel */
     --radius: 1rem;

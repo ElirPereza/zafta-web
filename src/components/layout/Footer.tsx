@@ -11,7 +11,7 @@ const Footer = () => {
       id="contact"
       className="py-8 md:py-10 px-6 md:px-8 border-t-2 border-secondary/30"
       style={{
-        background: `linear-gradient(135deg, hsl(var(--beige-500)) 0%, hsl(var(--beige-400)) 50%, hsl(var(--beige-500)) 100%)`
+        background: `linear-gradient(135deg, hsl(var(--beige-500)) 0%, hsl(var(--beige-400)) 50%, hsl(var(--beige-500)) 100%)`,
       }}
     >
       <div className="container mx-auto max-w-6xl">
@@ -32,7 +32,12 @@ const Footer = () => {
           >
             <div className="mb-8 flex items-center justify-center w-full lg:justify-start">
               {/* Logo completo */}
-              <Logo variant="banner-color-1" width={200} height={162} className="w-32 h-auto" />
+              <Logo
+                variant="banner-color-1"
+                width={200}
+                height={162}
+                className="w-32 h-auto"
+              />
             </div>
             <p className="text-lg font-serif italic text-primary leading-relaxed text-center lg:text-left w-full">
               Lo delicioso se vuelve tradición

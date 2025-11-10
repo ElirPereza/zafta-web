@@ -33,7 +33,7 @@ export const useCartStore = create<CartStore>()(
           // Si ya existe, incrementar cantidad
           set({
             items: items.map((i) =>
-              i.id === item.id ? { ...i, quantity: i.quantity + 1 } : i
+              i.id === item.id ? { ...i, quantity: i.quantity + 1 } : i,
             ),
           });
         } else {
@@ -53,9 +53,7 @@ export const useCartStore = create<CartStore>()(
         }
 
         set({
-          items: get().items.map((i) =>
-            i.id === id ? { ...i, quantity } : i
-          ),
+          items: get().items.map((i) => (i.id === id ? { ...i, quantity } : i)),
         });
       },
 
@@ -70,12 +68,12 @@ export const useCartStore = create<CartStore>()(
       getTotalPrice: () => {
         return get().items.reduce(
           (total, item) => total + item.price * item.quantity,
-          0
+          0,
         );
       },
     }),
     {
       name: "zafta-cart-storage", // Nombre en localStorage
-    }
-  )
+    },
+  ),
 );

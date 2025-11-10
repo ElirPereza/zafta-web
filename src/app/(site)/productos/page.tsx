@@ -49,8 +49,8 @@ export default async function ProductosPage() {
               Nuestras Delicias
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground font-sans max-w-3xl mx-auto leading-relaxed">
-              Descubre nuestra selección de tortas artesanales, hechas con amor y
-              los mejores ingredientes. Cada bocado es una celebración.
+              Descubre nuestra selección de tortas artesanales, hechas con amor
+              y los mejores ingredientes. Cada bocado es una celebración.
             </p>
           </div>
 

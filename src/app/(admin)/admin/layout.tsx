@@ -28,7 +28,10 @@ export default async function AdminLayout({
   const userMetadata = await getUserRole(userId);
 
   // If user is not admin, redirect to home
-  if (!userMetadata || (userMetadata.role !== "ADMIN" && userMetadata.role !== "SUPER_ADMIN")) {
+  if (
+    !userMetadata ||
+    (userMetadata.role !== "ADMIN" && userMetadata.role !== "SUPER_ADMIN")
+  ) {
     redirect("/inicio");
   }
 
@@ -45,9 +48,7 @@ export default async function AdminLayout({
 
           {/* Page Content */}
           <main className="flex-1 p-6 lg:p-8">
-            <div className="max-w-7xl mx-auto">
-              {children}
-            </div>
+            <div className="max-w-7xl mx-auto">{children}</div>
           </main>
         </div>
       </div>

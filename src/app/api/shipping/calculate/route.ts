@@ -1,5 +1,9 @@
 import { NextResponse } from "next/server";
-import { calculateShippingCost, getDepartments, getCitiesForDepartment } from "@/lib/shipping/zones";
+import {
+  calculateShippingCost,
+  getDepartments,
+  getCitiesForDepartment,
+} from "@/lib/shipping/zones";
 
 export const runtime = "nodejs";
 
@@ -12,7 +16,7 @@ export async function POST(request: Request) {
     if (!department || !city) {
       return NextResponse.json(
         { error: "Department and city are required" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -32,7 +36,7 @@ export async function POST(request: Request) {
     console.error("Error calculating shipping cost:", error);
     return NextResponse.json(
       { error: "Error calculating shipping cost" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -56,7 +60,7 @@ export async function GET(request: Request) {
     console.error("Error fetching shipping data:", error);
     return NextResponse.json(
       { error: "Error fetching shipping data" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

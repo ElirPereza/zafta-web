@@ -1,13 +1,25 @@
 "use client";
 
-import type { Order, OrderItem, OrderStatus, PaymentStatus, Product } from "@prisma/client";
+import type {
+  Order,
+  OrderItem,
+  OrderStatus,
+  PaymentStatus,
+  Product,
+} from "@prisma/client";
 import { ArrowLeft, Package } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import {
   Select,
   SelectContent,
@@ -134,7 +146,9 @@ export function OrderDetail({ order: initialOrder }: OrderDetailProps) {
                 <div className="flex-1">
                   <Select
                     value={order.status}
-                    onValueChange={(value) => handleStatusChange(value as OrderStatus)}
+                    onValueChange={(value) =>
+                      handleStatusChange(value as OrderStatus)
+                    }
                     disabled={updating}
                   >
                     <SelectTrigger>
@@ -170,7 +184,9 @@ export function OrderDetail({ order: initialOrder }: OrderDetailProps) {
             <CardHeader>
               <CardTitle className="font-serif">Productos</CardTitle>
               <CardDescription className="font-sans">
-                {order.items.length} {order.items.length === 1 ? "producto" : "productos"} en este pedido
+                {order.items.length}{" "}
+                {order.items.length === 1 ? "producto" : "productos"} en este
+                pedido
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -188,7 +204,8 @@ export function OrderDetail({ order: initialOrder }: OrderDetailProps) {
                           fill
                           className="object-cover"
                         />
-                      ) : item.product.images && item.product.images.length > 0 ? (
+                      ) : item.product.images &&
+                        item.product.images.length > 0 ? (
                         <Image
                           src={item.product.images[0]}
                           alt={item.name}
@@ -208,9 +225,12 @@ export function OrderDetail({ order: initialOrder }: OrderDetailProps) {
                       </p>
                     </div>
                     <div className="text-right">
-                      <p className="font-sans font-medium">{formatPrice(Number(item.price))}</p>
+                      <p className="font-sans font-medium">
+                        {formatPrice(Number(item.price))}
+                      </p>
                       <p className="text-sm text-muted-foreground font-sans">
-                        Subtotal: {formatPrice(Number(item.price) * item.quantity)}
+                        Subtotal:{" "}
+                        {formatPrice(Number(item.price) * item.quantity)}
                       </p>
                     </div>
                   </div>
@@ -229,7 +249,9 @@ export function OrderDetail({ order: initialOrder }: OrderDetailProps) {
             </CardHeader>
             <CardContent className="space-y-3">
               <div>
-                <p className="text-sm text-muted-foreground font-sans">Nombre</p>
+                <p className="text-sm text-muted-foreground font-sans">
+                  Nombre
+                </p>
                 <p className="font-sans font-medium">{order.customerName}</p>
               </div>
               <div>
@@ -237,7 +259,9 @@ export function OrderDetail({ order: initialOrder }: OrderDetailProps) {
                 <p className="font-sans">{order.customerEmail}</p>
               </div>
               <div>
-                <p className="text-sm text-muted-foreground font-sans">Teléfono</p>
+                <p className="text-sm text-muted-foreground font-sans">
+                  Teléfono
+                </p>
                 <p className="font-sans">{order.customerPhone}</p>
               </div>
             </CardContent>
@@ -249,7 +273,9 @@ export function OrderDetail({ order: initialOrder }: OrderDetailProps) {
               <CardTitle className="font-serif">Dirección de Envío</CardTitle>
             </CardHeader>
             <CardContent className="space-y-2">
-              <p className="font-sans">{shippingAddress?.address || "No especificada"}</p>
+              <p className="font-sans">
+                {shippingAddress?.address || "No especificada"}
+              </p>
               {shippingAddress?.city && (
                 <p className="text-sm font-sans">
                   {shippingAddress.city}, {shippingAddress.department}
@@ -257,7 +283,9 @@ export function OrderDetail({ order: initialOrder }: OrderDetailProps) {
               )}
               {shippingAddress?.notes && (
                 <div className="mt-3 pt-3 border-t">
-                  <p className="text-sm text-muted-foreground font-sans">Notas:</p>
+                  <p className="text-sm text-muted-foreground font-sans">
+                    Notas:
+                  </p>
                   <p className="text-sm font-sans">{shippingAddress.notes}</p>
                 </div>
               )}
@@ -271,11 +299,15 @@ export function OrderDetail({ order: initialOrder }: OrderDetailProps) {
             </CardHeader>
             <CardContent className="space-y-3">
               <div className="flex items-center justify-between">
-                <p className="text-sm text-muted-foreground font-sans">Método</p>
+                <p className="text-sm text-muted-foreground font-sans">
+                  Método
+                </p>
                 <p className="font-sans font-medium">{order.paymentMethod}</p>
               </div>
               <div className="flex items-center justify-between">
-                <p className="text-sm text-muted-foreground font-sans">Estado</p>
+                <p className="text-sm text-muted-foreground font-sans">
+                  Estado
+                </p>
                 <Badge
                   variant="outline"
                   className={`font-sans ${PAYMENT_STATUS_COLORS[order.paymentStatus]}`}
@@ -285,8 +317,12 @@ export function OrderDetail({ order: initialOrder }: OrderDetailProps) {
               </div>
               {order.paymentTransactionId && (
                 <div>
-                  <p className="text-sm text-muted-foreground font-sans">ID Transacción</p>
-                  <p className="text-sm font-sans font-mono">{order.paymentTransactionId}</p>
+                  <p className="text-sm text-muted-foreground font-sans">
+                    ID Transacción
+                  </p>
+                  <p className="text-sm font-sans font-mono">
+                    {order.paymentTransactionId}
+                  </p>
                 </div>
               )}
             </CardContent>

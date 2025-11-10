@@ -41,7 +41,10 @@ const fredoka = Fredoka({
   display: "swap",
 });
 
-import { generateMetadata as genMetadata, generateOrganizationSchema } from "@/lib/metadata";
+import {
+  generateMetadata as genMetadata,
+  generateOrganizationSchema,
+} from "@/lib/metadata";
 
 export const metadata: Metadata = genMetadata({});
 

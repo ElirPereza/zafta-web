@@ -60,7 +60,7 @@ export async function GET(_request: Request, { params }: RouteParams) {
     console.error("Error fetching order:", error);
     return NextResponse.json(
       { error: "Error fetching order" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -117,7 +117,7 @@ export async function PATCH(request: Request, { params }: RouteParams) {
     console.error("Error updating order:", error);
     return NextResponse.json(
       { error: "Error updating order" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
