@@ -6,7 +6,6 @@ import {
   LayoutDashboard,
   Package,
   ShoppingCart,
-  Users,
   FileText,
   Settings,
 } from "lucide-react";
@@ -28,11 +27,6 @@ const navigation = [
     name: "Pedidos",
     href: "/admin/pedidos",
     icon: ShoppingCart,
-  },
-  {
-    name: "Usuarios",
-    href: "/admin/usuarios",
-    icon: Users,
   },
   {
     name: "Facturas",
