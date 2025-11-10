@@ -160,46 +160,46 @@ const OrderSidebar = ({
             }}
             className="fixed right-0 top-0 h-full w-full md:w-[500px] bg-background shadow-warm z-50 overflow-y-auto texture-overlay"
           >
-            <div className="p-8 space-y-8">
+            {/* Close Button - Absolute positioned at top right corner */}
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={onClose}
+              className="absolute top-3 right-3 hover:bg-muted rounded-full transition-all hover:rotate-90 duration-300 z-10"
+            >
+              <X className="h-5 w-5" />
+            </Button>
+
+            <div className="p-6 space-y-5">
               {/* Header */}
-              <div className="flex items-center justify-between border-b border-border/50 pb-6">
-                <div>
-                  <h2 className="text-3xl md:text-4xl font-serif italic text-foreground">
-                    {isCustomOrder ? "Pedido Personalizado" : "Tu Pedido"}
-                  </h2>
-                  <p className="text-base text-muted-foreground mt-2 font-sans leading-relaxed">
-                    {isCustomOrder
-                      ? "Cuéntanos tu idea y la haremos realidad."
-                      : `${initialProduct?.name} - Completa los detalles de tu pedido.`}
-                  </p>
-                </div>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={onClose}
-                  className="hover:bg-muted rounded-full transition-all hover:rotate-90 duration-300"
-                >
-                  <X className="h-5 w-5" />
-                </Button>
+              <div className="border-b border-border/50 pb-4 pr-10">
+                <h2 className="text-2xl md:text-3xl font-serif italic text-foreground">
+                  {isCustomOrder ? "Pedido Personalizado" : "Tu Pedido"}
+                </h2>
+                <p className="text-sm text-muted-foreground mt-1 font-sans leading-relaxed">
+                  {isCustomOrder
+                    ? "Cuéntanos tu idea y la haremos realidad."
+                    : `${initialProduct?.name} - Completa los detalles de tu pedido.`}
+                </p>
               </div>
 
               {/* Nombre */}
-              <div className="space-y-2">
-                <Label className="text-base md:text-lg font-medium font-sans">
+              <div className="space-y-1.5">
+                <Label className="text-sm font-medium font-sans">
                   Tu nombre
                 </Label>
                 <Input
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="¿Cómo te llamas?"
-                  className="border-2 focus:border-primary transition-all"
+                  className="border-2 focus:border-primary transition-all h-10"
                 />
               </div>
 
               {/* Cantidad - Solo para productos específicos */}
               {!isCustomOrder && (
-                <div className="space-y-2">
-                  <Label className="text-base md:text-lg font-medium font-sans">
+                <div className="space-y-1.5">
+                  <Label className="text-sm font-medium font-sans">
                     Cantidad
                   </Label>
                   <div className="flex items-center gap-3">
@@ -232,8 +232,8 @@ const OrderSidebar = ({
               )}
 
               {/* Descripción/Mensaje */}
-              <div className="space-y-2">
-                <Label className="text-base md:text-lg font-medium font-sans">
+              <div className="space-y-1.5">
+                <Label className="text-sm font-medium font-sans">
                   {isCustomOrder
                     ? "Describe tu pedido personalizado"
                     : "Mensaje especial (opcional)"}
@@ -246,10 +246,10 @@ const OrderSidebar = ({
                       ? "Cuéntanos qué tipo de torta deseas, sabores, colores, decoración, tamaño, fecha de entrega..."
                       : "Agrega una dedicatoria o mensaje especial..."
                   }
-                  className="min-h-[100px] border-2 focus:border-primary transition-all resize-none"
+                  className="min-h-[80px] border-2 focus:border-primary transition-all resize-none text-sm"
                 />
                 {isCustomOrder && (
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-xs text-muted-foreground">
                     Incluye todos los detalles que consideres importantes para
                     tu torta ideal.
                   </p>
@@ -257,28 +257,28 @@ const OrderSidebar = ({
               </div>
 
               {/* Dirección */}
-              <div className="space-y-2">
-                <Label className="text-base md:text-lg font-medium font-sans">
+              <div className="space-y-1.5">
+                <Label className="text-sm font-medium font-sans">
                   Dirección de entrega (opcional)
                 </Label>
                 <Input
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
                   placeholder="Escribe tu dirección completa"
-                  className="border-2 focus:border-primary transition-all"
+                  className="border-2 focus:border-primary transition-all h-10"
                 />
-                <p className="text-sm text-muted-foreground">
+                <p className="text-xs text-muted-foreground">
                   Confirmaremos los detalles de entrega por WhatsApp.
                 </p>
               </div>
 
               {/* Resumen del pedido - Solo para productos específicos */}
               {!isCustomOrder && (
-                <div className="space-y-4 p-8 bg-gradient-to-br from-secondary/20 to-secondary/30 rounded-2xl border border-secondary/40 shadow-warm">
-                  <h3 className="text-xl md:text-2xl font-serif italic text-foreground">
+                <div className="space-y-3 p-5 bg-gradient-to-br from-secondary/20 to-secondary/30 rounded-xl border border-secondary/40 shadow-warm">
+                  <h3 className="text-lg font-serif italic text-foreground">
                     Resumen del pedido
                   </h3>
-                  <div className="space-y-3 text-base">
+                  <div className="space-y-2 text-sm">
                     <div className="flex justify-between items-center">
                       <span className="text-muted-foreground font-sans">
                         {initialProduct?.name} x{quantity}
@@ -295,8 +295,8 @@ const OrderSidebar = ({
                         ${deliveryCost.toLocaleString()}
                       </span>
                     </div>
-                    <div className="border-t border-secondary/30 pt-3 mt-3">
-                      <div className="flex justify-between text-lg md:text-xl font-bold">
+                    <div className="border-t border-secondary/30 pt-2 mt-2">
+                      <div className="flex justify-between text-base font-bold">
                         <span className="font-serif italic">Total</span>
                         <span className="text-primary">
                           ${total.toLocaleString()}
@@ -309,11 +309,11 @@ const OrderSidebar = ({
 
               {/* Info adicional - Solo para pedidos personalizados */}
               {isCustomOrder && (
-                <div className="space-y-4 p-8 bg-gradient-to-br from-secondary/20 to-secondary/30 rounded-2xl border border-secondary/40 shadow-warm">
-                  <h3 className="text-xl md:text-2xl font-serif italic text-foreground">
+                <div className="space-y-3 p-5 bg-gradient-to-br from-secondary/20 to-secondary/30 rounded-xl border border-secondary/40 shadow-warm">
+                  <h3 className="text-lg font-serif italic text-foreground">
                     ¿Cómo funciona?
                   </h3>
-                  <div className="space-y-3 text-base text-foreground/80 font-sans leading-relaxed">
+                  <div className="space-y-2 text-sm text-foreground/80 font-sans leading-relaxed">
                     <p>1️⃣ Envíanos tu solicitud por WhatsApp</p>
                     <p>2️⃣ Te responderemos con una cotización personalizada</p>
                     <p>3️⃣ Ajustamos los detalles según tus preferencias</p>
@@ -327,9 +327,9 @@ const OrderSidebar = ({
                 variant="whatsapp"
                 size="lg"
                 onClick={handleWhatsAppOrder}
-                className="w-full gap-3 text-base font-semibold h-14 shadow-warm hover:shadow-medium"
+                className="w-full gap-2 text-sm font-semibold h-12 shadow-warm hover:shadow-medium"
               >
-                <Send className="h-5 w-5" />
+                <Send className="h-4 w-4" />
                 {isCustomOrder ? "Enviar solicitud" : "Enviar cotización"} por
                 WhatsApp
               </Button>
