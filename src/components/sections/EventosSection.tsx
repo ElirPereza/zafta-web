@@ -25,24 +25,6 @@ const eventosPhotos = [
       "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=400&h=400&fit=crop",
     alt: "Evento corporativo con mesa de dulces",
   },
-  {
-    id: 4,
-    image:
-      "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=400&h=400&fit=crop",
-    alt: "Baby shower con decoración temática",
-  },
-  {
-    id: 5,
-    image:
-      "https://images.unsplash.com/photo-1481391319762-47dff72954d9?w=400&h=400&fit=crop",
-    alt: "Quinceañera con torta espectacular",
-  },
-  {
-    id: 6,
-    image:
-      "https://images.unsplash.com/photo-1478145046317-39f10e56b5e9?w=400&h=400&fit=crop",
-    alt: "Primera comunión con dulces decorados",
-  },
 ];
 
 const EventosSection = () => {
