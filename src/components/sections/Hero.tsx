@@ -60,8 +60,8 @@ const Hero = () => {
       <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-[hsl(var(--background))] via-[hsl(var(--background))]/40 to-transparent z-[5]" />
 
       {/* Content */}
-      <div className="relative z-10 flex min-h-screen items-center justify-center px-6 pb-16">
-        <div className="max-w-4xl text-center">
+      <div className="relative z-10 flex min-h-screen items-center justify-center px-6 pb-32">
+        <div className="max-w-4xl text-center -mt-16">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
