@@ -66,7 +66,7 @@ const Hero = () => {
             className="flex justify-center"
           >
             <Logo
-              variant="banner"
+              variant="banner-orange"
               width={700}
               height={566}
               className="w-96 md:w-[34rem] lg:w-[44rem] h-auto"
