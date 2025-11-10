@@ -69,7 +69,7 @@ const ProductGallery = ({ onOpenOrder }: ProductGalleryProps) => {
           transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
           className="mb-12 md:mb-16 text-center"
         >
-          <h2 className="mb-6 text-4xl font-serif italic md:text-5xl text-foreground">
+          <h2 className="mb-6 text-4xl font-sans italic md:text-5xl text-foreground">
             Nuestras Creaciones – Hechas con Amor
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground font-sans max-w-2xl mx-auto leading-relaxed">
@@ -118,7 +118,7 @@ const ProductGallery = ({ onOpenOrder }: ProductGalleryProps) => {
                     </div>
                   </div>
                   <div className="p-8">
-                    <h3 className="mb-3 text-xl md:text-2xl font-serif italic text-foreground">
+                    <h3 className="mb-3 text-xl md:text-2xl font-sans italic text-foreground">
                       {product.name}
                     </h3>
                     <p className="text-base md:text-lg text-muted-foreground leading-relaxed font-sans">

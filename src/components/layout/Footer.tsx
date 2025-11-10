@@ -39,7 +39,7 @@ const Footer = () => {
                 className="w-32 h-auto"
               />
             </div>
-            <p className="text-lg font-serif italic text-primary leading-relaxed text-center lg:text-left w-full">
+            <p className="text-lg font-sans italic text-primary leading-relaxed text-center lg:text-left w-full">
               Lo delicioso se vuelve tradición
             </p>
             <p className="text-sm font-sans font-light text-muted-foreground mt-4 italic text-center lg:text-left w-full">

@@ -56,6 +56,9 @@ const Hero = () => {
         </motion.div>
       </AnimatePresence>
 
+      {/* Bottom Gradient Overlay */}
+      <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-black/60 via-black/20 to-transparent z-[5]" />
+
       {/* Content */}
       <div className="relative z-10 flex min-h-screen items-center justify-center px-6 pb-16">
         <div className="max-w-4xl text-center">
@@ -76,7 +79,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.15, ease: [0.4, 0, 0.2, 1] }}
-            className="mb-10 text-xl md:text-2xl lg:text-3xl text-background font-serif italic max-w-3xl leading-relaxed mx-auto tracking-wide"
+            className="mb-10 text-xl md:text-2xl lg:text-3xl text-background font-sans font-medium max-w-3xl leading-relaxed mx-auto tracking-wide"
           >
             En cada bocado, una historia. Desde 1995, Zafta celebra la tradición
             del sabor hecho con amor.

@@ -88,7 +88,7 @@ const FAQ = () => {
           transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
           className="mb-20 text-center"
         >
-          <h2 className="mb-4 text-4xl md:text-5xl font-serif italic text-foreground">
+          <h2 className="mb-4 text-4xl md:text-5xl font-sans italic text-foreground">
             Preguntas Frecuentes
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed font-sans">
@@ -181,7 +181,7 @@ const FAQ = () => {
           className="text-center space-y-6"
         >
           <div className="max-w-2xl mx-auto">
-            <h3 className="text-2xl md:text-3xl font-serif italic text-foreground mb-3">
+            <h3 className="text-2xl md:text-3xl font-sans italic text-foreground mb-3">
               ¿Aún tienes dudas?
             </h3>
             <p className="text-base md:text-lg text-muted-foreground mb-6 font-sans">

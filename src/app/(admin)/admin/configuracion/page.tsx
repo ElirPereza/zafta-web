@@ -35,7 +35,7 @@ export default function SettingsPage() {
     <div className="space-y-6 pb-16">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-serif font-semibold text-foreground">
+        <h1 className="text-3xl font-sans font-semibold text-foreground">
           Configuración
         </h1>
         <p className="text-sm text-muted-foreground font-sans mt-1">
@@ -48,7 +48,7 @@ export default function SettingsPage() {
         <CardHeader>
           <div className="flex items-center gap-2">
             <Store className="h-5 w-5 text-primary" />
-            <CardTitle className="font-serif">
+            <CardTitle className="font-sans">
               Información de la Tienda
             </CardTitle>
           </div>
@@ -122,7 +122,7 @@ export default function SettingsPage() {
         <CardHeader>
           <div className="flex items-center gap-2">
             <Instagram className="h-5 w-5 text-primary" />
-            <CardTitle className="font-serif">Redes Sociales</CardTitle>
+            <CardTitle className="font-sans">Redes Sociales</CardTitle>
           </div>
           <CardDescription className="font-sans">
             Enlaces a tus perfiles en redes sociales
@@ -159,7 +159,7 @@ export default function SettingsPage() {
         <CardHeader>
           <div className="flex items-center gap-2">
             <Package className="h-5 w-5 text-primary" />
-            <CardTitle className="font-serif">
+            <CardTitle className="font-sans">
               Configuración de Envíos
             </CardTitle>
           </div>
@@ -210,7 +210,7 @@ export default function SettingsPage() {
         <CardHeader>
           <div className="flex items-center gap-2">
             <CreditCard className="h-5 w-5 text-primary" />
-            <CardTitle className="font-serif">Métodos de Pago</CardTitle>
+            <CardTitle className="font-sans">Métodos de Pago</CardTitle>
           </div>
           <CardDescription className="font-sans">
             Configuración de pasarelas de pago
@@ -250,7 +250,7 @@ export default function SettingsPage() {
         <CardHeader>
           <div className="flex items-center gap-2">
             <Mail className="h-5 w-5 text-primary" />
-            <CardTitle className="font-serif">
+            <CardTitle className="font-sans">
               Notificaciones por Email
             </CardTitle>
           </div>

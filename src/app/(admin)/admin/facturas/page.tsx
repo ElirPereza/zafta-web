@@ -85,7 +85,7 @@ export default async function InvoicesPage() {
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-serif font-semibold text-foreground">
+        <h1 className="text-3xl font-sans font-semibold text-foreground">
           Facturas
         </h1>
         <p className="text-sm text-muted-foreground font-sans mt-1">
@@ -102,7 +102,7 @@ export default async function InvoicesPage() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold font-serif">
+            <div className="text-2xl font-bold font-sans">
               {stats.totalInvoices}
             </div>
           </CardContent>
@@ -114,7 +114,7 @@ export default async function InvoicesPage() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold font-serif">
+            <div className="text-2xl font-bold font-sans">
               {stats.paidInvoices}
             </div>
           </CardContent>
@@ -126,7 +126,7 @@ export default async function InvoicesPage() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold font-serif">
+            <div className="text-2xl font-bold font-sans">
               {formatPrice(Number(stats.totalAmount))}
             </div>
           </CardContent>
@@ -136,7 +136,7 @@ export default async function InvoicesPage() {
       {/* Invoices Table */}
       <Card className="border-[hsl(var(--beige-400))]">
         <CardHeader>
-          <CardTitle className="font-serif">Lista de Facturas</CardTitle>
+          <CardTitle className="font-sans">Lista de Facturas</CardTitle>
           <CardDescription className="font-sans">
             Todas las facturas generadas en el sistema
           </CardDescription>
@@ -145,7 +145,7 @@ export default async function InvoicesPage() {
           {invoices.length === 0 ? (
             <div className="text-center py-12 border border-dashed border-[hsl(var(--beige-400))] rounded-lg bg-[hsl(var(--beige-50))]">
               <FileText className="mx-auto h-12 w-12 text-muted-foreground mb-4" />
-              <h3 className="text-lg font-serif font-semibold text-foreground mb-2">
+              <h3 className="text-lg font-sans font-semibold text-foreground mb-2">
                 No hay facturas
               </h3>
               <p className="text-sm text-muted-foreground font-sans">

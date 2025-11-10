@@ -136,7 +136,7 @@ export function OrderDetail({ order: initialOrder }: OrderDetailProps) {
           {/* Order Status */}
           <Card>
             <CardHeader>
-              <CardTitle className="font-serif">Estado del Pedido</CardTitle>
+              <CardTitle className="font-sans">Estado del Pedido</CardTitle>
               <CardDescription className="font-sans">
                 Actualiza el estado para notificar al cliente
               </CardDescription>
@@ -182,7 +182,7 @@ export function OrderDetail({ order: initialOrder }: OrderDetailProps) {
           {/* Order Items */}
           <Card>
             <CardHeader>
-              <CardTitle className="font-serif">Productos</CardTitle>
+              <CardTitle className="font-sans">Productos</CardTitle>
               <CardDescription className="font-sans">
                 {order.items.length}{" "}
                 {order.items.length === 1 ? "producto" : "productos"} en este
@@ -245,7 +245,7 @@ export function OrderDetail({ order: initialOrder }: OrderDetailProps) {
           {/* Customer Info */}
           <Card>
             <CardHeader>
-              <CardTitle className="font-serif">Cliente</CardTitle>
+              <CardTitle className="font-sans">Cliente</CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
               <div>
@@ -270,7 +270,7 @@ export function OrderDetail({ order: initialOrder }: OrderDetailProps) {
           {/* Shipping Address */}
           <Card>
             <CardHeader>
-              <CardTitle className="font-serif">Dirección de Envío</CardTitle>
+              <CardTitle className="font-sans">Dirección de Envío</CardTitle>
             </CardHeader>
             <CardContent className="space-y-2">
               <p className="font-sans">
@@ -295,7 +295,7 @@ export function OrderDetail({ order: initialOrder }: OrderDetailProps) {
           {/* Payment Info */}
           <Card>
             <CardHeader>
-              <CardTitle className="font-serif">Pago</CardTitle>
+              <CardTitle className="font-sans">Pago</CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
               <div className="flex items-center justify-between">
@@ -331,7 +331,7 @@ export function OrderDetail({ order: initialOrder }: OrderDetailProps) {
           {/* Order Summary */}
           <Card>
             <CardHeader>
-              <CardTitle className="font-serif">Resumen</CardTitle>
+              <CardTitle className="font-sans">Resumen</CardTitle>
             </CardHeader>
             <CardContent className="space-y-2">
               <div className="flex items-center justify-between font-sans">

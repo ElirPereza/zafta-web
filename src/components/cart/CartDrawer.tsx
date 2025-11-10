@@ -36,7 +36,7 @@ export function CartDrawer({ open, onClose }: CartDrawerProps) {
     <Sheet open={open} onOpenChange={onClose}>
       <SheetContent className="w-full sm:max-w-lg">
         <SheetHeader>
-          <SheetTitle className="font-serif text-2xl">Tu Carrito</SheetTitle>
+          <SheetTitle className="font-sans text-2xl">Tu Carrito</SheetTitle>
           <SheetDescription className="font-sans">
             {items.length === 0
               ? "Tu carrito está vacío"

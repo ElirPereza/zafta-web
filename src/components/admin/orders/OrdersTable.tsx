@@ -112,7 +112,7 @@ export function OrdersTable() {
   if (orders.length === 0) {
     return (
       <div className="text-center py-12 border border-dashed border-beige-400 rounded-lg bg-beige-50">
-        <h3 className="text-lg font-serif font-semibold text-foreground mb-2">
+        <h3 className="text-lg font-sans font-semibold text-foreground mb-2">
           No hay pedidos
         </h3>
         <p className="text-sm text-muted-foreground font-sans mb-4">

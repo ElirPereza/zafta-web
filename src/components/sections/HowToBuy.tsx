@@ -41,7 +41,7 @@ const HowToBuy = () => {
           transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
           className="text-center mb-12 md:mb-16"
         >
-          <h2 className="mb-6 text-4xl font-serif italic md:text-5xl text-foreground">
+          <h2 className="mb-6 text-4xl font-sans italic md:text-5xl text-foreground">
             ¿cómo pido mi torta?
           </h2>
         </motion.div>
@@ -62,13 +62,13 @@ const HowToBuy = () => {
             >
               {/* Número simple */}
               <div className="mb-6">
-                <span className="inline-flex items-center justify-center text-5xl md:text-6xl font-serif italic text-primary">
+                <span className="inline-flex items-center justify-center text-5xl md:text-6xl font-sans italic text-primary">
                   {index + 1}
                 </span>
               </div>
 
               {/* Título */}
-              <h3 className="mb-3 text-xl md:text-2xl font-serif italic text-foreground">
+              <h3 className="mb-3 text-xl md:text-2xl font-sans italic text-foreground">
                 {step.title}
               </h3>
 

@@ -173,7 +173,7 @@ const OrderSidebar = ({
             <div className="p-6 space-y-5">
               {/* Header */}
               <div className="border-b border-border/50 pb-4 pr-10">
-                <h2 className="text-2xl md:text-3xl font-serif italic text-foreground">
+                <h2 className="text-2xl md:text-3xl font-sans italic text-foreground">
                   {isCustomOrder ? "Pedido Personalizado" : "Tu Pedido"}
                 </h2>
                 <p className="text-sm text-muted-foreground mt-1 font-sans leading-relaxed">
@@ -275,7 +275,7 @@ const OrderSidebar = ({
               {/* Resumen del pedido - Solo para productos específicos */}
               {!isCustomOrder && (
                 <div className="space-y-3 p-5 bg-gradient-to-br from-secondary/20 to-secondary/30 rounded-xl border border-secondary/40 shadow-warm">
-                  <h3 className="text-lg font-serif italic text-foreground">
+                  <h3 className="text-lg font-sans italic text-foreground">
                     Resumen del pedido
                   </h3>
                   <div className="space-y-2 text-sm">
@@ -297,7 +297,7 @@ const OrderSidebar = ({
                     </div>
                     <div className="border-t border-secondary/30 pt-2 mt-2">
                       <div className="flex justify-between text-base font-bold">
-                        <span className="font-serif italic">Total</span>
+                        <span className="font-sans italic">Total</span>
                         <span className="text-primary">
                           ${total.toLocaleString()}
                         </span>
@@ -310,7 +310,7 @@ const OrderSidebar = ({
               {/* Info adicional - Solo para pedidos personalizados */}
               {isCustomOrder && (
                 <div className="space-y-3 p-5 bg-gradient-to-br from-secondary/20 to-secondary/30 rounded-xl border border-secondary/40 shadow-warm">
-                  <h3 className="text-lg font-serif italic text-foreground">
+                  <h3 className="text-lg font-sans italic text-foreground">
                     ¿Cómo funciona?
                   </h3>
                   <div className="space-y-2 text-sm text-foreground/80 font-sans leading-relaxed">

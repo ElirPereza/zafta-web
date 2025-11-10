@@ -134,7 +134,7 @@ export default async function AdminDashboard() {
     <div className="space-y-8">
       {/* Page Header */}
       <div>
-        <h1 className="text-3xl font-serif font-semibold text-foreground">
+        <h1 className="text-3xl font-sans font-semibold text-foreground">
           Dashboard
         </h1>
         <p className="text-muted-foreground mt-2">
@@ -157,7 +157,7 @@ export default async function AdminDashboard() {
                 </div>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold font-serif">
+                <div className="text-2xl font-bold font-sans">
                   {card.value}
                 </div>
                 <p className="text-xs text-muted-foreground mt-1">
@@ -174,7 +174,7 @@ export default async function AdminDashboard() {
         {/* Recent Orders */}
         <Card className="border-[hsl(var(--beige-400))]">
           <CardHeader className="flex flex-row items-center justify-between">
-            <CardTitle className="font-serif">Pedidos Recientes</CardTitle>
+            <CardTitle className="font-sans">Pedidos Recientes</CardTitle>
             <Link
               href="/admin/pedidos"
               className="text-sm font-sans text-primary hover:underline"
@@ -221,7 +221,7 @@ export default async function AdminDashboard() {
                         >
                           {paymentStatusConfig[order.paymentStatus].label}
                         </Badge>
-                        <p className="text-sm font-medium font-serif mt-1">
+                        <p className="text-sm font-medium font-sans mt-1">
                           $
                           {Number(order.total).toLocaleString("es-CO", {
                             minimumFractionDigits: 0,
@@ -240,7 +240,7 @@ export default async function AdminDashboard() {
         {/* Top Products */}
         <Card className="border-[hsl(var(--beige-400))]">
           <CardHeader className="flex flex-row items-center justify-between">
-            <CardTitle className="font-serif">Productos Más Vendidos</CardTitle>
+            <CardTitle className="font-sans">Productos Más Vendidos</CardTitle>
             <Link
               href="/admin/productos"
               className="text-sm font-sans text-primary hover:underline"

@@ -34,7 +34,7 @@ export default async function EditProductPage({
           </Button>
         </Link>
         <div>
-          <h1 className="text-3xl font-serif font-semibold text-foreground">
+          <h1 className="text-3xl font-sans font-semibold text-foreground">
             Editar Producto
           </h1>
           <p className="text-sm text-muted-foreground font-sans mt-1">

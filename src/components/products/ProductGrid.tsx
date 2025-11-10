@@ -47,7 +47,7 @@ export function ProductGrid({ products }: ProductGridProps) {
   if (products.length === 0) {
     return (
       <div className="text-center py-12 border border-dashed border-beige-400 rounded-lg bg-beige-50">
-        <h3 className="text-lg font-serif font-semibold text-foreground mb-2">
+        <h3 className="text-lg font-sans font-semibold text-foreground mb-2">
           No hay productos disponibles
         </h3>
         <p className="text-sm text-muted-foreground font-sans">
@@ -108,7 +108,7 @@ export function ProductGrid({ products }: ProductGridProps) {
 
               {/* Content */}
               <div className="p-6">
-                <h3 className="mb-2 text-xl md:text-2xl font-serif italic text-foreground">
+                <h3 className="mb-2 text-xl md:text-2xl font-sans italic text-foreground">
                   {product.name}
                 </h3>
                 {product.description && (
