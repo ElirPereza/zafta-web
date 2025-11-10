@@ -56,8 +56,8 @@ const Hero = () => {
         </motion.div>
       </AnimatePresence>
 
-      {/* Bottom Gradient Overlay */}
-      <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-black/60 via-black/20 to-transparent z-[5]" />
+      {/* Bottom Gradient Overlay - Transitions to background color */}
+      <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-[hsl(var(--background))] via-[hsl(var(--background))]/60 to-transparent z-[5]" />
 
       {/* Content */}
       <div className="relative z-10 flex min-h-screen items-center justify-center px-6 pb-16">
