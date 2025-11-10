@@ -5,6 +5,7 @@ export type LogoVariant =
   | "header"
   | "banner"
   | "banner-color-1"
+  | "banner-orange"
   | "isotipo-burgundy"
   | "isotipo-rose"
   | "zafta-text"
@@ -24,6 +25,7 @@ interface LogoProps {
  * - header: Burgundy logo with text + tagline + isotipo (for light backgrounds like ivory)
  * - banner: Ivory/cream logo with text + tagline + isotipo (for dark backgrounds like burgundy/navy)
  * - banner-color-1: Complete logo with cake, ZAFTA text and tagline (burgundy color)
+ * - banner-orange: Orange/rose gold logo for admin sidebar (for dark burgundy backgrounds)
  * - isotipo-burgundy: Just the books icon in burgundy (for favicon, small spaces)
  * - isotipo-rose: Just the books icon in rose gold (for decorative elements)
  * - isotipo-optimized: Optimized cake icon with tight viewBox (no extra whitespace)
@@ -39,6 +41,7 @@ export function Logo({
     header: "/SVG/logo-header.svg",
     banner: "/SVG/logo-banner.svg",
     "banner-color-1": "/SVG/logo-banner_color-1.svg",
+    "banner-orange": "/SVG/zafta-banner-orange.svg",
     "isotipo-burgundy": "/SVG/logos-10.svg",
     "isotipo-rose": "/SVG/logos-11.svg",
     "isotipo-optimized": "/SVG/isotipo-optimized.svg",
@@ -53,6 +56,7 @@ export function Logo({
     header: { width: 180, height: 145 },
     banner: { width: 180, height: 145 },
     "banner-color-1": { width: 200, height: 162 },
+    "banner-orange": { width: 180, height: 145 },
     "isotipo-burgundy": { width: 80, height: 65 },
     "isotipo-rose": { width: 80, height: 65 },
     "isotipo-optimized": { width: 80, height: 70 },

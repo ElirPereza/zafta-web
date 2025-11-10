@@ -49,7 +49,7 @@ export function AdminSidebar() {
       <div className="flex items-center justify-center h-20 px-6 border-b border-white/10">
         <Link href="/admin" className="flex items-center">
           <Logo
-            variant="banner"
+            variant="banner-orange"
             width={120}
             height={97}
             className="h-12 w-auto"
