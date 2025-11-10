@@ -1,42 +1,39 @@
-import { auth } from "@clerk/nextjs/server";
+import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
-import { cache } from "react";
 import { AdminSidebar } from "@/components/admin/AdminSidebar";
 import { AdminHeader } from "@/components/admin/AdminHeader";
-import { prisma } from "@/lib/prisma";
-
-// Cache the user role check to avoid multiple DB queries per request
-const getUserRole = cache(async (clerkId: string) => {
-  return await prisma.userMetadata.findUnique({
-    where: { clerkId },
-    select: { role: true },
-  });
-});
 
 export default async function AdminLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const { userId } = await auth();
+  const user = await currentUser();
 
-  if (!userId) {
+  if (!user) {
     redirect("/auth/sign-in");
   }
 
-  // Check user role from database (cached)
-  const userMetadata = await getUserRole(userId);
+  // Get admin email from environment variable
+  const adminEmail = process.env.ADMIN_EMAIL;
 
-  // If user is not admin, redirect to home
-  if (
-    !userMetadata ||
-    (userMetadata.role !== "ADMIN" && userMetadata.role !== "SUPER_ADMIN")
-  ) {
+  if (!adminEmail) {
+    console.error("ADMIN_EMAIL not configured in environment variables");
+    redirect("/inicio");
+  }
+
+  // Get user's primary email
+  const userEmail = user.emailAddresses.find(
+    (email) => email.id === user.primaryEmailAddressId
+  )?.emailAddress;
+
+  // Only allow access if user's email matches the admin email
+  if (!userEmail || userEmail.toLowerCase() !== adminEmail.toLowerCase()) {
     redirect("/inicio");
   }
 
   return (
-    <div className="min-h-screen bg-[hsl(var(--beige-100))]">
+    <div className="min-h-screen bg-gradient-to-br from-[hsl(var(--beige-50))] via-[hsl(var(--rose-gold))]/5 to-[hsl(var(--beige-100))]">
       <div className="flex">
         {/* Sidebar */}
         <AdminSidebar />

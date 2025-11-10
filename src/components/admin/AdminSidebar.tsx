@@ -50,21 +50,21 @@ export function AdminSidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="hidden lg:flex lg:flex-col lg:w-64 lg:fixed lg:inset-y-0 bg-white border-r border-[hsl(var(--beige-400))]">
+    <aside className="hidden lg:flex lg:flex-col lg:w-64 lg:fixed lg:inset-y-0 bg-gradient-to-b from-[hsl(var(--burgundy))] to-[hsl(346_98%_20%)] text-white shadow-xl">
       {/* Logo */}
-      <div className="flex items-center justify-center h-20 px-6 border-b border-[hsl(var(--beige-400))]">
+      <div className="flex items-center justify-center h-20 px-6 border-b border-white/10">
         <Link href="/admin" className="flex items-center">
           <Logo
-            variant="banner-color-1"
+            variant="banner-light-1"
             width={120}
             height={97}
-            className="h-12 w-auto"
+            className="h-12 w-auto brightness-0 invert"
           />
         </Link>
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 px-4 py-6 space-y-1 overflow-y-auto">
+      <nav className="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
         {navigation.map((item) => {
           // For Dashboard, only match exact path. For others, match path + subpaths
           const isActive =
@@ -78,10 +78,10 @@ export function AdminSidebar() {
               key={item.name}
               href={item.href}
               className={cn(
-                "flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200",
+                "flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-sans font-medium transition-all duration-200",
                 isActive
-                  ? "bg-primary text-primary-foreground shadow-sm"
-                  : "text-muted-foreground hover:bg-[hsl(var(--beige-200))] hover:text-foreground",
+                  ? "bg-white/20 text-white shadow-lg backdrop-blur-sm border border-white/30"
+                  : "text-white/80 hover:bg-white/10 hover:text-white",
               )}
             >
               <Icon className="h-5 w-5" />
@@ -92,9 +92,12 @@ export function AdminSidebar() {
       </nav>
 
       {/* Footer */}
-      <div className="p-4 border-t border-[hsl(var(--beige-400))]">
-        <p className="text-xs text-muted-foreground text-center">
+      <div className="p-4 border-t border-white/10">
+        <p className="text-xs text-white/60 text-center font-sans">
           ZAFTA Admin Panel
+        </p>
+        <p className="text-xs text-white/40 text-center font-sans mt-1">
+          v1.0
         </p>
       </div>
     </aside>
