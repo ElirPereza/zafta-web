@@ -148,10 +148,15 @@ export function ProductsTable() {
     try {
       const response = await fetch("/api/products");
       const data = await response.json();
-      // Sort by displayOrder
-      const sorted = data.sort((a: Product, b: Product) =>
-        (a.displayOrder || 0) - (b.displayOrder || 0)
-      );
+      // Handle both old format (array) and new format (object with products)
+      const productsArray = Array.isArray(data) ? data : (data.products || []);
+      // Sort by displayOrder if available, otherwise by createdAt
+      const sorted = productsArray.sort((a: Product, b: Product) => {
+        if (a.displayOrder !== undefined && b.displayOrder !== undefined) {
+          return a.displayOrder - b.displayOrder;
+        }
+        return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+      });
       setProducts(sorted);
     } catch (error) {
       console.error("Error fetching products:", error);
