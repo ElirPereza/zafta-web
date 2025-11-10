@@ -46,6 +46,17 @@ export function WompiCheckout({
 
         const data = await response.json();
 
+        console.log("📦 Creating order with:", {
+          currency: data.currency,
+          amountInCents: data.amountInCents,
+          reference: data.reference,
+          publicKey: data.publicKey,
+          signature: data.signature,
+          redirectUrl: data.redirectUrl,
+          customerEmail: data.customerEmail,
+          customerName: data.customerName,
+        });
+
         // Crear instancia del Widget de Wompi
         if (window.WidgetCheckout) {
           checkoutRef.current = new window.WidgetCheckout({
@@ -53,7 +64,9 @@ export function WompiCheckout({
             amountInCents: data.amountInCents,
             reference: data.reference,
             publicKey: data.publicKey,
-            signature: data.signature,
+            signature: {
+              integrity: data.signature,
+            },
             redirectUrl: data.redirectUrl,
             customerData: {
               email: data.customerEmail,

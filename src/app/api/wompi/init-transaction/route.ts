@@ -36,8 +36,12 @@ export async function POST(request: NextRequest) {
     // Generar reference único para Wompi
     const wompiReference = generateTransactionReference();
 
-    // Calcular amount en centavos
-    const amountInCents = Math.round(Number(order.total) * 100);
+    // Calcular amount en centavos (debe ser un entero)
+    // IMPORTANTE: Wompi espera el valor en centavos sin decimales
+    const amountInCents = Math.floor(Number(order.total) * 100);
+
+    console.log("💰 Order Total:", order.total);
+    console.log("💰 Amount in Cents:", amountInCents);
 
     // Generar firma de integridad
     const signature = generateWompiSignature(wompiReference, amountInCents);

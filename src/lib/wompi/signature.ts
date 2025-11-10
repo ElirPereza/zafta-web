@@ -18,14 +18,27 @@ export function generateWompiSignature(
     );
   }
 
+  // Asegurar que amountInCents es un entero sin decimales
+  const amountInteger = Math.floor(amountInCents);
+
   // Concatenar según la especificación de Wompi
-  const concatenatedText = `${reference}${amountInCents}${currency}${integritySecret}`;
+  // IMPORTANTE: No agregar espacios ni separadores entre los valores
+  const concatenatedText = `${reference}${amountInteger}${currency}${integritySecret}`;
+
+  // Debug log (comentar en producción)
+  console.log("🔐 Generating Wompi Signature:");
+  console.log("  Reference:", reference);
+  console.log("  Amount (cents):", amountInteger);
+  console.log("  Currency:", currency);
+  console.log("  Concatenated:", concatenatedText);
 
   // Generar hash SHA256
   const signature = crypto
     .createHash("sha256")
     .update(concatenatedText)
     .digest("hex");
+
+  console.log("  Signature:", signature);
 
   return signature;
 }
