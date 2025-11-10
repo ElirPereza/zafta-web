@@ -56,9 +56,6 @@ const Hero = () => {
         </motion.div>
       </AnimatePresence>
 
-      {/* Burgundy Overlay */}
-      <div className="absolute inset-0 bg-primary/40" />
-
       {/* Content */}
       <div className="relative z-10 flex min-h-screen items-center justify-center px-6 pb-16">
         <div className="max-w-4xl text-center">
