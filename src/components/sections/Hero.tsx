@@ -24,13 +24,27 @@ const bannerImages = [
 
 const Hero = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [showGradient, setShowGradient] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % bannerImages.length);
     }, 3000);
 
-    return () => clearInterval(interval);
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setShowGradient(true);
+      } else {
+        setShowGradient(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   return (
@@ -56,8 +70,13 @@ const Hero = () => {
         </motion.div>
       </AnimatePresence>
 
-      {/* Bottom Gradient Overlay - Subtle transition to background color */}
-      <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-[hsl(var(--background))] via-[hsl(var(--background))]/40 to-transparent z-[5]" />
+      {/* Bottom Gradient Overlay - Shows only when scrolling */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: showGradient ? 1 : 0 }}
+        transition={{ duration: 0.3 }}
+        className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-[hsl(var(--background))] via-[hsl(var(--background))]/40 to-transparent z-[5] pointer-events-none"
+      />
 
       {/* Content */}
       <div className="relative z-10 flex min-h-screen items-center justify-center px-6 pb-32">
@@ -106,8 +125,8 @@ const Hero = () => {
 
       {/* Scroll Indicator */}
       <div className="absolute bottom-20 left-1/2 z-10 -translate-x-1/2 animate-bounce">
-        <div className="h-12 w-6 rounded-full border-2 border-background/40 opacity-75">
-          <div className="mx-auto mt-2 h-2 w-1 rounded-full bg-background/60" />
+        <div className="h-12 w-6 rounded-full border-2 border-primary/60 opacity-75">
+          <div className="mx-auto mt-2 h-2 w-1 rounded-full bg-primary" />
         </div>
       </div>
     </section>
