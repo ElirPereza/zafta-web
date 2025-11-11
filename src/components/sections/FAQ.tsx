@@ -12,41 +12,160 @@ import {
 } from "@/components/ui/accordion";
 
 const faqs = [
+  // Sobre Zafta
   {
     id: "1",
-    question: "¿Cómo puedo hacer un pedido?",
+    category: "Sobre Zafta",
+    question: "¿Cuál es la historia detrás de la marca?",
     answer:
-      "Elige tu torta favorita en nuestro catálogo, personalízala y confirma tu cotización por WhatsApp. ¡Nosotros nos encargamos del resto!",
+      "Soy Cami, y hoy continúo con un legado familiar que ha endulzado los momentos de muchas familias en Antioquia. Este proyecto nació hace casi 30 años, gracias a Fanny Wagner, la abuela de mi esposo. En una época difícil, Fanny apostó por una de sus recetas más queridas: la torta de chocolate. Así nació lo que muchos conocieron como 'la torta de Judía'. Fanny horneaba desde su casa, siempre acompañada por sus hijos y, más adelante, por su esposo. Cuando ella falleció, hace más de 10 años, muchas personas pensaron que su receta se iría con ella. Pero no fue así. Nena, quien había trabajado junto a Fanny por más de 20 años, siguió con el legado. Y en 2015, decidí unirme para darle un nuevo impulso. Hoy, la torta de la Judía —que ahora llamamos con cariño 'Torta Zafta'— sigue siendo la misma receta, pero con nuevas formas de compartirla.",
   },
+  // Pedidos y entregas
   {
     id: "2",
-    question: "¿Con cuánto tiempo de anticipación debo hacer mi pedido?",
+    category: "Pedidos y entregas",
+    question: "¿Con cuánto tiempo debo hacer un pedido?",
     answer:
-      "Recomendamos realizarlo con al menos 24 horas de anticipación. Para tortas personalizadas, mínimo 48 horas.",
+      "Horneamos nuestra Torta Zafta a diario, por lo que casi siempre tenemos disponibilidad inmediata. Sin embargo, te recomendamos hacer tu pedido con 1 o 2 días de anticipación. Para tortas personalizadas y pedidos para eventos, lo ideal es mínimo 10 días de anticipación.",
   },
   {
     id: "3",
-    question: "¿Hacen entregas a domicilio?",
+    category: "Pedidos y entregas",
+    question: "¿Hacen entregas a domicilio? ¿En qué zonas?",
     answer:
-      "Sí. Entregamos en diferentes zonas de la ciudad. El costo del envío depende de la distancia, la cual puedes calcular fácilmente al hacer tu pedido.",
+      "Sí. Realizamos domicilios en todo el área metropolitana de Medellín y municipios cercanos como Rionegro, Bello, La Estrella, Sabaneta, Itagüí, entre otros. Algunas zonas tienen restricciones por seguridad de los mensajeros, por eso es importante confirmar con anticipación.",
   },
   {
     id: "4",
-    question: "¿Puedo personalizar mi torta?",
+    category: "Pedidos y entregas",
+    question: "¿Cuáles son los horarios de atención y entrega?",
     answer:
-      "Por supuesto. Podemos incluir mensajes, decoraciones especiales y colores personalizados. ¡Cada torta cuenta una historia única!",
+      "Lunes a viernes: 8:00 a.m. – 4:30 p.m. Sábados: 7:00 a.m. – 12:00 p.m. Domingos y festivos no tenemos atención.",
   },
   {
     id: "5",
-    question: "¿Qué métodos de pago aceptan?",
+    category: "Pedidos y entregas",
+    question: "¿Cómo puedo hacer mi pedido?",
     answer:
-      "Puedes pagar contra entrega o a través de transferencia. Confirmamos todos los detalles por WhatsApp antes de procesar el pedido.",
+      "Puedes realizar tu pedido a través de nuestra tienda en línea (próximamente), nuestro catálogo en WhatsApp Business: 321 759 0897, o por mensaje directo en nuestras redes sociales (Instagram, Facebook, TikTok). Como lo hacía Fanny: con cercanía, atención y todo el amor del mundo ❤️",
   },
+  // Productos
   {
     id: "6",
-    question: "¿Puedo recoger mi pedido en la tienda?",
+    category: "Productos",
+    question: "¿Puedo pedir solo una porción o hay pedido mínimo?",
+    answer: "Vendemos tortas completas desde 3 porciones en adelante.",
+  },
+  {
+    id: "7",
+    category: "Productos",
+    question: "¿Qué productos ofrecen?",
+    answer: "Tortas clásicas y personalizadas, postres, y mesas de postres para eventos.",
+  },
+  {
+    id: "8",
+    category: "Productos",
+    question: "¿Tienen productos sin azúcar, sin gluten o personalizados?",
     answer:
-      "Sí. También puedes programar la recogida en nuestra sede, según disponibilidad.",
+      "Sí, contamos con una línea saludable sin azúcar ni gluten, apta para personas con diabetes.",
+  },
+  {
+    id: "9",
+    category: "Productos",
+    question: "¿Cuál es su producto más recomendado o especialidad?",
+    answer: "Nuestra Torta de Chocolate Zafta.",
+  },
+  {
+    id: "10",
+    category: "Productos",
+    question: "¿Si meto la torta en la nevera se pone dura?",
+    answer:
+      "Sí, como toda receta con mantequilla, al refrigerarla se pone más firme. Al dejarla a temperatura ambiente, vuelve a suavizarse perfectamente.",
+  },
+  {
+    id: "11",
+    category: "Productos",
+    question: "¿Si la compro hoy, se daña mañana?",
+    answer:
+      "No. Nuestras tortas se preparan bajo pedido y se conservan hasta por 8 días si las guardas en nevera, preferiblemente en recipiente hermético. Si ya está cortada, recomendamos envolverla en papel film o papel chicle para evitar que la miga se seque.",
+  },
+  {
+    id: "12",
+    category: "Productos",
+    question: "¿Cómo puedo transportarla de forma segura?",
+    answer:
+      "Colócala en el piso del copiloto con el aire encendido. Maneja con suavidad y asegúrate de que la torta esté refrigerada previamente.",
+  },
+  {
+    id: "13",
+    category: "Productos",
+    question: "¿Qué hago para que mi torta decorada esté perfecta para el evento?",
+    answer:
+      "La refrigeración es clave. No la dejes a temperatura ambiente si vas a moverla. En Zafta usamos coberturas suaves (no pastillaje), por eso es importante conservarla en frío hasta el momento de servirla.",
+  },
+  // Eventos y celebraciones
+  {
+    id: "14",
+    category: "Eventos y celebraciones",
+    question: "¿Hacen productos para eventos (cumpleaños, bodas, reuniones)?",
+    answer:
+      "Sí, trabajamos para todo tipo de eventos. También nos adaptamos a requerimientos especiales.",
+  },
+  {
+    id: "15",
+    category: "Eventos y celebraciones",
+    question: "¿Con cuánto tiempo de anticipación debo hacer un encargo para un evento?",
+    answer: "Mínimo 10 días de anticipación.",
+  },
+  {
+    id: "16",
+    category: "Eventos y celebraciones",
+    question: "¿Puedo personalizar los productos o la presentación para eventos?",
+    answer: "Sí, nos encanta crear propuestas a tu medida.",
+  },
+  // Pagos y medios
+  {
+    id: "17",
+    category: "Pagos y medios",
+    question: "¿Qué formas de pago aceptan?",
+    answer: "Transferencia a Bancolombia y pago en efectivo.",
+  },
+  {
+    id: "18",
+    category: "Pagos y medios",
+    question: "¿Cuándo se realiza el pago?",
+    answer:
+      "Se debe pagar el 50% para agendar el pedido y el otro 50% antes de la entrega.",
+  },
+  // Canales de contacto
+  {
+    id: "19",
+    category: "Canales de contacto",
+    question: "¿Por dónde puedo hacer mi pedido?",
+    answer:
+      "Puedes pedir desde la tienda en línea, por WhatsApp Business (catálogo o mensaje), o escribiéndonos en Instagram, TikTok o Facebook. Coordinamos contigo todo con la misma calidez de siempre ❤️",
+  },
+  {
+    id: "20",
+    category: "Canales de contacto",
+    question: "¿Tienen catálogo digital o tienda en línea?",
+    answer:
+      "Sí ✨ Puedes ver nuestro catálogo por WhatsApp y muy pronto hacer tus pedidos en nuestra tienda online. Queremos que te sientas como en casa desde la primera pantalla.",
+  },
+  {
+    id: "21",
+    category: "Canales de contacto",
+    question: "¿Dónde puedo ver más fotos de sus productos?",
+    answer:
+      "📸 Instagram: @zafta_reposteria, 👍 Facebook: @zafta_reposteria, 🎥 TikTok: @zafta_reposteria, 🔍 Google: Búscanos como 'Zafta Repostería'. Te esperamos con tortas, antojos y un poquito de historia en cada post 🧁✨",
+  },
+  // Reseñas y experiencia
+  {
+    id: "22",
+    category: "Reseñas y experiencia",
+    question: "¿Dónde puedo dejar una reseña o comentario sobre mi experiencia?",
+    answer:
+      "Puedes dejar tu reseña en nuestro perfil de Google My Business o escribirnos por WhatsApp. Cada mensaje es como una receta que guardamos con cariño. Nos ayuda a crecer, a mejorar, y a seguir horneando con propósito.",
   },
 ];
 
@@ -54,7 +173,7 @@ const FAQ = () => {
   const handleWhatsAppContact = () => {
     const message =
       "¡Hola! Tengo algunas dudas sobre sus productos. ¿Me pueden ayudar? 😊";
-    const whatsappUrl = `https://wa.me/573001234567?text=${encodeURIComponent(message)}`;
+    const whatsappUrl = `https://wa.me/573217590897?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, "_blank");
   };
 
@@ -91,9 +210,8 @@ const FAQ = () => {
           <h2 className="mb-4 text-4xl md:text-5xl font-sans italic text-foreground">
             Preguntas Frecuentes
           </h2>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed font-sans">
-            Resolvemos tus dudas para que tu experiencia sea tan dulce como
-            nuestras tortas.
+          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed font-sans">
+            Aquí encontrarás respuestas a las preguntas más comunes sobre nuestras tortas, pedidos, entregas y más. Si tienes alguna otra duda, no dudes en contactarnos.
           </p>
         </motion.div>
 
@@ -108,7 +226,7 @@ const FAQ = () => {
             className="space-y-4"
           >
             <Accordion type="single" collapsible className="space-y-4">
-              {faqs.slice(0, 3).map((faq, index) => (
+              {faqs.slice(0, 11).map((faq, index) => (
                 <AccordionItem
                   key={faq.id}
                   value={faq.id}
@@ -144,7 +262,7 @@ const FAQ = () => {
             className="space-y-4"
           >
             <Accordion type="single" collapsible className="space-y-4">
-              {faqs.slice(3, 6).map((faq, index) => (
+              {faqs.slice(11, 22).map((faq, index) => (
                 <AccordionItem
                   key={faq.id}
                   value={faq.id}

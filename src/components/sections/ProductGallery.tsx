@@ -60,9 +60,9 @@ const ProductGallery = ({ onOpenOrder }: ProductGalleryProps) => {
   return (
     <section
       id="our-cakes"
-      className="py-12 md:py-16 lg:py-20 px-4 sm:px-6 md:px-8 bg-gradient-to-b from-background via-primary/5 to-background"
+      className="relative py-12 md:py-16 lg:py-20 px-4 sm:px-6 md:px-8"
     >
-      <div className="container mx-auto max-w-7xl">
+      <div className="container mx-auto max-w-7xl relative z-10">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -72,7 +72,7 @@ const ProductGallery = ({ onOpenOrder }: ProductGalleryProps) => {
           className="mb-8 md:mb-12 lg:mb-16 text-center px-2"
         >
           <h2 className="mb-4 md:mb-6 text-3xl sm:text-4xl md:text-5xl font-sans italic text-foreground">
-            Nuestras Creaciones – Hechas con Amor
+            Nuestros Productos de Línea
           </h2>
           <p className="text-base sm:text-lg md:text-xl text-muted-foreground font-sans max-w-2xl mx-auto leading-relaxed px-4">
             Hechas con cuidado, los mejores ingredientes y generaciones de amor.

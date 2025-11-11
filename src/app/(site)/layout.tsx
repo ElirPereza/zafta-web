@@ -1,17 +1,33 @@
+"use client";
+
+import { usePathname } from "next/navigation";
 import Navigation from "@/components/layout/Navigation";
 import Footer from "@/components/layout/Footer";
 import { FloatingWhatsApp } from "@/components/ui/floating-whatsapp";
+import { AuroraBackground } from "@/components/layout/AuroraBackground";
 
 export default function SiteLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const pathname = usePathname();
+  // Inicio page has its own gradient wrapper implementation
+  const isInicioPage = pathname === "/inicio";
+
   return (
     <>
       <Navigation />
-      <main className="min-h-screen">{children}</main>
-      <Footer />
+      {isInicioPage ? (
+        // Inicio page handles its own gradient and footer
+        <main className="min-h-screen">{children}</main>
+      ) : (
+        // All other pages use Aurora background wrapper
+        <AuroraBackground>
+          <main className="min-h-screen">{children}</main>
+          <Footer />
+        </AuroraBackground>
+      )}
       <FloatingWhatsApp />
     </>
   );

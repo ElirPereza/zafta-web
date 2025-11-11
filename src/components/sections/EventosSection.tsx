@@ -31,9 +31,9 @@ const EventosSection = () => {
   return (
     <section
       id="eventos"
-      className="py-16 md:py-20 px-6 md:px-8 bg-gradient-to-b from-background to-beige-100"
+      className="relative py-16 md:py-20 px-6 md:px-8"
     >
-      <div className="container mx-auto max-w-6xl">
+      <div className="container mx-auto max-w-6xl relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}

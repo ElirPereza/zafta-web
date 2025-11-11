@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 
 const steps = [
   {
-    title: "Elige tu favorita.",
+    title: "Elige tu producto.",
     description: "Mira los sabores y tamaños que tenemos.",
   },
   {
@@ -29,10 +29,8 @@ const HowToBuy = () => {
   return (
     <section
       id="how-to-buy"
-      className="relative py-16 md:py-20 px-6 md:px-8 bg-background"
+      className="relative py-16 md:py-20 px-6 md:px-8"
     >
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/8 to-background" />
-
       <div className="container mx-auto max-w-6xl relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -42,7 +40,7 @@ const HowToBuy = () => {
           className="text-center mb-12 md:mb-16"
         >
           <h2 className="mb-6 text-4xl font-sans italic md:text-5xl text-foreground">
-            ¿cómo pido mi torta?
+            ¿Cómo pido mi torta?
           </h2>
         </motion.div>
 
@@ -93,7 +91,7 @@ const HowToBuy = () => {
             size="lg"
             className="shadow-warm hover:shadow-medium transition-all duration-300"
           >
-            Descubre Nuestras Tortas
+            Descubre más productos
           </Button>
         </motion.div>
       </div>

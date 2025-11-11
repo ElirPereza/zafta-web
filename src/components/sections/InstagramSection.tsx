@@ -35,9 +35,9 @@ const InstagramSection = ({ onOpenOrder }: InstagramSectionProps) => {
   return (
     <section
       id="instagram"
-      className="py-16 md:py-20 px-6 md:px-8 bg-background"
+      className="relative py-16 md:py-20 px-6 md:px-8"
     >
-      <div className="container mx-auto max-w-6xl">
+      <div className="container mx-auto max-w-6xl relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}

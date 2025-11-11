@@ -4,15 +4,13 @@ import { motion } from "framer-motion";
 import { Instagram, Phone } from "lucide-react";
 import Link from "next/link";
 import { Logo } from "@/components/ui/logo";
+import { FaTiktok } from "react-icons/fa";
 
 const Footer = () => {
   return (
     <footer
       id="contact"
-      className="py-8 md:py-10 px-6 md:px-8 border-t-2 border-primary/20"
-      style={{
-        background: `linear-gradient(135deg, hsl(var(--beige-500)) 0%, hsl(var(--beige-400)) 50%, hsl(var(--beige-500)) 100%)`,
-      }}
+      className="py-8 md:py-10 px-6 md:px-8 bg-transparent"
     >
       <div className="container mx-auto max-w-6xl">
         <motion.div
@@ -136,6 +134,17 @@ const Footer = () => {
                 className="flex items-center gap-2 text-base text-muted-foreground hover:text-primary transition-all duration-300 group"
               >
                 <Instagram className="h-5 w-5 text-primary group-hover:text-primary-dark transition-colors" />
+                <span>@zafta_reposteria</span>
+              </motion.a>
+              <motion.a
+                whileHover={{ scale: 1.05, x: 5 }}
+                transition={{ duration: 0.2 }}
+                href="https://www.tiktok.com/@zafta_reposteria"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-base text-muted-foreground hover:text-primary transition-all duration-300 group"
+              >
+                <FaTiktok className="h-5 w-5 text-primary group-hover:text-primary-dark transition-colors" />
                 <span>@zafta_reposteria</span>
               </motion.a>
             </div>
