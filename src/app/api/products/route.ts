@@ -31,18 +31,30 @@ export async function GET(request: Request) {
     // Only show in-stock products
     where.inStock = true;
 
-    const products = await prisma.product.findMany({
-      where,
-      orderBy: [
-        {
-          displayOrder: "asc",
-        },
-        {
+    let products;
+
+    try {
+      // Try to use displayOrder first (works in production after migration)
+      products = await prisma.product.findMany({
+        where,
+        orderBy: [
+          // @ts-ignore - displayOrder might not exist in local Prisma client yet
+          { displayOrder: "asc" },
+          { createdAt: "desc" },
+        ],
+        take: limit ? Number.parseInt(limit) : undefined,
+      });
+    } catch (error) {
+      // Fallback to createdAt if displayOrder doesn't exist yet
+      console.log("displayOrder not available, using createdAt fallback");
+      products = await prisma.product.findMany({
+        where,
+        orderBy: {
           createdAt: "desc",
         },
-      ],
-      take: limit ? Number.parseInt(limit) : undefined,
-    });
+        take: limit ? Number.parseInt(limit) : undefined,
+      });
+    }
 
     return NextResponse.json({ products, count: products.length });
   } catch (error) {
