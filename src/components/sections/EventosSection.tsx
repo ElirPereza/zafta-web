@@ -38,7 +38,7 @@ const EventosSection = () => {
           transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
           className="text-center mb-12 md:mb-14"
         >
-          <h2 className="mb-4 text-4xl font-sans font-bold md:text-5xl text-foreground">
+          <h2 className="mb-4 text-4xl font-sans italic md:text-5xl text-foreground">
             Eventos Especiales
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground font-sans max-w-2xl mx-auto leading-relaxed">
