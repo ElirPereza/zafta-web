@@ -103,7 +103,7 @@ const Hero = () => {
             {/* Enhanced shadow backdrop with salmon/rose gold glow */}
             <div className="absolute inset-0 -m-8 bg-gradient-radial from-[#FFB4A2]/50 via-[#E5B097]/30 to-transparent blur-3xl" />
             <Logo
-              variant="banner-white"
+              variant="banner"
               width={700}
               height={566}
               className="w-96 md:w-[34rem] lg:w-[44rem] h-auto drop-shadow-[0_10px_40px_rgba(244,168,159,0.7)] relative z-10"
