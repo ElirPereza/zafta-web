@@ -22,24 +22,46 @@ export async function POST(request: Request) {
     }
 
     // Update all products in a transaction
-    await prisma.$transaction(
-      updates.map((update: { id: string; displayOrder: number }) =>
-        prisma.product.update({
-          where: { id: update.id },
-          data: { displayOrder: update.displayOrder },
-        })
-      )
-    );
+    try {
+      await prisma.$transaction(
+        updates.map((update: { id: string; displayOrder: number }) =>
+          prisma.product.update({
+            where: { id: update.id },
+            // @ts-ignore - displayOrder might not exist in local Prisma client
+            data: { displayOrder: update.displayOrder },
+          })
+        )
+      );
 
-    // Revalidate the homepage to show updated order immediately
-    revalidatePath("/inicio");
-    revalidatePath("/");
+      // Revalidate the homepage to show updated order immediately
+      revalidatePath("/inicio");
+      revalidatePath("/");
 
-    return NextResponse.json({ success: true });
-  } catch (error) {
+      return NextResponse.json({ success: true });
+    } catch (updateError: any) {
+      console.error("Error updating products:", updateError);
+
+      // Check if error is due to missing displayOrder field
+      if (updateError?.message?.includes("displayOrder") ||
+          updateError?.message?.includes("Unknown field")) {
+        return NextResponse.json(
+          {
+            error: "El campo displayOrder no existe. Ejecuta el SQL en Supabase primero.",
+            details: updateError.message
+          },
+          { status: 500 }
+        );
+      }
+
+      throw updateError;
+    }
+  } catch (error: any) {
     console.error("Error reordering products:", error);
     return NextResponse.json(
-      { error: "Failed to reorder products" },
+      {
+        error: "Failed to reorder products",
+        details: error?.message || "Unknown error"
+      },
       { status: 500 }
     );
   }
