@@ -11,7 +11,7 @@ const bannerImages = [
     alt: "Banner 1 - Colección de tortas artesanales ZAFTA",
   },
   {
-    src: "/zafta_assets/banner2.jpg",
+    src: "/zafta_assets/_MG_9939.webp",
     alt: "Banner 2 - Deliciosas creaciones de repostería ZAFTA",
   },
   {
