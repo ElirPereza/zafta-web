@@ -33,10 +33,9 @@ export async function GET(request: Request) {
 
     const products = await prisma.product.findMany({
       where,
-      orderBy: [
-        { displayOrder: "asc" },
-        { createdAt: "desc" },
-      ],
+      orderBy: {
+        createdAt: "desc",
+      },
       take: limit ? Number.parseInt(limit) : undefined,
     });
 

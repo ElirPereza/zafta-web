@@ -32,11 +32,20 @@ const ProductGallery = ({ onOpenOrder }: ProductGalleryProps) => {
   useEffect(() => {
     const fetchFeaturedProducts = async () => {
       try {
-        // Get only featured products (max 6)
-        const response = await fetch("/api/products?featured=true&limit=6");
+        // Try to get featured products first
+        let response = await fetch("/api/products?featured=true&limit=6");
         if (response.ok) {
           const data = await response.json();
-          setProducts(data.products || []);
+          // If no featured products, get all products (for now)
+          if (data.products && data.products.length === 0) {
+            response = await fetch("/api/products?limit=6");
+            if (response.ok) {
+              const allData = await response.json();
+              setProducts(allData.products || []);
+            }
+          } else {
+            setProducts(data.products || []);
+          }
         }
       } catch (error) {
         console.error("Error fetching featured products:", error);
