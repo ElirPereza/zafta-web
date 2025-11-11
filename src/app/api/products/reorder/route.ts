@@ -1,6 +1,7 @@
 import { auth } from "@clerk/nextjs/server";
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 
 export async function POST(request: Request) {
   try {
@@ -29,6 +30,10 @@ export async function POST(request: Request) {
         })
       )
     );
+
+    // Revalidate the homepage to show updated order immediately
+    revalidatePath("/inicio");
+    revalidatePath("/");
 
     return NextResponse.json({ success: true });
   } catch (error) {
