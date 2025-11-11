@@ -9,21 +9,18 @@ import Link from "next/link";
 const eventosPhotos = [
   {
     id: 1,
-    image:
-      "https://images.unsplash.com/photo-1464347744102-11db6282f854?w=400&h=400&fit=crop",
-    alt: "Boda elegante con torta de varios pisos",
+    image: "/eventos/eventos-1.jpeg",
+    alt: "Evento especial ZAFTA - Celebración elegante",
   },
   {
     id: 2,
-    image:
-      "https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=400&h=400&fit=crop",
-    alt: "Celebración de cumpleaños especial",
+    image: "/eventos/eventos-2.jpeg",
+    alt: "Evento especial ZAFTA - Mesa de dulces personalizada",
   },
   {
     id: 3,
-    image:
-      "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=400&h=400&fit=crop",
-    alt: "Evento corporativo con mesa de dulces",
+    image: "/eventos/eventos-3.jpeg",
+    alt: "Evento especial ZAFTA - Torta para ocasión especial",
   },
 ];
 

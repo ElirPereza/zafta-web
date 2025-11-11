@@ -65,8 +65,6 @@ const Hero = () => {
               className="object-cover"
               quality={90}
             />
-            {/* Salmon overlay filter for better logo visibility */}
-            <div className="absolute inset-0 bg-[#F4A89F]/30" />
           </motion.div>
         ))}
       </div>

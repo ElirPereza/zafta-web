@@ -13,21 +13,18 @@ interface InstagramSectionProps {
 const instagramPosts = [
   {
     id: 1,
-    image:
-      "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&h=400&fit=crop",
-    alt: "Delicious chocolate cake with berries",
+    image: "/especiales/especiales-1.jpeg",
+    alt: "Torta personalizada ZAFTA - Diseño único y artesanal",
   },
   {
     id: 2,
-    image:
-      "https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=400&h=400&fit=crop",
-    alt: "Vanilla cake with cream frosting",
+    image: "/especiales/especiales-2.jpeg",
+    alt: "Torta personalizada ZAFTA - Creación especial",
   },
   {
     id: 3,
-    image:
-      "https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=400&h=400&fit=crop",
-    alt: "Red velvet cake slice",
+    image: "/especiales/especiales-3.jpeg",
+    alt: "Torta personalizada ZAFTA - Hecha con amor",
   },
 ];
 
