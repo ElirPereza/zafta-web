@@ -14,6 +14,7 @@ datasource db {
 // PRODUCTO MODELS
 // ============================================================================
 
+// Product model with drag-and-drop ordering support
 model Product {
   id           String      @id @default(cuid())
   name         String
@@ -22,10 +23,10 @@ model Product {
   price        Decimal     @db.Decimal(10, 2)
   comparePrice Decimal?    @db.Decimal(10, 2)
   images       String[]
-  category     String?     // Now optional
+  category     String?     // Optional category field
   inStock      Boolean     @default(true)
   featured     Boolean     @default(false)
-  displayOrder Int         @default(0) // For drag-and-drop ordering
+  displayOrder Int         @default(0) // Controls display order in product listings
   createdAt    DateTime    @default(now())
   updatedAt    DateTime    @updatedAt
   orderItems   OrderItem[]
@@ -33,7 +34,7 @@ model Product {
   @@index([category])
   @@index([featured])
   @@index([slug])
-  @@index([displayOrder])
+  @@index([displayOrder]) // Index for efficient ordering queries
 }
 
 // ============================================================================
