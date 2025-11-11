@@ -57,17 +57,20 @@ function SortableRow({ product, onDelete, formatPrice }: SortableRowProps) {
 
   return (
     <TableRow ref={setNodeRef} style={style} className={isDragging ? "bg-beige-100" : ""}>
-      <TableCell>
+      {/* Drag Handle - Always visible */}
+      <TableCell className="w-8 md:w-12">
         <button
-          className="cursor-grab active:cursor-grabbing p-2 hover:bg-beige-100 rounded-md transition-colors"
+          className="cursor-grab active:cursor-grabbing p-1 md:p-2 hover:bg-beige-100 rounded-md transition-colors"
           {...attributes}
           {...listeners}
         >
-          <GripVertical className="h-5 w-5 text-muted-foreground" />
+          <GripVertical className="h-4 w-4 md:h-5 md:w-5 text-muted-foreground" />
         </button>
       </TableCell>
-      <TableCell>
-        <div className="relative w-16 h-16 rounded-lg overflow-hidden bg-beige-100">
+
+      {/* Image - Smaller on mobile */}
+      <TableCell className="w-12 md:w-16">
+        <div className="relative w-12 h-12 md:w-16 md:h-16 rounded-lg overflow-hidden bg-beige-100">
           {product.images && product.images.length > 0 ? (
             <Image
               src={product.images[0]}
@@ -77,55 +80,68 @@ function SortableRow({ product, onDelete, formatPrice }: SortableRowProps) {
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center">
-              <Eye className="h-6 w-6 text-muted-foreground" />
+              <Eye className="h-4 w-4 md:h-6 md:w-6 text-muted-foreground" />
             </div>
           )}
         </div>
       </TableCell>
-      <TableCell className="font-sans font-medium">
+
+      {/* Name - Always visible */}
+      <TableCell className="font-sans font-medium text-sm md:text-base">
         {product.name}
       </TableCell>
-      <TableCell className="font-sans">
+
+      {/* Category - Hidden on mobile */}
+      <TableCell className="hidden md:table-cell font-sans">
         {product.category ? (
-          <Badge variant="outline" className="font-sans">
+          <Badge variant="outline" className="font-sans text-xs">
             {product.category}
           </Badge>
         ) : (
           <span className="text-muted-foreground text-sm">-</span>
         )}
       </TableCell>
-      <TableCell className="font-sans">
+
+      {/* Price - Smaller font on mobile */}
+      <TableCell className="font-sans text-sm md:text-base">
         {formatPrice(Number(product.price))}
       </TableCell>
-      <TableCell className="font-sans">
+
+      {/* Stock - Hidden on small screens, visible on tablet+ */}
+      <TableCell className="hidden lg:table-cell font-sans">
         <Badge
           variant={product.inStock ? "default" : "secondary"}
-          className="font-sans"
+          className="font-sans text-xs"
         >
           {product.inStock ? "En Stock" : "Agotado"}
         </Badge>
       </TableCell>
-      <TableCell>
+
+      {/* Featured - Hidden on mobile */}
+      <TableCell className="hidden md:table-cell">
         <Badge
           variant={product.featured ? "default" : "outline"}
-          className="font-sans"
+          className="font-sans text-xs"
         >
           {product.featured ? "Destacado" : "-"}
         </Badge>
       </TableCell>
-      <TableCell className="text-right">
-        <div className="flex items-center justify-end gap-2">
+
+      {/* Actions - Always visible, compact on mobile */}
+      <TableCell className="text-right w-20 md:w-auto">
+        <div className="flex items-center justify-end gap-1 md:gap-2">
           <Link href={`/admin/productos/${product.id}/editar`}>
-            <Button variant="ghost" size="icon">
-              <Pencil className="h-4 w-4" />
+            <Button variant="ghost" size="icon" className="h-8 w-8 md:h-10 md:w-10">
+              <Pencil className="h-3 w-3 md:h-4 md:w-4" />
             </Button>
           </Link>
           <Button
             variant="ghost"
             size="icon"
             onClick={() => onDelete(product.id)}
+            className="h-8 w-8 md:h-10 md:w-10"
           >
-            <Trash2 className="h-4 w-4 text-red-600" />
+            <Trash2 className="h-3 w-3 md:h-4 md:w-4 text-red-600" />
           </Button>
         </div>
       </TableCell>
@@ -288,22 +304,23 @@ export function ProductsTable() {
   return (
     <div className="space-y-4">
       <div className="border border-beige-400 rounded-lg overflow-hidden bg-white">
-        <DndContext
-          sensors={sensors}
-          collisionDetection={closestCenter}
-          onDragEnd={handleDragEnd}
-        >
-          <Table>
+        <div className="overflow-x-auto">
+          <DndContext
+            sensors={sensors}
+            collisionDetection={closestCenter}
+            onDragEnd={handleDragEnd}
+          >
+            <Table className="min-w-full">
             <TableHeader>
               <TableRow className="bg-beige-100">
-                <TableHead className="font-sans font-semibold w-12"></TableHead>
-                <TableHead className="font-sans font-semibold">Imagen</TableHead>
-                <TableHead className="font-sans font-semibold">Nombre</TableHead>
-                <TableHead className="font-sans font-semibold">Categoría</TableHead>
-                <TableHead className="font-sans font-semibold">Precio</TableHead>
-                <TableHead className="font-sans font-semibold">Stock</TableHead>
-                <TableHead className="font-sans font-semibold">Destacado</TableHead>
-                <TableHead className="font-sans font-semibold text-right">
+                <TableHead className="font-sans font-semibold w-8 md:w-12"></TableHead>
+                <TableHead className="font-sans font-semibold w-12 md:w-16 text-xs md:text-sm">Imagen</TableHead>
+                <TableHead className="font-sans font-semibold text-xs md:text-sm">Nombre</TableHead>
+                <TableHead className="hidden md:table-cell font-sans font-semibold text-xs md:text-sm">Categoría</TableHead>
+                <TableHead className="font-sans font-semibold text-xs md:text-sm">Precio</TableHead>
+                <TableHead className="hidden lg:table-cell font-sans font-semibold text-xs md:text-sm">Stock</TableHead>
+                <TableHead className="hidden md:table-cell font-sans font-semibold text-xs md:text-sm">Destacado</TableHead>
+                <TableHead className="font-sans font-semibold text-right text-xs md:text-sm w-20 md:w-auto">
                   Acciones
                 </TableHead>
               </TableRow>
@@ -323,8 +340,9 @@ export function ProductsTable() {
                 ))}
               </SortableContext>
             </TableBody>
-          </Table>
-        </DndContext>
+            </Table>
+          </DndContext>
+        </div>
       </div>
 
       {hasChanges && (

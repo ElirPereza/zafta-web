@@ -60,7 +60,7 @@ const ProductGallery = ({ onOpenOrder }: ProductGalleryProps) => {
   return (
     <section
       id="our-cakes"
-      className="py-16 md:py-20 px-6 md:px-8 bg-gradient-to-b from-background via-primary/5 to-background"
+      className="py-12 md:py-16 lg:py-20 px-4 sm:px-6 md:px-8 bg-gradient-to-b from-background via-primary/5 to-background"
     >
       <div className="container mx-auto max-w-7xl">
         {/* Header */}
@@ -69,12 +69,12 @@ const ProductGallery = ({ onOpenOrder }: ProductGalleryProps) => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
-          className="mb-12 md:mb-16 text-center"
+          className="mb-8 md:mb-12 lg:mb-16 text-center px-2"
         >
-          <h2 className="mb-6 text-4xl font-sans italic md:text-5xl text-foreground">
+          <h2 className="mb-4 md:mb-6 text-3xl sm:text-4xl md:text-5xl font-sans italic text-foreground">
             Nuestras Creaciones – Hechas con Amor
           </h2>
-          <p className="text-lg md:text-xl text-muted-foreground font-sans max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg md:text-xl text-muted-foreground font-sans max-w-2xl mx-auto leading-relaxed px-4">
             Hechas con cuidado, los mejores ingredientes y generaciones de amor.
             Cada bocado cuenta una historia.
           </p>
@@ -98,7 +98,7 @@ const ProductGallery = ({ onOpenOrder }: ProductGalleryProps) => {
 
         {/* Product Grid */}
         {!loading && products.length > 0 && (
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-4 sm:gap-6 md:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
             {products.map((product, index) => (
               <motion.div
                 key={product.id}
@@ -112,8 +112,8 @@ const ProductGallery = ({ onOpenOrder }: ProductGalleryProps) => {
                 }}
               >
                 <Link href={`/productos/${product.slug}`}>
-                  <Card className="group overflow-hidden border-border/50 shadow-soft transition-all duration-500 hover:shadow-warm hover:-translate-y-2 bg-card/95 backdrop-blur-sm rounded-2xl cursor-pointer">
-                    <div className="aspect-square overflow-hidden relative rounded-t-2xl">
+                  <Card className="group overflow-hidden border-border/50 shadow-soft transition-all duration-500 hover:shadow-warm hover:-translate-y-2 bg-card/95 backdrop-blur-sm rounded-xl md:rounded-2xl cursor-pointer">
+                    <div className="aspect-square overflow-hidden relative rounded-t-xl md:rounded-t-2xl">
                       <Image
                         src={product.images[0] || "/zafta_assets/placeholder.webp"}
                         alt={product.name}
@@ -121,26 +121,27 @@ const ProductGallery = ({ onOpenOrder }: ProductGalleryProps) => {
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                         className="object-cover transition-transform duration-500 group-hover:scale-110"
                         quality={80}
+                        priority={index < 3}
                       />
-                      {/* Hover overlay con carrito */}
-                      <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/30 transition-all duration-300 flex flex-col items-center justify-center gap-3">
+                      {/* Hover overlay con carrito - Hidden on touch devices */}
+                      <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/30 transition-all duration-300 hidden sm:flex flex-col items-center justify-center gap-3">
                         <motion.div
                           initial={{ scale: 0.8, opacity: 0 }}
                           whileHover={{ scale: 1, opacity: 1 }}
                           className="opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                         >
-                          <ShoppingCart className="w-12 h-12 text-background" />
+                          <ShoppingCart className="w-10 h-10 md:w-12 md:h-12 text-background" />
                         </motion.div>
-                        <span className="text-background font-sans font-medium text-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <span className="text-background font-sans font-medium text-base md:text-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                           Dale una probada
                         </span>
                       </div>
                     </div>
-                    <div className="p-8">
-                      <h3 className="mb-3 text-xl md:text-2xl font-sans italic text-foreground">
+                    <div className="p-4 sm:p-6 md:p-8">
+                      <h3 className="mb-2 md:mb-3 text-lg sm:text-xl md:text-2xl font-sans italic text-foreground">
                         {product.name}
                       </h3>
-                      <p className="text-base md:text-lg text-muted-foreground leading-relaxed font-sans">
+                      <p className="text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed font-sans line-clamp-2">
                         {product.description || "Deliciosa creación artesanal"}
                       </p>
                     </div>
