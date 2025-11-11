@@ -65,8 +65,8 @@ const Hero = () => {
               className="object-cover"
               quality={90}
             />
-            {/* Subtle overlay filter */}
-            <div className="absolute inset-0 bg-black/10" />
+            {/* Salmon/Rose Gold overlay filter for better logo visibility */}
+            <div className="absolute inset-0 bg-[#FFB4A2]/30" />
           </motion.div>
         ))}
       </div>
@@ -98,22 +98,24 @@ const Hero = () => {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
-            className="flex justify-center"
+            className="flex justify-center relative"
           >
+            {/* Enhanced shadow backdrop with salmon/rose gold glow */}
+            <div className="absolute inset-0 -m-8 bg-gradient-radial from-[#FFB4A2]/50 via-[#E5B097]/30 to-transparent blur-3xl" />
             <Logo
               variant="banner-orange"
               width={700}
               height={566}
-              className="w-96 md:w-[34rem] lg:w-[44rem] h-auto drop-shadow-2xl"
+              className="w-96 md:w-[34rem] lg:w-[44rem] h-auto drop-shadow-[0_10px_40px_rgba(229,176,151,0.7)] relative z-10"
             />
           </motion.div>
         </div>
       </div>
 
-      {/* Scroll Indicator */}
+      {/* Scroll Indicator - Simple white design */}
       <div className="absolute bottom-20 left-1/2 z-10 -translate-x-1/2 animate-bounce">
-        <div className="h-12 w-6 rounded-full border-2 border-[hsl(224,55%,15%)]/60 opacity-75">
-          <div className="mx-auto mt-2 h-2 w-1 rounded-full bg-[hsl(224,55%,15%)]" />
+        <div className="h-12 w-6 rounded-full border-2 border-white bg-white/20 shadow-lg backdrop-blur-sm">
+          <div className="mx-auto mt-2 h-2 w-1 rounded-full bg-white shadow-md" />
         </div>
       </div>
     </section>
