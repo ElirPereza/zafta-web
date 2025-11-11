@@ -9,8 +9,8 @@ interface AuroraBackgroundProps {
 
 /**
  * Aurora Dream ZAFTA Background Wrapper
- * Provides consistent gradient background across all pages
- * Uses brand colors: Rose Gold, Salmon, Melocotón, Burgundy
+ * Uses EXACT same gradient as inicio page for consistency
+ * Brand colors: Rose Gold, Salmon, Melocotón, Burgundy
  */
 export const AuroraBackground = ({
   children,

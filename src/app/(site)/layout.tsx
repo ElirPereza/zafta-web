@@ -22,9 +22,9 @@ export default function SiteLayout({
         // Inicio page handles its own gradient and footer
         <main className="min-h-screen">{children}</main>
       ) : (
-        // All other pages use Aurora background wrapper
+        // All other pages use Aurora background wrapper with same gradient as inicio
         <AuroraBackground>
-          <main className="min-h-screen">{children}</main>
+          <main>{children}</main>
           <Footer />
         </AuroraBackground>
       )}
