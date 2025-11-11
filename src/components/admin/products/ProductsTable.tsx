@@ -136,6 +136,8 @@ function SortableRow({ product, onDelete, formatPrice }: SortableRowProps) {
 export function ProductsTable() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
+  const [hasChanges, setHasChanges] = useState(false);
+  const [saving, setSaving] = useState(false);
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -169,7 +171,7 @@ export function ProductsTable() {
     fetchProducts();
   }, [fetchProducts]);
 
-  const handleDragEnd = async (event: DragEndEvent) => {
+  const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
 
     if (!over || active.id === over.id) {
@@ -181,25 +183,51 @@ export function ProductsTable() {
 
     const newProducts = arrayMove(products, oldIndex, newIndex);
     setProducts(newProducts);
+    setHasChanges(true);
+  };
 
-    // Update displayOrder in database
+  const handleSaveOrder = async () => {
+    setSaving(true);
     try {
-      const updates = newProducts.map((product, index) => ({
+      const updates = products.map((product, index) => ({
         id: product.id,
         displayOrder: index,
       }));
 
-      await fetch("/api/products/reorder", {
+      const response = await fetch("/api/products/reorder", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ updates }),
       });
+
+      if (response.ok) {
+        setHasChanges(false);
+
+        // Revalidar la cache del homepage
+        await fetch("/api/revalidate", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ path: "/inicio" }),
+        });
+
+        alert("¡Orden actualizado correctamente! La página se actualizará automáticamente.");
+
+        // Refrescar la lista de productos
+        await fetchProducts();
+      } else {
+        throw new Error("Error saving order");
+      }
     } catch (error) {
       console.error("Error updating product order:", error);
+      alert("Error al actualizar el orden. Intenta de nuevo.");
       // Revert on error
       fetchProducts();
+    } finally {
+      setSaving(false);
     }
   };
 
@@ -258,44 +286,58 @@ export function ProductsTable() {
   }
 
   return (
-    <div className="border border-beige-400 rounded-lg overflow-hidden bg-white">
-      <DndContext
-        sensors={sensors}
-        collisionDetection={closestCenter}
-        onDragEnd={handleDragEnd}
-      >
-        <Table>
-          <TableHeader>
-            <TableRow className="bg-beige-100">
-              <TableHead className="font-sans font-semibold w-12"></TableHead>
-              <TableHead className="font-sans font-semibold">Imagen</TableHead>
-              <TableHead className="font-sans font-semibold">Nombre</TableHead>
-              <TableHead className="font-sans font-semibold">Categoría</TableHead>
-              <TableHead className="font-sans font-semibold">Precio</TableHead>
-              <TableHead className="font-sans font-semibold">Stock</TableHead>
-              <TableHead className="font-sans font-semibold">Destacado</TableHead>
-              <TableHead className="font-sans font-semibold text-right">
-                Acciones
-              </TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            <SortableContext
-              items={products.map((p) => p.id)}
-              strategy={verticalListSortingStrategy}
-            >
-              {products.map((product) => (
-                <SortableRow
-                  key={product.id}
-                  product={product}
-                  onDelete={handleDelete}
-                  formatPrice={formatPrice}
-                />
-              ))}
-            </SortableContext>
-          </TableBody>
-        </Table>
-      </DndContext>
+    <div className="space-y-4">
+      <div className="border border-beige-400 rounded-lg overflow-hidden bg-white">
+        <DndContext
+          sensors={sensors}
+          collisionDetection={closestCenter}
+          onDragEnd={handleDragEnd}
+        >
+          <Table>
+            <TableHeader>
+              <TableRow className="bg-beige-100">
+                <TableHead className="font-sans font-semibold w-12"></TableHead>
+                <TableHead className="font-sans font-semibold">Imagen</TableHead>
+                <TableHead className="font-sans font-semibold">Nombre</TableHead>
+                <TableHead className="font-sans font-semibold">Categoría</TableHead>
+                <TableHead className="font-sans font-semibold">Precio</TableHead>
+                <TableHead className="font-sans font-semibold">Stock</TableHead>
+                <TableHead className="font-sans font-semibold">Destacado</TableHead>
+                <TableHead className="font-sans font-semibold text-right">
+                  Acciones
+                </TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              <SortableContext
+                items={products.map((p) => p.id)}
+                strategy={verticalListSortingStrategy}
+              >
+                {products.map((product) => (
+                  <SortableRow
+                    key={product.id}
+                    product={product}
+                    onDelete={handleDelete}
+                    formatPrice={formatPrice}
+                  />
+                ))}
+              </SortableContext>
+            </TableBody>
+          </Table>
+        </DndContext>
+      </div>
+
+      {hasChanges && (
+        <div className="flex justify-end">
+          <Button
+            onClick={handleSaveOrder}
+            disabled={saving}
+            className="font-sans"
+          >
+            {saving ? "Guardando..." : "Guardar Orden"}
+          </Button>
+        </div>
+      )}
     </div>
   );
 }
