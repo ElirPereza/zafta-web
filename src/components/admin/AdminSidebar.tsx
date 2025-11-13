@@ -8,6 +8,7 @@ import {
   ShoppingCart,
   FileText,
   Images,
+  Gift,
 } from "lucide-react";
 import { Logo } from "@/components/ui/logo";
 import { cn } from "@/lib/utils";
@@ -37,6 +38,11 @@ const navigation = [
     name: "Galerías",
     href: "/admin/galerias",
     icon: Images,
+  },
+  {
+    name: "Descuentos",
+    href: "/admin/descuentos",
+    icon: Gift,
   },
 ];
 

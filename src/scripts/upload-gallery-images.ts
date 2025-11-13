@@ -145,8 +145,7 @@ async function main() {
   await prisma.$disconnect();
 }
 
-main()
-  .catch((error) => {
-    console.error("Fatal error:", error);
-    process.exit(1);
-  });
+main().catch((error) => {
+  console.error("Fatal error:", error);
+  process.exit(1);
+});

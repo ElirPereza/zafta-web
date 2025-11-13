@@ -33,10 +33,7 @@ export async function POST(request: NextRequest) {
     const user = await currentUser();
 
     if (!user) {
-      return NextResponse.json(
-        { error: "No autorizado" },
-        { status: 401 },
-      );
+      return NextResponse.json({ error: "No autorizado" }, { status: 401 });
     }
 
     // Check if user is admin

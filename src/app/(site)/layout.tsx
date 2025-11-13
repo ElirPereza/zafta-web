@@ -5,6 +5,7 @@ import Navigation from "@/components/layout/Navigation";
 import Footer from "@/components/layout/Footer";
 import { FloatingWhatsApp } from "@/components/ui/floating-whatsapp";
 import { AuroraBackground } from "@/components/layout/AuroraBackground";
+import { DiscountPopup } from "@/components/ui/discount-popup";
 
 export default function SiteLayout({
   children,
@@ -29,6 +30,7 @@ export default function SiteLayout({
         </AuroraBackground>
       )}
       <FloatingWhatsApp />
+      <DiscountPopup />
     </>
   );
 }

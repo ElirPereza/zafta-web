@@ -82,7 +82,7 @@ const OurStory = () => {
           className="mb-12 md:mb-16 text-center"
         >
           <h2 className="mb-6 text-4xl md:text-5xl text-foreground">
-            Nuestra Historia – Tradición, Sabor y Amor
+            Nuestra Historia
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto font-sans leading-relaxed">
             Una historia de tradición, sabor y amor que comenzó en la cocina de

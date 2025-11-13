@@ -72,14 +72,12 @@ export default function GaleriasPage() {
 
       if (response.ok) {
         // Sort by section and displayOrder
-        const sorted = data.images.sort(
-          (a: GalleryImage, b: GalleryImage) => {
-            if (a.section !== b.section) {
-              return a.section === "PERSONALIZADAS" ? -1 : 1;
-            }
-            return a.displayOrder - b.displayOrder;
-          },
-        );
+        const sorted = data.images.sort((a: GalleryImage, b: GalleryImage) => {
+          if (a.section !== b.section) {
+            return a.section === "PERSONALIZADAS" ? -1 : 1;
+          }
+          return a.displayOrder - b.displayOrder;
+        });
         setImages(sorted);
       } else {
         toast.error("Error al cargar las imágenes");
@@ -196,7 +194,8 @@ export default function GaleriasPage() {
             Gestión de Galerías
           </h1>
           <p className="text-sm text-muted-foreground font-sans mt-1">
-            Administra las imágenes de Tortas Personalizadas y Eventos Especiales
+            Administra las imágenes de Tortas Personalizadas y Eventos
+            Especiales
           </p>
         </div>
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
@@ -285,7 +284,8 @@ export default function GaleriasPage() {
             </CardTitle>
             <CardDescription className="font-sans">
               {personalizadasImages.length} imagen
-              {personalizadasImages.length !== 1 ? "es" : ""} (máximo recomendado: 3)
+              {personalizadasImages.length !== 1 ? "es" : ""} (máximo
+              recomendado: 3)
             </CardDescription>
           </CardHeader>
           <CardContent>

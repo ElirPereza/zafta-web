@@ -9,7 +9,7 @@ const steps = [
     description: "Mira los sabores y tamaños que tenemos.",
   },
   {
-    title: "Personalízala.",
+    title: "Personalízalo.",
     description:
       "¿Tienes una idea diferente? ¡Contáctanos por WhatsApp y la hacemos realidad!",
   },

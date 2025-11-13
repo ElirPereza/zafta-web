@@ -75,7 +75,7 @@ const ProductGallery = ({ onOpenOrder }: ProductGalleryProps) => {
             Nuestros Productos de Línea
           </h2>
           <p className="text-base sm:text-lg md:text-xl text-muted-foreground font-sans max-w-2xl mx-auto leading-relaxed px-4">
-            Hechas con cuidado, los mejores ingredientes y generaciones de amor.
+            Hechos con cuidado, los mejores ingredientes y generaciones de amor.
             Cada bocado cuenta una historia.
           </p>
         </motion.div>

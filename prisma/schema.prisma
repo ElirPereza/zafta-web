@@ -179,3 +179,23 @@ enum GallerySection {
   PERSONALIZADAS  // Tortas Personalizadas section
   EVENTOS         // Eventos Especiales section
 }
+
+// ============================================================================
+// DISCOUNT POPUP MODELS
+// ============================================================================
+
+model DiscountPopup {
+  id              String   @id @default(cuid())
+  title           String
+  description     String   @db.Text
+  discountCode    String
+  discountPercent Int      // Percentage discount (e.g., 10 for 10%)
+  imageUrl        String?  // Optional image for the popup
+  isActive        Boolean  @default(false) // Only one can be active at a time
+  startDate       DateTime?
+  endDate         DateTime?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([isActive])
+}
