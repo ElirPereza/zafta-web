@@ -226,7 +226,7 @@ export function ProductForm({ product }: ProductFormProps) {
               type="number"
               required
               min="0"
-              step="1000"
+              step="100"
               value={formData.price}
               onChange={(e) =>
                 setFormData({
@@ -250,7 +250,7 @@ export function ProductForm({ product }: ProductFormProps) {
               id="comparePrice"
               type="number"
               min="0"
-              step="1000"
+              step="100"
               value={formData.comparePrice || ""}
               onChange={(e) =>
                 setFormData({
