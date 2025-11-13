@@ -5,7 +5,7 @@ import { currentUser } from "@clerk/nextjs/server";
 // PUT /api/discount-popup/[id] - Update discount popup
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
     const user = await currentUser();
@@ -23,7 +23,7 @@ export async function PUT(
       return NextResponse.json({ error: "No autorizado" }, { status: 403 });
     }
 
-    const { id } = params;
+    const { id } = await params;
     const {
       title,
       description,
@@ -73,7 +73,7 @@ export async function PUT(
 // DELETE /api/discount-popup/[id] - Delete discount popup
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
     const user = await currentUser();
@@ -91,7 +91,7 @@ export async function DELETE(
       return NextResponse.json({ error: "No autorizado" }, { status: 403 });
     }
 
-    const { id } = params;
+    const { id } = await params;
 
     await prisma.discountPopup.delete({
       where: { id },

@@ -28,7 +28,7 @@ async function checkAdmin() {
 // PUT /api/gallery/[id] - Update gallery image
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
     const auth = await checkAdmin();
@@ -36,7 +36,7 @@ export async function PUT(
       return NextResponse.json({ error: auth.error }, { status: 403 });
     }
 
-    const { id } = params;
+    const { id } = await params;
     const body = await request.json();
     const { imageUrl, alt, section, displayOrder, isActive } = body;
 
@@ -63,7 +63,7 @@ export async function PUT(
 // DELETE /api/gallery/[id] - Delete gallery image
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
     const auth = await checkAdmin();
@@ -71,7 +71,7 @@ export async function DELETE(
       return NextResponse.json({ error: auth.error }, { status: 403 });
     }
 
-    const { id } = params;
+    const { id } = await params;
 
     await prisma.galleryImage.delete({
       where: { id },
