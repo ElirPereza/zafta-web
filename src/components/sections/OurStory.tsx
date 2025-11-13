@@ -309,7 +309,7 @@ const OurStory = () => {
                   />
                 </div>
               </motion.div>
-              <h3 className="mb-3 text-xl md:text-2xl font-sans italic text-foreground">
+              <h3 className="mb-3 text-xl md:text-2xl font-gotham text-foreground">
                 {value.title}
               </h3>
               <p className="text-base text-muted-foreground font-sans leading-relaxed px-2">
