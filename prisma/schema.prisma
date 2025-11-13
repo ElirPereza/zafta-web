@@ -155,3 +155,27 @@ enum UserRole {
   ADMIN
   CUSTOMER
 }
+
+// ============================================================================
+// GALLERY MODELS
+// ============================================================================
+
+model GalleryImage {
+  id          String        @id @default(cuid())
+  imageUrl    String        // URL from Supabase Storage
+  alt         String
+  section     GallerySection // Which section this image belongs to
+  displayOrder Int          @default(0) // Order of display
+  isActive    Boolean       @default(true)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  @@index([section])
+  @@index([displayOrder])
+  @@index([isActive])
+}
+
+enum GallerySection {
+  PERSONALIZADAS  // Tortas Personalizadas section
+  EVENTOS         // Eventos Especiales section
+}

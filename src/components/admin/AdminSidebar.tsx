@@ -7,7 +7,7 @@ import {
   Package,
   ShoppingCart,
   FileText,
-  Settings,
+  Images,
 } from "lucide-react";
 import { Logo } from "@/components/ui/logo";
 import { cn } from "@/lib/utils";
@@ -34,9 +34,9 @@ const navigation = [
     icon: FileText,
   },
   {
-    name: "Configuración",
-    href: "/admin/configuracion",
-    icon: Settings,
+    name: "Galerías",
+    href: "/admin/galerias",
+    icon: Images,
   },
 ];
 

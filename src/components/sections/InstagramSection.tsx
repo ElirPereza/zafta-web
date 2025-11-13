@@ -5,30 +5,39 @@ import Image from "next/image";
 import { Instagram } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 interface InstagramSectionProps {
   onOpenOrder?: () => void;
 }
 
-const instagramPosts = [
-  {
-    id: 1,
-    image: "/especiales/perso1.jpg",
-    alt: "Torta personalizada ZAFTA - Diseño único y artesanal",
-  },
-  {
-    id: 2,
-    image: "/especiales/perso2.jpg",
-    alt: "Torta personalizada ZAFTA - Creación especial",
-  },
-  {
-    id: 3,
-    image: "/especiales/perso3.jpg",
-    alt: "Torta personalizada ZAFTA - Hecha con amor",
-  },
-];
+interface GalleryImage {
+  id: string;
+  imageUrl: string;
+  alt: string;
+}
 
 const InstagramSection = ({ onOpenOrder }: InstagramSectionProps) => {
+  const [images, setImages] = useState<GalleryImage[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchImages = async () => {
+      try {
+        const response = await fetch("/api/gallery?section=PERSONALIZADAS");
+        const data = await response.json();
+        if (response.ok && data.images) {
+          setImages(data.images);
+        }
+      } catch (error) {
+        // Error handled silently
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchImages();
+  }, []);
   return (
     <section id="instagram" className="relative py-16 md:py-20 px-6 md:px-8">
       <div className="container mx-auto max-w-6xl relative z-10">
@@ -48,33 +57,45 @@ const InstagramSection = ({ onOpenOrder }: InstagramSectionProps) => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 mb-12">
-          {instagramPosts.map((post, index) => (
-            <motion.a
-              key={post.id}
-              href="https://instagram.com/zafta_reposteria"
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{
-                duration: 0.5,
-                delay: index * 0.1,
-                ease: [0.4, 0, 0.2, 1],
-              }}
-              className="group relative aspect-square overflow-hidden rounded-2xl shadow-card hover:shadow-medium transition-all duration-300"
-            >
-              <Image
-                src={post.image}
-                alt={post.alt}
-                fill
-                sizes="(max-width: 768px) 50vw, 33vw"
-                className="object-cover transition-transform duration-500 group-hover:scale-110"
-              />
-            </motion.a>
-          ))}
-        </div>
+        {loading ? (
+          <div className="text-center py-12">
+            <p className="text-muted-foreground">Cargando imágenes...</p>
+          </div>
+        ) : images.length > 0 ? (
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 mb-12">
+            {images.map((image, index) => (
+              <motion.a
+                key={image.id}
+                href="https://instagram.com/zafta_reposteria"
+                target="_blank"
+                rel="noopener noreferrer"
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 0.5,
+                  delay: index * 0.1,
+                  ease: [0.4, 0, 0.2, 1],
+                }}
+                className="group relative aspect-square overflow-hidden rounded-2xl shadow-card hover:shadow-medium transition-all duration-300"
+              >
+                <Image
+                  src={image.imageUrl}
+                  alt={image.alt}
+                  fill
+                  sizes="(max-width: 768px) 50vw, 33vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+              </motion.a>
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-12">
+            <p className="text-muted-foreground">
+              No hay imágenes disponibles en este momento.
+            </p>
+          </div>
+        )}
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
