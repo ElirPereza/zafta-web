@@ -163,7 +163,7 @@ const OurStory = () => {
                               item.year === "2010"
                                 ? { objectPosition: "center 30%" }
                                 : item.year === "2017-Actualidad"
-                                  ? { objectPosition: "center 40%" }
+                                  ? { objectPosition: "center 60%" }
                                   : {}
                             }
                             quality={85}
