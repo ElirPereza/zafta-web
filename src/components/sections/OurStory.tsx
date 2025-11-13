@@ -81,7 +81,7 @@ const OurStory = () => {
           transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
           className="mb-12 md:mb-16 text-center"
         >
-          <h2 className="mb-6 text-4xl md:text-5xl text-foreground">
+          <h2 className="mb-6 text-4xl md:text-5xl text-foreground font-gotham">
             Nuestra Historia
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto font-sans leading-relaxed">
@@ -172,7 +172,7 @@ const OurStory = () => {
                       ) : (
                         // Text on left
                         <div className="md:text-right text-center space-y-3 md:pr-4">
-                          <div className="text-3xl md:text-4xl font-sans italic text-primary mb-2">
+                          <div className="text-3xl md:text-4xl font-gotham text-primary mb-2">
                             {item.year}
                           </div>
                           <h4 className="text-xl md:text-2xl font-sans italic text-foreground">
@@ -229,7 +229,7 @@ const OurStory = () => {
                       {isLeft ? (
                         // Text on right
                         <div className="md:text-left text-center space-y-3 md:pl-4">
-                          <div className="text-3xl md:text-4xl font-sans italic text-primary mb-2">
+                          <div className="text-3xl md:text-4xl font-gotham text-primary mb-2">
                             {item.year}
                           </div>
                           <h4 className="text-xl md:text-2xl font-sans italic text-foreground">
@@ -273,7 +273,7 @@ const OurStory = () => {
           transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
           className="text-center mb-16"
         >
-          <h2 className="mb-6 text-4xl md:text-5xl text-foreground">
+          <h2 className="mb-6 text-4xl md:text-5xl text-foreground font-gotham">
             Nuestros Valores
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground font-sans max-w-2xl mx-auto leading-relaxed">
@@ -327,7 +327,7 @@ const OurStory = () => {
           transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
           className="max-w-4xl mx-auto"
         >
-          <h3 className="mb-6 text-3xl font-sans italic md:text-4xl text-center text-foreground">
+          <h3 className="mb-6 text-3xl font-gotham md:text-4xl text-center text-foreground">
             Nuestro Propósito
           </h3>
           <p className="text-lg md:text-xl text-center text-muted-foreground font-sans leading-relaxed mb-12 max-w-3xl mx-auto">
@@ -343,7 +343,7 @@ const OurStory = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="relative pl-6 border-l-4 border-primary"
             >
-              <h4 className="text-xl md:text-2xl font-sans italic text-primary mb-4">
+              <h4 className="text-xl md:text-2xl font-gotham text-primary mb-4">
                 Misión
               </h4>
               <p className="text-base md:text-lg text-foreground font-sans leading-relaxed">
@@ -359,7 +359,7 @@ const OurStory = () => {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="relative pl-6 border-l-4 border-primary"
             >
-              <h4 className="text-xl md:text-2xl font-sans italic text-primary mb-4">
+              <h4 className="text-xl md:text-2xl font-gotham text-primary mb-4">
                 Visión
               </h4>
               <p className="text-base md:text-lg text-foreground font-sans leading-relaxed">

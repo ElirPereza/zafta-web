@@ -71,7 +71,7 @@ const ProductGallery = ({ onOpenOrder }: ProductGalleryProps) => {
           transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
           className="mb-8 md:mb-12 lg:mb-16 text-center px-2"
         >
-          <h2 className="mb-4 md:mb-6 text-3xl sm:text-4xl md:text-5xl text-foreground">
+          <h2 className="mb-4 md:mb-6 text-3xl sm:text-4xl md:text-5xl text-foreground font-gotham">
             Nuestros Productos de Línea
           </h2>
           <p className="text-base sm:text-lg md:text-xl text-muted-foreground font-sans max-w-2xl mx-auto leading-relaxed px-4">
