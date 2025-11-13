@@ -162,9 +162,7 @@ export function CheckoutForm({ onShippingCostChange }: CheckoutFormProps) {
   if (createdOrderId) {
     return (
       <Card className="p-6">
-        <h2 className="text-2xl italic mb-6 text-center">
-          Completa tu Pago
-        </h2>
+        <h2 className="text-2xl mb-6 text-center">Completa tu Pago</h2>
         <WompiCheckout
           orderId={createdOrderId}
           onSuccess={handleWompiSuccess}
@@ -191,7 +189,7 @@ export function CheckoutForm({ onShippingCostChange }: CheckoutFormProps) {
     <form onSubmit={handleSubmit} className="space-y-6">
       {/* Personal Information */}
       <Card className="p-6">
-        <h2 className="text-2xl italic mb-6 flex items-center gap-2">
+        <h2 className="text-2xl mb-6 flex items-center gap-2">
           <User className="h-6 w-6 text-primary" />
           Información Personal
         </h2>
@@ -238,7 +236,7 @@ export function CheckoutForm({ onShippingCostChange }: CheckoutFormProps) {
 
       {/* Shipping Address */}
       <Card className="p-6">
-        <h2 className="text-2xl italic mb-6 flex items-center gap-2">
+        <h2 className="text-2xl mb-6 flex items-center gap-2">
           <Mail className="h-6 w-6 text-primary" />
           Dirección de Envío
         </h2>
@@ -247,7 +245,7 @@ export function CheckoutForm({ onShippingCostChange }: CheckoutFormProps) {
 
       {/* Payment Method */}
       <Card className="p-6">
-        <h2 className="text-2xl italic mb-6 flex items-center gap-2">
+        <h2 className="text-2xl mb-6 flex items-center gap-2">
           <CreditCard className="h-6 w-6 text-primary" />
           Método de Pago
         </h2>

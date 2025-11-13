@@ -11,7 +11,10 @@
       "Bash(git push)",
       "Bash(taskkill:*)",
       "Bash(dir \"public\\eventos\" /b 2)",
-      "Bash(del nul 2)"
+      "Bash(del nul 2)",
+      "Bash(bunx next build:*)",
+      "Bash(bun pm:*)",
+      "Bash(git restore:*)"
     ],
     "deny": [],
     "ask": []

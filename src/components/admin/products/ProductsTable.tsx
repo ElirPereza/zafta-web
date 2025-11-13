@@ -56,7 +56,11 @@ function SortableRow({ product, onDelete, formatPrice }: SortableRowProps) {
   };
 
   return (
-    <TableRow ref={setNodeRef} style={style} className={isDragging ? "bg-beige-100" : ""}>
+    <TableRow
+      ref={setNodeRef}
+      style={style}
+      className={isDragging ? "bg-beige-100" : ""}
+    >
       {/* Drag Handle - Always visible */}
       <TableCell className="w-8 md:w-12">
         <button
@@ -131,7 +135,11 @@ function SortableRow({ product, onDelete, formatPrice }: SortableRowProps) {
       <TableCell className="text-right w-20 md:w-auto">
         <div className="flex items-center justify-end gap-1 md:gap-2">
           <Link href={`/admin/productos/${product.id}/editar`}>
-            <Button variant="ghost" size="icon" className="h-8 w-8 md:h-10 md:w-10">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="h-8 w-8 md:h-10 md:w-10"
+            >
               <Pencil className="h-3 w-3 md:h-4 md:w-4" />
             </Button>
           </Link>
@@ -159,7 +167,7 @@ export function ProductsTable() {
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
-    })
+    }),
   );
 
   const fetchProducts = useCallback(async () => {
@@ -167,13 +175,15 @@ export function ProductsTable() {
       const response = await fetch("/api/products");
       const data = await response.json();
       // Handle both old format (array) and new format (object with products)
-      const productsArray = Array.isArray(data) ? data : (data.products || []);
+      const productsArray = Array.isArray(data) ? data : data.products || [];
       // Sort by displayOrder if available, otherwise by createdAt
       const sorted = productsArray.sort((a: Product, b: Product) => {
         if (a.displayOrder !== undefined && b.displayOrder !== undefined) {
           return a.displayOrder - b.displayOrder;
         }
-        return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+        return (
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        );
       });
       setProducts(sorted);
     } catch (error) {
@@ -230,7 +240,9 @@ export function ProductsTable() {
           body: JSON.stringify({ path: "/inicio" }),
         });
 
-        alert("¡Orden actualizado correctamente! La página se actualizará automáticamente.");
+        alert(
+          "¡Orden actualizado correctamente! La página se actualizará automáticamente.",
+        );
 
         // Refrescar la lista de productos
         await fetchProducts();
@@ -311,35 +323,47 @@ export function ProductsTable() {
             onDragEnd={handleDragEnd}
           >
             <Table className="min-w-full">
-            <TableHeader>
-              <TableRow className="bg-beige-100">
-                <TableHead className="font-sans font-semibold w-8 md:w-12"></TableHead>
-                <TableHead className="font-sans font-semibold w-12 md:w-16 text-xs md:text-sm">Imagen</TableHead>
-                <TableHead className="font-sans font-semibold text-xs md:text-sm">Nombre</TableHead>
-                <TableHead className="hidden md:table-cell font-sans font-semibold text-xs md:text-sm">Categoría</TableHead>
-                <TableHead className="font-sans font-semibold text-xs md:text-sm">Precio</TableHead>
-                <TableHead className="hidden lg:table-cell font-sans font-semibold text-xs md:text-sm">Stock</TableHead>
-                <TableHead className="hidden md:table-cell font-sans font-semibold text-xs md:text-sm">Destacado</TableHead>
-                <TableHead className="font-sans font-semibold text-right text-xs md:text-sm w-20 md:w-auto">
-                  Acciones
-                </TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              <SortableContext
-                items={products.map((p) => p.id)}
-                strategy={verticalListSortingStrategy}
-              >
-                {products.map((product) => (
-                  <SortableRow
-                    key={product.id}
-                    product={product}
-                    onDelete={handleDelete}
-                    formatPrice={formatPrice}
-                  />
-                ))}
-              </SortableContext>
-            </TableBody>
+              <TableHeader>
+                <TableRow className="bg-beige-100">
+                  <TableHead className="font-sans font-semibold w-8 md:w-12"></TableHead>
+                  <TableHead className="font-sans font-semibold w-12 md:w-16 text-xs md:text-sm">
+                    Imagen
+                  </TableHead>
+                  <TableHead className="font-sans font-semibold text-xs md:text-sm">
+                    Nombre
+                  </TableHead>
+                  <TableHead className="hidden md:table-cell font-sans font-semibold text-xs md:text-sm">
+                    Categoría
+                  </TableHead>
+                  <TableHead className="font-sans font-semibold text-xs md:text-sm">
+                    Precio
+                  </TableHead>
+                  <TableHead className="hidden lg:table-cell font-sans font-semibold text-xs md:text-sm">
+                    Stock
+                  </TableHead>
+                  <TableHead className="hidden md:table-cell font-sans font-semibold text-xs md:text-sm">
+                    Destacado
+                  </TableHead>
+                  <TableHead className="font-sans font-semibold text-right text-xs md:text-sm w-20 md:w-auto">
+                    Acciones
+                  </TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                <SortableContext
+                  items={products.map((p) => p.id)}
+                  strategy={verticalListSortingStrategy}
+                >
+                  {products.map((product) => (
+                    <SortableRow
+                      key={product.id}
+                      product={product}
+                      onDelete={handleDelete}
+                      formatPrice={formatPrice}
+                    />
+                  ))}
+                </SortableContext>
+              </TableBody>
             </Table>
           </DndContext>
         </div>

@@ -47,10 +47,7 @@ const tiktokVideos = [
 
 const TikTokSection = () => {
   return (
-    <section
-      id="tiktok"
-      className="py-16 md:py-20 px-6 md:px-8 bg-beige-100"
-    >
+    <section id="tiktok" className="py-16 md:py-20 px-6 md:px-8 bg-beige-100">
       <div className="container mx-auto max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -114,7 +111,11 @@ const TikTokSection = () => {
             asChild
             className="shadow-warm hover:shadow-medium transition-all duration-300"
           >
-            <Link href="https://www.tiktok.com/@zafta_reposteria" target="_blank" rel="noopener noreferrer">
+            <Link
+              href="https://www.tiktok.com/@zafta_reposteria"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Síguenos en TikTok
             </Link>
           </Button>

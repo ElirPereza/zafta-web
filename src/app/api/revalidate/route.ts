@@ -6,10 +6,7 @@ export async function POST(request: Request) {
     const { path } = await request.json();
 
     if (!path) {
-      return NextResponse.json(
-        { error: "Path is required" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Path is required" }, { status: 400 });
     }
 
     // Revalidate the specified path
@@ -18,9 +15,6 @@ export async function POST(request: Request) {
     return NextResponse.json({ revalidated: true, path });
   } catch (error) {
     console.error("Error revalidating:", error);
-    return NextResponse.json(
-      { error: "Error revalidating" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Error revalidating" }, { status: 500 });
   }
 }

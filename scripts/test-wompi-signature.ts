@@ -9,7 +9,7 @@ import crypto from "crypto";
 const INTEGRITY_SECRET = process.env.WOMPI_INTEGRITY_SECRET;
 
 console.log("\n🔐 TEST: Generación de Firma Wompi\n");
-console.log("=" .repeat(60));
+console.log("=".repeat(60));
 
 if (!INTEGRITY_SECRET) {
   console.error("❌ ERROR: WOMPI_INTEGRITY_SECRET no está configurado");
@@ -46,13 +46,19 @@ console.log("\n" + "=".repeat(60));
 
 // Probar también con el formato del widget
 console.log("\n📦 Formato para Widget de Wompi:");
-console.log(JSON.stringify({
-  currency: testCurrency,
-  amountInCents: testAmountInCents,
-  reference: testReference,
-  signature: {
-    integrity: signature,
-  },
-}, null, 2));
+console.log(
+  JSON.stringify(
+    {
+      currency: testCurrency,
+      amountInCents: testAmountInCents,
+      reference: testReference,
+      signature: {
+        integrity: signature,
+      },
+    },
+    null,
+    2,
+  ),
+);
 
 console.log("\n✅ Test completado\n");

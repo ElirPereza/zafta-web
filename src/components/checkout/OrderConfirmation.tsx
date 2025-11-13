@@ -73,7 +73,7 @@ export function OrderConfirmation({ order }: OrderConfirmationProps) {
         {/* Success Message */}
         <div className="text-center mb-8">
           <CheckCircle2 className="h-16 w-16 text-green-600 mx-auto mb-4" />
-          <h1 className="text-4xl md:text-5xl italic mb-4 text-foreground">
+          <h1 className="text-4xl md:text-5xl mb-4 text-foreground">
             ¡Pedido Confirmado!
           </h1>
           <p className="text-lg text-muted-foreground font-sans mb-2">
@@ -89,9 +89,7 @@ export function OrderConfirmation({ order }: OrderConfirmationProps) {
         <Card className="p-6 mb-6">
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-xl italic mb-2">
-                Estado del Pedido
-              </h2>
+              <h2 className="text-xl mb-2">Estado del Pedido</h2>
               <p className="text-sm text-muted-foreground font-sans">
                 Pedido realizado el {formatDate(order.createdAt)}
               </p>
@@ -109,7 +107,7 @@ export function OrderConfirmation({ order }: OrderConfirmationProps) {
         <div className="grid md:grid-cols-2 gap-6 mb-6">
           {/* Contact Information */}
           <Card className="p-6">
-            <h2 className="text-xl italic mb-4 flex items-center gap-2">
+            <h2 className="text-xl mb-4 flex items-center gap-2">
               <Mail className="h-5 w-5 text-primary" />
               Información de Contacto
             </h2>
@@ -131,7 +129,7 @@ export function OrderConfirmation({ order }: OrderConfirmationProps) {
 
           {/* Shipping Address */}
           <Card className="p-6">
-            <h2 className="text-xl italic mb-4 flex items-center gap-2">
+            <h2 className="text-xl mb-4 flex items-center gap-2">
               <MapPin className="h-5 w-5 text-primary" />
               Dirección de Envío
             </h2>
@@ -152,7 +150,7 @@ export function OrderConfirmation({ order }: OrderConfirmationProps) {
 
         {/* Order Items */}
         <Card className="p-6 mb-6">
-          <h2 className="text-xl italic mb-4 flex items-center gap-2">
+          <h2 className="text-xl mb-4 flex items-center gap-2">
             <Package className="h-5 w-5 text-primary" />
             Productos
           </h2>

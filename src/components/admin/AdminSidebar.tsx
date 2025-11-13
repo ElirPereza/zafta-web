@@ -90,9 +90,7 @@ export function AdminSidebar() {
         <p className="text-xs text-white/60 text-center font-sans">
           ZAFTA Admin Panel
         </p>
-        <p className="text-xs text-white/40 text-center font-sans mt-1">
-          v1.0
-        </p>
+        <p className="text-xs text-white/40 text-center font-sans mt-1">v1.0</p>
       </div>
     </aside>
   );

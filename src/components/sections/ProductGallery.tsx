@@ -71,7 +71,7 @@ const ProductGallery = ({ onOpenOrder }: ProductGalleryProps) => {
           transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
           className="mb-8 md:mb-12 lg:mb-16 text-center px-2"
         >
-          <h2 className="mb-4 md:mb-6 text-3xl sm:text-4xl md:text-5xl italic text-foreground">
+          <h2 className="mb-4 md:mb-6 text-3xl sm:text-4xl md:text-5xl text-foreground">
             Nuestros Productos de Línea
           </h2>
           <p className="text-base sm:text-lg md:text-xl text-muted-foreground font-sans max-w-2xl mx-auto leading-relaxed px-4">
@@ -83,7 +83,9 @@ const ProductGallery = ({ onOpenOrder }: ProductGalleryProps) => {
         {/* Loading State */}
         {loading && (
           <div className="text-center py-12">
-            <p className="text-muted-foreground font-sans">Cargando productos...</p>
+            <p className="text-muted-foreground font-sans">
+              Cargando productos...
+            </p>
           </div>
         )}
 
@@ -115,7 +117,9 @@ const ProductGallery = ({ onOpenOrder }: ProductGalleryProps) => {
                   <Card className="group overflow-hidden border-border/50 shadow-soft transition-all duration-500 hover:shadow-warm hover:-translate-y-2 bg-card/95 backdrop-blur-sm rounded-xl md:rounded-2xl cursor-pointer">
                     <div className="aspect-square overflow-hidden relative rounded-t-xl md:rounded-t-2xl">
                       <Image
-                        src={product.images[0] || "/zafta_assets/placeholder.webp"}
+                        src={
+                          product.images[0] || "/zafta_assets/placeholder.webp"
+                        }
                         alt={product.name}
                         fill
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"

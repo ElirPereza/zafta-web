@@ -111,7 +111,7 @@
     /* Fredoka: Font secundaria del BrandBook (Light 300, Regular 400, Medium 500) */
     font-family: var(--font-fredoka), var(--font-sans);
     /* Base ivory background - gradient moved to page wrapper for seamless sections */
-    background: linear-gradient(135deg, #FFFBEF 0%, #FFF5ED 100%);
+    background: linear-gradient(135deg, #fffbef 0%, #fff5ed 100%);
     min-height: 100vh;
   }
 

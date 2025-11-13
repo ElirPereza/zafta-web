@@ -46,7 +46,10 @@ const Hero = () => {
   }, []);
 
   return (
-    <section id="home" className="relative min-h-screen w-full overflow-hidden bg-beige-100">
+    <section
+      id="home"
+      className="relative min-h-screen w-full overflow-hidden bg-beige-100"
+    >
       {/* Background Image Carousel with Crossfade */}
       <div className="absolute inset-0">
         {bannerImages.map((image, index) => (

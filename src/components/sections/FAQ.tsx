@@ -60,7 +60,8 @@ const faqs = [
     id: "7",
     category: "Productos",
     question: "¿Qué productos ofrecen?",
-    answer: "Tortas clásicas y personalizadas, postres, y mesas de postres para eventos.",
+    answer:
+      "Tortas clásicas y personalizadas, postres, y mesas de postres para eventos.",
   },
   {
     id: "8",
@@ -99,7 +100,8 @@ const faqs = [
   {
     id: "13",
     category: "Productos",
-    question: "¿Qué hago para que mi torta decorada esté perfecta para el evento?",
+    question:
+      "¿Qué hago para que mi torta decorada esté perfecta para el evento?",
     answer:
       "La refrigeración es clave. No la dejes a temperatura ambiente si vas a moverla. En Zafta usamos coberturas suaves (no pastillaje), por eso es importante conservarla en frío hasta el momento de servirla.",
   },
@@ -114,13 +116,15 @@ const faqs = [
   {
     id: "15",
     category: "Eventos y celebraciones",
-    question: "¿Con cuánto tiempo de anticipación debo hacer un encargo para un evento?",
+    question:
+      "¿Con cuánto tiempo de anticipación debo hacer un encargo para un evento?",
     answer: "Mínimo 10 días de anticipación.",
   },
   {
     id: "16",
     category: "Eventos y celebraciones",
-    question: "¿Puedo personalizar los productos o la presentación para eventos?",
+    question:
+      "¿Puedo personalizar los productos o la presentación para eventos?",
     answer: "Sí, nos encanta crear propuestas a tu medida.",
   },
   // Pagos y medios
@@ -163,7 +167,8 @@ const faqs = [
   {
     id: "22",
     category: "Reseñas y experiencia",
-    question: "¿Dónde puedo dejar una reseña o comentario sobre mi experiencia?",
+    question:
+      "¿Dónde puedo dejar una reseña o comentario sobre mi experiencia?",
     answer:
       "Puedes dejar tu reseña en nuestro perfil de Google My Business o escribirnos por WhatsApp. Cada mensaje es como una receta que guardamos con cariño. Nos ayuda a crecer, a mejorar, y a seguir horneando con propósito.",
   },
@@ -207,11 +212,13 @@ const FAQ = () => {
           transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
           className="mb-20 text-center"
         >
-          <h2 className="mb-4 text-4xl md:text-5xl italic text-foreground">
+          <h2 className="mb-4 text-4xl md:text-5xl text-foreground">
             Preguntas Frecuentes
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed font-sans">
-            Aquí encontrarás respuestas a las preguntas más comunes sobre nuestras tortas, pedidos, entregas y más. Si tienes alguna otra duda, no dudes en contactarnos.
+            Aquí encontrarás respuestas a las preguntas más comunes sobre
+            nuestras tortas, pedidos, entregas y más. Si tienes alguna otra
+            duda, no dudes en contactarnos.
           </p>
         </motion.div>
 

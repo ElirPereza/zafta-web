@@ -6,9 +6,7 @@ export default function OrdersPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-semibold text-foreground">
-            Pedidos
-          </h1>
+          <h1 className="text-3xl font-semibold text-foreground">Pedidos</h1>
           <p className="text-sm text-muted-foreground font-sans mt-1">
             Gestiona todos los pedidos de tu tienda
           </p>

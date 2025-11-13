@@ -27,10 +27,7 @@ const HowToBuy = () => {
   };
 
   return (
-    <section
-      id="how-to-buy"
-      className="relative py-16 md:py-20 px-6 md:px-8"
-    >
+    <section id="how-to-buy" className="relative py-16 md:py-20 px-6 md:px-8">
       <div className="container mx-auto max-w-6xl relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -39,7 +36,7 @@ const HowToBuy = () => {
           transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
           className="text-center mb-12 md:mb-16"
         >
-          <h2 className="mb-6 text-4xl italic md:text-5xl text-foreground">
+          <h2 className="mb-6 text-4xl md:text-5xl text-foreground">
             ¿Cómo hago mi pedido?
           </h2>
         </motion.div>

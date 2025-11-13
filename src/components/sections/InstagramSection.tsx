@@ -30,10 +30,7 @@ const instagramPosts = [
 
 const InstagramSection = ({ onOpenOrder }: InstagramSectionProps) => {
   return (
-    <section
-      id="instagram"
-      className="relative py-16 md:py-20 px-6 md:px-8"
-    >
+    <section id="instagram" className="relative py-16 md:py-20 px-6 md:px-8">
       <div className="container mx-auto max-w-6xl relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -42,11 +39,12 @@ const InstagramSection = ({ onOpenOrder }: InstagramSectionProps) => {
           transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
           className="text-center mb-12 md:mb-14"
         >
-          <h2 className="mb-4 text-4xl italic md:text-5xl text-foreground">
+          <h2 className="mb-4 text-4xl md:text-5xl text-foreground">
             Tortas Personalizadas
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground font-sans max-w-2xl mx-auto leading-relaxed">
-            Creamos la torta de tus sueños. Cada diseño es único y hecho con amor.
+            Creamos la torta de tus sueños. Cada diseño es único y hecho con
+            amor.
           </p>
         </motion.div>
 

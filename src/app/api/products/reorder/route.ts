@@ -17,7 +17,7 @@ export async function POST(request: Request) {
     if (!Array.isArray(updates)) {
       return NextResponse.json(
         { error: "Invalid request format" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -29,8 +29,8 @@ export async function POST(request: Request) {
             where: { id: update.id },
             // @ts-ignore - displayOrder might not exist in local Prisma client
             data: { displayOrder: update.displayOrder },
-          })
-        )
+          }),
+        ),
       );
 
       // Revalidate the homepage to show updated order immediately
@@ -42,14 +42,17 @@ export async function POST(request: Request) {
       console.error("Error updating products:", updateError);
 
       // Check if error is due to missing displayOrder field
-      if (updateError?.message?.includes("displayOrder") ||
-          updateError?.message?.includes("Unknown field")) {
+      if (
+        updateError?.message?.includes("displayOrder") ||
+        updateError?.message?.includes("Unknown field")
+      ) {
         return NextResponse.json(
           {
-            error: "El campo displayOrder no existe. Ejecuta el SQL en Supabase primero.",
-            details: updateError.message
+            error:
+              "El campo displayOrder no existe. Ejecuta el SQL en Supabase primero.",
+            details: updateError.message,
           },
-          { status: 500 }
+          { status: 500 },
         );
       }
 
@@ -60,9 +63,9 @@ export async function POST(request: Request) {
     return NextResponse.json(
       {
         error: "Failed to reorder products",
-        details: error?.message || "Unknown error"
+        details: error?.message || "Unknown error",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

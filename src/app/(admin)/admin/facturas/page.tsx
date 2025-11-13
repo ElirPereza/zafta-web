@@ -85,9 +85,7 @@ export default async function InvoicesPage() {
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-semibold text-foreground">
-          Facturas
-        </h1>
+        <h1 className="text-3xl font-semibold text-foreground">Facturas</h1>
         <p className="text-sm text-muted-foreground font-sans mt-1">
           Gestiona las facturas de los pedidos
         </p>

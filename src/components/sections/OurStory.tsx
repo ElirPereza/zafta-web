@@ -81,7 +81,7 @@ const OurStory = () => {
           transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
           className="mb-12 md:mb-16 text-center"
         >
-          <h2 className="mb-6 text-4xl italic md:text-5xl text-foreground">
+          <h2 className="mb-6 text-4xl md:text-5xl text-foreground">
             Nuestra Historia – Tradición, Sabor y Amor
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto font-sans leading-relaxed">
@@ -159,7 +159,11 @@ const OurStory = () => {
                             fill
                             sizes="(max-width: 768px) 100vw, 50vw"
                             className="object-cover transition-transform duration-500 group-hover:scale-105"
-                            style={item.year === "2010" ? { objectPosition: "center 30%" } : {}}
+                            style={
+                              item.year === "2010"
+                                ? { objectPosition: "center 30%" }
+                                : {}
+                            }
                             quality={85}
                           />
                           {/* Year badge overlay */}
@@ -248,7 +252,11 @@ const OurStory = () => {
                             fill
                             sizes="(max-width: 768px) 100vw, 50vw"
                             className="object-cover transition-transform duration-500 group-hover:scale-105"
-                            style={item.year === "1990" ? { objectPosition: "center 30%" } : {}}
+                            style={
+                              item.year === "1990"
+                                ? { objectPosition: "center 30%" }
+                                : {}
+                            }
                             quality={85}
                           />
                           {/* Year badge overlay */}
@@ -275,7 +283,7 @@ const OurStory = () => {
           transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
           className="text-center mb-16"
         >
-          <h2 className="mb-6 text-4xl italic md:text-5xl text-foreground">
+          <h2 className="mb-6 text-4xl md:text-5xl text-foreground">
             Nuestros Valores
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground font-sans max-w-2xl mx-auto leading-relaxed">

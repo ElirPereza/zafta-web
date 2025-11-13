@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import { AdminSidebar } from "@/components/admin/AdminSidebar";
 import { AdminHeader } from "@/components/admin/AdminHeader";
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 export default async function AdminLayout({
@@ -27,7 +27,7 @@ export default async function AdminLayout({
 
   // Get user's primary email
   const userEmail = user.emailAddresses.find(
-    (email) => email.id === user.primaryEmailAddressId
+    (email) => email.id === user.primaryEmailAddressId,
   )?.emailAddress;
 
   // Only allow access if user's email matches the admin email

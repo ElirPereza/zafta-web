@@ -134,9 +134,7 @@ export default async function AdminDashboard() {
     <div className="space-y-8">
       {/* Page Header */}
       <div>
-        <h1 className="text-3xl font-semibold text-foreground">
-          Dashboard
-        </h1>
+        <h1 className="text-3xl font-semibold text-foreground">Dashboard</h1>
         <p className="text-muted-foreground mt-2">
           Resumen general de tu tienda ZAFTA
         </p>
@@ -157,9 +155,7 @@ export default async function AdminDashboard() {
                 </div>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold font-sans">
-                  {card.value}
-                </div>
+                <div className="text-2xl font-bold font-sans">{card.value}</div>
                 <p className="text-xs text-muted-foreground mt-1">
                   {card.description}
                 </p>

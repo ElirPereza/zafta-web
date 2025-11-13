@@ -27,9 +27,7 @@ export default function CheckoutClient() {
         <div className="container mx-auto px-6 py-16">
           <div className="max-w-md mx-auto text-center">
             <ShoppingBag className="h-16 w-16 text-muted-foreground mx-auto mb-6" />
-            <h1 className="text-3xl italic mb-4">
-              Tu carrito está vacío
-            </h1>
+            <h1 className="text-3xl italic mb-4">Tu carrito está vacío</h1>
             <p className="text-muted-foreground mb-8 font-sans">
               Agrega algunos productos antes de proceder al pago
             </p>

@@ -37,16 +37,19 @@ const Navigation = () => {
   const isHomePage = pathname === "/inicio" || pathname === "/";
 
   // Check if current user is admin
-  const isAdmin = isLoaded && user && (() => {
-    const adminEmail = process.env.NEXT_PUBLIC_ADMIN_EMAIL;
-    if (!adminEmail) return false;
+  const isAdmin =
+    isLoaded &&
+    user &&
+    (() => {
+      const adminEmail = process.env.NEXT_PUBLIC_ADMIN_EMAIL;
+      if (!adminEmail) return false;
 
-    const userEmail = user.emailAddresses.find(
-      (email) => email.id === user.primaryEmailAddressId
-    )?.emailAddress;
+      const userEmail = user.emailAddresses.find(
+        (email) => email.id === user.primaryEmailAddressId,
+      )?.emailAddress;
 
-    return userEmail?.toLowerCase() === adminEmail.toLowerCase();
-  })();
+      return userEmail?.toLowerCase() === adminEmail.toLowerCase();
+    })();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -100,8 +103,12 @@ const Navigation = () => {
                       active ? "text-white" : "hover:bg-opacity-50"
                     }`}
                     style={{
-                      color: active ? "hsl(var(--background))" : "hsl(var(--primary))",
-                      backgroundColor: active ? "hsl(var(--primary))" : "transparent",
+                      color: active
+                        ? "hsl(var(--background))"
+                        : "hsl(var(--primary))",
+                      backgroundColor: active
+                        ? "hsl(var(--primary))"
+                        : "transparent",
                     }}
                     whileHover={{
                       backgroundColor: "hsl(var(--primary))",
@@ -147,8 +154,12 @@ const Navigation = () => {
                       active ? "text-white" : "hover:bg-opacity-50"
                     }`}
                     style={{
-                      color: active ? "hsl(var(--background))" : "hsl(var(--primary))",
-                      backgroundColor: active ? "hsl(var(--primary))" : "transparent",
+                      color: active
+                        ? "hsl(var(--background))"
+                        : "hsl(var(--primary))",
+                      backgroundColor: active
+                        ? "hsl(var(--primary))"
+                        : "transparent",
                     }}
                     whileHover={{
                       backgroundColor: "hsl(var(--primary))",

@@ -159,9 +159,7 @@ export default function SettingsPage() {
         <CardHeader>
           <div className="flex items-center gap-2">
             <Package className="h-5 w-5 text-primary" />
-            <CardTitle className="font-sans">
-              Configuración de Envíos
-            </CardTitle>
+            <CardTitle className="font-sans">Configuración de Envíos</CardTitle>
           </div>
           <CardDescription className="font-sans">
             Gestiona las opciones de envío y tarifas

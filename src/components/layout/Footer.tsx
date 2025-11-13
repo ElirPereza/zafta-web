@@ -8,10 +8,7 @@ import { FaTiktok, FaFacebook } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer
-      id="contact"
-      className="py-8 md:py-10 px-6 md:px-8 bg-transparent"
-    >
+    <footer id="contact" className="py-8 md:py-10 px-6 md:px-8 bg-transparent">
       <div className="container mx-auto max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 40 }}

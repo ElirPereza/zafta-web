@@ -15,7 +15,7 @@ import { prisma } from "../src/lib/prisma";
 
 async function clearDatabase() {
   console.log("\n🗑️  LIMPIEZA DE BASE DE DATOS\n");
-  console.log("=" .repeat(60));
+  console.log("=".repeat(60));
   console.log("\n⚠️  ADVERTENCIA: Esto eliminará TODOS los datos de:");
   console.log("   - Productos");
   console.log("   - Pedidos y sus items");
@@ -52,7 +52,6 @@ async function clearDatabase() {
     console.log(`   - Pedidos eliminados:         ${ordersDeleted.count}`);
     console.log(`   - Productos eliminados:       ${productsDeleted.count}`);
     console.log("\n");
-
   } catch (error) {
     console.error("\n❌ Error al limpiar la base de datos:", error);
     throw error;

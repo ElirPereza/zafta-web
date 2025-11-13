@@ -105,7 +105,7 @@ const OrderSidebar = ({
         toast.error(
           orderType === "event"
             ? "Por favor describe tu evento"
-            : "Por favor describe tu pedido personalizado"
+            : "Por favor describe tu pedido personalizado",
         );
         return;
       }
@@ -186,7 +186,7 @@ const OrderSidebar = ({
             <div className="p-6 space-y-5">
               {/* Header */}
               <div className="border-b border-border/50 pb-4 pr-10">
-                <h2 className="text-2xl md:text-3xl italic text-foreground">
+                <h2 className="text-2xl md:text-3xl text-foreground">
                   {isCustomOrder
                     ? orderType === "event"
                       ? "Cotiza tu Evento"
