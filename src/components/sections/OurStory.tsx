@@ -172,10 +172,10 @@ const OurStory = () => {
                       ) : (
                         // Text on left
                         <div className="md:text-right text-center space-y-3 md:pr-4">
-                          <div className="text-3xl md:text-4xl font-gotham text-primary mb-2">
+                          <div className="text-3xl md:text-4xl italic text-primary mb-2">
                             {item.year}
                           </div>
-                          <h4 className="text-xl md:text-2xl font-sans italic text-foreground">
+                          <h4 className="text-xl md:text-2xl font-gotham text-foreground">
                             {item.title}
                           </h4>
                           <p className="text-base md:text-lg text-muted-foreground leading-relaxed font-sans">
@@ -229,10 +229,10 @@ const OurStory = () => {
                       {isLeft ? (
                         // Text on right
                         <div className="md:text-left text-center space-y-3 md:pl-4">
-                          <div className="text-3xl md:text-4xl font-gotham text-primary mb-2">
+                          <div className="text-3xl md:text-4xl italic text-primary mb-2">
                             {item.year}
                           </div>
-                          <h4 className="text-xl md:text-2xl font-sans italic text-foreground">
+                          <h4 className="text-xl md:text-2xl font-gotham text-foreground">
                             {item.title}
                           </h4>
                           <p className="text-base md:text-lg text-muted-foreground leading-relaxed font-sans">
