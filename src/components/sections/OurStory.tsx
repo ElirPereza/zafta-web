@@ -162,16 +162,12 @@ const OurStory = () => {
                             style={
                               item.year === "2010"
                                 ? { objectPosition: "center 30%" }
-                                : {}
+                                : item.year === "2017-Actualidad"
+                                  ? { objectPosition: "center 40%" }
+                                  : {}
                             }
                             quality={85}
                           />
-                          {/* Year badge overlay */}
-                          <div className="absolute top-3 left-3 bg-primary/90 backdrop-blur-sm px-4 py-2 rounded-full">
-                            <span className="text-lg md:text-xl font-sans italic text-background font-bold">
-                              {item.year}
-                            </span>
-                          </div>
                         </div>
                       ) : (
                         // Text on left
@@ -259,12 +255,6 @@ const OurStory = () => {
                             }
                             quality={85}
                           />
-                          {/* Year badge overlay */}
-                          <div className="absolute top-3 left-3 bg-primary/90 backdrop-blur-sm px-4 py-2 rounded-full">
-                            <span className="text-lg md:text-xl font-sans italic text-background font-bold">
-                              {item.year}
-                            </span>
-                          </div>
                         </div>
                       )}
                     </motion.div>
