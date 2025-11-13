@@ -40,7 +40,7 @@ const ValuesSection = () => {
           transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
           className="text-center mb-20"
         >
-          <h2 className="mb-6 text-4xl font-sans italic md:text-5xl text-foreground">
+          <h2 className="mb-6 text-4xl italic md:text-5xl text-foreground">
             Nuestros Valores
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground font-sans max-w-2xl mx-auto leading-relaxed">

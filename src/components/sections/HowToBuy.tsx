@@ -39,8 +39,8 @@ const HowToBuy = () => {
           transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
           className="text-center mb-12 md:mb-16"
         >
-          <h2 className="mb-6 text-4xl font-sans italic md:text-5xl text-foreground">
-            ¿Cómo pido mi torta?
+          <h2 className="mb-6 text-4xl italic md:text-5xl text-foreground">
+            ¿Cómo hago mi pedido?
           </h2>
         </motion.div>
 

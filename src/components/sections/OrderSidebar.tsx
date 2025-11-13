@@ -27,6 +27,7 @@ interface OrderSidebarProps {
   isOpen: boolean;
   onClose: () => void;
   initialProduct?: Product;
+  orderType?: "custom" | "event"; // Nuevo: tipo de pedido
 }
 
 const products: Product[] = [
@@ -78,6 +79,7 @@ const OrderSidebar = ({
   isOpen,
   onClose,
   initialProduct,
+  orderType = "custom",
 }: OrderSidebarProps) => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -98,15 +100,26 @@ const OrderSidebar = ({
     let message = "";
 
     if (isCustomOrder) {
-      // Pedido personalizado
+      // Pedido personalizado o evento
       if (!description) {
-        toast.error("Por favor describe tu pedido personalizado");
+        toast.error(
+          orderType === "event"
+            ? "Por favor describe tu evento"
+            : "Por favor describe tu pedido personalizado"
+        );
         return;
       }
+
+      const emoji = orderType === "event" ? "🎉" : "🍰";
+      const title =
+        orderType === "event"
+          ? "Cotización para Evento ZAFTA"
+          : "Pedido Personalizado ZAFTA";
+
       message =
-        `🍰 *Pedido Personalizado ZAFTA*\n\n` +
+        `${emoji} *${title}*\n\n` +
         `👤 *Nombre:* ${name}\n\n` +
-        `📝 *Descripción del pedido:*\n${description}\n\n` +
+        `📝 *Descripción:*\n${description}\n\n` +
         (address ? `📍 *Dirección:* ${address}\n\n` : "") +
         `¡Espero su cotización! 😊`;
     } else {
@@ -124,7 +137,7 @@ const OrderSidebar = ({
         `¡Espero tu confirmación! 😊`;
     }
 
-    const whatsappUrl = `https://wa.me/573117479392?text=${encodeURIComponent(message)}`;
+    const whatsappUrl = `https://wa.me/573217590897?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, "_blank");
 
     toast.success("Redirigiendo a WhatsApp...");
@@ -173,12 +186,18 @@ const OrderSidebar = ({
             <div className="p-6 space-y-5">
               {/* Header */}
               <div className="border-b border-border/50 pb-4 pr-10">
-                <h2 className="text-2xl md:text-3xl font-sans italic text-foreground">
-                  {isCustomOrder ? "Pedido Personalizado" : "Tu Pedido"}
+                <h2 className="text-2xl md:text-3xl italic text-foreground">
+                  {isCustomOrder
+                    ? orderType === "event"
+                      ? "Cotiza tu Evento"
+                      : "Pedido Personalizado"
+                    : "Tu Pedido"}
                 </h2>
                 <p className="text-sm text-muted-foreground mt-1 font-sans leading-relaxed">
                   {isCustomOrder
-                    ? "Cuéntanos tu idea y la haremos realidad."
+                    ? orderType === "event"
+                      ? "Cuéntanos sobre tu evento y te enviaremos una cotización personalizada."
+                      : "Cuéntanos tu idea y la haremos realidad."
                     : `${initialProduct?.name} - Completa los detalles de tu pedido.`}
                 </p>
               </div>
@@ -235,7 +254,9 @@ const OrderSidebar = ({
               <div className="space-y-1.5">
                 <Label className="text-sm font-medium font-sans">
                   {isCustomOrder
-                    ? "Describe tu pedido personalizado"
+                    ? orderType === "event"
+                      ? "Describe tu evento"
+                      : "Describe tu pedido personalizado"
                     : "Mensaje especial (opcional)"}
                 </Label>
                 <Textarea
@@ -243,15 +264,18 @@ const OrderSidebar = ({
                   onChange={(e) => setDescription(e.target.value)}
                   placeholder={
                     isCustomOrder
-                      ? "Cuéntanos qué tipo de torta deseas, sabores, colores, decoración, tamaño, fecha de entrega..."
+                      ? orderType === "event"
+                        ? "Cuéntanos sobre tu evento: tipo de evento, número de invitados, fecha, tipo de torta o dulces que necesitas, temática..."
+                        : "Cuéntanos qué tipo de torta deseas, sabores, colores, decoración, tamaño, fecha de entrega..."
                       : "Agrega una dedicatoria o mensaje especial..."
                   }
                   className="min-h-[80px] border-2 focus:border-primary transition-all resize-none text-sm"
                 />
                 {isCustomOrder && (
                   <p className="text-xs text-muted-foreground">
-                    Incluye todos los detalles que consideres importantes para
-                    tu torta ideal.
+                    {orderType === "event"
+                      ? "Incluye todos los detalles importantes sobre tu evento para que podamos preparar la mejor propuesta."
+                      : "Incluye todos los detalles que consideres importantes para tu torta ideal."}
                   </p>
                 )}
               </div>

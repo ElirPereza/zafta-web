@@ -8,7 +8,7 @@ export function FloatingWhatsApp() {
     const message = encodeURIComponent(
       "¡Hola! Me gustaría hacer un pedido de tortas Zafta 🍰",
     );
-    window.open(`https://wa.me/573117479392?text=${message}`, "_blank");
+    window.open(`https://wa.me/573217590897?text=${message}`, "_blank");
   };
 
   return (

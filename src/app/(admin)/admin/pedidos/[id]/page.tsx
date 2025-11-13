@@ -57,7 +57,7 @@ export default async function OrderDetailPage({
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-sans font-semibold text-foreground">
+        <h1 className="text-3xl font-semibold text-foreground">
           Pedido {order.orderNumber}
         </h1>
         <p className="text-sm text-muted-foreground font-sans mt-1">

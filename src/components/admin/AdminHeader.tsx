@@ -15,7 +15,7 @@ export function AdminHeader() {
 
         {/* Page title - Will be dynamic based on route */}
         <div className="hidden lg:block">
-          <h1 className="text-xl font-sans italic text-[hsl(var(--burgundy))]">
+          <h1 className="text-xl italic text-[hsl(var(--burgundy))]">
             Panel de Administración
           </h1>
         </div>

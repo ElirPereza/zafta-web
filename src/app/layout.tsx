@@ -5,33 +5,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { esES } from "@clerk/localizations";
 import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
-
 // Zafta Brand Fonts (del BrandBook)
-
-// Lust - Font Principal (tipografía con alto contraste para títulos)
-// Nota: Lust es una fuente comercial del BrandBook
-const lust = localFont({
-  src: [
-    {
-      path: "../../public/fonts/lust/fonnts.com-Lust-Fine-Italic.otf",
-      weight: "400",
-      style: "italic",
-    },
-    {
-      path: "../../public/fonts/lust/fonnts.com-Lust-Display-Italic.otf",
-      weight: "600",
-      style: "italic",
-    },
-    {
-      path: "../../public/fonts/lust/fonnts.com-Lust-Didone-Fine-.otf",
-      weight: "700",
-      style: "normal",
-    },
-  ],
-  variable: "--font-lust",
-  display: "swap",
-  fallback: ["Didot", "Bodoni MT", "Playfair Display", "serif"],
-});
 
 // Fredoka - Font Secundaria (Light, Regular, Medium, Semibold, Bold)
 const fredoka = Fredoka({
@@ -39,6 +13,30 @@ const fredoka = Fredoka({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"], // Light, Regular, Medium, Semibold, Bold
   display: "swap",
+});
+
+// Gotham - Font para Títulos (h1, h2)
+const gotham = localFont({
+  src: [
+    {
+      path: "../../public/fonts/Gotham/gotham_medium.otf",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/Gotham/gotham_bold.otf",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/Gotham/gotham_black.otf",
+      weight: "900",
+      style: "normal",
+    },
+  ],
+  variable: "--font-gotham",
+  display: "swap",
+  fallback: ["Arial", "Helvetica", "sans-serif"],
 });
 
 import {
@@ -57,7 +55,7 @@ export default function RootLayout({
 
   return (
     <ClerkProvider localization={esES}>
-      <html lang="es" className={`${lust.variable} ${fredoka.variable}`}>
+      <html lang="es" className={`${fredoka.variable} ${gotham.variable}`}>
         <head>
           <script
             type="application/ld+json"

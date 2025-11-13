@@ -2,34 +2,37 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { Instagram } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import { useState } from "react";
+import OrderSidebar from "./OrderSidebar";
 
 const eventosPhotos = [
   {
     id: 1,
-    image: "/eventos/eventos-1.jpeg",
+    image: "/eventos/eventos-1.jpg",
     alt: "Evento especial ZAFTA - Celebración elegante",
   },
   {
     id: 2,
-    image: "/eventos/eventos-2.jpeg",
+    image: "/eventos/eventos-2.jpg",
     alt: "Evento especial ZAFTA - Mesa de dulces personalizada",
   },
   {
     id: 3,
-    image: "/eventos/eventos-3.jpeg",
+    image: "/eventos/eventos-3.jpg",
     alt: "Evento especial ZAFTA - Torta para ocasión especial",
   },
 ];
 
 const EventosSection = () => {
+  const [isOrderOpen, setIsOrderOpen] = useState(false);
+
   return (
-    <section
-      id="eventos"
-      className="relative py-16 md:py-20 px-6 md:px-8"
-    >
+    <>
+      <section
+        id="eventos"
+        className="relative py-16 md:py-20 px-6 md:px-8"
+      >
       <div className="container mx-auto max-w-6xl relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -38,7 +41,7 @@ const EventosSection = () => {
           transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
           className="text-center mb-12 md:mb-14"
         >
-          <h2 className="mb-4 text-4xl font-sans italic md:text-5xl text-foreground">
+          <h2 className="mb-4 text-4xl italic md:text-5xl text-foreground">
             Eventos Especiales
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground font-sans max-w-2xl mx-auto leading-relaxed">
@@ -70,12 +73,6 @@ const EventosSection = () => {
                 sizes="(max-width: 768px) 50vw, 33vw"
                 className="object-cover transition-transform duration-500 group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/30 transition-all duration-300 flex flex-col items-center justify-center gap-2">
-                <Instagram className="w-10 h-10 text-foreground opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <span className="text-foreground font-sans font-medium text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  Ver en Instagram
-                </span>
-              </div>
             </motion.a>
           ))}
         </div>
@@ -90,14 +87,21 @@ const EventosSection = () => {
           <Button
             variant="default"
             size="lg"
-            asChild
+            onClick={() => setIsOrderOpen(true)}
             className="shadow-warm hover:shadow-medium transition-all duration-300"
           >
-            <Link href="/contacto">Cotiza tu evento</Link>
+            Cotiza tu evento
           </Button>
         </motion.div>
       </div>
     </section>
+
+      <OrderSidebar
+        isOpen={isOrderOpen}
+        onClose={() => setIsOrderOpen(false)}
+        orderType="event"
+      />
+    </>
   );
 };
 

@@ -35,7 +35,7 @@ const timeline = [
       "María Camila revitaliza la marca con un enfoque creativo y presencia en redes sociales.",
   },
   {
-    year: "2024",
+    year: "2017-Actualidad",
     image: "/timeline/2024.jpg",
     title: "ZAFTA toma forma",
     event:
@@ -81,7 +81,7 @@ const OurStory = () => {
           transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
           className="mb-12 md:mb-16 text-center"
         >
-          <h2 className="mb-6 text-4xl font-sans italic md:text-5xl text-foreground">
+          <h2 className="mb-6 text-4xl italic md:text-5xl text-foreground">
             Nuestra Historia – Tradición, Sabor y Amor
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto font-sans leading-relaxed">
@@ -275,7 +275,7 @@ const OurStory = () => {
           transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
           className="text-center mb-16"
         >
-          <h2 className="mb-6 text-4xl font-sans italic md:text-5xl text-foreground">
+          <h2 className="mb-6 text-4xl italic md:text-5xl text-foreground">
             Nuestros Valores
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground font-sans max-w-2xl mx-auto leading-relaxed">

@@ -24,7 +24,7 @@ export default function ContactoPage() {
     <div className="pt-20 min-h-screen bg-background">
       <section className="py-32 px-6 md:px-8">
         <div className="container mx-auto max-w-4xl text-center">
-          <h1 className="mb-6 text-4xl md:text-5xl font-sans italic text-foreground">
+          <h1 className="mb-6 text-4xl md:text-5xl italic text-foreground">
             Contáctanos
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground font-sans mb-12 leading-relaxed">
@@ -34,7 +34,7 @@ export default function ContactoPage() {
 
           <div className="grid md:grid-cols-3 gap-8 max-w-3xl mx-auto">
             <a
-              href="https://wa.me/573117479392"
+              href="https://wa.me/573217590897"
               target="_blank"
               rel="noopener noreferrer"
               className="block"
@@ -42,7 +42,7 @@ export default function ContactoPage() {
               <div className="p-8 bg-card rounded-2xl shadow-soft hover:shadow-warm transition-all duration-300 hover:-translate-y-1">
                 <Phone className="w-12 h-12 text-primary mx-auto mb-4" />
                 <h3 className="text-xl font-sans italic mb-2">WhatsApp</h3>
-                <p className="text-muted-foreground mb-4">+57 311 747 9392</p>
+                <p className="text-muted-foreground mb-4">+57 321 759 0897</p>
                 <Button variant="default" className="w-full">
                   Enviar mensaje
                 </Button>

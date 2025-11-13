@@ -13,17 +13,17 @@ interface InstagramSectionProps {
 const instagramPosts = [
   {
     id: 1,
-    image: "/especiales/especiales-1.jpeg",
+    image: "/especiales/perso1.jpg",
     alt: "Torta personalizada ZAFTA - Diseño único y artesanal",
   },
   {
     id: 2,
-    image: "/especiales/especiales-2.jpeg",
+    image: "/especiales/perso2.jpg",
     alt: "Torta personalizada ZAFTA - Creación especial",
   },
   {
     id: 3,
-    image: "/especiales/especiales-3.jpeg",
+    image: "/especiales/perso3.jpg",
     alt: "Torta personalizada ZAFTA - Hecha con amor",
   },
 ];
@@ -42,7 +42,7 @@ const InstagramSection = ({ onOpenOrder }: InstagramSectionProps) => {
           transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
           className="text-center mb-12 md:mb-14"
         >
-          <h2 className="mb-4 text-4xl font-sans italic md:text-5xl text-foreground">
+          <h2 className="mb-4 text-4xl italic md:text-5xl text-foreground">
             Tortas Personalizadas
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground font-sans max-w-2xl mx-auto leading-relaxed">
@@ -74,12 +74,6 @@ const InstagramSection = ({ onOpenOrder }: InstagramSectionProps) => {
                 sizes="(max-width: 768px) 50vw, 33vw"
                 className="object-cover transition-transform duration-500 group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/30 transition-all duration-300 flex flex-col items-center justify-center gap-2">
-                <Instagram className="w-10 h-10 text-foreground opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <span className="text-foreground font-sans font-medium text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  Ver en Instagram
-                </span>
-              </div>
             </motion.a>
           ))}
         </div>

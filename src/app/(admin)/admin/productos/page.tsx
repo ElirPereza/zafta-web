@@ -9,7 +9,7 @@ export default function ProductsPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-sans font-semibold text-foreground">
+          <h1 className="text-3xl font-semibold text-foreground">
             Productos
           </h1>
           <p className="text-sm text-muted-foreground font-sans mt-1">

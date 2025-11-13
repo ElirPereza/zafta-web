@@ -64,15 +64,14 @@ The project is **85% production-ready**:
 - Ivory Cream: `#FFFBEF` → `hsl(45 100% 97%)`
 
 **Typography (del BrandBook oficial):**
-- **Lust** - Font Principal: Tipografía con alto contraste y gran presencia visual. Ideal para títulos.
-  - Variante: Fine Display Regular Italic
-  - Weights: 400 (regular), 600 (display)
-  - Style: Italic
-  - Fallbacks: Didot, Bodoni MT, Playfair Display, serif
-- **Fredoka** - Font Secundaria: Perfecta para textos secundarios, redes sociales, etiquetas y descripciones.
+- **Gotham** - Font para Títulos (h1, h2): Tipografía limpia y moderna para títulos principales.
+  - Variantes: Medium (500), Bold (700), Black (900)
+  - Fallbacks: Arial, Helvetica, sans-serif
+  - Apply via `font-gotham` utility or automatically on h1/h2 elements
+- **Fredoka** - Font Principal: Perfecta para todos los textos, descripciones, y contenido general.
   - Weights: 300 (Light), 400 (Regular), 500 (Medium), 600 (Semibold), 700 (Bold)
-- Apply via `font-serif` (Lust) and `font-sans` (Fredoka) utilities
-- **IMPORTANTE:** Lust es una fuente comercial. Archivos deben estar en `public/fonts/lust/` (ver README en esa carpeta)
+  - Apply via `font-sans` utility
+- **IMPORTANTE:** Gotham es una fuente comercial. Archivos deben estar en `public/fonts/Gotham/`
 
 **Tone:** Warm, feminine, artisanal, memory-focused ("huele a recuerdos" not "2x1 urgente!")
 

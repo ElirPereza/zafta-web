@@ -207,7 +207,7 @@ const FAQ = () => {
           transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
           className="mb-20 text-center"
         >
-          <h2 className="mb-4 text-4xl md:text-5xl font-sans italic text-foreground">
+          <h2 className="mb-4 text-4xl md:text-5xl italic text-foreground">
             Preguntas Frecuentes
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed font-sans">

@@ -43,7 +43,7 @@ export function AuthWrapper({ children, title, subtitle }: AuthWrapperProps) {
           {/* Title and Subtitle */}
           <div className="text-center mb-8 space-y-2">
             {title && (
-              <h1 className="text-xl font-sans font-semibold text-foreground leading-relaxed">
+              <h1 className="text-xl font-semibold text-foreground leading-relaxed">
                 {title}
               </h1>
             )}

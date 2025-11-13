@@ -24,7 +24,7 @@ export function OrderSummary({ shippingCost = 0 }: OrderSummaryProps) {
 
   return (
     <Card className="p-6 sticky top-32">
-      <h2 className="text-2xl font-sans italic mb-6">Resumen del Pedido</h2>
+      <h2 className="text-2xl italic mb-6">Resumen del Pedido</h2>
 
       {/* Items List */}
       <div className="space-y-4 mb-6">

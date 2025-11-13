@@ -71,9 +71,9 @@
 
     /* Typography - Zafta brand fonts (BrandBook actualizado) */
     /* Fredoka: Font principal - Perfecta para todos los textos y descripciones */
-    /* Lust: Font secundaria - Para elegancia y casos especiales */
-    --font-serif: "Lust", "Didot", "Bodoni MT", "Playfair Display", serif;
+    /* Gotham: Font para títulos h1 y h2 */
     --font-sans: "Fredoka", sans-serif;
+    --font-gotham: "Gotham", "Arial", "Helvetica", sans-serif;
 
     /* Transitions - smooth and gentle */
     --transition-smooth: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -131,7 +131,13 @@
   }
 
   h1,
-  h2,
+  h2 {
+    /* Gotham: Font para títulos principales */
+    font-family: var(--font-gotham), sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+  }
+
   h3,
   h4,
   h5,
@@ -142,15 +148,14 @@
     letter-spacing: 0.01em;
   }
 
-  .font-serif {
-    /* Lust Display Regular Italic - Para casos especiales donde se necesite elegancia */
-    font-family: var(--font-lust), var(--font-serif);
-    font-style: italic;
-  }
-
   .font-sans {
     /* Fredoka - Font principal del sitio */
     font-family: var(--font-fredoka), var(--font-sans);
+  }
+
+  .font-gotham {
+    /* Gotham - Font para títulos */
+    font-family: var(--font-gotham), sans-serif;
   }
 }
 

@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Instagram, Phone } from "lucide-react";
 import Link from "next/link";
 import { Logo } from "@/components/ui/logo";
-import { FaTiktok } from "react-icons/fa";
+import { FaTiktok, FaFacebook } from "react-icons/fa";
 
 const Footer = () => {
   return (
@@ -117,13 +117,13 @@ const Footer = () => {
               <motion.a
                 whileHover={{ scale: 1.05, x: 5 }}
                 transition={{ duration: 0.2 }}
-                href="https://wa.me/573117479392"
+                href="https://wa.me/573217590897"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 text-base text-muted-foreground hover:text-primary transition-all duration-300 group"
               >
                 <Phone className="h-5 w-5 text-primary group-hover:text-primary-dark transition-colors" />
-                <span>WhatsApp: +57 311 747 9392</span>
+                <span>WhatsApp: +57 321 759 0897</span>
               </motion.a>
               <motion.a
                 whileHover={{ scale: 1.05, x: 5 }}
@@ -146,6 +146,17 @@ const Footer = () => {
               >
                 <FaTiktok className="h-5 w-5 text-primary group-hover:text-primary-dark transition-colors" />
                 <span>@zafta_reposteria</span>
+              </motion.a>
+              <motion.a
+                whileHover={{ scale: 1.05, x: 5 }}
+                transition={{ duration: 0.2 }}
+                href="https://www.facebook.com/zaftareposteria"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-base text-muted-foreground hover:text-primary transition-all duration-300 group"
+              >
+                <FaFacebook className="h-5 w-5 text-primary group-hover:text-primary-dark transition-colors" />
+                <span>Zafta Repostería</span>
               </motion.a>
             </div>
           </motion.div>
