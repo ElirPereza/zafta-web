@@ -273,14 +273,13 @@ export function ProductForm({ product }: ProductFormProps) {
         {/* Category */}
         <div className="space-y-2">
           <Label htmlFor="category" className="font-sans">
-            Categoría *
+            Categoría (Opcional)
           </Label>
           <Select
             value={formData.category}
             onValueChange={(value) =>
               setFormData({ ...formData, category: value })
             }
-            required
           >
             <SelectTrigger className="font-sans">
               <SelectValue placeholder="Selecciona una categoría" />
