@@ -79,7 +79,7 @@ export function CartDrawer({ open, onClose }: CartDrawerProps) {
                       <h4 className="font-sans font-medium text-sm mb-1 truncate">
                         {item.name}
                       </h4>
-                      <p className="font-sans text-sm text-primary font-semibold mb-2">
+                      <p className="text-sm text-primary font-semibold mb-2" style={{ fontFamily: 'Fredoka, sans-serif' }}>
                         {formatPrice(item.price)}
                       </p>
 
@@ -129,7 +129,7 @@ export function CartDrawer({ open, onClose }: CartDrawerProps) {
                 {/* Total */}
                 <div className="flex items-center justify-between">
                   <span className="font-sans text-lg font-semibold">Total</span>
-                  <span className="font-sans text-2xl font-bold text-primary">
+                  <span className="text-2xl font-bold text-primary" style={{ fontFamily: 'Fredoka, sans-serif' }}>
                     {formatPrice(getTotalPrice)}
                   </span>
                 </div>

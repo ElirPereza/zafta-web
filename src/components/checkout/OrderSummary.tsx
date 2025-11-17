@@ -127,7 +127,7 @@ export function OrderSummary({
               <p className="text-sm text-muted-foreground font-sans">
                 Cantidad: {item.quantity}
               </p>
-              <p className="font-sans text-sm text-primary font-semibold mt-1">
+              <p className="text-sm text-primary font-semibold mt-1" style={{ fontFamily: 'Fredoka, sans-serif' }}>
                 {formatPrice(item.price * item.quantity)}
               </p>
             </div>
@@ -212,7 +212,7 @@ export function OrderSummary({
       <div className="space-y-3">
         <div className="flex justify-between text-sm font-sans">
           <span className="text-muted-foreground">Subtotal</span>
-          <span className="font-medium">{formatPrice(subtotal)}</span>
+          <span className="font-medium" style={{ fontFamily: 'Fredoka, sans-serif' }}>{formatPrice(subtotal)}</span>
         </div>
 
         {appliedDiscount && (
@@ -220,7 +220,7 @@ export function OrderSummary({
             <span className="text-green-600">
               Descuento ({appliedDiscount.percent}%)
             </span>
-            <span className="font-medium text-green-600">
+            <span className="font-medium text-green-600" style={{ fontFamily: 'Fredoka, sans-serif' }}>
               -{formatPrice(appliedDiscount.amount)}
             </span>
           </div>
@@ -228,7 +228,7 @@ export function OrderSummary({
 
         <div className="flex justify-between text-sm font-sans">
           <span className="text-muted-foreground">Envío</span>
-          <span className="font-medium">
+          <span className="font-medium" style={{ fontFamily: 'Fredoka, sans-serif' }}>
             {shippingCost > 0 ? formatPrice(shippingCost) : "Por calcular"}
           </span>
         </div>
@@ -237,7 +237,7 @@ export function OrderSummary({
 
         <div className="flex justify-between text-lg font-sans">
           <span className="font-semibold">Total</span>
-          <span className="font-bold text-primary text-xl">
+          <span className="font-bold text-primary text-xl" style={{ fontFamily: 'Fredoka, sans-serif' }}>
             {formatPrice(total)}
           </span>
         </div>
