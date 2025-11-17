@@ -21,6 +21,8 @@ const isPublicRoute = createRouteMatcher([
   "/api/orders(.*)", // Public orders API for guest checkout
   "/api/shipping(.*)", // Public shipping calculation API
   "/api/wompi(.*)", // Wompi payment integration
+  "/api/gallery(.*)", // Public gallery images API
+  "/api/discount-popup(.*)", // Public discount popup API
   "/api/auth/check-role", // Allow access to role checking API
 ]);
 
