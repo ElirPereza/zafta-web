@@ -5,9 +5,10 @@ import { CheckoutForm } from "@/components/checkout/CheckoutForm";
 import { OrderSummary } from "@/components/checkout/OrderSummary";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { ShoppingBag } from "lucide-react";
+import { ShoppingBag, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 export default function CheckoutClient() {
   const router = useRouter();
@@ -57,6 +58,20 @@ export default function CheckoutClient() {
           <p className="text-lg text-muted-foreground font-sans">
             Completa tus datos para procesar tu pedido
           </p>
+        </div>
+
+        {/* Important Notice */}
+        <div className="max-w-3xl mx-auto mb-8">
+          <Alert className="border-primary/50 bg-primary/10">
+            <AlertCircle className="h-5 w-5 text-primary" />
+            <AlertTitle className="font-sans font-semibold text-foreground">
+              Aviso Importante
+            </AlertTitle>
+            <AlertDescription className="font-sans text-sm text-muted-foreground space-y-1 mt-2">
+              <p>• Haz tu pedido antes de las 12:00 p.m. y recíbelo al día siguiente en la mañana.</p>
+              <p>• No realizamos entregas los domingos y los sábados despachamos hasta las 12:00 p.m.</p>
+            </AlertDescription>
+          </Alert>
         </div>
 
         {/* Checkout Grid */}
