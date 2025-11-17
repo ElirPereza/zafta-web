@@ -20,7 +20,7 @@ export default function AccesoDenegadoPage() {
           </div>
         </div>
 
-        <h1 className="text-4xl italic mb-4 text-foreground">
+        <h1 className="text-4xl mb-4 text-foreground">
           Acceso Denegado
         </h1>
 

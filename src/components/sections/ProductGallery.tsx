@@ -142,7 +142,7 @@ const ProductGallery = ({ onOpenOrder }: ProductGalleryProps) => {
                       </div>
                     </div>
                     <div className="p-4 sm:p-6 md:p-8">
-                      <h3 className="mb-2 md:mb-3 text-lg sm:text-xl md:text-2xl font-sans italic text-foreground">
+                      <h3 className="mb-2 md:mb-3 text-lg sm:text-xl md:text-2xl font-sans text-foreground">
                         {product.name}
                       </h3>
                       <p className="text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed font-sans line-clamp-2">

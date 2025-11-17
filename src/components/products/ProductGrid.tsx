@@ -108,7 +108,7 @@ export function ProductGrid({ products }: ProductGridProps) {
 
               {/* Content */}
               <div className="p-6">
-                <h3 className="mb-2 text-xl md:text-2xl font-sans italic text-foreground">
+                <h3 className="mb-2 text-xl md:text-2xl font-sans text-foreground">
                   {product.name}
                 </h3>
                 {product.description && (

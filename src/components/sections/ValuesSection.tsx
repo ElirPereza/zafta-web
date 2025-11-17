@@ -65,7 +65,7 @@ const ValuesSection = () => {
               className="text-center"
             >
               {/* Título */}
-              <h3 className="mb-4 text-2xl md:text-3xl font-sans italic text-foreground">
+              <h3 className="mb-4 text-2xl md:text-3xl font-sans text-foreground">
                 {value.title}
               </h3>
 
@@ -85,7 +85,7 @@ const ValuesSection = () => {
           transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
           className="max-w-4xl mx-auto"
         >
-          <h3 className="mb-12 text-3xl font-sans italic md:text-4xl text-center text-foreground">
+          <h3 className="mb-12 text-3xl font-sans md:text-4xl text-center text-foreground">
             Nuestro Propósito
           </h3>
 
@@ -97,7 +97,7 @@ const ValuesSection = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="bg-card p-8 rounded-2xl shadow-card hover:shadow-medium transition-all duration-300"
             >
-              <h4 className="text-xl font-sans italic text-primary mb-4">
+              <h4 className="text-xl font-sans text-primary mb-4">
                 Misión
               </h4>
               <p className="text-base text-muted-foreground font-sans leading-relaxed">
@@ -114,7 +114,7 @@ const ValuesSection = () => {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="bg-card p-8 rounded-2xl shadow-card hover:shadow-medium transition-all duration-300"
             >
-              <h4 className="text-xl font-sans italic text-primary mb-4">
+              <h4 className="text-xl font-sans text-primary mb-4">
                 Visión
               </h4>
               <p className="text-base text-muted-foreground font-sans leading-relaxed">

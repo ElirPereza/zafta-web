@@ -299,7 +299,7 @@ const OrderSidebar = ({
               {/* Resumen del pedido - Solo para productos específicos */}
               {!isCustomOrder && (
                 <div className="space-y-3 p-5 bg-gradient-to-br from-primary/20 to-primary/30 rounded-xl border border-primary/40 shadow-warm">
-                  <h3 className="text-lg font-sans italic text-foreground">
+                  <h3 className="text-lg font-sans text-foreground">
                     Resumen del pedido
                   </h3>
                   <div className="space-y-2 text-sm">
@@ -321,7 +321,7 @@ const OrderSidebar = ({
                     </div>
                     <div className="border-t border-primary/30 pt-2 mt-2">
                       <div className="flex justify-between text-base font-bold">
-                        <span className="font-sans italic">Total</span>
+                        <span className="font-sans">Total</span>
                         <span className="text-primary">
                           ${total.toLocaleString()}
                         </span>
@@ -334,7 +334,7 @@ const OrderSidebar = ({
               {/* Info adicional - Solo para pedidos personalizados */}
               {isCustomOrder && (
                 <div className="space-y-3 p-5 bg-gradient-to-br from-primary/20 to-primary/30 rounded-xl border border-primary/40 shadow-warm">
-                  <h3 className="text-lg font-sans italic text-foreground">
+                  <h3 className="text-lg font-sans text-foreground">
                     ¿Cómo funciona?
                   </h3>
                   <div className="space-y-2 text-sm text-foreground/80 font-sans leading-relaxed">

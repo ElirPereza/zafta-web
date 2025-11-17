@@ -227,7 +227,7 @@ export function OrderConfirmation({ order }: OrderConfirmationProps) {
 
         {/* Next Steps */}
         <Card className="p-6 mb-6 bg-primary/30">
-          <h3 className="font-sans italic text-lg mb-3">¿Qué sigue?</h3>
+          <h3 className="font-sans text-lg mb-3">¿Qué sigue?</h3>
           <ul className="space-y-2 font-sans text-sm text-muted-foreground">
             <li className="flex items-start gap-2">
               <span className="text-primary font-bold">1.</span>

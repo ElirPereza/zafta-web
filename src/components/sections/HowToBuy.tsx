@@ -53,13 +53,13 @@ const HowToBuy = () => {
             >
               {/* Número simple */}
               <div className="mb-6">
-                <span className="inline-flex items-center justify-center text-5xl md:text-6xl font-sans italic text-primary">
+                <span className="inline-flex items-center justify-center text-5xl md:text-6xl font-sans text-primary">
                   {index + 1}
                 </span>
               </div>
 
               {/* Título */}
-              <h3 className="mb-3 text-xl md:text-2xl font-sans italic text-foreground">
+              <h3 className="mb-3 text-xl md:text-2xl font-sans text-foreground">
                 {step.title}
               </h3>
 

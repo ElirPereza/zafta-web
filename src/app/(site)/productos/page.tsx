@@ -45,7 +45,7 @@ export default async function ProductosPage() {
         <div className="container mx-auto max-w-7xl">
           {/* Header */}
           <div className="text-center mb-12 md:mb-16">
-            <h1 className="mb-6 text-5xl italic md:text-6xl text-foreground font-gotham">
+            <h1 className="mb-6 text-5xl md:text-6xl text-foreground font-gotham">
               Nuestras Delicias
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground font-sans max-w-3xl mx-auto leading-relaxed">

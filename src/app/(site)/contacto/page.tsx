@@ -25,7 +25,7 @@ export default function ContactoPage() {
     <div className="pt-20 min-h-screen bg-background">
       <section className="py-32 px-6 md:px-8">
         <div className="container mx-auto max-w-4xl text-center">
-          <h1 className="mb-6 text-4xl md:text-5xl italic text-foreground">
+          <h1 className="mb-6 text-4xl md:text-5xl text-foreground">
             Contáctanos
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground font-sans mb-12 leading-relaxed">
