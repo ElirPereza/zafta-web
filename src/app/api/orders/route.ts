@@ -122,6 +122,8 @@ export async function POST(request: Request) {
         paymentMethod: body.paymentMethod || "WOMPI",
         subtotal: body.subtotal,
         shippingCost: body.shippingCost || 0,
+        discountCode: body.discountCode || null,
+        discountAmount: body.discountAmount || 0,
         total: body.total,
         items: {
           create: body.items.map((item: any) => ({

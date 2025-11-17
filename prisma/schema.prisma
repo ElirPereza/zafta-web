@@ -58,6 +58,8 @@ model Order {
   paymentTransactionId   String?       // Wompi transaction ID
   subtotal               Decimal       @db.Decimal(10, 2)
   shippingCost           Decimal       @db.Decimal(10, 2) @default(0)
+  discountCode           String?       // Discount code used (if any)
+  discountAmount         Decimal       @db.Decimal(10, 2) @default(0) // Discount amount applied
   total                  Decimal       @db.Decimal(10, 2)
   items                  OrderItem[]
   invoice                Invoice?
@@ -68,6 +70,7 @@ model Order {
   @@index([orderNumber])
   @@index([status])
   @@index([paymentStatus])
+  @@index([customerEmail]) // Index for checking used discount codes
 }
 
 model OrderItem {

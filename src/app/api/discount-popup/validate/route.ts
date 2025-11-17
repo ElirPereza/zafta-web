@@ -4,7 +4,7 @@ import { prisma } from "@/lib/prisma";
 // POST /api/discount-popup/validate - Validate discount code
 export async function POST(request: NextRequest) {
   try {
-    const { code } = await request.json();
+    const { code, customerEmail } = await request.json();
 
     if (!code) {
       return NextResponse.json(
@@ -14,6 +14,23 @@ export async function POST(request: NextRequest) {
     }
 
     const now = new Date();
+
+    // Check if this email has already used this discount code
+    if (customerEmail) {
+      const existingOrder = await prisma.order.findFirst({
+        where: {
+          customerEmail: customerEmail,
+          discountCode: code.toUpperCase(),
+        },
+      });
+
+      if (existingOrder) {
+        return NextResponse.json(
+          { error: "Este código ya fue utilizado en una compra anterior" },
+          { status: 400 },
+        );
+      }
+    }
 
     // Find active discount with matching code
     const popup = await prisma.discountPopup.findFirst({

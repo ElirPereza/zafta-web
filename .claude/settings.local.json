@@ -20,7 +20,9 @@
       "Bash(bun run format:*)",
       "Bash(cmd /c \"if exist .next rmdir /S /Q .next\")",
       "Bash(rm:*)",
-      "Bash(bun dev)"
+      "Bash(bun dev)",
+      "Bash(deploy-db-prod.bat)",
+      "Bash(cmd /c deploy-db-prod.bat)"
     ],
     "deny": [],
     "ask": []

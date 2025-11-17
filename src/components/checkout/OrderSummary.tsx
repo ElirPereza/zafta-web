@@ -11,6 +11,7 @@ import { Tag, Loader2, Check, X } from "lucide-react";
 
 interface OrderSummaryProps {
   shippingCost?: number;
+  customerEmail?: string; // Email to check if code was already used
   onDiscountApplied?: (discount: {
     code: string;
     percent: number;
@@ -20,6 +21,7 @@ interface OrderSummaryProps {
 
 export function OrderSummary({
   shippingCost = 0,
+  customerEmail,
   onDiscountApplied,
 }: OrderSummaryProps) {
   const items = useCartStore((state) => state.items);
@@ -58,7 +60,10 @@ export function OrderSummary({
       const response = await fetch("/api/discount-popup/validate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ code: discountCode.trim() }),
+        body: JSON.stringify({
+          code: discountCode.trim(),
+          customerEmail: customerEmail || undefined,
+        }),
       });
 
       const data = await response.json();

@@ -23,6 +23,7 @@ interface ShippingData {
 
 interface CheckoutFormProps {
   onShippingCostChange?: (cost: number) => void;
+  onEmailChange?: (email: string) => void;
   discount?: {
     code: string;
     percent: number;
@@ -32,6 +33,7 @@ interface CheckoutFormProps {
 
 export function CheckoutForm({
   onShippingCostChange,
+  onEmailChange,
   discount,
 }: CheckoutFormProps) {
   const router = useRouter();
@@ -226,7 +228,10 @@ export function CheckoutForm({
               id="email"
               type="email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                onEmailChange?.(e.target.value);
+              }}
               placeholder="maria@ejemplo.com"
               required
             />

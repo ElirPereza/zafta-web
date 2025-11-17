@@ -13,6 +13,7 @@ export default function CheckoutClient() {
   const router = useRouter();
   const items = useCartStore((state) => state.items);
   const [shippingCost, setShippingCost] = useState(0);
+  const [customerEmail, setCustomerEmail] = useState("");
   const [discount, setDiscount] = useState<{
     code: string;
     percent: number;
@@ -64,6 +65,7 @@ export default function CheckoutClient() {
           <div>
             <CheckoutForm
               onShippingCostChange={setShippingCost}
+              onEmailChange={setCustomerEmail}
               discount={discount}
             />
           </div>
@@ -72,6 +74,7 @@ export default function CheckoutClient() {
           <div>
             <OrderSummary
               shippingCost={shippingCost}
+              customerEmail={customerEmail}
               onDiscountApplied={setDiscount}
             />
           </div>
