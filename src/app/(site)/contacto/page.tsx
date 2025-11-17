@@ -1,18 +1,19 @@
 import { Phone, Instagram } from "lucide-react";
-import { FaTiktok } from "react-icons/fa";
+import { FaTiktok, FaFacebook } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import { generateMetadata as genMetadata } from "@/lib/metadata";
 
 export const metadata = genMetadata({
   title: "Contacto",
   description:
-    "Contáctanos por WhatsApp, Instagram o TikTok para hacer tu pedido o resolver tus dudas. Estamos en Bogotá, Colombia. Respuesta rápida garantizada.",
+    "Contáctanos por WhatsApp, Instagram, TikTok o Facebook para hacer tu pedido o resolver tus dudas. Estamos en Bogotá, Colombia. Respuesta rápida garantizada.",
   path: "/contacto",
   keywords: [
     "contacto",
     "WhatsApp",
     "Instagram",
     "TikTok",
+    "Facebook",
     "teléfono",
     "hacer pedido",
     "atención al cliente",
@@ -32,7 +33,7 @@ export default function ContactoPage() {
             responderemos lo antes posible.
           </p>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-3xl mx-auto">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-5xl mx-auto">
             <a
               href="https://wa.me/573217590897"
               target="_blank"
@@ -75,6 +76,22 @@ export default function ContactoPage() {
                 <FaTiktok className="w-12 h-12 text-primary mx-auto mb-4" />
                 <h3 className="text-xl font-sans italic mb-2">TikTok</h3>
                 <p className="text-muted-foreground mb-4">@zafta_reposteria</p>
+                <Button variant="default" className="w-full">
+                  Seguir
+                </Button>
+              </div>
+            </a>
+
+            <a
+              href="https://www.facebook.com/zaftareposteria"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block"
+            >
+              <div className="p-8 bg-card rounded-2xl shadow-soft hover:shadow-warm transition-all duration-300 hover:-translate-y-1">
+                <FaFacebook className="w-12 h-12 text-primary mx-auto mb-4" />
+                <h3 className="text-xl font-sans italic mb-2">Facebook</h3>
+                <p className="text-muted-foreground mb-4">@zaftareposteria</p>
                 <Button variant="default" className="w-full">
                   Seguir
                 </Button>
