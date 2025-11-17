@@ -23,9 +23,17 @@ interface ShippingData {
 
 interface CheckoutFormProps {
   onShippingCostChange?: (cost: number) => void;
+  discount?: {
+    code: string;
+    percent: number;
+    amount: number;
+  } | null;
 }
 
-export function CheckoutForm({ onShippingCostChange }: CheckoutFormProps) {
+export function CheckoutForm({
+  onShippingCostChange,
+  discount,
+}: CheckoutFormProps) {
   const router = useRouter();
   const items = useCartStore((state) => state.items);
   const clearCart = useCartStore((state) => state.clearCart);
@@ -83,12 +91,17 @@ export function CheckoutForm({ onShippingCostChange }: CheckoutFormProps) {
     try {
       // Calculate totals
       const subtotal = getTotalPrice;
-      const total = subtotal + shippingData.shippingCost;
+      const discountAmount = discount ? discount.amount : 0;
+      const total = subtotal + shippingData.shippingCost - discountAmount;
 
       console.log("📦 Creating order with:", {
         itemsCount: items.length,
         subtotal,
         shippingCost: shippingData.shippingCost,
+        discount: discount
+          ? `${discount.code} (${discount.percent}%)`
+          : "No discount",
+        discountAmount,
         total,
       });
 
@@ -107,6 +120,8 @@ export function CheckoutForm({ onShippingCostChange }: CheckoutFormProps) {
           shippingCost: shippingData.shippingCost,
           subtotal,
           total,
+          discountCode: discount?.code,
+          discountAmount: discountAmount,
           items: items.map((item) => ({
             productId: item.id,
             name: item.name,

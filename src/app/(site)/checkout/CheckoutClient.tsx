@@ -13,6 +13,11 @@ export default function CheckoutClient() {
   const router = useRouter();
   const items = useCartStore((state) => state.items);
   const [shippingCost, setShippingCost] = useState(0);
+  const [discount, setDiscount] = useState<{
+    code: string;
+    percent: number;
+    amount: number;
+  } | null>(null);
 
   // Redirect to products if cart is empty
   useEffect(() => {
@@ -57,12 +62,18 @@ export default function CheckoutClient() {
         <div className="grid lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
           {/* Left Column: Forms */}
           <div>
-            <CheckoutForm onShippingCostChange={setShippingCost} />
+            <CheckoutForm
+              onShippingCostChange={setShippingCost}
+              discount={discount}
+            />
           </div>
 
           {/* Right Column: Order Summary */}
           <div>
-            <OrderSummary shippingCost={shippingCost} />
+            <OrderSummary
+              shippingCost={shippingCost}
+              onDiscountApplied={setDiscount}
+            />
           </div>
         </div>
       </div>
