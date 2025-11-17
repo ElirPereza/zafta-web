@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const steps = [
   {
@@ -21,11 +22,6 @@ const steps = [
 ];
 
 const HowToBuy = () => {
-  const scrollToGallery = () => {
-    const gallery = document.getElementById("gallery");
-    gallery?.scrollIntoView({ behavior: "smooth" });
-  };
-
   return (
     <section id="how-to-buy" className="relative py-16 md:py-20 px-6 md:px-8">
       <div className="container mx-auto max-w-6xl relative z-10">
@@ -82,14 +78,15 @@ const HowToBuy = () => {
           transition={{ duration: 0.6, delay: 0.4, ease: [0.4, 0, 0.2, 1] }}
           className="text-center"
         >
-          <Button
-            onClick={scrollToGallery}
-            variant="default"
-            size="lg"
-            className="shadow-warm hover:shadow-medium transition-all duration-300"
-          >
-            Descubre más productos
-          </Button>
+          <Link href="/productos">
+            <Button
+              variant="default"
+              size="lg"
+              className="shadow-warm hover:shadow-medium transition-all duration-300"
+            >
+              Descubre más productos
+            </Button>
+          </Link>
         </motion.div>
       </div>
     </section>
