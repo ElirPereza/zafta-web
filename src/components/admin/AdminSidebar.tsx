@@ -138,7 +138,7 @@ export function AdminSidebar({ isOpen = false, onClose }: AdminSidebarProps) {
       <aside
         className={cn(
           "fixed inset-y-0 left-0 z-50 w-64 flex flex-col",
-          "bg-gradient-to-br from-[hsl(var(--burgundy))] via-[hsl(346_98%_22%)] to-[hsl(346_98%_18%)]",
+          "bg-gradient-to-br from-[hsl(var(--rose-gold))] via-[hsl(19_60%_70%)] to-[hsl(19_60%_65%)]",
           "text-white shadow-2xl transition-transform duration-300 ease-in-out lg:hidden",
           isOpen ? "translate-x-0" : "-translate-x-full",
         )}
@@ -147,7 +147,7 @@ export function AdminSidebar({ isOpen = false, onClose }: AdminSidebarProps) {
       </aside>
 
       {/* Desktop Sidebar */}
-      <aside className="hidden lg:flex lg:flex-col lg:w-64 lg:fixed lg:inset-y-0 bg-gradient-to-br from-[hsl(var(--burgundy))] via-[hsl(346_98%_22%)] to-[hsl(346_98%_18%)] text-white shadow-xl z-30">
+      <aside className="hidden lg:flex lg:flex-col lg:w-64 lg:fixed lg:inset-y-0 bg-gradient-to-br from-[hsl(var(--rose-gold))] via-[hsl(19_60%_70%)] to-[hsl(19_60%_65%)] text-white shadow-xl z-30">
         {sidebarContent}
       </aside>
     </>

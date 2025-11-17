@@ -115,7 +115,7 @@ export function OrdersTable() {
       <div className="flex items-center justify-center py-12">
         <div className="flex flex-col items-center gap-3">
           <div className="w-8 h-8 border-4 border-[hsl(var(--rose-gold))]/30 border-t-[hsl(var(--rose-gold))] rounded-full animate-spin" />
-          <p className="text-[hsl(var(--rose-gold))]/70 font-sans">
+          <p className="text-[hsl(var(--midnight-navy))]/70 font-sans font-medium">
             Cargando pedidos...
           </p>
         </div>
@@ -131,10 +131,10 @@ export function OrdersTable() {
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-[hsl(var(--rose-gold))]/20 to-[hsl(var(--rose-gold))]/10 mb-4">
             <ShoppingCart className="h-8 w-8 text-[hsl(var(--rose-gold))]" />
           </div>
-          <h3 className="text-lg font-gotham font-semibold text-[hsl(var(--rose-gold))] mb-2">
+          <h3 className="text-lg font-gotham font-bold text-[hsl(var(--midnight-navy))] mb-2">
             No hay pedidos
           </h3>
-          <p className="text-sm text-[hsl(var(--rose-gold))]/60 font-sans">
+          <p className="text-sm text-[hsl(var(--midnight-navy))]/60 font-sans">
             Los pedidos aparecerán aquí cuando los clientes realicen compras
           </p>
         </div>
@@ -147,7 +147,7 @@ export function OrdersTable() {
       {/* Filters */}
       <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 p-4 rounded-xl bg-gradient-to-br from-[hsl(var(--beige-50))] to-white border border-[hsl(var(--beige-400))]/50 shadow-sm">
         <div className="flex items-center gap-2">
-          <label className="text-sm font-gotham font-medium text-[hsl(var(--rose-gold))]">
+          <label className="text-sm font-gotham font-semibold text-[hsl(var(--midnight-navy))]">
             Filtrar por estado:
           </label>
           <Select value={statusFilter} onValueChange={setStatusFilter}>
@@ -165,8 +165,8 @@ export function OrdersTable() {
             </SelectContent>
           </Select>
         </div>
-        <div className="text-sm text-[hsl(var(--rose-gold))]/70 font-sans">
-          <span className="font-semibold text-[hsl(var(--rose-gold))]">
+        <div className="text-sm text-[hsl(var(--midnight-navy))]/70 font-sans">
+          <span className="font-bold text-[hsl(var(--midnight-navy))]" style={{ fontFamily: 'Fredoka, sans-serif' }}>
             {filteredOrders.length}
           </span>{" "}
           {filteredOrders.length === 1 ? "pedido" : "pedidos"}
@@ -175,88 +175,90 @@ export function OrdersTable() {
 
       {/* Table */}
       <div className="border-2 border-[hsl(var(--beige-400))] rounded-xl overflow-hidden bg-white shadow-lg">
-        <Table>
-          <TableHeader>
-            <TableRow className="bg-gradient-to-r from-[hsl(var(--beige-100))] to-[hsl(var(--beige-50))] hover:from-[hsl(var(--beige-200))] hover:to-[hsl(var(--beige-100))]">
-              <TableHead className="font-gotham font-semibold text-[hsl(var(--rose-gold))]">
-                Número
-              </TableHead>
-              <TableHead className="font-gotham font-semibold text-[hsl(var(--rose-gold))]">
-                Cliente
-              </TableHead>
-              <TableHead className="font-gotham font-semibold text-[hsl(var(--rose-gold))]">
-                Fecha
-              </TableHead>
-              <TableHead className="font-gotham font-semibold text-[hsl(var(--rose-gold))]">
-                Total
-              </TableHead>
-              <TableHead className="font-gotham font-semibold text-[hsl(var(--rose-gold))]">
-                Estado del Pedido
-              </TableHead>
-              <TableHead className="font-gotham font-semibold text-[hsl(var(--rose-gold))]">
-                Estado del Pago
-              </TableHead>
-              <TableHead className="font-gotham font-semibold text-[hsl(var(--rose-gold))] text-right">
-                Acciones
-              </TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {filteredOrders.map((order) => (
-              <TableRow
-                key={order.id}
-                className="hover:bg-gradient-to-r hover:from-[hsl(var(--rose-gold))]/5 hover:to-transparent transition-colors border-b border-[hsl(var(--beige-300))]/50"
-              >
-                <TableCell className="font-sans font-semibold text-[hsl(var(--rose-gold))]">
-                  #{order.orderNumber}
-                </TableCell>
-                <TableCell className="font-sans">
-                  <div>
-                    <p className="font-medium text-[hsl(var(--rose-gold))]">
-                      {order.customerName}
-                    </p>
-                    <p className="text-sm text-[hsl(var(--rose-gold))]/60">
-                      {order.customerEmail}
-                    </p>
-                  </div>
-                </TableCell>
-                <TableCell className="font-sans text-sm text-[hsl(var(--rose-gold))]/70">
-                  {formatDate(order.createdAt)}
-                </TableCell>
-                <TableCell className="font-sans font-semibold text-[hsl(var(--rose-gold))]">
-                  {formatPrice(Number(order.total))}
-                </TableCell>
-                <TableCell>
-                  <Badge
-                    variant="outline"
-                    className={`font-sans ${ORDER_STATUS_COLORS[order.status]}`}
-                  >
-                    {ORDER_STATUS_LABELS[order.status]}
-                  </Badge>
-                </TableCell>
-                <TableCell>
-                  <Badge
-                    variant="outline"
-                    className={`font-sans ${PAYMENT_STATUS_COLORS[order.paymentStatus]}`}
-                  >
-                    {PAYMENT_STATUS_LABELS[order.paymentStatus]}
-                  </Badge>
-                </TableCell>
-                <TableCell className="text-right">
-                  <Link href={`/admin/pedidos/${order.id}`}>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="hover:bg-[hsl(var(--rose-gold))]/20 hover:text-[hsl(var(--rose-gold))] transition-colors"
-                    >
-                      <Eye className="h-4 w-4" />
-                    </Button>
-                  </Link>
-                </TableCell>
+        <div className="overflow-x-auto scrollbar-thin scrollbar-thumb-[hsl(var(--rose-gold))] scrollbar-track-[hsl(var(--beige-100))]">
+          <Table className="min-w-[1000px]">
+            <TableHeader>
+              <TableRow className="bg-gradient-to-r from-[hsl(var(--beige-100))] to-[hsl(var(--beige-50))] hover:from-[hsl(var(--beige-200))] hover:to-[hsl(var(--beige-100))]">
+                <TableHead className="font-gotham font-bold text-[hsl(var(--midnight-navy))] w-[100px]">
+                  Número
+                </TableHead>
+                <TableHead className="font-gotham font-bold text-[hsl(var(--midnight-navy))] min-w-[200px]">
+                  Cliente
+                </TableHead>
+                <TableHead className="font-gotham font-bold text-[hsl(var(--midnight-navy))] w-[150px]">
+                  Fecha
+                </TableHead>
+                <TableHead className="font-gotham font-bold text-[hsl(var(--midnight-navy))] w-[120px]">
+                  Total
+                </TableHead>
+                <TableHead className="font-gotham font-bold text-[hsl(var(--midnight-navy))] w-[140px]">
+                  Estado Pedido
+                </TableHead>
+                <TableHead className="font-gotham font-bold text-[hsl(var(--midnight-navy))] w-[130px]">
+                  Estado Pago
+                </TableHead>
+                <TableHead className="font-gotham font-bold text-[hsl(var(--midnight-navy))] text-right w-[100px]">
+                  Acciones
+                </TableHead>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+            </TableHeader>
+            <TableBody>
+              {filteredOrders.map((order) => (
+                <TableRow
+                  key={order.id}
+                  className="hover:bg-gradient-to-r hover:from-[hsl(var(--rose-gold))]/5 hover:to-transparent transition-colors border-b border-[hsl(var(--beige-300))]/50"
+                >
+                  <TableCell className="font-sans font-bold text-[hsl(var(--midnight-navy))]" style={{ fontFamily: 'Fredoka, sans-serif' }}>
+                    #{order.orderNumber}
+                  </TableCell>
+                  <TableCell className="font-sans">
+                    <div>
+                      <p className="font-semibold text-[hsl(var(--midnight-navy))]">
+                        {order.customerName}
+                      </p>
+                      <p className="text-sm text-[hsl(var(--midnight-navy))]/60">
+                        {order.customerEmail}
+                      </p>
+                    </div>
+                  </TableCell>
+                  <TableCell className="font-sans text-sm text-[hsl(var(--midnight-navy))]/70">
+                    {formatDate(order.createdAt)}
+                  </TableCell>
+                  <TableCell className="font-sans font-bold text-[hsl(var(--midnight-navy))]" style={{ fontFamily: 'Fredoka, sans-serif' }}>
+                    {formatPrice(Number(order.total))}
+                  </TableCell>
+                  <TableCell>
+                    <Badge
+                      variant="outline"
+                      className={`font-sans ${ORDER_STATUS_COLORS[order.status]}`}
+                    >
+                      {ORDER_STATUS_LABELS[order.status]}
+                    </Badge>
+                  </TableCell>
+                  <TableCell>
+                    <Badge
+                      variant="outline"
+                      className={`font-sans ${PAYMENT_STATUS_COLORS[order.paymentStatus]}`}
+                    >
+                      {PAYMENT_STATUS_LABELS[order.paymentStatus]}
+                    </Badge>
+                  </TableCell>
+                  <TableCell className="text-right">
+                    <Link href={`/admin/pedidos/${order.id}`}>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="hover:bg-[hsl(var(--rose-gold))]/20 hover:text-[hsl(var(--midnight-navy))] transition-colors"
+                      >
+                        <Eye className="h-4 w-4" />
+                      </Button>
+                    </Link>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
       </div>
     </div>
   );
