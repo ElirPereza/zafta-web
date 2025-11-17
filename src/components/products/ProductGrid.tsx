@@ -126,7 +126,7 @@ export function ProductGrid({ products }: ProductGridProps) {
                           {formatPrice(product.comparePrice)}
                         </p>
                       )}
-                    <p className="text-2xl md:text-3xl font-bold text-primary font-sans">
+                    <p className="text-2xl md:text-3xl font-bold text-primary" style={{ fontFamily: 'Fredoka, sans-serif' }}>
                       {formatPrice(product.price)}
                     </p>
                   </div>
