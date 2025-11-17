@@ -188,19 +188,19 @@ export default function GaleriasPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-semibold text-foreground">
+          <h1 className="text-4xl font-gotham font-bold text-[hsl(var(--burgundy))] mb-2">
             Gestión de Galerías
           </h1>
-          <p className="text-sm text-muted-foreground font-sans mt-1">
+          <p className="text-[hsl(var(--burgundy))]/70 font-sans text-base">
             Administra las imágenes de Tortas Personalizadas y Eventos
             Especiales
           </p>
         </div>
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogTrigger asChild>
-            <Button className="gap-2">
+            <Button className="gap-2 bg-[hsl(var(--burgundy))] hover:bg-[hsl(var(--burgundy))]/90 text-white shadow-lg">
               <Plus className="h-4 w-4" />
               Nueva Imagen
             </Button>
@@ -269,8 +269,13 @@ export default function GaleriasPage() {
 
       {/* Loading State */}
       {loading && (
-        <div className="text-center py-12">
-          <p className="text-muted-foreground">Cargando imágenes...</p>
+        <div className="flex items-center justify-center py-12">
+          <div className="flex flex-col items-center gap-3">
+            <div className="w-8 h-8 border-4 border-[hsl(var(--rose-gold))]/30 border-t-[hsl(var(--burgundy))] rounded-full animate-spin" />
+            <p className="text-[hsl(var(--burgundy))]/70 font-sans">
+              Cargando imágenes...
+            </p>
+          </div>
         </div>
       )}
 
@@ -290,8 +295,13 @@ export default function GaleriasPage() {
           </CardHeader>
           <CardContent>
             {personalizadasImages.length === 0 ? (
-              <div className="text-center py-8 text-muted-foreground">
-                No hay imágenes en esta sección
+              <div className="relative overflow-hidden text-center py-8 border-2 border-dashed border-[hsl(var(--beige-400))] rounded-xl bg-gradient-to-br from-[hsl(var(--beige-50))] to-white">
+                <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--rose-gold))]/5 to-transparent" />
+                <div className="relative z-10">
+                  <p className="text-[hsl(var(--burgundy))]/60 font-sans">
+                    No hay imágenes en esta sección
+                  </p>
+                </div>
               </div>
             ) : (
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -345,8 +355,13 @@ export default function GaleriasPage() {
           </CardHeader>
           <CardContent>
             {eventosImages.length === 0 ? (
-              <div className="text-center py-8 text-muted-foreground">
-                No hay imágenes en esta sección
+              <div className="relative overflow-hidden text-center py-8 border-2 border-dashed border-[hsl(var(--beige-400))] rounded-xl bg-gradient-to-br from-[hsl(var(--beige-50))] to-white">
+                <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--rose-gold))]/5 to-transparent" />
+                <div className="relative z-10">
+                  <p className="text-[hsl(var(--burgundy))]/60 font-sans">
+                    No hay imágenes en esta sección
+                  </p>
+                </div>
               </div>
             ) : (
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">

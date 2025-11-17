@@ -98,16 +98,20 @@ export default async function AdminDashboard() {
       value: stats.totalProducts,
       icon: Package,
       description: "Productos en catálogo",
-      color: "text-blue-600",
-      bgColor: "bg-blue-50",
+      color: "text-[hsl(var(--burgundy))]",
+      bgColor:
+        "bg-gradient-to-br from-[hsl(var(--rose-gold))]/20 to-[hsl(var(--rose-gold))]/10",
+      borderColor: "border-[hsl(var(--rose-gold))]/30",
     },
     {
       title: "Pedidos Totales",
       value: stats.totalOrders,
       icon: ShoppingCart,
       description: "Pedidos realizados",
-      color: "text-green-600",
-      bgColor: "bg-green-50",
+      color: "text-[hsl(var(--burgundy))]",
+      bgColor:
+        "bg-gradient-to-br from-[hsl(var(--beige-200))] to-[hsl(var(--beige-100))]",
+      borderColor: "border-[hsl(var(--beige-400))]",
     },
     {
       title: "Pedidos Pendientes",
@@ -115,7 +119,8 @@ export default async function AdminDashboard() {
       icon: ShoppingCart,
       description: "Requieren atención",
       color: "text-orange-600",
-      bgColor: "bg-orange-50",
+      bgColor: "bg-gradient-to-br from-orange-50 to-orange-100",
+      borderColor: "border-orange-200",
     },
     {
       title: "Ingresos Totales",
@@ -125,17 +130,21 @@ export default async function AdminDashboard() {
       })}`,
       icon: DollarSign,
       description: "Ventas confirmadas",
-      color: "text-primary",
-      bgColor: "bg-[hsl(var(--beige-300))]",
+      color: "text-[hsl(var(--burgundy))]",
+      bgColor:
+        "bg-gradient-to-br from-[hsl(var(--burgundy))]/10 to-[hsl(var(--burgundy))]/5",
+      borderColor: "border-[hsl(var(--burgundy))]/20",
     },
   ];
 
   return (
     <div className="space-y-8">
       {/* Page Header */}
-      <div>
-        <h1 className="text-3xl font-semibold text-foreground">Dashboard</h1>
-        <p className="text-muted-foreground mt-2">
+      <div className="mb-8">
+        <h1 className="text-4xl font-gotham font-bold text-[hsl(var(--burgundy))] mb-2">
+          Dashboard
+        </h1>
+        <p className="text-[hsl(var(--burgundy))]/70 font-sans text-lg">
           Resumen general de tu tienda ZAFTA
         </p>
       </div>
@@ -145,18 +154,24 @@ export default async function AdminDashboard() {
         {cards.map((card) => {
           const Icon = card.icon;
           return (
-            <Card key={card.title} className="border-[hsl(var(--beige-400))]">
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium font-sans">
+            <Card
+              key={card.title}
+              className={`${card.borderColor} border-2 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden relative group`}
+            >
+              <div className={`absolute inset-0 ${card.bgColor} opacity-100`} />
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 relative z-10">
+                <CardTitle className="text-sm font-gotham font-medium text-[hsl(var(--burgundy))]">
                   {card.title}
                 </CardTitle>
-                <div className={`p-2 rounded-lg ${card.bgColor}`}>
+                <div className="p-2 rounded-xl bg-white/80 backdrop-blur-sm shadow-md group-hover:scale-110 transition-transform duration-300">
                   <Icon className={`h-5 w-5 ${card.color}`} />
                 </div>
               </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold font-sans">{card.value}</div>
-                <p className="text-xs text-muted-foreground mt-1">
+              <CardContent className="relative z-10">
+                <div className="text-3xl font-gotham font-bold text-[hsl(var(--burgundy))]">
+                  {card.value}
+                </div>
+                <p className="text-xs text-[hsl(var(--burgundy))]/60 mt-1 font-sans">
                   {card.description}
                 </p>
               </CardContent>
@@ -168,28 +183,30 @@ export default async function AdminDashboard() {
       {/* Recent Activity Section */}
       <div className="grid gap-6 md:grid-cols-2">
         {/* Recent Orders */}
-        <Card className="border-[hsl(var(--beige-400))]">
-          <CardHeader className="flex flex-row items-center justify-between">
-            <CardTitle className="font-sans">Pedidos Recientes</CardTitle>
+        <Card className="border-[hsl(var(--beige-400))] border-2 shadow-lg hover:shadow-xl transition-shadow">
+          <CardHeader className="flex flex-row items-center justify-between bg-gradient-to-r from-[hsl(var(--beige-100))] to-transparent pb-4">
+            <CardTitle className="font-gotham font-semibold text-[hsl(var(--burgundy))]">
+              Pedidos Recientes
+            </CardTitle>
             <Link
               href="/admin/pedidos"
-              className="text-sm font-sans text-primary hover:underline"
+              className="text-sm font-sans text-[hsl(var(--burgundy))] hover:text-[hsl(var(--rose-gold))] transition-colors font-medium"
             >
-              Ver todos
+              Ver todos →
             </Link>
           </CardHeader>
           <CardContent>
             {recentOrders.length === 0 ? (
-              <p className="text-sm text-muted-foreground text-center py-8">
+              <p className="text-sm text-[hsl(var(--burgundy))]/60 text-center py-8 font-sans">
                 No hay pedidos recientes
               </p>
             ) : (
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {recentOrders.map((order) => (
                   <Link
                     key={order.id}
                     href={`/admin/pedidos/${order.id}`}
-                    className="block hover:bg-[hsl(var(--beige-200))] p-3 rounded-lg transition-colors"
+                    className="block hover:bg-gradient-to-r hover:from-[hsl(var(--rose-gold))]/10 hover:to-transparent p-3 rounded-xl transition-all border border-[hsl(var(--beige-300))] hover:border-[hsl(var(--rose-gold))]/40 hover:shadow-md"
                   >
                     <div className="flex items-start justify-between gap-4">
                       <div className="flex-1 min-w-0">
@@ -234,37 +251,39 @@ export default async function AdminDashboard() {
         </Card>
 
         {/* Top Products */}
-        <Card className="border-[hsl(var(--beige-400))]">
-          <CardHeader className="flex flex-row items-center justify-between">
-            <CardTitle className="font-sans">Productos Más Vendidos</CardTitle>
+        <Card className="border-[hsl(var(--beige-400))] border-2 shadow-lg hover:shadow-xl transition-shadow">
+          <CardHeader className="flex flex-row items-center justify-between bg-gradient-to-r from-[hsl(var(--beige-100))] to-transparent pb-4">
+            <CardTitle className="font-gotham font-semibold text-[hsl(var(--burgundy))]">
+              Productos Más Vendidos
+            </CardTitle>
             <Link
               href="/admin/productos"
-              className="text-sm font-sans text-primary hover:underline"
+              className="text-sm font-sans text-[hsl(var(--burgundy))] hover:text-[hsl(var(--rose-gold))] transition-colors font-medium"
             >
-              Ver todos
+              Ver todos →
             </Link>
           </CardHeader>
           <CardContent>
             {topProducts.length === 0 ? (
-              <p className="text-sm text-muted-foreground text-center py-8">
+              <p className="text-sm text-[hsl(var(--burgundy))]/60 text-center py-8 font-sans">
                 No hay datos de ventas aún
               </p>
             ) : (
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {topProducts.map((product, index) => (
                   <div
                     key={product.productId}
-                    className="flex items-center justify-between p-3 rounded-lg bg-[hsl(var(--beige-200))]"
+                    className="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-[hsl(var(--beige-200))] to-[hsl(var(--beige-100))] border border-[hsl(var(--beige-300))] hover:border-[hsl(var(--rose-gold))]/40 hover:shadow-md transition-all"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary text-primary-foreground font-bold text-sm">
+                      <div className="flex items-center justify-center w-8 h-8 rounded-full bg-gradient-to-br from-[hsl(var(--burgundy))] to-[hsl(var(--burgundy))]/80 text-white font-gotham font-bold text-sm shadow-md">
                         {index + 1}
                       </div>
                       <div>
-                        <p className="font-sans font-medium text-sm">
+                        <p className="font-sans font-semibold text-sm text-[hsl(var(--burgundy))]">
                           {product.name}
                         </p>
-                        <p className="text-xs text-muted-foreground">
+                        <p className="text-xs text-[hsl(var(--burgundy))]/60">
                           {product._sum.quantity} unidades vendidas
                         </p>
                       </div>

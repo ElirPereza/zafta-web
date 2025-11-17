@@ -39,16 +39,30 @@ export function DiscountPopup({ onClose }: DiscountPopupProps) {
         const response = await fetch("/api/discount-popup");
         const data = await response.json();
 
+        if (process.env.NODE_ENV === "development") {
+          console.log("Discount popup fetch response:", { response, data });
+        }
+
         if (response.ok && data.popup) {
+          if (process.env.NODE_ENV === "development") {
+            console.log("Setting popup data:", data.popup);
+          }
           setPopup(data.popup);
           // Show popup after 2 seconds delay
           setTimeout(() => {
+            if (process.env.NODE_ENV === "development") {
+              console.log("Opening popup");
+            }
             setIsOpen(true);
             sessionStorage.setItem("discount-popup-shown", "true");
           }, 2000);
+        } else {
+          if (process.env.NODE_ENV === "development") {
+            console.log("No active popup found");
+          }
         }
       } catch (error) {
-        // Silently fail
+        console.error("Error fetching discount popup:", error);
       }
     };
 
@@ -80,7 +94,7 @@ export function DiscountPopup({ onClose }: DiscountPopupProps) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={handleClose}
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50"
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[9998]"
           />
 
           {/* Popup */}
@@ -89,7 +103,7 @@ export function DiscountPopup({ onClose }: DiscountPopupProps) {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
             transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
-            className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-50 w-full max-w-md mx-4"
+            className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-[9999] w-full max-w-md mx-4"
           >
             <div className="relative bg-card rounded-2xl shadow-2xl overflow-hidden border-2 border-primary/40">
               {/* Close button */}

@@ -1,7 +1,7 @@
 "use client";
 
 import type { Order, OrderStatus, PaymentStatus } from "@prisma/client";
-import { Eye } from "lucide-react";
+import { Eye, ShoppingCart } from "lucide-react";
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import { Badge } from "@/components/ui/badge";
@@ -41,19 +41,28 @@ const PAYMENT_STATUS_LABELS: Record<PaymentStatus, string> = {
 };
 
 const ORDER_STATUS_COLORS: Record<OrderStatus, string> = {
-  PENDING: "bg-yellow-100 text-yellow-800 border-yellow-300",
-  CONFIRMED: "bg-blue-100 text-blue-800 border-blue-300",
-  PREPARING: "bg-purple-100 text-purple-800 border-purple-300",
-  IN_TRANSIT: "bg-indigo-100 text-indigo-800 border-indigo-300",
-  DELIVERED: "bg-green-100 text-green-800 border-green-300",
-  CANCELLED: "bg-red-100 text-red-800 border-red-300",
+  PENDING:
+    "bg-gradient-to-r from-yellow-50 to-yellow-100 text-yellow-700 border-yellow-300 shadow-sm",
+  CONFIRMED:
+    "bg-gradient-to-r from-[hsl(var(--rose-gold))]/20 to-[hsl(var(--rose-gold))]/10 text-[hsl(var(--burgundy))] border-[hsl(var(--rose-gold))]/40 shadow-sm",
+  PREPARING:
+    "bg-gradient-to-r from-purple-50 to-purple-100 text-purple-700 border-purple-300 shadow-sm",
+  IN_TRANSIT:
+    "bg-gradient-to-r from-blue-50 to-blue-100 text-blue-700 border-blue-300 shadow-sm",
+  DELIVERED:
+    "bg-gradient-to-r from-green-50 to-green-100 text-green-700 border-green-300 shadow-sm",
+  CANCELLED:
+    "bg-gradient-to-r from-red-50 to-red-100 text-red-700 border-red-300 shadow-sm",
 };
 
 const PAYMENT_STATUS_COLORS: Record<PaymentStatus, string> = {
-  PENDING: "bg-yellow-100 text-yellow-800 border-yellow-300",
-  PAID: "bg-green-100 text-green-800 border-green-300",
-  FAILED: "bg-red-100 text-red-800 border-red-300",
-  REFUNDED: "bg-gray-100 text-gray-800 border-gray-300",
+  PENDING:
+    "bg-gradient-to-r from-orange-50 to-orange-100 text-orange-700 border-orange-300 shadow-sm",
+  PAID: "bg-gradient-to-r from-green-50 to-green-100 text-green-700 border-green-300 shadow-sm",
+  FAILED:
+    "bg-gradient-to-r from-red-50 to-red-100 text-red-700 border-red-300 shadow-sm",
+  REFUNDED:
+    "bg-gradient-to-r from-[hsl(var(--beige-200))] to-[hsl(var(--beige-100))] text-[hsl(var(--burgundy))]/70 border-[hsl(var(--beige-400))] shadow-sm",
 };
 
 export function OrdersTable() {
@@ -104,20 +113,31 @@ export function OrdersTable() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-12">
-        <p className="text-muted-foreground font-sans">Cargando pedidos...</p>
+        <div className="flex flex-col items-center gap-3">
+          <div className="w-8 h-8 border-4 border-[hsl(var(--rose-gold))]/30 border-t-[hsl(var(--burgundy))] rounded-full animate-spin" />
+          <p className="text-[hsl(var(--burgundy))]/70 font-sans">
+            Cargando pedidos...
+          </p>
+        </div>
       </div>
     );
   }
 
   if (orders.length === 0) {
     return (
-      <div className="text-center py-12 border border-dashed border-beige-400 rounded-lg bg-beige-50">
-        <h3 className="text-lg font-sans font-semibold text-foreground mb-2">
-          No hay pedidos
-        </h3>
-        <p className="text-sm text-muted-foreground font-sans mb-4">
-          Los pedidos aparecerán aquí cuando los clientes realicen compras
-        </p>
+      <div className="relative overflow-hidden text-center py-12 border-2 border-dashed border-[hsl(var(--beige-400))] rounded-xl bg-gradient-to-br from-[hsl(var(--beige-50))] to-white shadow-sm">
+        <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--rose-gold))]/5 to-transparent" />
+        <div className="relative z-10">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-[hsl(var(--rose-gold))]/20 to-[hsl(var(--rose-gold))]/10 mb-4">
+            <ShoppingCart className="h-8 w-8 text-[hsl(var(--burgundy))]" />
+          </div>
+          <h3 className="text-lg font-gotham font-semibold text-[hsl(var(--burgundy))] mb-2">
+            No hay pedidos
+          </h3>
+          <p className="text-sm text-[hsl(var(--burgundy))]/60 font-sans">
+            Los pedidos aparecerán aquí cuando los clientes realicen compras
+          </p>
+        </div>
       </div>
     );
   }
@@ -125,13 +145,13 @@ export function OrdersTable() {
   return (
     <div className="space-y-4">
       {/* Filters */}
-      <div className="flex items-center gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 p-4 rounded-xl bg-gradient-to-br from-[hsl(var(--beige-50))] to-white border border-[hsl(var(--beige-400))]/50 shadow-sm">
         <div className="flex items-center gap-2">
-          <label className="text-sm font-sans font-medium">
+          <label className="text-sm font-gotham font-medium text-[hsl(var(--burgundy))]">
             Filtrar por estado:
           </label>
           <Select value={statusFilter} onValueChange={setStatusFilter}>
-            <SelectTrigger className="w-[200px]">
+            <SelectTrigger className="w-[200px] border-[hsl(var(--beige-400))] focus:ring-[hsl(var(--rose-gold))]">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -145,50 +165,65 @@ export function OrdersTable() {
             </SelectContent>
           </Select>
         </div>
-        <div className="text-sm text-muted-foreground font-sans">
-          {filteredOrders.length}{" "}
+        <div className="text-sm text-[hsl(var(--burgundy))]/70 font-sans">
+          <span className="font-semibold text-[hsl(var(--burgundy))]">
+            {filteredOrders.length}
+          </span>{" "}
           {filteredOrders.length === 1 ? "pedido" : "pedidos"}
         </div>
       </div>
 
       {/* Table */}
-      <div className="border border-beige-400 rounded-lg overflow-hidden bg-white">
+      <div className="border-2 border-[hsl(var(--beige-400))] rounded-xl overflow-hidden bg-white shadow-lg">
         <Table>
           <TableHeader>
-            <TableRow className="bg-beige-100">
-              <TableHead className="font-sans font-semibold">Número</TableHead>
-              <TableHead className="font-sans font-semibold">Cliente</TableHead>
-              <TableHead className="font-sans font-semibold">Fecha</TableHead>
-              <TableHead className="font-sans font-semibold">Total</TableHead>
-              <TableHead className="font-sans font-semibold">
+            <TableRow className="bg-gradient-to-r from-[hsl(var(--beige-100))] to-[hsl(var(--beige-50))] hover:from-[hsl(var(--beige-200))] hover:to-[hsl(var(--beige-100))]">
+              <TableHead className="font-gotham font-semibold text-[hsl(var(--burgundy))]">
+                Número
+              </TableHead>
+              <TableHead className="font-gotham font-semibold text-[hsl(var(--burgundy))]">
+                Cliente
+              </TableHead>
+              <TableHead className="font-gotham font-semibold text-[hsl(var(--burgundy))]">
+                Fecha
+              </TableHead>
+              <TableHead className="font-gotham font-semibold text-[hsl(var(--burgundy))]">
+                Total
+              </TableHead>
+              <TableHead className="font-gotham font-semibold text-[hsl(var(--burgundy))]">
                 Estado del Pedido
               </TableHead>
-              <TableHead className="font-sans font-semibold">
+              <TableHead className="font-gotham font-semibold text-[hsl(var(--burgundy))]">
                 Estado del Pago
               </TableHead>
-              <TableHead className="font-sans font-semibold text-right">
+              <TableHead className="font-gotham font-semibold text-[hsl(var(--burgundy))] text-right">
                 Acciones
               </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {filteredOrders.map((order) => (
-              <TableRow key={order.id}>
-                <TableCell className="font-sans font-medium">
-                  {order.orderNumber}
+              <TableRow
+                key={order.id}
+                className="hover:bg-gradient-to-r hover:from-[hsl(var(--rose-gold))]/5 hover:to-transparent transition-colors border-b border-[hsl(var(--beige-300))]/50"
+              >
+                <TableCell className="font-sans font-semibold text-[hsl(var(--burgundy))]">
+                  #{order.orderNumber}
                 </TableCell>
                 <TableCell className="font-sans">
                   <div>
-                    <p className="font-medium">{order.customerName}</p>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="font-medium text-[hsl(var(--burgundy))]">
+                      {order.customerName}
+                    </p>
+                    <p className="text-sm text-[hsl(var(--burgundy))]/60">
                       {order.customerEmail}
                     </p>
                   </div>
                 </TableCell>
-                <TableCell className="font-sans text-sm">
+                <TableCell className="font-sans text-sm text-[hsl(var(--burgundy))]/70">
                   {formatDate(order.createdAt)}
                 </TableCell>
-                <TableCell className="font-sans font-medium">
+                <TableCell className="font-sans font-semibold text-[hsl(var(--burgundy))]">
                   {formatPrice(Number(order.total))}
                 </TableCell>
                 <TableCell>
@@ -209,7 +244,11 @@ export function OrdersTable() {
                 </TableCell>
                 <TableCell className="text-right">
                   <Link href={`/admin/pedidos/${order.id}`}>
-                    <Button variant="ghost" size="icon">
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="hover:bg-[hsl(var(--rose-gold))]/20 hover:text-[hsl(var(--burgundy))] transition-colors"
+                    >
                       <Eye className="h-4 w-4" />
                     </Button>
                   </Link>

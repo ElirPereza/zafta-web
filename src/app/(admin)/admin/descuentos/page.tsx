@@ -22,7 +22,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Plus, Trash2, Gift, ToggleLeft, ToggleRight } from "lucide-react";
+import { Plus, Trash2, Gift, ToggleLeft, ToggleRight, Eye } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 
 interface DiscountPopup {
@@ -219,149 +219,174 @@ export default function DescuentosPage() {
     }
   };
 
+  const handleTestPopup = () => {
+    // Clear sessionStorage to allow popup to show again
+    sessionStorage.removeItem("discount-popup-shown");
+    toast.success(
+      "SessionStorage limpiado. Abre una nueva pestaña del sitio para ver el popup.",
+    );
+    // Open the site in a new tab
+    window.open("/inicio", "_blank");
+  };
+
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-semibold text-foreground">
+          <h1 className="text-4xl font-gotham font-bold text-[hsl(var(--burgundy))] mb-2">
             Gestión de Popups de Descuento
           </h1>
-          <p className="text-sm text-muted-foreground font-sans mt-1">
+          <p className="text-[hsl(var(--burgundy))]/70 font-sans text-base">
             Crea y gestiona los popups de descuento que aparecerán en el sitio
             web
           </p>
         </div>
-        <Dialog
-          open={isDialogOpen}
-          onOpenChange={(open) => {
-            setIsDialogOpen(open);
-            if (!open) resetForm();
-          }}
-        >
-          <DialogTrigger asChild>
-            <Button className="gap-2" onClick={() => handleOpenDialog()}>
-              <Plus className="h-4 w-4" />
-              Nuevo Popup
-            </Button>
-          </DialogTrigger>
-          <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
-            <DialogHeader>
-              <DialogTitle>
-                {editingPopup ? "Editar Popup" : "Crear Nuevo Popup"}
-              </DialogTitle>
-              <DialogDescription>
-                Configura el popup de descuento que aparecerá a los usuarios
-              </DialogDescription>
-            </DialogHeader>
-            <div className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="title">Título *</Label>
-                <Input
-                  id="title"
-                  value={title}
-                  onChange={(e) => setTitle(e.target.value)}
-                  placeholder="¡Descuento especial!"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="description">Descripción *</Label>
-                <Textarea
-                  id="description"
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                  placeholder="Obtén un 15% de descuento en tu primera compra..."
-                  rows={3}
-                />
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="discountCode">Código de descuento *</Label>
-                  <Input
-                    id="discountCode"
-                    value={discountCode}
-                    onChange={(e) =>
-                      setDiscountCode(e.target.value.toUpperCase())
-                    }
-                    placeholder="PRIMERA15"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="discountPercent">
-                    Porcentaje de descuento *
-                  </Label>
-                  <Input
-                    id="discountPercent"
-                    type="number"
-                    min="1"
-                    max="100"
-                    value={discountPercent}
-                    onChange={(e) => setDiscountPercent(e.target.value)}
-                    placeholder="15"
-                  />
-                </div>
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="imageUrl">URL de imagen (opcional)</Label>
-                <Input
-                  id="imageUrl"
-                  value={imageUrl}
-                  onChange={(e) => setImageUrl(e.target.value)}
-                  placeholder="https://..."
-                />
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="startDate">Fecha de inicio (opcional)</Label>
-                  <Input
-                    id="startDate"
-                    type="date"
-                    value={startDate}
-                    onChange={(e) => setStartDate(e.target.value)}
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="endDate">Fecha de fin (opcional)</Label>
-                  <Input
-                    id="endDate"
-                    type="date"
-                    value={endDate}
-                    onChange={(e) => setEndDate(e.target.value)}
-                  />
-                </div>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Switch
-                  id="isActive"
-                  checked={isActive}
-                  onCheckedChange={setIsActive}
-                />
-                <Label htmlFor="isActive" className="cursor-pointer">
-                  Activar popup (solo uno puede estar activo)
-                </Label>
-              </div>
-            </div>
-            <DialogFooter>
+        <div className="flex gap-2 flex-shrink-0">
+          <Button
+            variant="outline"
+            className="gap-2 border-[hsl(var(--burgundy))]/30 text-[hsl(var(--burgundy))] hover:bg-[hsl(var(--rose-gold))]/10 hover:border-[hsl(var(--rose-gold))]"
+            onClick={handleTestPopup}
+          >
+            <Eye className="h-4 w-4" />
+            Probar Popup
+          </Button>
+          <Dialog
+            open={isDialogOpen}
+            onOpenChange={(open) => {
+              setIsDialogOpen(open);
+              if (!open) resetForm();
+            }}
+          >
+            <DialogTrigger asChild>
               <Button
-                variant="outline"
-                onClick={() => {
-                  setIsDialogOpen(false);
-                  resetForm();
-                }}
-                disabled={submitting}
+                className="gap-2 bg-[hsl(var(--burgundy))] hover:bg-[hsl(var(--burgundy))]/90 text-white shadow-lg hover:shadow-xl transition-all"
+                onClick={() => handleOpenDialog()}
               >
-                Cancelar
+                <Plus className="h-4 w-4" />
+                Nuevo Popup
               </Button>
-              <Button onClick={handleSubmit} disabled={submitting}>
-                {submitting
-                  ? "Guardando..."
-                  : editingPopup
-                    ? "Actualizar"
-                    : "Crear"}
-              </Button>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
+            </DialogTrigger>
+            <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+              <DialogHeader>
+                <DialogTitle>
+                  {editingPopup ? "Editar Popup" : "Crear Nuevo Popup"}
+                </DialogTitle>
+                <DialogDescription>
+                  Configura el popup de descuento que aparecerá a los usuarios
+                </DialogDescription>
+              </DialogHeader>
+              <div className="space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="title">Título *</Label>
+                  <Input
+                    id="title"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    placeholder="¡Descuento especial!"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="description">Descripción *</Label>
+                  <Textarea
+                    id="description"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    placeholder="Obtén un 15% de descuento en tu primera compra..."
+                    rows={3}
+                  />
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="discountCode">Código de descuento *</Label>
+                    <Input
+                      id="discountCode"
+                      value={discountCode}
+                      onChange={(e) =>
+                        setDiscountCode(e.target.value.toUpperCase())
+                      }
+                      placeholder="PRIMERA15"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="discountPercent">
+                      Porcentaje de descuento *
+                    </Label>
+                    <Input
+                      id="discountPercent"
+                      type="number"
+                      min="1"
+                      max="100"
+                      value={discountPercent}
+                      onChange={(e) => setDiscountPercent(e.target.value)}
+                      placeholder="15"
+                    />
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="imageUrl">URL de imagen (opcional)</Label>
+                  <Input
+                    id="imageUrl"
+                    value={imageUrl}
+                    onChange={(e) => setImageUrl(e.target.value)}
+                    placeholder="https://..."
+                  />
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="startDate">
+                      Fecha de inicio (opcional)
+                    </Label>
+                    <Input
+                      id="startDate"
+                      type="date"
+                      value={startDate}
+                      onChange={(e) => setStartDate(e.target.value)}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="endDate">Fecha de fin (opcional)</Label>
+                    <Input
+                      id="endDate"
+                      type="date"
+                      value={endDate}
+                      onChange={(e) => setEndDate(e.target.value)}
+                    />
+                  </div>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Switch
+                    id="isActive"
+                    checked={isActive}
+                    onCheckedChange={setIsActive}
+                  />
+                  <Label htmlFor="isActive" className="cursor-pointer">
+                    Activar popup (solo uno puede estar activo)
+                  </Label>
+                </div>
+              </div>
+              <DialogFooter>
+                <Button
+                  variant="outline"
+                  onClick={() => {
+                    setIsDialogOpen(false);
+                    resetForm();
+                  }}
+                  disabled={submitting}
+                >
+                  Cancelar
+                </Button>
+                <Button onClick={handleSubmit} disabled={submitting}>
+                  {submitting
+                    ? "Guardando..."
+                    : editingPopup
+                      ? "Actualizar"
+                      : "Crear"}
+                </Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
+        </div>
       </div>
 
       {/* Loading State */}
@@ -373,11 +398,16 @@ export default function DescuentosPage() {
 
       {/* Empty State */}
       {!loading && popups.length === 0 && (
-        <Card className="border-[hsl(var(--beige-400))]">
-          <CardContent className="text-center py-12">
-            <Gift className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-            <p className="text-muted-foreground font-sans">
-              No hay popups de descuento creados
+        <Card className="border-[hsl(var(--beige-400))] border-2 shadow-lg">
+          <CardContent className="text-center py-16">
+            <div className="mx-auto w-20 h-20 rounded-full bg-gradient-to-br from-[hsl(var(--rose-gold))]/20 to-[hsl(var(--rose-gold))]/10 flex items-center justify-center mb-4">
+              <Gift className="h-10 w-10 text-[hsl(var(--burgundy))]" />
+            </div>
+            <h3 className="text-lg font-gotham font-semibold text-[hsl(var(--burgundy))] mb-2">
+              No hay popups de descuento
+            </h3>
+            <p className="text-[hsl(var(--burgundy))]/60 font-sans">
+              Crea tu primer popup para atraer más clientes
             </p>
           </CardContent>
         </Card>
@@ -389,44 +419,54 @@ export default function DescuentosPage() {
           {popups.map((popup) => (
             <Card
               key={popup.id}
-              className="border-[hsl(var(--beige-400))] relative"
+              className="border-[hsl(var(--beige-400))] border-2 shadow-lg hover:shadow-xl transition-all relative overflow-hidden"
             >
+              <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--beige-50))] to-transparent opacity-50" />
               {popup.isActive && (
-                <div className="absolute top-4 right-4">
-                  <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-green-500/10 text-green-700 dark:text-green-400 text-xs font-medium">
+                <div className="absolute top-4 right-4 z-10">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-green-500/20 to-green-600/20 text-green-700 dark:text-green-400 text-xs font-semibold border border-green-500/30">
                     <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
                     Activo
                   </span>
                 </div>
               )}
-              <CardHeader>
-                <CardTitle className="font-sans flex items-start gap-4">
+              <CardHeader className="relative z-10">
+                <CardTitle className="font-gotham flex items-start gap-4">
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-2">
-                      <Gift className="h-5 w-5" />
-                      {popup.title}
+                      <div className="p-2 rounded-lg bg-gradient-to-br from-[hsl(var(--rose-gold))]/20 to-[hsl(var(--rose-gold))]/10">
+                        <Gift className="h-5 w-5 text-[hsl(var(--burgundy))]" />
+                      </div>
+                      <span className="text-[hsl(var(--burgundy))]">
+                        {popup.title}
+                      </span>
                     </div>
                     <CardDescription className="font-sans text-sm">
                       Código:{" "}
-                      <span className="font-bold">{popup.discountCode}</span> -{" "}
-                      {popup.discountPercent}% de descuento
+                      <span className="font-bold text-[hsl(var(--burgundy))]">
+                        {popup.discountCode}
+                      </span>{" "}
+                      -{" "}
+                      <span className="text-[hsl(var(--burgundy))]">
+                        {popup.discountPercent}% de descuento
+                      </span>
                     </CardDescription>
                   </div>
                 </CardTitle>
               </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground mb-4">
+              <CardContent className="relative z-10">
+                <p className="text-sm text-[hsl(var(--burgundy))]/70 font-sans mb-4">
                   {popup.description}
                 </p>
                 {(popup.startDate || popup.endDate) && (
-                  <div className="text-xs text-muted-foreground mb-4">
+                  <div className="text-xs text-[hsl(var(--burgundy))]/60 font-sans mb-4 px-3 py-2 bg-[hsl(var(--beige-100))] rounded-lg">
                     {popup.startDate && (
                       <span>
-                        Desde:{" "}
+                        📅 Desde:{" "}
                         {new Date(popup.startDate).toLocaleDateString("es-CO")}
                       </span>
                     )}
-                    {popup.startDate && popup.endDate && <span> - </span>}
+                    {popup.startDate && popup.endDate && <span> • </span>}
                     {popup.endDate && (
                       <span>
                         Hasta:{" "}
@@ -435,19 +475,24 @@ export default function DescuentosPage() {
                     )}
                   </div>
                 )}
-                <div className="flex gap-2">
+                <div className="flex flex-wrap gap-2">
                   <Button
                     variant="outline"
                     size="sm"
                     onClick={() => handleOpenDialog(popup)}
+                    className="border-[hsl(var(--burgundy))]/30 text-[hsl(var(--burgundy))] hover:bg-[hsl(var(--rose-gold))]/10 hover:border-[hsl(var(--rose-gold))]"
                   >
                     Editar
                   </Button>
                   <Button
-                    variant={popup.isActive ? "secondary" : "default"}
+                    variant={popup.isActive ? "outline" : "default"}
                     size="sm"
                     onClick={() => handleToggleActive(popup)}
-                    className="gap-2"
+                    className={
+                      popup.isActive
+                        ? "gap-2 border-orange-300 text-orange-700 hover:bg-orange-50"
+                        : "gap-2 bg-green-600 hover:bg-green-700 text-white"
+                    }
                   >
                     {popup.isActive ? (
                       <>
@@ -462,10 +507,10 @@ export default function DescuentosPage() {
                     )}
                   </Button>
                   <Button
-                    variant="destructive"
+                    variant="outline"
                     size="sm"
                     onClick={() => handleDelete(popup)}
-                    className="gap-2"
+                    className="gap-2 border-red-300 text-red-700 hover:bg-red-50 hover:border-red-500"
                   >
                     <Trash2 className="h-4 w-4" />
                     Eliminar

@@ -85,8 +85,10 @@ export default async function InvoicesPage() {
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-semibold text-foreground">Facturas</h1>
-        <p className="text-sm text-muted-foreground font-sans mt-1">
+        <h1 className="text-4xl font-gotham font-bold text-[hsl(var(--burgundy))] mb-2">
+          Facturas
+        </h1>
+        <p className="text-[hsl(var(--burgundy))]/70 font-sans text-base">
           Gestiona las facturas de los pedidos
         </p>
       </div>
@@ -141,15 +143,20 @@ export default async function InvoicesPage() {
         </CardHeader>
         <CardContent>
           {invoices.length === 0 ? (
-            <div className="text-center py-12 border border-dashed border-[hsl(var(--beige-400))] rounded-lg bg-[hsl(var(--beige-50))]">
-              <FileText className="mx-auto h-12 w-12 text-muted-foreground mb-4" />
-              <h3 className="text-lg font-sans font-semibold text-foreground mb-2">
-                No hay facturas
-              </h3>
-              <p className="text-sm text-muted-foreground font-sans">
-                Las facturas se generarán automáticamente cuando se confirmen
-                pedidos
-              </p>
+            <div className="relative overflow-hidden text-center py-12 border-2 border-dashed border-[hsl(var(--beige-400))] rounded-xl bg-gradient-to-br from-[hsl(var(--beige-50))] to-white shadow-sm">
+              <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--rose-gold))]/5 to-transparent" />
+              <div className="relative z-10">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-[hsl(var(--rose-gold))]/20 to-[hsl(var(--rose-gold))]/10 mb-4">
+                  <FileText className="h-8 w-8 text-[hsl(var(--burgundy))]" />
+                </div>
+                <h3 className="text-lg font-gotham font-semibold text-[hsl(var(--burgundy))] mb-2">
+                  No hay facturas
+                </h3>
+                <p className="text-sm text-[hsl(var(--burgundy))]/60 font-sans">
+                  Las facturas se generarán automáticamente cuando se confirmen
+                  pedidos
+                </p>
+              </div>
             </div>
           ) : (
             <div className="border border-[hsl(var(--beige-400))] rounded-lg overflow-hidden">

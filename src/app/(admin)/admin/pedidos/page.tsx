@@ -2,15 +2,15 @@ import { OrdersTable } from "@/components/admin/orders/OrdersTable";
 
 export default function OrdersPage() {
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-semibold text-foreground">Pedidos</h1>
-          <p className="text-sm text-muted-foreground font-sans mt-1">
-            Gestiona todos los pedidos de tu tienda
-          </p>
-        </div>
+      <div className="mb-8">
+        <h1 className="text-4xl font-gotham font-bold text-[hsl(var(--burgundy))] mb-2">
+          Pedidos
+        </h1>
+        <p className="text-[hsl(var(--burgundy))]/70 font-sans text-base">
+          Gestiona todos los pedidos de tu tienda
+        </p>
       </div>
 
       {/* Orders Table */}

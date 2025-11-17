@@ -1,7 +1,7 @@
 "use client";
 
 import type { Product } from "@prisma/client";
-import { Eye, Pencil, Trash2, GripVertical } from "lucide-react";
+import { Eye, Pencil, Trash2, GripVertical, Package } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
@@ -59,22 +59,22 @@ function SortableRow({ product, onDelete, formatPrice }: SortableRowProps) {
     <TableRow
       ref={setNodeRef}
       style={style}
-      className={isDragging ? "bg-beige-100" : ""}
+      className={`${isDragging ? "bg-gradient-to-r from-[hsl(var(--rose-gold))]/20 to-transparent" : ""} hover:bg-gradient-to-r hover:from-[hsl(var(--rose-gold))]/5 hover:to-transparent transition-colors border-b border-[hsl(var(--beige-300))]/50`}
     >
       {/* Drag Handle - Always visible */}
       <TableCell className="w-8 md:w-12">
         <button
-          className="cursor-grab active:cursor-grabbing p-1 md:p-2 hover:bg-beige-100 rounded-md transition-colors"
+          className="cursor-grab active:cursor-grabbing p-1 md:p-2 hover:bg-[hsl(var(--rose-gold))]/20 rounded-md transition-colors"
           {...attributes}
           {...listeners}
         >
-          <GripVertical className="h-4 w-4 md:h-5 md:w-5 text-muted-foreground" />
+          <GripVertical className="h-4 w-4 md:h-5 md:w-5 text-[hsl(var(--burgundy))]/70" />
         </button>
       </TableCell>
 
       {/* Image - Smaller on mobile */}
       <TableCell className="w-12 md:w-16">
-        <div className="relative w-12 h-12 md:w-16 md:h-16 rounded-lg overflow-hidden bg-beige-100">
+        <div className="relative w-12 h-12 md:w-16 md:h-16 rounded-lg overflow-hidden bg-gradient-to-br from-[hsl(var(--beige-100))] to-[hsl(var(--beige-50))] border-2 border-[hsl(var(--beige-300))]">
           {product.images && product.images.length > 0 ? (
             <Image
               src={product.images[0]}
@@ -84,30 +84,33 @@ function SortableRow({ product, onDelete, formatPrice }: SortableRowProps) {
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center">
-              <Eye className="h-4 w-4 md:h-6 md:w-6 text-muted-foreground" />
+              <Eye className="h-4 w-4 md:h-6 md:w-6 text-[hsl(var(--burgundy))]/50" />
             </div>
           )}
         </div>
       </TableCell>
 
       {/* Name - Always visible */}
-      <TableCell className="font-sans font-medium text-sm md:text-base">
+      <TableCell className="font-sans font-semibold text-sm md:text-base text-[hsl(var(--burgundy))]">
         {product.name}
       </TableCell>
 
       {/* Category - Hidden on mobile */}
       <TableCell className="hidden md:table-cell font-sans">
         {product.category ? (
-          <Badge variant="outline" className="font-sans text-xs">
+          <Badge
+            variant="outline"
+            className="font-sans text-xs bg-gradient-to-r from-[hsl(var(--rose-gold))]/20 to-[hsl(var(--rose-gold))]/10 text-[hsl(var(--burgundy))] border-[hsl(var(--rose-gold))]/40"
+          >
             {product.category}
           </Badge>
         ) : (
-          <span className="text-muted-foreground text-sm">-</span>
+          <span className="text-[hsl(var(--burgundy))]/50 text-sm">-</span>
         )}
       </TableCell>
 
       {/* Price - Smaller font on mobile */}
-      <TableCell className="font-sans text-sm md:text-base">
+      <TableCell className="font-sans font-semibold text-sm md:text-base text-[hsl(var(--burgundy))]">
         {formatPrice(Number(product.price))}
       </TableCell>
 
@@ -115,7 +118,11 @@ function SortableRow({ product, onDelete, formatPrice }: SortableRowProps) {
       <TableCell className="hidden lg:table-cell font-sans">
         <Badge
           variant={product.inStock ? "default" : "secondary"}
-          className="font-sans text-xs"
+          className={`font-sans text-xs ${
+            product.inStock
+              ? "bg-gradient-to-r from-green-50 to-green-100 text-green-700 border-green-300"
+              : "bg-gradient-to-r from-red-50 to-red-100 text-red-700 border-red-300"
+          }`}
         >
           {product.inStock ? "En Stock" : "Agotado"}
         </Badge>
@@ -125,7 +132,11 @@ function SortableRow({ product, onDelete, formatPrice }: SortableRowProps) {
       <TableCell className="hidden md:table-cell">
         <Badge
           variant={product.featured ? "default" : "outline"}
-          className="font-sans text-xs"
+          className={`font-sans text-xs ${
+            product.featured
+              ? "bg-gradient-to-r from-[hsl(var(--burgundy))]/90 to-[hsl(var(--burgundy))] text-white border-[hsl(var(--burgundy))]"
+              : "text-[hsl(var(--burgundy))]/50 border-[hsl(var(--beige-300))]"
+          }`}
         >
           {product.featured ? "Destacado" : "-"}
         </Badge>
@@ -138,7 +149,7 @@ function SortableRow({ product, onDelete, formatPrice }: SortableRowProps) {
             <Button
               variant="ghost"
               size="icon"
-              className="h-8 w-8 md:h-10 md:w-10"
+              className="h-8 w-8 md:h-10 md:w-10 hover:bg-[hsl(var(--rose-gold))]/20 hover:text-[hsl(var(--burgundy))]"
             >
               <Pencil className="h-3 w-3 md:h-4 md:w-4" />
             </Button>
@@ -147,7 +158,7 @@ function SortableRow({ product, onDelete, formatPrice }: SortableRowProps) {
             variant="ghost"
             size="icon"
             onClick={() => onDelete(product.id)}
-            className="h-8 w-8 md:h-10 md:w-10"
+            className="h-8 w-8 md:h-10 md:w-10 hover:bg-red-50 hover:text-red-600"
           >
             <Trash2 className="h-3 w-3 md:h-4 md:w-4 text-red-600" />
           </Button>
@@ -292,30 +303,43 @@ export function ProductsTable() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-12">
-        <p className="text-muted-foreground font-sans">Cargando productos...</p>
+        <div className="flex flex-col items-center gap-3">
+          <div className="w-8 h-8 border-4 border-[hsl(var(--rose-gold))]/30 border-t-[hsl(var(--burgundy))] rounded-full animate-spin" />
+          <p className="text-[hsl(var(--burgundy))]/70 font-sans">
+            Cargando productos...
+          </p>
+        </div>
       </div>
     );
   }
 
   if (products.length === 0) {
     return (
-      <div className="text-center py-12 border border-dashed border-beige-400 rounded-lg bg-beige-50">
-        <h3 className="text-lg font-sans font-semibold text-foreground mb-2">
-          No hay productos
-        </h3>
-        <p className="text-sm text-muted-foreground font-sans mb-4">
-          Comienza agregando tu primer producto al catálogo
-        </p>
-        <Link href="/admin/productos/nuevo">
-          <Button>Crear Producto</Button>
-        </Link>
+      <div className="relative overflow-hidden text-center py-12 border-2 border-dashed border-[hsl(var(--beige-400))] rounded-xl bg-gradient-to-br from-[hsl(var(--beige-50))] to-white shadow-sm">
+        <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--rose-gold))]/5 to-transparent" />
+        <div className="relative z-10">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-[hsl(var(--rose-gold))]/20 to-[hsl(var(--rose-gold))]/10 mb-4">
+            <Package className="h-8 w-8 text-[hsl(var(--burgundy))]" />
+          </div>
+          <h3 className="text-lg font-gotham font-semibold text-[hsl(var(--burgundy))] mb-2">
+            No hay productos
+          </h3>
+          <p className="text-sm text-[hsl(var(--burgundy))]/60 font-sans mb-4">
+            Comienza agregando tu primer producto al catálogo
+          </p>
+          <Link href="/admin/productos/nuevo">
+            <Button className="bg-[hsl(var(--burgundy))] hover:bg-[hsl(var(--burgundy))]/90 text-white shadow-lg">
+              Crear Producto
+            </Button>
+          </Link>
+        </div>
       </div>
     );
   }
 
   return (
     <div className="space-y-4">
-      <div className="border border-beige-400 rounded-lg overflow-hidden bg-white">
+      <div className="border-2 border-[hsl(var(--beige-400))] rounded-xl overflow-hidden bg-white shadow-lg">
         <div className="overflow-x-auto">
           <DndContext
             sensors={sensors}
@@ -324,27 +348,27 @@ export function ProductsTable() {
           >
             <Table className="min-w-full">
               <TableHeader>
-                <TableRow className="bg-beige-100">
-                  <TableHead className="font-sans font-semibold w-8 md:w-12"></TableHead>
-                  <TableHead className="font-sans font-semibold w-12 md:w-16 text-xs md:text-sm">
+                <TableRow className="bg-gradient-to-r from-[hsl(var(--beige-100))] to-[hsl(var(--beige-50))] hover:from-[hsl(var(--beige-200))] hover:to-[hsl(var(--beige-100))]">
+                  <TableHead className="font-gotham font-semibold w-8 md:w-12 text-[hsl(var(--burgundy))]"></TableHead>
+                  <TableHead className="font-gotham font-semibold w-12 md:w-16 text-xs md:text-sm text-[hsl(var(--burgundy))]">
                     Imagen
                   </TableHead>
-                  <TableHead className="font-sans font-semibold text-xs md:text-sm">
+                  <TableHead className="font-gotham font-semibold text-xs md:text-sm text-[hsl(var(--burgundy))]">
                     Nombre
                   </TableHead>
-                  <TableHead className="hidden md:table-cell font-sans font-semibold text-xs md:text-sm">
+                  <TableHead className="hidden md:table-cell font-gotham font-semibold text-xs md:text-sm text-[hsl(var(--burgundy))]">
                     Categoría
                   </TableHead>
-                  <TableHead className="font-sans font-semibold text-xs md:text-sm">
+                  <TableHead className="font-gotham font-semibold text-xs md:text-sm text-[hsl(var(--burgundy))]">
                     Precio
                   </TableHead>
-                  <TableHead className="hidden lg:table-cell font-sans font-semibold text-xs md:text-sm">
+                  <TableHead className="hidden lg:table-cell font-gotham font-semibold text-xs md:text-sm text-[hsl(var(--burgundy))]">
                     Stock
                   </TableHead>
-                  <TableHead className="hidden md:table-cell font-sans font-semibold text-xs md:text-sm">
+                  <TableHead className="hidden md:table-cell font-gotham font-semibold text-xs md:text-sm text-[hsl(var(--burgundy))]">
                     Destacado
                   </TableHead>
-                  <TableHead className="font-sans font-semibold text-right text-xs md:text-sm w-20 md:w-auto">
+                  <TableHead className="font-gotham font-semibold text-right text-xs md:text-sm w-20 md:w-auto text-[hsl(var(--burgundy))]">
                     Acciones
                   </TableHead>
                 </TableRow>
@@ -370,11 +394,11 @@ export function ProductsTable() {
       </div>
 
       {hasChanges && (
-        <div className="flex justify-end">
+        <div className="flex justify-end p-4 rounded-xl bg-gradient-to-r from-[hsl(var(--rose-gold))]/10 to-transparent border border-[hsl(var(--rose-gold))]/30">
           <Button
             onClick={handleSaveOrder}
             disabled={saving}
-            className="font-sans"
+            className="font-gotham bg-[hsl(var(--burgundy))] hover:bg-[hsl(var(--burgundy))]/90 text-white shadow-lg"
           >
             {saving ? "Guardando..." : "Guardar Orden"}
           </Button>

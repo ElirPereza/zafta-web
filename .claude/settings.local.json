@@ -14,7 +14,13 @@
       "Bash(del nul 2)",
       "Bash(bunx next build:*)",
       "Bash(bun pm:*)",
-      "Bash(git restore:*)"
+      "Bash(git restore:*)",
+      "Bash(bunx prisma db push:*)",
+      "Bash(bunx prisma generate:*)",
+      "Bash(bun run format:*)",
+      "Bash(cmd /c \"if exist .next rmdir /S /Q .next\")",
+      "Bash(rm:*)",
+      "Bash(bun dev)"
     ],
     "deny": [],
     "ask": []

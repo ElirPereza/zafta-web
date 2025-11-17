@@ -5,17 +5,19 @@ import Link from "next/link";
 
 export default function ProductsPage() {
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-semibold text-foreground">Productos</h1>
-          <p className="text-sm text-muted-foreground font-sans mt-1">
+          <h1 className="text-4xl font-gotham font-bold text-[hsl(var(--burgundy))] mb-2">
+            Productos
+          </h1>
+          <p className="text-[hsl(var(--burgundy))]/70 font-sans text-base">
             Gestiona el catálogo de productos de ZAFTA
           </p>
         </div>
         <Link href="/admin/productos/nuevo">
-          <Button className="gap-2">
+          <Button className="gap-2 bg-[hsl(var(--burgundy))] hover:bg-[hsl(var(--burgundy))]/90 text-white shadow-lg hover:shadow-xl transition-all">
             <Plus className="h-4 w-4" />
             Nuevo Producto
           </Button>

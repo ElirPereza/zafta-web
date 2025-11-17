@@ -5,18 +5,27 @@ import { currentUser } from "@clerk/nextjs/server";
 // GET /api/discount-popup - Get active discount popup
 export async function GET(request: NextRequest) {
   try {
+    const now = new Date();
+
     const popup = await prisma.discountPopup.findFirst({
       where: {
         isActive: true,
         OR: [
-          {
-            AND: [
-              { startDate: { lte: new Date() } },
-              { endDate: { gte: new Date() } },
-            ],
-          },
+          // Case 1: Both dates are null (always active)
           {
             AND: [{ startDate: null }, { endDate: null }],
+          },
+          // Case 2: Only startDate is set (active after start)
+          {
+            AND: [{ startDate: { lte: now } }, { endDate: null }],
+          },
+          // Case 3: Only endDate is set (active until end)
+          {
+            AND: [{ startDate: null }, { endDate: { gte: now } }],
+          },
+          // Case 4: Both dates are set (active in range)
+          {
+            AND: [{ startDate: { lte: now } }, { endDate: { gte: now } }],
           },
         ],
       },
