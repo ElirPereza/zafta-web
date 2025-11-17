@@ -102,6 +102,7 @@ export function OrdersTable() {
       day: "numeric",
       hour: "2-digit",
       minute: "2-digit",
+      hour12: false, // Use 24-hour format to avoid "a. m." / "p. m." wrapping
     });
   };
 
@@ -185,10 +186,10 @@ export function OrdersTable() {
                 <TableHead className="font-gotham font-bold text-[hsl(var(--midnight-navy))] min-w-[200px]">
                   Cliente
                 </TableHead>
-                <TableHead className="font-gotham font-bold text-[hsl(var(--midnight-navy))] w-[150px]">
+                <TableHead className="font-gotham font-bold text-[hsl(var(--midnight-navy))] w-[180px]">
                   Fecha
                 </TableHead>
-                <TableHead className="font-gotham font-bold text-[hsl(var(--midnight-navy))] w-[120px]">
+                <TableHead className="font-gotham font-bold text-[hsl(var(--midnight-navy))] w-[130px]">
                   Total
                 </TableHead>
                 <TableHead className="font-gotham font-bold text-[hsl(var(--midnight-navy))] w-[140px]">
@@ -221,7 +222,7 @@ export function OrdersTable() {
                       </p>
                     </div>
                   </TableCell>
-                  <TableCell className="font-sans text-sm text-[hsl(var(--midnight-navy))]/70">
+                  <TableCell className="font-sans text-sm text-[hsl(var(--midnight-navy))]/70 whitespace-nowrap">
                     {formatDate(order.createdAt)}
                   </TableCell>
                   <TableCell className="font-sans font-bold text-[hsl(var(--midnight-navy))]" style={{ fontFamily: 'Fredoka, sans-serif' }}>
