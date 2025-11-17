@@ -34,13 +34,6 @@ export function DiscountPopup({ onClose }: DiscountPopupProps) {
       return;
     }
 
-    // Check if user permanently dismissed the popup
-    const permanentlyDismissed = localStorage.getItem("discount-popup-dismissed");
-    if (permanentlyDismissed === "true") {
-      setHasBeenShown(true);
-      return;
-    }
-
     // Fetch active popup
     const fetchPopup = async () => {
       try {
@@ -77,11 +70,8 @@ export function DiscountPopup({ onClose }: DiscountPopupProps) {
   }, []);
 
   const handleClose = () => {
-    // Permanently dismiss the popup
-    localStorage.setItem("discount-popup-dismissed", "true");
-    setIsOpen(false);
+    // Just close the modal, keep floating button visible
     setShowFullPopup(false);
-    onClose?.();
   };
 
   const handleTogglePopup = () => {

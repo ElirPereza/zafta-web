@@ -202,3 +202,29 @@ model DiscountPopup {
 
   @@index([isActive])
 }
+
+// ============================================================================
+// FREE SHIPPING MODELS
+// ============================================================================
+
+model FreeShippingRule {
+  id                String   @id @default(cuid())
+  name              String   // Descriptive name (e.g., "Envío gratis por compra mayor a $50.000")
+  type              ShippingRuleType @default(MINIMUM_PURCHASE) // Type of rule
+  minimumAmount     Decimal? @db.Decimal(10, 2) // Minimum purchase amount for free shipping
+  cities            String[] // List of cities with free shipping (empty = all cities)
+  departments       String[] // List of departments with free shipping (empty = all departments)
+  isActive          Boolean  @default(true) // Whether this rule is currently active
+  priority          Int      @default(0) // Higher priority rules are checked first
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@index([isActive])
+  @@index([priority])
+}
+
+enum ShippingRuleType {
+  MINIMUM_PURCHASE  // Free shipping when purchase exceeds minimumAmount
+  SPECIFIC_LOCATION // Free shipping for specific cities/departments
+  ALWAYS_FREE       // Always free shipping
+}

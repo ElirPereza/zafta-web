@@ -23,8 +23,8 @@ function AdminLayoutClient({ children }: { children: React.ReactNode }) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[hsl(var(--beige-50))] via-[hsl(var(--rose-gold))]/5 to-[hsl(var(--beige-100))]">
         <div className="text-center">
-          <div className="animate-spin h-12 w-12 border-4 border-[hsl(var(--burgundy))] border-t-transparent rounded-full mx-auto mb-4" />
-          <p className="text-[hsl(var(--burgundy))] font-sans">Cargando...</p>
+          <div className="animate-spin h-12 w-12 border-4 border-[hsl(var(--rose-gold))] border-t-transparent rounded-full mx-auto mb-4" />
+          <p className="text-[hsl(var(--rose-gold))] font-sans">Cargando...</p>
         </div>
       </div>
     );

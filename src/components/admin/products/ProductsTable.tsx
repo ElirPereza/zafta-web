@@ -68,7 +68,7 @@ function SortableRow({ product, onDelete, formatPrice }: SortableRowProps) {
           {...attributes}
           {...listeners}
         >
-          <GripVertical className="h-4 w-4 md:h-5 md:w-5 text-[hsl(var(--burgundy))]/70" />
+          <GripVertical className="h-4 w-4 md:h-5 md:w-5 text-[hsl(var(--rose-gold))]/70" />
         </button>
       </TableCell>
 
@@ -84,14 +84,14 @@ function SortableRow({ product, onDelete, formatPrice }: SortableRowProps) {
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center">
-              <Eye className="h-4 w-4 md:h-6 md:w-6 text-[hsl(var(--burgundy))]/50" />
+              <Eye className="h-4 w-4 md:h-6 md:w-6 text-[hsl(var(--rose-gold))]/50" />
             </div>
           )}
         </div>
       </TableCell>
 
       {/* Name - Always visible */}
-      <TableCell className="font-sans font-semibold text-sm md:text-base text-[hsl(var(--burgundy))]">
+      <TableCell className="font-sans font-semibold text-sm md:text-base text-[hsl(var(--rose-gold))]">
         {product.name}
       </TableCell>
 
@@ -100,17 +100,17 @@ function SortableRow({ product, onDelete, formatPrice }: SortableRowProps) {
         {product.category ? (
           <Badge
             variant="outline"
-            className="font-sans text-xs bg-gradient-to-r from-[hsl(var(--rose-gold))]/20 to-[hsl(var(--rose-gold))]/10 text-[hsl(var(--burgundy))] border-[hsl(var(--rose-gold))]/40"
+            className="font-sans text-xs bg-gradient-to-r from-[hsl(var(--rose-gold))]/20 to-[hsl(var(--rose-gold))]/10 text-[hsl(var(--rose-gold))] border-[hsl(var(--rose-gold))]/40"
           >
             {product.category}
           </Badge>
         ) : (
-          <span className="text-[hsl(var(--burgundy))]/50 text-sm">-</span>
+          <span className="text-[hsl(var(--rose-gold))]/50 text-sm">-</span>
         )}
       </TableCell>
 
       {/* Price - Smaller font on mobile */}
-      <TableCell className="font-sans font-semibold text-sm md:text-base text-[hsl(var(--burgundy))]">
+      <TableCell className="font-semibold text-sm md:text-base text-[hsl(var(--rose-gold))]" style={{ fontFamily: 'Fredoka, sans-serif' }}>
         {formatPrice(Number(product.price))}
       </TableCell>
 
@@ -134,8 +134,8 @@ function SortableRow({ product, onDelete, formatPrice }: SortableRowProps) {
           variant={product.featured ? "default" : "outline"}
           className={`font-sans text-xs ${
             product.featured
-              ? "bg-gradient-to-r from-[hsl(var(--burgundy))]/90 to-[hsl(var(--burgundy))] text-white border-[hsl(var(--burgundy))]"
-              : "text-[hsl(var(--burgundy))]/50 border-[hsl(var(--beige-300))]"
+              ? "bg-gradient-to-r from-[hsl(var(--rose-gold))]/90 to-[hsl(var(--rose-gold))] text-white border-[hsl(var(--rose-gold))]"
+              : "text-[hsl(var(--rose-gold))]/50 border-[hsl(var(--beige-300))]"
           }`}
         >
           {product.featured ? "Destacado" : "-"}
@@ -149,7 +149,7 @@ function SortableRow({ product, onDelete, formatPrice }: SortableRowProps) {
             <Button
               variant="ghost"
               size="icon"
-              className="h-8 w-8 md:h-10 md:w-10 hover:bg-[hsl(var(--rose-gold))]/20 hover:text-[hsl(var(--burgundy))]"
+              className="h-8 w-8 md:h-10 md:w-10 hover:bg-[hsl(var(--rose-gold))]/20 hover:text-[hsl(var(--rose-gold))]"
             >
               <Pencil className="h-3 w-3 md:h-4 md:w-4" />
             </Button>
@@ -304,8 +304,8 @@ export function ProductsTable() {
     return (
       <div className="flex items-center justify-center py-12">
         <div className="flex flex-col items-center gap-3">
-          <div className="w-8 h-8 border-4 border-[hsl(var(--rose-gold))]/30 border-t-[hsl(var(--burgundy))] rounded-full animate-spin" />
-          <p className="text-[hsl(var(--burgundy))]/70 font-sans">
+          <div className="w-8 h-8 border-4 border-[hsl(var(--rose-gold))]/30 border-t-[hsl(var(--rose-gold))] rounded-full animate-spin" />
+          <p className="text-[hsl(var(--rose-gold))]/70 font-sans">
             Cargando productos...
           </p>
         </div>
@@ -319,16 +319,16 @@ export function ProductsTable() {
         <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--rose-gold))]/5 to-transparent" />
         <div className="relative z-10">
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-[hsl(var(--rose-gold))]/20 to-[hsl(var(--rose-gold))]/10 mb-4">
-            <Package className="h-8 w-8 text-[hsl(var(--burgundy))]" />
+            <Package className="h-8 w-8 text-[hsl(var(--rose-gold))]" />
           </div>
-          <h3 className="text-lg font-gotham font-semibold text-[hsl(var(--burgundy))] mb-2">
+          <h3 className="text-lg font-gotham font-semibold text-[hsl(var(--rose-gold))] mb-2">
             No hay productos
           </h3>
-          <p className="text-sm text-[hsl(var(--burgundy))]/60 font-sans mb-4">
+          <p className="text-sm text-[hsl(var(--rose-gold))]/60 font-sans mb-4">
             Comienza agregando tu primer producto al catálogo
           </p>
           <Link href="/admin/productos/nuevo">
-            <Button className="bg-[hsl(var(--burgundy))] hover:bg-[hsl(var(--burgundy))]/90 text-white shadow-lg">
+            <Button className="bg-[hsl(var(--rose-gold))] hover:bg-[hsl(var(--rose-gold))]/90 text-white shadow-lg">
               Crear Producto
             </Button>
           </Link>
@@ -340,35 +340,35 @@ export function ProductsTable() {
   return (
     <div className="space-y-4">
       <div className="border-2 border-[hsl(var(--beige-400))] rounded-xl overflow-hidden bg-white shadow-lg">
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto scrollbar-thin scrollbar-thumb-[hsl(var(--rose-gold))] scrollbar-track-[hsl(var(--beige-100))]">
           <DndContext
             sensors={sensors}
             collisionDetection={closestCenter}
             onDragEnd={handleDragEnd}
           >
-            <Table className="min-w-full">
+            <Table className="min-w-[800px] w-full">
               <TableHeader>
                 <TableRow className="bg-gradient-to-r from-[hsl(var(--beige-100))] to-[hsl(var(--beige-50))] hover:from-[hsl(var(--beige-200))] hover:to-[hsl(var(--beige-100))]">
-                  <TableHead className="font-gotham font-semibold w-8 md:w-12 text-[hsl(var(--burgundy))]"></TableHead>
-                  <TableHead className="font-gotham font-semibold w-12 md:w-16 text-xs md:text-sm text-[hsl(var(--burgundy))]">
+                  <TableHead className="font-gotham font-semibold w-8 md:w-12 text-[hsl(var(--rose-gold))]"></TableHead>
+                  <TableHead className="font-gotham font-semibold w-12 md:w-16 text-xs md:text-sm text-[hsl(var(--rose-gold))]">
                     Imagen
                   </TableHead>
-                  <TableHead className="font-gotham font-semibold text-xs md:text-sm text-[hsl(var(--burgundy))]">
+                  <TableHead className="font-gotham font-semibold text-xs md:text-sm text-[hsl(var(--rose-gold))]">
                     Nombre
                   </TableHead>
-                  <TableHead className="hidden md:table-cell font-gotham font-semibold text-xs md:text-sm text-[hsl(var(--burgundy))]">
+                  <TableHead className="hidden md:table-cell font-gotham font-semibold text-xs md:text-sm text-[hsl(var(--rose-gold))]">
                     Categoría
                   </TableHead>
-                  <TableHead className="font-gotham font-semibold text-xs md:text-sm text-[hsl(var(--burgundy))]">
+                  <TableHead className="font-gotham font-semibold text-xs md:text-sm text-[hsl(var(--rose-gold))]">
                     Precio
                   </TableHead>
-                  <TableHead className="hidden lg:table-cell font-gotham font-semibold text-xs md:text-sm text-[hsl(var(--burgundy))]">
+                  <TableHead className="hidden lg:table-cell font-gotham font-semibold text-xs md:text-sm text-[hsl(var(--rose-gold))]">
                     Stock
                   </TableHead>
-                  <TableHead className="hidden md:table-cell font-gotham font-semibold text-xs md:text-sm text-[hsl(var(--burgundy))]">
+                  <TableHead className="hidden md:table-cell font-gotham font-semibold text-xs md:text-sm text-[hsl(var(--rose-gold))]">
                     Destacado
                   </TableHead>
-                  <TableHead className="font-gotham font-semibold text-right text-xs md:text-sm w-20 md:w-auto text-[hsl(var(--burgundy))]">
+                  <TableHead className="font-gotham font-semibold text-right text-xs md:text-sm w-20 md:w-auto text-[hsl(var(--rose-gold))]">
                     Acciones
                   </TableHead>
                 </TableRow>

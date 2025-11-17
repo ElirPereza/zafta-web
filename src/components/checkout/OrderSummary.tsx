@@ -1,17 +1,22 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useCartStore } from "@/store/cartStore";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
-import { Tag, Loader2, Check, X } from "lucide-react";
+import { Tag, Loader2, Check, X, Truck } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 
 interface OrderSummaryProps {
   shippingCost?: number;
   customerEmail?: string; // Email to check if code was already used
+  shippingLocation?: {
+    city: string;
+    department: string;
+  } | null;
   onDiscountApplied?: (discount: {
     code: string;
     percent: number;
@@ -22,6 +27,7 @@ interface OrderSummaryProps {
 export function OrderSummary({
   shippingCost = 0,
   customerEmail,
+  shippingLocation,
   onDiscountApplied,
 }: OrderSummaryProps) {
   const items = useCartStore((state) => state.items);
@@ -35,9 +41,45 @@ export function OrderSummary({
   } | null>(null);
   const [isValidating, setIsValidating] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [freeShippingQualified, setFreeShippingQualified] = useState<{
+    qualifies: boolean;
+    rule: { id: string; name: string; type: string } | null;
+  } | null>(null);
 
   const discountAmount = appliedDiscount ? appliedDiscount.amount : 0;
-  const total = subtotal + shippingCost - discountAmount;
+  const actualShippingCost =
+    freeShippingQualified?.qualifies ? 0 : shippingCost;
+  const total = subtotal + actualShippingCost - discountAmount;
+
+  // Check for free shipping whenever location or subtotal changes
+  useEffect(() => {
+    const checkFreeShipping = async () => {
+      if (!shippingLocation?.city || !shippingLocation?.department) {
+        setFreeShippingQualified(null);
+        return;
+      }
+
+      try {
+        const response = await fetch("/api/free-shipping/validate", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            subtotal,
+            city: shippingLocation.city,
+            department: shippingLocation.department,
+          }),
+        });
+
+        const data = await response.json();
+        setFreeShippingQualified(data);
+      } catch (error) {
+        console.error("Error checking free shipping:", error);
+        setFreeShippingQualified(null);
+      }
+    };
+
+    checkFreeShipping();
+  }, [shippingLocation, subtotal]);
 
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat("es-CO", {
@@ -227,9 +269,24 @@ export function OrderSummary({
         )}
 
         <div className="flex justify-between text-sm font-sans">
-          <span className="text-muted-foreground">Envío</span>
+          <span className="text-muted-foreground flex items-center gap-2">
+            Envío
+            {freeShippingQualified?.qualifies && (
+              <Badge
+                variant="outline"
+                className="bg-green-50 text-green-700 border-green-300 font-sans text-xs"
+              >
+                <Truck className="h-3 w-3 mr-1" />
+                ¡Gratis!
+              </Badge>
+            )}
+          </span>
           <span className="font-medium" style={{ fontFamily: 'Fredoka, sans-serif' }}>
-            {shippingCost > 0 ? formatPrice(shippingCost) : "Por calcular"}
+            {freeShippingQualified?.qualifies
+              ? formatPrice(0)
+              : shippingCost > 0
+                ? formatPrice(shippingCost)
+                : "Por calcular"}
           </span>
         </div>
 

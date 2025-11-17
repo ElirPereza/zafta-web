@@ -9,6 +9,7 @@ import {
   FileText,
   Images,
   Gift,
+  Truck,
   X,
 } from "lucide-react";
 import { Logo } from "@/components/ui/logo";
@@ -45,6 +46,11 @@ const navigation = [
     href: "/admin/descuentos",
     icon: Gift,
   },
+  {
+    name: "Envío Gratis",
+    href: "/admin/envio-gratis",
+    icon: Truck,
+  },
 ];
 
 interface AdminSidebarProps {
@@ -61,10 +67,10 @@ export function AdminSidebar({ isOpen = false, onClose }: AdminSidebarProps) {
       <div className="flex items-center justify-between h-20 px-6 border-b border-white/10">
         <Link href="/admin" className="flex items-center" onClick={onClose}>
           <Logo
-            variant="banner-orange"
-            width={120}
-            height={97}
-            className="h-12 w-auto"
+            variant="zafta-text"
+            width={140}
+            height={32}
+            className="h-8 w-auto"
           />
         </Link>
         {/* Close button - only visible on mobile */}

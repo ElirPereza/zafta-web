@@ -44,7 +44,7 @@ const ORDER_STATUS_COLORS: Record<OrderStatus, string> = {
   PENDING:
     "bg-gradient-to-r from-yellow-50 to-yellow-100 text-yellow-700 border-yellow-300 shadow-sm",
   CONFIRMED:
-    "bg-gradient-to-r from-[hsl(var(--rose-gold))]/20 to-[hsl(var(--rose-gold))]/10 text-[hsl(var(--burgundy))] border-[hsl(var(--rose-gold))]/40 shadow-sm",
+    "bg-gradient-to-r from-[hsl(var(--rose-gold))]/20 to-[hsl(var(--rose-gold))]/10 text-[hsl(var(--rose-gold))] border-[hsl(var(--rose-gold))]/40 shadow-sm",
   PREPARING:
     "bg-gradient-to-r from-purple-50 to-purple-100 text-purple-700 border-purple-300 shadow-sm",
   IN_TRANSIT:
@@ -62,7 +62,7 @@ const PAYMENT_STATUS_COLORS: Record<PaymentStatus, string> = {
   FAILED:
     "bg-gradient-to-r from-red-50 to-red-100 text-red-700 border-red-300 shadow-sm",
   REFUNDED:
-    "bg-gradient-to-r from-[hsl(var(--beige-200))] to-[hsl(var(--beige-100))] text-[hsl(var(--burgundy))]/70 border-[hsl(var(--beige-400))] shadow-sm",
+    "bg-gradient-to-r from-[hsl(var(--beige-200))] to-[hsl(var(--beige-100))] text-[hsl(var(--rose-gold))]/70 border-[hsl(var(--beige-400))] shadow-sm",
 };
 
 export function OrdersTable() {
@@ -114,8 +114,8 @@ export function OrdersTable() {
     return (
       <div className="flex items-center justify-center py-12">
         <div className="flex flex-col items-center gap-3">
-          <div className="w-8 h-8 border-4 border-[hsl(var(--rose-gold))]/30 border-t-[hsl(var(--burgundy))] rounded-full animate-spin" />
-          <p className="text-[hsl(var(--burgundy))]/70 font-sans">
+          <div className="w-8 h-8 border-4 border-[hsl(var(--rose-gold))]/30 border-t-[hsl(var(--rose-gold))] rounded-full animate-spin" />
+          <p className="text-[hsl(var(--rose-gold))]/70 font-sans">
             Cargando pedidos...
           </p>
         </div>
@@ -129,12 +129,12 @@ export function OrdersTable() {
         <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--rose-gold))]/5 to-transparent" />
         <div className="relative z-10">
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-[hsl(var(--rose-gold))]/20 to-[hsl(var(--rose-gold))]/10 mb-4">
-            <ShoppingCart className="h-8 w-8 text-[hsl(var(--burgundy))]" />
+            <ShoppingCart className="h-8 w-8 text-[hsl(var(--rose-gold))]" />
           </div>
-          <h3 className="text-lg font-gotham font-semibold text-[hsl(var(--burgundy))] mb-2">
+          <h3 className="text-lg font-gotham font-semibold text-[hsl(var(--rose-gold))] mb-2">
             No hay pedidos
           </h3>
-          <p className="text-sm text-[hsl(var(--burgundy))]/60 font-sans">
+          <p className="text-sm text-[hsl(var(--rose-gold))]/60 font-sans">
             Los pedidos aparecerán aquí cuando los clientes realicen compras
           </p>
         </div>
@@ -147,7 +147,7 @@ export function OrdersTable() {
       {/* Filters */}
       <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 p-4 rounded-xl bg-gradient-to-br from-[hsl(var(--beige-50))] to-white border border-[hsl(var(--beige-400))]/50 shadow-sm">
         <div className="flex items-center gap-2">
-          <label className="text-sm font-gotham font-medium text-[hsl(var(--burgundy))]">
+          <label className="text-sm font-gotham font-medium text-[hsl(var(--rose-gold))]">
             Filtrar por estado:
           </label>
           <Select value={statusFilter} onValueChange={setStatusFilter}>
@@ -165,8 +165,8 @@ export function OrdersTable() {
             </SelectContent>
           </Select>
         </div>
-        <div className="text-sm text-[hsl(var(--burgundy))]/70 font-sans">
-          <span className="font-semibold text-[hsl(var(--burgundy))]">
+        <div className="text-sm text-[hsl(var(--rose-gold))]/70 font-sans">
+          <span className="font-semibold text-[hsl(var(--rose-gold))]">
             {filteredOrders.length}
           </span>{" "}
           {filteredOrders.length === 1 ? "pedido" : "pedidos"}
@@ -178,25 +178,25 @@ export function OrdersTable() {
         <Table>
           <TableHeader>
             <TableRow className="bg-gradient-to-r from-[hsl(var(--beige-100))] to-[hsl(var(--beige-50))] hover:from-[hsl(var(--beige-200))] hover:to-[hsl(var(--beige-100))]">
-              <TableHead className="font-gotham font-semibold text-[hsl(var(--burgundy))]">
+              <TableHead className="font-gotham font-semibold text-[hsl(var(--rose-gold))]">
                 Número
               </TableHead>
-              <TableHead className="font-gotham font-semibold text-[hsl(var(--burgundy))]">
+              <TableHead className="font-gotham font-semibold text-[hsl(var(--rose-gold))]">
                 Cliente
               </TableHead>
-              <TableHead className="font-gotham font-semibold text-[hsl(var(--burgundy))]">
+              <TableHead className="font-gotham font-semibold text-[hsl(var(--rose-gold))]">
                 Fecha
               </TableHead>
-              <TableHead className="font-gotham font-semibold text-[hsl(var(--burgundy))]">
+              <TableHead className="font-gotham font-semibold text-[hsl(var(--rose-gold))]">
                 Total
               </TableHead>
-              <TableHead className="font-gotham font-semibold text-[hsl(var(--burgundy))]">
+              <TableHead className="font-gotham font-semibold text-[hsl(var(--rose-gold))]">
                 Estado del Pedido
               </TableHead>
-              <TableHead className="font-gotham font-semibold text-[hsl(var(--burgundy))]">
+              <TableHead className="font-gotham font-semibold text-[hsl(var(--rose-gold))]">
                 Estado del Pago
               </TableHead>
-              <TableHead className="font-gotham font-semibold text-[hsl(var(--burgundy))] text-right">
+              <TableHead className="font-gotham font-semibold text-[hsl(var(--rose-gold))] text-right">
                 Acciones
               </TableHead>
             </TableRow>
@@ -207,23 +207,23 @@ export function OrdersTable() {
                 key={order.id}
                 className="hover:bg-gradient-to-r hover:from-[hsl(var(--rose-gold))]/5 hover:to-transparent transition-colors border-b border-[hsl(var(--beige-300))]/50"
               >
-                <TableCell className="font-sans font-semibold text-[hsl(var(--burgundy))]">
+                <TableCell className="font-sans font-semibold text-[hsl(var(--rose-gold))]">
                   #{order.orderNumber}
                 </TableCell>
                 <TableCell className="font-sans">
                   <div>
-                    <p className="font-medium text-[hsl(var(--burgundy))]">
+                    <p className="font-medium text-[hsl(var(--rose-gold))]">
                       {order.customerName}
                     </p>
-                    <p className="text-sm text-[hsl(var(--burgundy))]/60">
+                    <p className="text-sm text-[hsl(var(--rose-gold))]/60">
                       {order.customerEmail}
                     </p>
                   </div>
                 </TableCell>
-                <TableCell className="font-sans text-sm text-[hsl(var(--burgundy))]/70">
+                <TableCell className="font-sans text-sm text-[hsl(var(--rose-gold))]/70">
                   {formatDate(order.createdAt)}
                 </TableCell>
-                <TableCell className="font-sans font-semibold text-[hsl(var(--burgundy))]">
+                <TableCell className="font-sans font-semibold text-[hsl(var(--rose-gold))]">
                   {formatPrice(Number(order.total))}
                 </TableCell>
                 <TableCell>
@@ -247,7 +247,7 @@ export function OrdersTable() {
                     <Button
                       variant="ghost"
                       size="icon"
-                      className="hover:bg-[hsl(var(--rose-gold))]/20 hover:text-[hsl(var(--burgundy))] transition-colors"
+                      className="hover:bg-[hsl(var(--rose-gold))]/20 hover:text-[hsl(var(--rose-gold))] transition-colors"
                     >
                       <Eye className="h-4 w-4" />
                     </Button>

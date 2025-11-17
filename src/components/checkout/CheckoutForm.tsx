@@ -24,6 +24,7 @@ interface ShippingData {
 interface CheckoutFormProps {
   onShippingCostChange?: (cost: number) => void;
   onEmailChange?: (email: string) => void;
+  onLocationChange?: (location: { city: string; department: string }) => void;
   discount?: {
     code: string;
     percent: number;
@@ -34,6 +35,7 @@ interface CheckoutFormProps {
 export function CheckoutForm({
   onShippingCostChange,
   onEmailChange,
+  onLocationChange,
   discount,
 }: CheckoutFormProps) {
   const router = useRouter();
@@ -60,6 +62,12 @@ export function CheckoutForm({
     setShippingData(data);
     if (onShippingCostChange) {
       onShippingCostChange(data.shippingCost);
+    }
+    if (onLocationChange) {
+      onLocationChange({
+        city: data.city,
+        department: data.department,
+      });
     }
   };
 
