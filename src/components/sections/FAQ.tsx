@@ -306,7 +306,7 @@ const FAQ = () => {
           className="text-center space-y-6"
         >
           <div className="max-w-2xl mx-auto">
-            <h3 className="text-2xl md:text-3xl font-sans italic text-foreground mb-3">
+            <h3 className="text-2xl md:text-3xl font-gotham font-bold text-foreground mb-3">
               ¿Aún tienes dudas?
             </h3>
             <p className="text-base md:text-lg text-muted-foreground mb-6 font-sans">

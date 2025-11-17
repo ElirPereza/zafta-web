@@ -42,7 +42,7 @@ export default function ContactoPage() {
             >
               <div className="p-8 bg-card rounded-2xl shadow-soft hover:shadow-warm transition-all duration-300 hover:-translate-y-1">
                 <Phone className="w-12 h-12 text-primary mx-auto mb-4" />
-                <h3 className="text-xl font-sans italic mb-2">WhatsApp</h3>
+                <h3 className="text-xl font-gotham font-semibold mb-2">WhatsApp</h3>
                 <p className="text-muted-foreground mb-4">+57 321 759 0897</p>
                 <Button variant="default" className="w-full">
                   Enviar mensaje
@@ -58,7 +58,7 @@ export default function ContactoPage() {
             >
               <div className="p-8 bg-card rounded-2xl shadow-soft hover:shadow-warm transition-all duration-300 hover:-translate-y-1">
                 <Instagram className="w-12 h-12 text-primary mx-auto mb-4" />
-                <h3 className="text-xl font-sans italic mb-2">Instagram</h3>
+                <h3 className="text-xl font-gotham font-semibold mb-2">Instagram</h3>
                 <p className="text-muted-foreground mb-4">@zafta_reposteria</p>
                 <Button variant="default" className="w-full">
                   Seguir
@@ -74,7 +74,7 @@ export default function ContactoPage() {
             >
               <div className="p-8 bg-card rounded-2xl shadow-soft hover:shadow-warm transition-all duration-300 hover:-translate-y-1">
                 <FaTiktok className="w-12 h-12 text-primary mx-auto mb-4" />
-                <h3 className="text-xl font-sans italic mb-2">TikTok</h3>
+                <h3 className="text-xl font-gotham font-semibold mb-2">TikTok</h3>
                 <p className="text-muted-foreground mb-4">@zafta_reposteria</p>
                 <Button variant="default" className="w-full">
                   Seguir
@@ -90,7 +90,7 @@ export default function ContactoPage() {
             >
               <div className="p-8 bg-card rounded-2xl shadow-soft hover:shadow-warm transition-all duration-300 hover:-translate-y-1">
                 <FaFacebook className="w-12 h-12 text-primary mx-auto mb-4" />
-                <h3 className="text-xl font-sans italic mb-2">Facebook</h3>
+                <h3 className="text-xl font-gotham font-semibold mb-2">Facebook</h3>
                 <p className="text-muted-foreground mb-4">@zaftareposteria</p>
                 <Button variant="default" className="w-full">
                   Seguir

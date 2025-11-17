@@ -49,7 +49,7 @@ const Footer = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2, ease: [0.4, 0, 0.2, 1] }}
           >
-            <h4 className="mb-5 font-sans font-semibold text-lg text-foreground">
+            <h4 className="mb-5 font-gotham font-semibold text-lg text-foreground">
               Enlaces Rápidos
             </h4>
             <ul className="space-y-3 text-base font-sans">
@@ -107,7 +107,7 @@ const Footer = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.3, ease: [0.4, 0, 0.2, 1] }}
           >
-            <h4 className="mb-5 font-sans font-semibold text-lg text-foreground">
+            <h4 className="mb-5 font-gotham font-semibold text-lg text-foreground">
               Contacto
             </h4>
             <div className="space-y-4 font-sans">
