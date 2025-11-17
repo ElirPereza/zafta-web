@@ -61,15 +61,15 @@ export default function CheckoutClient() {
         </div>
 
         {/* Important Notice */}
-        <div className="max-w-3xl mx-auto mb-8">
+        <div className="max-w-3xl mx-auto mb-6 md:mb-8 px-4 sm:px-0">
           <Alert className="border-primary/50 bg-primary/10">
-            <AlertCircle className="h-5 w-5 text-primary" />
-            <AlertTitle className="font-sans font-semibold text-foreground">
+            <AlertCircle className="h-4 w-4 sm:h-5 sm:w-5 text-primary flex-shrink-0" />
+            <AlertTitle className="font-sans font-semibold text-foreground text-sm sm:text-base">
               Aviso Importante
             </AlertTitle>
-            <AlertDescription className="font-sans text-sm text-muted-foreground space-y-1 mt-2">
-              <p>• Haz tu pedido antes de las 12:00 p.m. y recíbelo al día siguiente en la mañana.</p>
-              <p>• No realizamos entregas los domingos y los sábados despachamos hasta las 12:00 p.m.</p>
+            <AlertDescription className="font-sans text-xs sm:text-sm text-muted-foreground space-y-1.5 mt-2">
+              <p className="leading-relaxed">• Haz tu pedido antes de las 12:00 p.m. y recíbelo al día siguiente en la mañana.</p>
+              <p className="leading-relaxed">• No realizamos entregas los domingos y los sábados despachamos hasta las 12:00 p.m.</p>
             </AlertDescription>
           </Alert>
         </div>

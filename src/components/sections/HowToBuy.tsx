@@ -78,11 +78,11 @@ const HowToBuy = () => {
           transition={{ duration: 0.6, delay: 0.4, ease: [0.4, 0, 0.2, 1] }}
           className="text-center"
         >
-          <Link href="/productos">
+          <Link href="/productos" className="inline-block w-full sm:w-auto">
             <Button
               variant="default"
               size="lg"
-              className="shadow-warm hover:shadow-medium transition-all duration-300"
+              className="w-full sm:w-auto shadow-warm hover:shadow-medium transition-all duration-300"
             >
               Descubre más productos
             </Button>
