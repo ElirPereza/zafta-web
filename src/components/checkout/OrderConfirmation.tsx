@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -17,6 +18,10 @@ interface OrderConfirmationProps {
 }
 
 export function OrderConfirmation({ order }: OrderConfirmationProps) {
+  // Mark first purchase as completed - this will hide the discount popup forever
+  useEffect(() => {
+    localStorage.setItem("zafta-first-purchase-completed", "true");
+  }, []);
   const formatPrice = (price: number | string) => {
     const numPrice = typeof price === "string" ? parseFloat(price) : price;
     return new Intl.NumberFormat("es-CO", {
