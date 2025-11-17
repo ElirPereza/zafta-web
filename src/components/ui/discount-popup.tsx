@@ -27,9 +27,16 @@ export function DiscountPopup({ onClose }: DiscountPopupProps) {
   const [hasBeenShown, setHasBeenShown] = useState(false);
 
   useEffect(() => {
-    // Check if popup has already been shown in this session
-    const shown = sessionStorage.getItem("discount-popup-shown");
-    if (shown) {
+    // Check if user has completed their first purchase
+    const hasCompletedPurchase = localStorage.getItem("zafta-first-purchase-completed");
+    if (hasCompletedPurchase === "true") {
+      setHasBeenShown(true);
+      return;
+    }
+
+    // Check if user permanently dismissed the popup
+    const permanentlyDismissed = localStorage.getItem("discount-popup-dismissed");
+    if (permanentlyDismissed === "true") {
       setHasBeenShown(true);
       return;
     }
@@ -55,7 +62,6 @@ export function DiscountPopup({ onClose }: DiscountPopupProps) {
               console.log("Showing floating discount button");
             }
             setIsOpen(true);
-            sessionStorage.setItem("discount-popup-shown", "true");
           }, 2000);
         } else {
           if (process.env.NODE_ENV === "development") {
@@ -71,6 +77,8 @@ export function DiscountPopup({ onClose }: DiscountPopupProps) {
   }, []);
 
   const handleClose = () => {
+    // Permanently dismiss the popup
+    localStorage.setItem("discount-popup-dismissed", "true");
     setIsOpen(false);
     setShowFullPopup(false);
     onClose?.();
