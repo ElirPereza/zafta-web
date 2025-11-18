@@ -104,7 +104,7 @@ export function DiscountPopup({ onClose }: DiscountPopupProps) {
             }}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            className="fixed bottom-6 left-6 z-50 flex h-14 w-14 md:h-16 md:w-16 items-center justify-center rounded-full shadow-lg hover:shadow-xl transition-shadow bg-gradient-to-br from-[hsl(var(--rose-gold))] to-[hsl(var(--burgundy))]"
+            className="fixed bottom-6 right-6 z-50 flex h-14 w-14 md:h-16 md:w-16 items-center justify-center rounded-full shadow-lg hover:shadow-xl transition-shadow bg-gradient-to-br from-[hsl(var(--rose-gold))] to-[hsl(var(--burgundy))]"
             aria-label="Ver descuento especial"
           >
             <Gift className="h-7 w-7 md:h-8 md:w-8 text-white" />
