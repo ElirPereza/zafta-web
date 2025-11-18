@@ -376,7 +376,11 @@ export default function DescuentosPage() {
                 >
                   Cancelar
                 </Button>
-                <Button onClick={handleSubmit} disabled={submitting}>
+                <Button
+                  onClick={handleSubmit}
+                  disabled={submitting}
+                  className="bg-[hsl(var(--rose-gold))] hover:bg-[hsl(var(--rose-gold))]/90 text-white"
+                >
                   {submitting
                     ? "Guardando..."
                     : editingPopup

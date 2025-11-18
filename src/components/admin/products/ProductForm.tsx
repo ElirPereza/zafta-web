@@ -354,7 +354,11 @@ export function ProductForm({ product }: ProductFormProps) {
         >
           Cancelar
         </Button>
-        <Button type="submit" disabled={loading}>
+        <Button
+          type="submit"
+          disabled={loading}
+          className="bg-[hsl(var(--rose-gold))] hover:bg-[hsl(var(--rose-gold))]/90 text-white"
+        >
           {loading
             ? "Guardando..."
             : product

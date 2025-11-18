@@ -351,7 +351,7 @@ export default function FreeShippingPage() {
                 </Button>
                 <Button
                   type="submit"
-                  className="bg-[hsl(var(--midnight-navy))] hover:bg-[hsl(var(--midnight-navy))]/90"
+                  className="bg-[hsl(var(--rose-gold))] hover:bg-[hsl(var(--rose-gold))]/90 text-white"
                 >
                   {editingRule ? "Guardar Cambios" : "Crear Regla"}
                 </Button>

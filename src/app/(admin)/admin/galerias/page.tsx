@@ -259,7 +259,11 @@ export default function GaleriasPage() {
               >
                 Cancelar
               </Button>
-              <Button onClick={handleUpload} disabled={uploading}>
+              <Button
+                onClick={handleUpload}
+                disabled={uploading}
+                className="bg-[hsl(var(--rose-gold))] hover:bg-[hsl(var(--rose-gold))]/90 text-white"
+              >
                 {uploading ? "Subiendo..." : "Subir Imagen"}
               </Button>
             </DialogFooter>
