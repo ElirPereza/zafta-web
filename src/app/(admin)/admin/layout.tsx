@@ -47,7 +47,7 @@ function AdminLayoutClient({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[hsl(var(--beige-50))] via-[hsl(var(--rose-gold))]/5 to-[hsl(var(--beige-100))]">
+    <div className="min-h-screen bg-gradient-to-br from-[hsl(var(--beige-50))] via-[hsl(var(--rose-gold))]/5 to-[hsl(var(--beige-100))] font-[family-name:var(--font-fredoka)]">
       {/* Sidebar - both mobile and desktop */}
       <AdminSidebar
         isOpen={sidebarOpen}
