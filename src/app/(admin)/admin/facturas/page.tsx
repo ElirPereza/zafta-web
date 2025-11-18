@@ -85,10 +85,10 @@ export default async function InvoicesPage() {
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-4xl font-gotham font-bold text-[hsl(var(--burgundy))] mb-2">
+        <h1 className="text-4xl font-gotham font-bold text-[hsl(var(--midnight-navy))] mb-2">
           Facturas
         </h1>
-        <p className="text-[hsl(var(--burgundy))]/70 font-sans text-base">
+        <p className="text-[hsl(var(--midnight-navy))]/70 font-sans text-base">
           Gestiona las facturas de los pedidos
         </p>
       </div>
@@ -147,12 +147,12 @@ export default async function InvoicesPage() {
               <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--rose-gold))]/5 to-transparent" />
               <div className="relative z-10">
                 <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-[hsl(var(--rose-gold))]/20 to-[hsl(var(--rose-gold))]/10 mb-4">
-                  <FileText className="h-8 w-8 text-[hsl(var(--burgundy))]" />
+                  <FileText className="h-8 w-8 text-[hsl(var(--midnight-navy))]" />
                 </div>
-                <h3 className="text-lg font-gotham font-semibold text-[hsl(var(--burgundy))] mb-2">
+                <h3 className="text-lg font-gotham font-semibold text-[hsl(var(--midnight-navy))] mb-2">
                   No hay facturas
                 </h3>
-                <p className="text-sm text-[hsl(var(--burgundy))]/60 font-sans">
+                <p className="text-sm text-[hsl(var(--midnight-navy))]/60 font-sans">
                   Las facturas se generarán automáticamente cuando se confirmen
                   pedidos
                 </p>

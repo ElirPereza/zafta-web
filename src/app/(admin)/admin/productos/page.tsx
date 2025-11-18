@@ -9,10 +9,10 @@ export default function ProductsPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-4xl font-gotham font-bold text-[hsl(var(--burgundy))] mb-2">
+          <h1 className="text-4xl font-gotham font-bold text-[hsl(var(--midnight-navy))] mb-2">
             Productos
           </h1>
-          <p className="text-[hsl(var(--burgundy))]/70 font-sans text-base">
+          <p className="text-[hsl(var(--midnight-navy))]/70 font-sans text-base">
             Gestiona el catálogo de productos de ZAFTA
           </p>
         </div>

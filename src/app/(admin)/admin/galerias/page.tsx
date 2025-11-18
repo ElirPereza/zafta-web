@@ -190,10 +190,10 @@ export default function GaleriasPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
         <div>
-          <h1 className="text-4xl font-gotham font-bold text-[hsl(var(--burgundy))] mb-2">
+          <h1 className="text-4xl font-gotham font-bold text-[hsl(var(--midnight-navy))] mb-2">
             Gestión de Galerías
           </h1>
-          <p className="text-[hsl(var(--burgundy))]/70 font-sans text-base">
+          <p className="text-[hsl(var(--midnight-navy))]/70 font-sans text-base">
             Administra las imágenes de Tortas Personalizadas y Eventos
             Especiales
           </p>
@@ -272,7 +272,7 @@ export default function GaleriasPage() {
         <div className="flex items-center justify-center py-12">
           <div className="flex flex-col items-center gap-3">
             <div className="w-8 h-8 border-4 border-[hsl(var(--rose-gold))]/30 border-t-[hsl(var(--burgundy))] rounded-full animate-spin" />
-            <p className="text-[hsl(var(--burgundy))]/70 font-sans">
+            <p className="text-[hsl(var(--midnight-navy))]/70 font-sans">
               Cargando imágenes...
             </p>
           </div>
@@ -298,7 +298,7 @@ export default function GaleriasPage() {
               <div className="relative overflow-hidden text-center py-8 border-2 border-dashed border-[hsl(var(--beige-400))] rounded-xl bg-gradient-to-br from-[hsl(var(--beige-50))] to-white">
                 <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--rose-gold))]/5 to-transparent" />
                 <div className="relative z-10">
-                  <p className="text-[hsl(var(--burgundy))]/60 font-sans">
+                  <p className="text-[hsl(var(--midnight-navy))]/60 font-sans">
                     No hay imágenes en esta sección
                   </p>
                 </div>
@@ -358,7 +358,7 @@ export default function GaleriasPage() {
               <div className="relative overflow-hidden text-center py-8 border-2 border-dashed border-[hsl(var(--beige-400))] rounded-xl bg-gradient-to-br from-[hsl(var(--beige-50))] to-white">
                 <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--rose-gold))]/5 to-transparent" />
                 <div className="relative z-10">
-                  <p className="text-[hsl(var(--burgundy))]/60 font-sans">
+                  <p className="text-[hsl(var(--midnight-navy))]/60 font-sans">
                     No hay imágenes en esta sección
                   </p>
                 </div>

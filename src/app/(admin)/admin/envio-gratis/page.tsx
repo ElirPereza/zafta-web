@@ -173,7 +173,7 @@ export default function FreeShippingPage() {
       <div className="flex items-center justify-center py-12">
         <div className="flex flex-col items-center gap-3">
           <div className="w-8 h-8 border-4 border-[hsl(var(--rose-gold))]/30 border-t-[hsl(var(--rose-gold))] rounded-full animate-spin" />
-          <p className="text-[hsl(var(--rose-gold))]/70 font-sans">
+          <p className="text-[hsl(var(--midnight-navy))]/70 font-sans">
             Cargando reglas...
           </p>
         </div>
@@ -186,10 +186,10 @@ export default function FreeShippingPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-4xl font-gotham font-bold text-[hsl(var(--rose-gold))] mb-2">
+          <h1 className="text-4xl font-gotham font-bold text-[hsl(var(--midnight-navy))] mb-2">
             Envío Gratis
           </h1>
-          <p className="text-[hsl(var(--rose-gold))]/70 font-sans text-lg">
+          <p className="text-[hsl(var(--midnight-navy))]/70 font-sans text-lg">
             Configura las reglas de envío gratuito
           </p>
         </div>
@@ -198,7 +198,7 @@ export default function FreeShippingPage() {
           <DialogTrigger asChild>
             <Button
               onClick={resetForm}
-              className="bg-[hsl(var(--rose-gold))] hover:bg-[hsl(var(--rose-gold))]/90 text-white"
+              className="bg-[hsl(var(--midnight-navy))] hover:bg-[hsl(var(--midnight-navy))]/90 text-white"
             >
               <Plus className="h-4 w-4 mr-2" />
               Nueva Regla
@@ -206,7 +206,7 @@ export default function FreeShippingPage() {
           </DialogTrigger>
           <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
             <DialogHeader>
-              <DialogTitle className="font-gotham text-2xl text-[hsl(var(--rose-gold))]">
+              <DialogTitle className="font-gotham text-2xl text-[hsl(var(--midnight-navy))]">
                 {editingRule ? "Editar Regla" : "Nueva Regla de Envío Gratis"}
               </DialogTitle>
             </DialogHeader>
@@ -351,7 +351,7 @@ export default function FreeShippingPage() {
                 </Button>
                 <Button
                   type="submit"
-                  className="bg-[hsl(var(--rose-gold))] hover:bg-[hsl(var(--rose-gold))]/90"
+                  className="bg-[hsl(var(--midnight-navy))] hover:bg-[hsl(var(--midnight-navy))]/90"
                 >
                   {editingRule ? "Guardar Cambios" : "Crear Regla"}
                 </Button>
@@ -365,11 +365,11 @@ export default function FreeShippingPage() {
       {rules.length === 0 ? (
         <Card className="border-2 border-dashed border-[hsl(var(--beige-400))]">
           <CardContent className="py-12 text-center">
-            <Truck className="h-12 w-12 text-[hsl(var(--rose-gold))]/50 mx-auto mb-4" />
-            <h3 className="text-lg font-gotham font-semibold text-[hsl(var(--rose-gold))] mb-2">
+            <Truck className="h-12 w-12 text-[hsl(var(--midnight-navy))]/50 mx-auto mb-4" />
+            <h3 className="text-lg font-gotham font-semibold text-[hsl(var(--midnight-navy))] mb-2">
               No hay reglas de envío gratis
             </h3>
-            <p className="text-sm text-[hsl(var(--rose-gold))]/60 font-sans">
+            <p className="text-sm text-[hsl(var(--midnight-navy))]/60 font-sans">
               Crea tu primera regla para ofrecer envío gratuito a tus clientes
             </p>
           </CardContent>
@@ -385,7 +385,7 @@ export default function FreeShippingPage() {
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-2">
-                      <CardTitle className="font-gotham text-lg text-[hsl(var(--rose-gold))]">
+                      <CardTitle className="font-gotham text-lg text-[hsl(var(--midnight-navy))]">
                         {rule.name}
                       </CardTitle>
                       <Badge
@@ -400,7 +400,7 @@ export default function FreeShippingPage() {
                       </Badge>
                       <Badge
                         variant="outline"
-                        className="font-sans text-xs bg-[hsl(var(--beige-100))] text-[hsl(var(--rose-gold))] border-[hsl(var(--rose-gold))]/30"
+                        className="font-sans text-xs bg-[hsl(var(--beige-100))] text-[hsl(var(--midnight-navy))] border-[hsl(var(--midnight-navy))]/30"
                       >
                         {getRuleTypeLabel(rule.type)}
                       </Badge>
@@ -412,9 +412,9 @@ export default function FreeShippingPage() {
                       variant="ghost"
                       size="icon"
                       onClick={() => handleEdit(rule)}
-                      className="hover:bg-[hsl(var(--rose-gold))]/20"
+                      className="hover:bg-[hsl(var(--midnight-navy))]/20"
                     >
-                      <Pencil className="h-4 w-4 text-[hsl(var(--rose-gold))]" />
+                      <Pencil className="h-4 w-4 text-[hsl(var(--midnight-navy))]" />
                     </Button>
                     <Button
                       variant="ghost"
@@ -430,11 +430,11 @@ export default function FreeShippingPage() {
               <CardContent>
                 <div className="grid gap-2 text-sm font-sans">
                   {rule.type === "MINIMUM_PURCHASE" && rule.minimumAmount && (
-                    <div className="flex items-center gap-2 text-[hsl(var(--rose-gold))]/70">
+                    <div className="flex items-center gap-2 text-[hsl(var(--midnight-navy))]/70">
                       <DollarSign className="h-4 w-4" />
                       <span>
                         Compra mínima:{" "}
-                        <strong className="text-[hsl(var(--rose-gold))]">
+                        <strong className="text-[hsl(var(--midnight-navy))]">
                           {formatPrice(Number(rule.minimumAmount))}
                         </strong>
                       </span>
@@ -444,17 +444,17 @@ export default function FreeShippingPage() {
                   {rule.type === "SPECIFIC_LOCATION" && (
                     <>
                       {rule.cities.length > 0 && (
-                        <div className="text-[hsl(var(--rose-gold))]/70">
+                        <div className="text-[hsl(var(--midnight-navy))]/70">
                           Ciudades:{" "}
-                          <strong className="text-[hsl(var(--rose-gold))]">
+                          <strong className="text-[hsl(var(--midnight-navy))]">
                             {rule.cities.join(", ")}
                           </strong>
                         </div>
                       )}
                       {rule.departments.length > 0 && (
-                        <div className="text-[hsl(var(--rose-gold))]/70">
+                        <div className="text-[hsl(var(--midnight-navy))]/70">
                           Departamentos:{" "}
-                          <strong className="text-[hsl(var(--rose-gold))]">
+                          <strong className="text-[hsl(var(--midnight-navy))]">
                             {rule.departments.join(", ")}
                           </strong>
                         </div>
@@ -462,9 +462,9 @@ export default function FreeShippingPage() {
                     </>
                   )}
 
-                  <div className="text-[hsl(var(--rose-gold))]/70">
+                  <div className="text-[hsl(var(--midnight-navy))]/70">
                     Prioridad:{" "}
-                    <strong className="text-[hsl(var(--rose-gold))]">
+                    <strong className="text-[hsl(var(--midnight-navy))]">
                       {rule.priority}
                     </strong>
                   </div>

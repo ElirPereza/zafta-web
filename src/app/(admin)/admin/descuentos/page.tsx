@@ -234,10 +234,10 @@ export default function DescuentosPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
         <div>
-          <h1 className="text-4xl font-gotham font-bold text-[hsl(var(--burgundy))] mb-2">
+          <h1 className="text-4xl font-gotham font-bold text-[hsl(var(--midnight-navy))] mb-2">
             Gestión de Popups de Descuento
           </h1>
-          <p className="text-[hsl(var(--burgundy))]/70 font-sans text-base">
+          <p className="text-[hsl(var(--midnight-navy))]/70 font-sans text-base">
             Crea y gestiona los popups de descuento que aparecerán en el sitio
             web
           </p>
@@ -245,7 +245,7 @@ export default function DescuentosPage() {
         <div className="flex gap-2 flex-shrink-0">
           <Button
             variant="outline"
-            className="gap-2 border-[hsl(var(--burgundy))]/30 text-[hsl(var(--burgundy))] hover:bg-[hsl(var(--rose-gold))]/10 hover:border-[hsl(var(--rose-gold))]"
+            className="gap-2 border-[hsl(var(--midnight-navy))]/30 text-[hsl(var(--midnight-navy))] hover:bg-[hsl(var(--midnight-navy))]/10 hover:border-[hsl(var(--midnight-navy))]"
             onClick={handleTestPopup}
           >
             <Eye className="h-4 w-4" />
@@ -401,12 +401,12 @@ export default function DescuentosPage() {
         <Card className="border-[hsl(var(--beige-400))] border-2 shadow-lg">
           <CardContent className="text-center py-16">
             <div className="mx-auto w-20 h-20 rounded-full bg-gradient-to-br from-[hsl(var(--rose-gold))]/20 to-[hsl(var(--rose-gold))]/10 flex items-center justify-center mb-4">
-              <Gift className="h-10 w-10 text-[hsl(var(--burgundy))]" />
+              <Gift className="h-10 w-10 text-[hsl(var(--midnight-navy))]" />
             </div>
-            <h3 className="text-lg font-gotham font-semibold text-[hsl(var(--burgundy))] mb-2">
+            <h3 className="text-lg font-gotham font-semibold text-[hsl(var(--midnight-navy))] mb-2">
               No hay popups de descuento
             </h3>
-            <p className="text-[hsl(var(--burgundy))]/60 font-sans">
+            <p className="text-[hsl(var(--midnight-navy))]/60 font-sans">
               Crea tu primer popup para atraer más clientes
             </p>
           </CardContent>
@@ -435,19 +435,19 @@ export default function DescuentosPage() {
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-2">
                       <div className="p-2 rounded-lg bg-gradient-to-br from-[hsl(var(--rose-gold))]/20 to-[hsl(var(--rose-gold))]/10">
-                        <Gift className="h-5 w-5 text-[hsl(var(--burgundy))]" />
+                        <Gift className="h-5 w-5 text-[hsl(var(--midnight-navy))]" />
                       </div>
-                      <span className="text-[hsl(var(--burgundy))]">
+                      <span className="text-[hsl(var(--midnight-navy))]">
                         {popup.title}
                       </span>
                     </div>
                     <CardDescription className="font-sans text-sm">
                       Código:{" "}
-                      <span className="font-bold text-[hsl(var(--burgundy))]">
+                      <span className="font-bold text-[hsl(var(--midnight-navy))]">
                         {popup.discountCode}
                       </span>{" "}
                       -{" "}
-                      <span className="text-[hsl(var(--burgundy))]">
+                      <span className="text-[hsl(var(--midnight-navy))]">
                         {popup.discountPercent}% de descuento
                       </span>
                     </CardDescription>
@@ -455,11 +455,11 @@ export default function DescuentosPage() {
                 </CardTitle>
               </CardHeader>
               <CardContent className="relative z-10">
-                <p className="text-sm text-[hsl(var(--burgundy))]/70 font-sans mb-4">
+                <p className="text-sm text-[hsl(var(--midnight-navy))]/70 font-sans mb-4">
                   {popup.description}
                 </p>
                 {(popup.startDate || popup.endDate) && (
-                  <div className="text-xs text-[hsl(var(--burgundy))]/60 font-sans mb-4 px-3 py-2 bg-[hsl(var(--beige-100))] rounded-lg">
+                  <div className="text-xs text-[hsl(var(--midnight-navy))]/60 font-sans mb-4 px-3 py-2 bg-[hsl(var(--beige-100))] rounded-lg">
                     {popup.startDate && (
                       <span>
                         📅 Desde:{" "}
@@ -480,7 +480,7 @@ export default function DescuentosPage() {
                     variant="outline"
                     size="sm"
                     onClick={() => handleOpenDialog(popup)}
-                    className="border-[hsl(var(--burgundy))]/30 text-[hsl(var(--burgundy))] hover:bg-[hsl(var(--rose-gold))]/10 hover:border-[hsl(var(--rose-gold))]"
+                    className="border-[hsl(var(--midnight-navy))]/30 text-[hsl(var(--midnight-navy))] hover:bg-[hsl(var(--midnight-navy))]/10 hover:border-[hsl(var(--midnight-navy))]"
                   >
                     Editar
                   </Button>
