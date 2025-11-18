@@ -125,7 +125,7 @@ export function DiscountPopup({ onClose }: DiscountPopupProps) {
 
             {/* Discount badge */}
             <motion.div
-              className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-7 w-7 flex items-center justify-center shadow-md"
+              className="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] font-bold rounded-full min-w-[32px] h-8 px-1.5 flex items-center justify-center shadow-md"
               animate={{
                 scale: [1, 1.1, 1],
               }}
@@ -135,7 +135,7 @@ export function DiscountPopup({ onClose }: DiscountPopupProps) {
                 ease: "easeInOut",
               }}
             >
-              -{Math.abs(popup.discountPercent)}%
+              {Math.abs(popup.discountPercent)}%
             </motion.div>
 
             {/* Sparkle effect */}
