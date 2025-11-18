@@ -198,9 +198,9 @@ export default function FreeShippingPage() {
           <DialogTrigger asChild>
             <Button
               onClick={resetForm}
-              className="bg-[hsl(var(--midnight-navy))] hover:bg-[hsl(var(--midnight-navy))]/90 text-white"
+              className="gap-2 bg-[hsl(var(--rose-gold))] hover:bg-[hsl(var(--rose-gold))]/90 text-white shadow-lg hover:shadow-xl transition-all"
             >
-              <Plus className="h-4 w-4 mr-2" />
+              <Plus className="h-4 w-4" />
               Nueva Regla
             </Button>
           </DialogTrigger>
