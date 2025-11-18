@@ -70,9 +70,9 @@
     --radius: 1rem;
 
     /* Typography - Zafta brand fonts (BrandBook actualizado) */
-    /* Gotham: Font principal - Perfecta para todos los textos y títulos */
-    /* Fredoka: Font secundaria (disponible si se necesita) */
-    --font-sans: "Gotham", "Arial", "Helvetica", sans-serif;
+    /* Fredoka: Font principal - Perfecta para todos los textos, descripciones y contenido */
+    /* Gotham: Font para títulos (h1, h2) - Solo pesos 500, 700, 900 */
+    --font-sans: "Fredoka", sans-serif;
     --font-gotham: "Gotham", "Arial", "Helvetica", sans-serif;
     --font-fredoka: "Fredoka", sans-serif;
 
@@ -109,8 +109,8 @@
 
   body {
     @apply text-foreground antialiased;
-    /* Gotham: Font principal del proyecto */
-    font-family: var(--font-gotham), var(--font-sans);
+    /* Fredoka: Font principal del proyecto (Gotham solo para títulos) */
+    font-family: var(--font-fredoka), var(--font-sans);
     /* Base ivory background - gradient moved to page wrapper for seamless sections */
     background: linear-gradient(135deg, #fffbef 0%, #fff5ed 100%);
     min-height: 100vh;
@@ -144,8 +144,8 @@
   }
 
   .font-sans {
-    /* Gotham - Font principal del sitio */
-    font-family: var(--font-gotham), var(--font-sans);
+    /* Fredoka - Font principal del sitio (Gotham solo para títulos) */
+    font-family: var(--font-fredoka), sans-serif;
   }
 
   .font-gotham {

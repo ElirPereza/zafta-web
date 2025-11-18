@@ -22,7 +22,8 @@
       "Bash(rm:*)",
       "Bash(bun dev)",
       "Bash(deploy-db-prod.bat)",
-      "Bash(cmd /c deploy-db-prod.bat)"
+      "Bash(cmd /c deploy-db-prod.bat)",
+      "Bash(dir:*)"
     ],
     "deny": [],
     "ask": []

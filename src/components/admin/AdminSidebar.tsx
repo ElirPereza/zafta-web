@@ -67,7 +67,7 @@ export function AdminSidebar({ isOpen = false, onClose }: AdminSidebarProps) {
       <div className="flex items-center justify-between h-20 px-6 border-b border-white/10">
         <Link href="/admin" className="flex items-center" onClick={onClose}>
           <Logo
-            variant="banner"
+            variant="zafta-text"
             width={140}
             height={32}
             className="h-8 w-auto brightness-0 invert"

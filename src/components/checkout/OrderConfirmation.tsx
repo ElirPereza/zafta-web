@@ -38,6 +38,7 @@ export function OrderConfirmation({ order }: OrderConfirmationProps) {
       day: "numeric",
       hour: "2-digit",
       minute: "2-digit",
+      hour12: false, // Use 24-hour format to avoid "a. m." / "p. m." wrapping
     });
   };
 
