@@ -185,7 +185,7 @@ export function DiscountPopup({ onClose }: DiscountPopupProps) {
                   className="absolute top-4 right-4 z-10 p-2 rounded-full bg-white/90 hover:bg-white transition-colors shadow-md"
                   aria-label="Cerrar"
                 >
-                  <X className="h-5 w-5 text-[hsl(var(--burgundy))]" />
+                  <X className="h-5 w-5 text-[hsl(var(--midnight-navy))]" />
                 </button>
 
                 {/* Image (if provided) */}
@@ -205,25 +205,25 @@ export function DiscountPopup({ onClose }: DiscountPopupProps) {
                   {/* Icon and Title */}
                   <div className="text-center space-y-2">
                     {!popup.imageUrl && (
-                      <div className="mx-auto w-16 h-16 rounded-full bg-gradient-to-br from-[hsl(var(--rose-gold))]/20 to-[hsl(var(--burgundy))]/10 flex items-center justify-center mb-4">
-                        <Gift className="h-8 w-8 text-[hsl(var(--burgundy))]" />
+                      <div className="mx-auto w-16 h-16 rounded-full bg-gradient-to-br from-[hsl(var(--rose-gold))]/20 to-[hsl(var(--midnight-navy))]/10 flex items-center justify-center mb-4">
+                        <Gift className="h-8 w-8 text-[hsl(var(--midnight-navy))]" />
                       </div>
                     )}
-                    <h2 className="text-2xl md:text-3xl font-gotham font-bold text-[hsl(var(--burgundy))]">
+                    <h2 className="text-2xl md:text-3xl font-gotham font-bold text-[hsl(var(--midnight-navy))]">
                       {popup.title}
                     </h2>
-                    <p className="text-base md:text-lg text-[hsl(var(--burgundy))]/70 font-sans">
+                    <p className="text-base md:text-lg text-[hsl(var(--midnight-navy))]/70 font-sans">
                       {popup.description}
                     </p>
                   </div>
 
                   {/* Discount Code */}
                   <div className="bg-gradient-to-br from-[hsl(var(--beige-100))] to-white rounded-lg p-4 border-2 border-[hsl(var(--rose-gold))]/30 border-dashed">
-                    <p className="text-xs text-[hsl(var(--burgundy))]/60 font-sans mb-2 text-center">
+                    <p className="text-xs text-[hsl(var(--midnight-navy))]/60 font-sans mb-2 text-center">
                       Usa este código al finalizar tu compra:
                     </p>
                     <div className="flex items-center justify-center gap-2">
-                      <code className="text-xl md:text-2xl font-bold text-[hsl(var(--burgundy))] tracking-wider">
+                      <code className="text-xl md:text-2xl font-bold text-[hsl(var(--midnight-navy))] tracking-wider">
                         {popup.discountCode}
                       </code>
                       <Button
@@ -235,13 +235,13 @@ export function DiscountPopup({ onClose }: DiscountPopupProps) {
                         {copied ? (
                           <Check className="h-4 w-4 text-green-600" />
                         ) : (
-                          <Copy className="h-4 w-4 text-[hsl(var(--burgundy))]" />
+                          <Copy className="h-4 w-4 text-[hsl(var(--midnight-navy))]" />
                         )}
                       </Button>
                     </div>
                     <div className="flex items-center justify-center gap-2 mt-2">
-                      <Percent className="h-5 w-5 text-[hsl(var(--burgundy))]" />
-                      <p className="text-lg font-semibold text-[hsl(var(--burgundy))]">
+                      <Percent className="h-5 w-5 text-[hsl(var(--midnight-navy))]" />
+                      <p className="text-lg font-semibold text-[hsl(var(--midnight-navy))]">
                         {Math.abs(popup.discountPercent)}% de descuento
                       </p>
                     </div>
@@ -251,14 +251,14 @@ export function DiscountPopup({ onClose }: DiscountPopupProps) {
                   <div className="space-y-2">
                     <Button
                       onClick={handleClose}
-                      className="w-full text-base md:text-lg py-5 md:py-6 bg-[hsl(var(--burgundy))] hover:bg-[hsl(var(--burgundy))]/90 text-white shadow-lg font-gotham"
+                      className="w-full text-base md:text-lg py-5 md:py-6 bg-[hsl(var(--midnight-navy))] hover:bg-[hsl(var(--midnight-navy))]/90 text-white shadow-lg font-gotham"
                       size="lg"
                     >
                       Empezar a comprar
                     </Button>
                     <button
                       onClick={() => setShowFullPopup(false)}
-                      className="w-full text-sm text-[hsl(var(--burgundy))]/60 hover:text-[hsl(var(--burgundy))] transition-colors font-sans"
+                      className="w-full text-sm text-[hsl(var(--midnight-navy))]/60 hover:text-[hsl(var(--midnight-navy))] transition-colors font-sans"
                     >
                       Ver después
                     </button>
