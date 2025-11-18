@@ -260,7 +260,7 @@ export default function DescuentosPage() {
           >
             <DialogTrigger asChild>
               <Button
-                className="gap-2 bg-[hsl(var(--burgundy))] hover:bg-[hsl(var(--burgundy))]/90 text-white shadow-lg hover:shadow-xl transition-all"
+                className="gap-2 bg-[hsl(var(--midnight-navy))] hover:bg-[hsl(var(--midnight-navy))]/90 text-white shadow-lg hover:shadow-xl transition-all"
                 onClick={() => handleOpenDialog()}
               >
                 <Plus className="h-4 w-4" />
@@ -485,14 +485,10 @@ export default function DescuentosPage() {
                     Editar
                   </Button>
                   <Button
-                    variant={popup.isActive ? "outline" : "default"}
+                    variant="outline"
                     size="sm"
                     onClick={() => handleToggleActive(popup)}
-                    className={
-                      popup.isActive
-                        ? "gap-2 border-orange-300 text-orange-700 hover:bg-orange-50"
-                        : "gap-2 bg-green-600 hover:bg-green-700 text-white"
-                    }
+                    className="gap-2 border-[hsl(var(--midnight-navy))]/30 text-[hsl(var(--midnight-navy))] hover:bg-[hsl(var(--midnight-navy))]/10 hover:border-[hsl(var(--midnight-navy))]"
                   >
                     {popup.isActive ? (
                       <>
@@ -510,7 +506,7 @@ export default function DescuentosPage() {
                     variant="outline"
                     size="sm"
                     onClick={() => handleDelete(popup)}
-                    className="gap-2 border-red-300 text-red-700 hover:bg-red-50 hover:border-red-500"
+                    className="gap-2 border-red-300 text-red-600 hover:bg-red-50 hover:border-red-500 hover:text-red-700"
                   >
                     <Trash2 className="h-4 w-4" />
                     Eliminar
