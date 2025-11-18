@@ -17,7 +17,7 @@ export default function ProductsPage() {
           </p>
         </div>
         <Link href="/admin/productos/nuevo">
-          <Button className="gap-2 bg-[hsl(var(--burgundy))] hover:bg-[hsl(var(--burgundy))]/90 text-white shadow-lg hover:shadow-xl transition-all">
+          <Button className="gap-2 bg-[hsl(var(--midnight-navy))] hover:bg-[hsl(var(--midnight-navy))]/90 text-white shadow-lg hover:shadow-xl transition-all">
             <Plus className="h-4 w-4" />
             Nuevo Producto
           </Button>
