@@ -135,7 +135,7 @@ export function DiscountPopup({ onClose }: DiscountPopupProps) {
                 ease: "easeInOut",
               }}
             >
-              -{popup.discountPercent}%
+              -{Math.abs(popup.discountPercent)}%
             </motion.div>
 
             {/* Sparkle effect */}
@@ -242,7 +242,7 @@ export function DiscountPopup({ onClose }: DiscountPopupProps) {
                     <div className="flex items-center justify-center gap-2 mt-2">
                       <Percent className="h-5 w-5 text-[hsl(var(--burgundy))]" />
                       <p className="text-lg font-semibold text-[hsl(var(--burgundy))]">
-                        {popup.discountPercent}% de descuento
+                        {Math.abs(popup.discountPercent)}% de descuento
                       </p>
                     </div>
                   </div>
