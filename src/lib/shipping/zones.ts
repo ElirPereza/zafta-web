@@ -14,20 +14,44 @@ export const SHIPPING_ZONES: ShippingZone[] = [
   {
     department: "Antioquia",
     cities: [
-      { name: "Medellín", cost: 10000 }, // Dentro de la ciudad
-      { name: "Envigado", cost: 12000 }, // Área metropolitana cercana
-      { name: "Bello", cost: 12000 }, // Área metropolitana cercana
-      { name: "Itagüí", cost: 12000 }, // Área metropolitana cercana
-      { name: "Sabaneta", cost: 12000 }, // Área metropolitana cercana
-      { name: "La Estrella", cost: 15000 }, // Un poco más lejos
-      { name: "Caldas", cost: 15000 }, // Un poco más lejos
-      { name: "Copacabana", cost: 15000 }, // Un poco más lejos
-      { name: "Girardota", cost: 18000 }, // Más lejos
-      { name: "Barbosa", cost: 20000 }, // Más lejos
-      { name: "Rionegro", cost: 20000 }, // Oriente cercano
-      { name: "Marinilla", cost: 25000 }, // Oriente
-      { name: "El Retiro", cost: 25000 }, // Oriente
-      { name: "Guarne", cost: 25000 }, // Oriente
+      // Zona Palmas y El Poblado
+      { name: "Alto de Palmas", cost: 20000 },
+      { name: "Mall Indiana", cost: 20000 },
+      { name: "Palmas hasta la cola del zorro", cost: 12000 },
+      { name: "Palmas de la cola del zorro hasta la bomba Texaco", cost: 15000 },
+      { name: "Poblado inferior hacia arriba", cost: 12000 },
+      { name: "Poblado inferior hacia abajo", cost: 10000 },
+      // Medellín barrios
+      { name: "Medellín", cost: 12000 },
+      { name: "Robledo", cost: 15000 },
+      { name: "Castilla", cost: 15000 },
+      { name: "Manrique", cost: 15000 },
+      { name: "Villa Hermosa", cost: 15000 },
+      { name: "Aranjuez", cost: 15000 },
+      { name: "Loreto", cost: 15000 },
+      { name: "La Milagrosa", cost: 15000 },
+      { name: "Buenos Aires", cost: 15000 },
+      { name: "Rodeo Alto", cost: 15000 },
+      { name: "Belén Alta Vista", cost: 15000 },
+      { name: "Belén Las Violetas", cost: 15000 },
+      { name: "Robledo La Colina", cost: 15000 },
+      // Área metropolitana
+      { name: "Envigado", cost: 12000 },
+      { name: "Escobero", cost: 15000 },
+      { name: "Sabaneta", cost: 15000 },
+      { name: "Itagüí", cost: 15000 },
+      { name: "La Estrella", cost: 18000 },
+      { name: "San Antonio", cost: 18000 },
+      { name: "Bello", cost: 20000 },
+      { name: "Copacabana", cost: 18000 },
+      { name: "Caldas", cost: 25000 },
+      // Oriente y zonas alejadas
+      { name: "Rotonda del aeropuerto JMC", cost: 35000 },
+      { name: "Rionegro", cost: 50000 },
+      { name: "El Retiro", cost: 45000 },
+      { name: "Santa Elena", cost: 45000 },
+      { name: "Llano Grande", cost: 45000 },
+      { name: "La Ceja", cost: 45000 },
     ],
     defaultCost: 30000, // Otras ciudades de Antioquia
   },
