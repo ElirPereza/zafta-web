@@ -26,6 +26,11 @@ export default async function ProductosPage() {
     where: {
       inStock: true, // Solo productos en stock
     },
+    include: {
+      sizes: {
+        orderBy: { displayOrder: "asc" },
+      },
+    },
     orderBy: [
       { featured: "desc" }, // Destacados primero
       { createdAt: "desc" }, // Luego los más recientes
@@ -37,6 +42,10 @@ export default async function ProductosPage() {
     ...product,
     price: Number(product.price),
     comparePrice: product.comparePrice ? Number(product.comparePrice) : null,
+    sizes: product.sizes.map((size) => ({
+      ...size,
+      price: Number(size.price),
+    })),
   }));
 
   return (
