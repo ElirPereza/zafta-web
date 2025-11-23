@@ -37,6 +37,11 @@ export async function GET(request: Request) {
       // Try to use displayOrder first (works in production after migration)
       products = await prisma.product.findMany({
         where,
+        include: {
+          sizes: {
+            orderBy: { displayOrder: "asc" },
+          },
+        },
         orderBy: [
           // @ts-ignore - displayOrder might not exist in local Prisma client yet
           { displayOrder: "asc" },
@@ -49,6 +54,11 @@ export async function GET(request: Request) {
       console.log("displayOrder not available, using createdAt fallback");
       products = await prisma.product.findMany({
         where,
+        include: {
+          sizes: {
+            orderBy: { displayOrder: "asc" },
+          },
+        },
         orderBy: {
           createdAt: "desc",
         },
@@ -109,6 +119,26 @@ export async function POST(request: Request) {
         category: body.category || null,
         inStock: body.inStock ?? true,
         featured: body.featured ?? false,
+        sizes: body.sizes?.length
+          ? {
+              create: body.sizes.map(
+                (size: {
+                  name: string;
+                  price: number;
+                  displayOrder: number;
+                }) => ({
+                  name: size.name,
+                  price: size.price,
+                  displayOrder: size.displayOrder,
+                }),
+              ),
+            }
+          : undefined,
+      },
+      include: {
+        sizes: {
+          orderBy: { displayOrder: "asc" },
+        },
       },
     });
 

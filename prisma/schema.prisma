@@ -16,25 +16,41 @@ datasource db {
 
 // Product model with drag-and-drop ordering support
 model Product {
-  id           String      @id @default(cuid())
+  id           String        @id @default(cuid())
   name         String
-  slug         String      @unique
-  description  String?     @db.Text
-  price        Decimal     @db.Decimal(10, 2)
-  comparePrice Decimal?    @db.Decimal(10, 2)
+  slug         String        @unique
+  description  String?       @db.Text
+  price        Decimal       @db.Decimal(10, 2) // Base price (used when no sizes defined)
+  comparePrice Decimal?      @db.Decimal(10, 2)
   images       String[]
-  category     String?     // Optional category field
-  inStock      Boolean     @default(true)
-  featured     Boolean     @default(false)
-  displayOrder Int         @default(0) // Controls display order in product listings
-  createdAt    DateTime    @default(now())
-  updatedAt    DateTime    @updatedAt
+  category     String?       // Optional category field
+  inStock      Boolean       @default(true)
+  featured     Boolean       @default(false)
+  displayOrder Int           @default(0) // Controls display order in product listings
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
   orderItems   OrderItem[]
+  sizes        ProductSize[] // Available sizes with different prices
 
   @@index([category])
   @@index([featured])
   @@index([slug])
   @@index([displayOrder]) // Index for efficient ordering queries
+}
+
+// Product size variants with individual pricing
+model ProductSize {
+  id           String   @id @default(cuid())
+  productId    String
+  name         String   // e.g., "Pequeña (6 porciones)", "Mediana (12 porciones)"
+  price        Decimal  @db.Decimal(10, 2)
+  displayOrder Int      @default(0)
+  product      Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([productId])
+  @@index([displayOrder])
 }
 
 // ============================================================================
@@ -51,6 +67,7 @@ model Order {
   shippingAddress        String        // Shipping address as string
   shippingCity           String        // Shipping city
   shippingDepartment     String        // Shipping department
+  deliveryDate           DateTime?     // Requested delivery date
   deliveryNotes          String?       // Optional delivery notes
   status                 OrderStatus   @default(PENDING)
   paymentMethod          String
@@ -71,6 +88,7 @@ model Order {
   @@index([status])
   @@index([paymentStatus])
   @@index([customerEmail]) // Index for checking used discount codes
+  @@index([deliveryDate])
 }
 
 model OrderItem {
@@ -78,6 +96,7 @@ model OrderItem {
   orderId   String
   productId String
   name      String
+  sizeName  String?  // Selected size name (e.g., "Mediana (12 porciones)")
   price     Decimal  @db.Decimal(10, 2)
   quantity  Int
   imageUrl  String?

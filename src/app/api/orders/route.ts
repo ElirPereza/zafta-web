@@ -118,6 +118,7 @@ export async function POST(request: Request) {
         shippingAddress: body.shippingAddress,
         shippingCity: body.shippingCity,
         shippingDepartment: body.shippingDepartment || "Cundinamarca",
+        deliveryDate: body.deliveryDate ? new Date(body.deliveryDate) : null,
         deliveryNotes: body.deliveryNotes || "",
         paymentMethod: body.paymentMethod || "WOMPI",
         subtotal: body.subtotal,
@@ -129,6 +130,7 @@ export async function POST(request: Request) {
           create: body.items.map((item: any) => ({
             productId: item.productId,
             name: item.name,
+            sizeName: item.sizeName || null,
             price: item.price,
             quantity: item.quantity,
             imageUrl: item.imageUrl || item.image || "",

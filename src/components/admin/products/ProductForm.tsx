@@ -1,7 +1,7 @@
 "use client";
 
-import type { Product } from "@prisma/client";
-import { Upload, X } from "lucide-react";
+import type { Product, ProductSize } from "@prisma/client";
+import { Upload, X, Plus, Trash2 } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -18,8 +18,18 @@ import {
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 
+interface SizeInput {
+  id?: string;
+  name: string;
+  price: number | "";
+}
+
+interface ProductWithSizes extends Product {
+  sizes?: ProductSize[];
+}
+
 interface ProductFormProps {
-  product?: Product;
+  product?: ProductWithSizes;
 }
 
 export function ProductForm({ product }: ProductFormProps) {
@@ -42,6 +52,37 @@ export function ProductForm({ product }: ProductFormProps) {
     inStock: product?.inStock ?? true,
     featured: product?.featured ?? false,
   });
+
+  // Sizes state
+  const [sizes, setSizes] = useState<SizeInput[]>(
+    product?.sizes?.map((s) => ({
+      id: s.id,
+      name: s.name,
+      price: Number(s.price),
+    })) || [],
+  );
+
+  const addSize = () => {
+    setSizes([...sizes, { name: "", price: "" }]);
+  };
+
+  const removeSize = (index: number) => {
+    setSizes(sizes.filter((_, i) => i !== index));
+  };
+
+  const updateSize = (
+    index: number,
+    field: keyof SizeInput,
+    value: string | number,
+  ) => {
+    const newSizes = [...sizes];
+    if (field === "price") {
+      newSizes[index][field] = value === "" ? "" : Number(value);
+    } else {
+      newSizes[index][field] = value as string;
+    }
+    setSizes(newSizes);
+  };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -99,6 +140,16 @@ export function ProductForm({ product }: ProductFormProps) {
 
       const method = product ? "PUT" : "POST";
 
+      // Filter and validate sizes
+      const validSizes = sizes
+        .filter((s) => s.name.trim() && s.price !== "")
+        .map((s, index) => ({
+          id: s.id,
+          name: s.name.trim(),
+          price: Number(s.price),
+          displayOrder: index,
+        }));
+
       const response = await fetch(url, {
         method,
         headers: {
@@ -112,6 +163,7 @@ export function ProductForm({ product }: ProductFormProps) {
             : null,
           slug,
           images,
+          sizes: validSizes,
         }),
       });
 
@@ -302,6 +354,75 @@ export function ProductForm({ product }: ProductFormProps) {
               </SelectItem>
             </SelectContent>
           </Select>
+        </div>
+
+        {/* Product Sizes */}
+        <div className="space-y-4">
+          <div className="flex items-center justify-between">
+            <div>
+              <Label className="font-sans font-semibold">
+                Tamaños y Precios
+              </Label>
+              <p className="text-sm text-muted-foreground font-sans">
+                Define diferentes tamaños con sus precios. Si no agregas
+                tamaños, se usará el precio base.
+              </p>
+            </div>
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              onClick={addSize}
+              className="gap-2"
+            >
+              <Plus className="h-4 w-4" />
+              Agregar Tamaño
+            </Button>
+          </div>
+
+          {sizes.length > 0 && (
+            <div className="space-y-3">
+              {sizes.map((size, index) => (
+                <div
+                  key={index}
+                  className="flex items-center gap-3 p-3 border border-beige-400 rounded-lg bg-beige-50"
+                >
+                  <div className="flex-1">
+                    <Input
+                      placeholder="Ej: Pequeña (6 porciones)"
+                      value={size.name}
+                      onChange={(e) =>
+                        updateSize(index, "name", e.target.value)
+                      }
+                      className="font-sans"
+                    />
+                  </div>
+                  <div className="w-40">
+                    <Input
+                      type="number"
+                      placeholder="Precio"
+                      min="0"
+                      step="100"
+                      value={size.price}
+                      onChange={(e) =>
+                        updateSize(index, "price", e.target.value)
+                      }
+                      className="font-sans"
+                    />
+                  </div>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => removeSize(index)}
+                    className="text-red-500 hover:text-red-700 hover:bg-red-50"
+                  >
+                    <Trash2 className="h-4 w-4" />
+                  </Button>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Stock and Featured Status */}

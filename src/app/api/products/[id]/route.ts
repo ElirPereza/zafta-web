@@ -17,6 +17,11 @@ export async function GET(_request: Request, { params }: RouteParams) {
 
     const product = await prisma.product.findUnique({
       where: { id },
+      include: {
+        sizes: {
+          orderBy: { displayOrder: "asc" },
+        },
+      },
     });
 
     if (!product) {
@@ -58,19 +63,48 @@ export async function PUT(request: Request, { params }: RouteParams) {
     const { id } = await params;
     const body = await request.json();
 
-    const product = await prisma.product.update({
-      where: { id },
-      data: {
-        name: body.name,
-        slug: body.slug,
-        description: body.description || null,
-        price: body.price,
-        comparePrice: body.comparePrice || null,
-        images: body.images || [],
-        category: body.category,
-        inStock: body.inStock ?? true,
-        featured: body.featured ?? false,
-      },
+    // Update product and handle sizes in a transaction
+    const product = await prisma.$transaction(async (tx) => {
+      // Delete existing sizes
+      await tx.productSize.deleteMany({
+        where: { productId: id },
+      });
+
+      // Update product and create new sizes
+      return tx.product.update({
+        where: { id },
+        data: {
+          name: body.name,
+          slug: body.slug,
+          description: body.description || null,
+          price: body.price,
+          comparePrice: body.comparePrice || null,
+          images: body.images || [],
+          category: body.category,
+          inStock: body.inStock ?? true,
+          featured: body.featured ?? false,
+          sizes: body.sizes?.length
+            ? {
+                create: body.sizes.map(
+                  (size: {
+                    name: string;
+                    price: number;
+                    displayOrder: number;
+                  }) => ({
+                    name: size.name,
+                    price: size.price,
+                    displayOrder: size.displayOrder,
+                  }),
+                ),
+              }
+            : undefined,
+        },
+        include: {
+          sizes: {
+            orderBy: { displayOrder: "asc" },
+          },
+        },
+      });
     });
 
     return NextResponse.json(product);

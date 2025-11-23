@@ -5,11 +5,18 @@ import { Card } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
 import { ShippingForm } from "./ShippingForm";
 import { WompiCheckout } from "./WompiCheckout";
+import { DeliveryDatePicker } from "./DeliveryDatePicker";
 import { useCartStore } from "@/store/cartStore";
-import { Loader2, User, Mail, Phone, CreditCard } from "lucide-react";
+import {
+  Loader2,
+  User,
+  Mail,
+  Phone,
+  CreditCard,
+  CalendarDays,
+} from "lucide-react";
 import { useRouter } from "next/navigation";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
@@ -55,6 +62,9 @@ export function CheckoutForm({
   // Shipping Information
   const [shippingData, setShippingData] = useState<ShippingData | null>(null);
 
+  // Delivery Date
+  const [deliveryDate, setDeliveryDate] = useState<Date | undefined>();
+
   // Payment Method
   const [paymentMethod, setPaymentMethod] = useState("wompi");
 
@@ -96,6 +106,11 @@ export function CheckoutForm({
       return;
     }
 
+    if (!deliveryDate) {
+      setError("Por favor selecciona una fecha de entrega");
+      return;
+    }
+
     setLoading(true);
 
     try {
@@ -126,6 +141,7 @@ export function CheckoutForm({
           shippingAddress: shippingData.address,
           shippingCity: shippingData.city,
           shippingDepartment: shippingData.department,
+          deliveryDate: deliveryDate.toISOString(),
           deliveryNotes: shippingData.notes,
           shippingCost: shippingData.shippingCost,
           subtotal,
@@ -133,8 +149,9 @@ export function CheckoutForm({
           discountCode: discount?.code,
           discountAmount: discountAmount,
           items: items.map((item) => ({
-            productId: item.id,
+            productId: item.productId || item.id,
             name: item.name,
+            sizeName: item.sizeName,
             price: item.price,
             quantity: item.quantity,
             imageUrl: item.image,
@@ -269,6 +286,15 @@ export function CheckoutForm({
           Dirección de Envío
         </h2>
         <ShippingForm onShippingChange={handleShippingChange} />
+      </Card>
+
+      {/* Delivery Date */}
+      <Card className="p-6">
+        <h2 className="text-2xl mb-6 flex items-center gap-2">
+          <CalendarDays className="h-6 w-6 text-primary" />
+          Fecha de Entrega
+        </h2>
+        <DeliveryDatePicker value={deliveryDate} onChange={setDeliveryDate} />
       </Card>
 
       {/* Payment Method */}
