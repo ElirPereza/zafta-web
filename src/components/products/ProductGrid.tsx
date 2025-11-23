@@ -140,9 +140,9 @@ function ProductCard({
               <SelectTrigger className="w-full">
                 <SelectValue placeholder="Selecciona un tamaño" />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="min-w-[280px]">
                 {product.sizes!.map((size) => (
-                  <SelectItem key={size.id} value={size.id}>
+                  <SelectItem key={size.id} value={size.id} className="whitespace-nowrap">
                     {size.name} - {formatPrice(size.price)}
                   </SelectItem>
                 ))}
