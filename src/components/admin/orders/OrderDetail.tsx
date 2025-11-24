@@ -333,29 +333,29 @@ export function OrderDetail({ order: initialOrder }: OrderDetailProps) {
             <CardHeader>
               <CardTitle className="font-sans">Resumen</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-2">
-              <div className="flex items-center justify-between gap-2 font-sans text-sm">
+            <CardContent className="space-y-3">
+              <div className="flex items-center justify-between gap-3 font-sans text-sm">
                 <span className="text-muted-foreground shrink-0">Subtotal</span>
-                <span className="font-medium text-right wrap-break-word">{formatPrice(Number(order.subtotal))}</span>
+                <span className="font-medium text-right min-w-0 break-all">{formatPrice(Number(order.subtotal))}</span>
               </div>
-              <div className="flex items-center justify-between gap-2 font-sans text-sm">
+              <div className="flex items-center justify-between gap-3 font-sans text-sm">
                 <span className="text-muted-foreground shrink-0">Envío</span>
-                <span className="font-medium text-right wrap-break-word">{formatPrice(Number(order.shippingCost))}</span>
+                <span className="font-medium text-right min-w-0 break-all">{formatPrice(Number(order.shippingCost))}</span>
               </div>
-              <div className="border-t pt-2 mt-2">
-                <div className="flex items-center justify-between gap-2 font-sans font-semibold">
+              <div className="border-t pt-3 mt-3">
+                <div className="flex items-center justify-between gap-3 font-sans font-semibold">
                   <span className="shrink-0">Total</span>
-                  <span className="text-right wrap-break-word">{formatPrice(Number(order.total))}</span>
+                  <span className="text-right min-w-0 break-all">{formatPrice(Number(order.total))}</span>
                 </div>
               </div>
-              <div className="text-xs text-muted-foreground font-sans pt-2 border-t mt-2 space-y-2">
+              <div className="text-xs text-muted-foreground font-sans pt-3 border-t mt-3 space-y-2">
                 <div>
-                  <p className="font-medium">Creado:</p>
-                  <p className="text-foreground/80 wrap-break-word">{formatDate(order.createdAt)}</p>
+                  <p className="font-medium text-xs">Creado:</p>
+                  <p className="text-foreground/80 text-xs min-w-0 break-all">{formatDate(order.createdAt)}</p>
                 </div>
                 <div>
-                  <p className="font-medium">Actualizado:</p>
-                  <p className="text-foreground/80 wrap-break-word">{formatDate(order.updatedAt)}</p>
+                  <p className="font-medium text-xs">Actualizado:</p>
+                  <p className="text-foreground/80 text-xs min-w-0 break-all">{formatDate(order.updatedAt)}</p>
                 </div>
               </div>
             </CardContent>
