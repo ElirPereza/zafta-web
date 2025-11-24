@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @plugin "tailwindcss-animate";
+@import "react-day-picker/style.css";
 
 /* Zafta Design System - Tailwind v4 + Next.js Configuration */
 /* IMPORTANTE: Mantener 100% compatible con pagina_components/index.css */
