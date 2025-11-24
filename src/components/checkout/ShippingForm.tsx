@@ -14,7 +14,6 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Loader2, MapPin } from "lucide-react";
 import { useState } from "react";
 import {
-  useDepartments,
   useCities,
   useShippingCalculator,
 } from "@/hooks/useShippingCalculator";
@@ -31,11 +30,11 @@ interface ShippingFormProps {
 
 export function ShippingForm({ onShippingChange }: ShippingFormProps) {
   const [address, setAddress] = useState("");
-  const [department, setDepartment] = useState<string | null>(null);
+  // Antioquia fijo por ahora - solo entregas en Antioquia
+  const [department] = useState<string>("Antioquia");
   const [city, setCity] = useState<string | null>(null);
   const [notes, setNotes] = useState("");
 
-  const { departments, loading: loadingDepartments } = useDepartments();
   const { cities, loading: loadingCities } = useCities(department);
   const shippingCalculation = useShippingCalculator(department, city);
 
@@ -50,11 +49,6 @@ export function ShippingForm({ onShippingChange }: ShippingFormProps) {
         shippingCost: shippingCalculation.cost,
       });
     }
-  };
-
-  const handleDepartmentChange = (value: string) => {
-    setDepartment(value);
-    setCity(null); // Reset city when department changes
   };
 
   const handleCityChange = (value: string) => {
@@ -82,22 +76,17 @@ export function ShippingForm({ onShippingChange }: ShippingFormProps) {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="space-y-2">
           <Label htmlFor="department">Departamento *</Label>
-          <Select
-            value={department || ""}
-            onValueChange={handleDepartmentChange}
-            disabled={loadingDepartments}
-          >
+          <Select value={department} disabled>
             <SelectTrigger>
-              <SelectValue placeholder="Selecciona departamento" />
+              <SelectValue placeholder="Antioquia" />
             </SelectTrigger>
             <SelectContent>
-              {departments.map((dept) => (
-                <SelectItem key={dept} value={dept}>
-                  {dept}
-                </SelectItem>
-              ))}
+              <SelectItem value="Antioquia">Antioquia</SelectItem>
             </SelectContent>
           </Select>
+          <p className="text-xs text-muted-foreground">
+            Por ahora solo entregas en Antioquia
+          </p>
         </div>
 
         <div className="space-y-2">
