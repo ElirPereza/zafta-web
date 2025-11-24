@@ -69,11 +69,24 @@ export default function CheckoutClient() {
           <Alert className="border-primary/50 bg-primary/10">
             <AlertCircle className="h-4 w-4 sm:h-5 sm:w-5 text-primary flex-shrink-0" />
             <AlertTitle className="font-sans font-semibold text-foreground text-sm sm:text-base">
-              Aviso Importante
+              Información de Entregas
             </AlertTitle>
             <AlertDescription className="font-sans text-xs sm:text-sm text-muted-foreground space-y-1.5 mt-2">
-              <p className="leading-relaxed">• Haz tu pedido antes de las 12:00 p.m. y recíbelo al día siguiente en la mañana.</p>
-              <p className="leading-relaxed">• No realizamos entregas los domingos y los sábados despachamos hasta las 12:00 p.m.</p>
+              <p className="leading-relaxed">
+                • Las entregas se realizan en un día hábil:
+              </p>
+              <p className="leading-relaxed pl-4">
+                – Si haces tu pedido en la mañana, llega al día siguiente en la mañana.
+              </p>
+              <p className="leading-relaxed pl-4">
+                – Si lo haces en la tarde, llega al día siguiente en la tarde.
+              </p>
+              <p className="leading-relaxed">
+                • No realizamos entregas los domingos ni días festivos.
+              </p>
+              <p className="leading-relaxed">
+                • Los sábados despachamos hasta las 12:00 p.m.
+              </p>
             </AlertDescription>
           </Alert>
         </div>
