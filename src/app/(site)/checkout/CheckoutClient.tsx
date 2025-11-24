@@ -5,10 +5,11 @@ import { CheckoutForm } from "@/components/checkout/CheckoutForm";
 import { OrderSummary } from "@/components/checkout/OrderSummary";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { ShoppingBag, AlertCircle } from "lucide-react";
+import { ShoppingBag, AlertCircle, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { getDeliveryTimeInfo } from "@/lib/holidays";
 
 export default function CheckoutClient() {
   const router = useRouter();
@@ -24,6 +25,9 @@ export default function CheckoutClient() {
     percent: number;
     amount: number;
   } | null>(null);
+
+  // Get delivery time info
+  const deliveryInfo = getDeliveryTimeInfo();
 
   // Redirect to products if cart is empty
   useEffect(() => {
@@ -65,9 +69,29 @@ export default function CheckoutClient() {
         </div>
 
         {/* Important Notice */}
-        <div className="max-w-3xl mx-auto mb-6 md:mb-8 px-4 sm:px-0">
+        <div className="max-w-3xl mx-auto mb-6 md:mb-8 px-4 sm:px-0 space-y-4">
+          {/* Dynamic delivery time message */}
+          <Alert
+            className={
+              deliveryInfo.canOrderToday
+                ? "border-green-500 bg-green-50"
+                : "border-amber-500 bg-amber-50"
+            }
+          >
+            <Clock className="h-4 w-4 sm:h-5 sm:w-5 text-primary shrink-0" />
+            <AlertTitle className="font-sans font-semibold text-foreground text-sm sm:text-base">
+              Estado de tu Pedido
+            </AlertTitle>
+            <AlertDescription className="font-sans text-xs sm:text-sm text-muted-foreground mt-2">
+              <p className="leading-relaxed font-medium">
+                {deliveryInfo.message}
+              </p>
+            </AlertDescription>
+          </Alert>
+
+          {/* General delivery info */}
           <Alert className="border-primary/50 bg-primary/10">
-            <AlertCircle className="h-4 w-4 sm:h-5 sm:w-5 text-primary flex-shrink-0" />
+            <AlertCircle className="h-4 w-4 sm:h-5 sm:w-5 text-primary shrink-0" />
             <AlertTitle className="font-sans font-semibold text-foreground text-sm sm:text-base">
               Información de Entregas
             </AlertTitle>
@@ -76,7 +100,8 @@ export default function CheckoutClient() {
                 • Las entregas se realizan en un día hábil:
               </p>
               <p className="leading-relaxed pl-4">
-                – Si haces tu pedido en la mañana, llega al día siguiente en la mañana.
+                – Si haces tu pedido en la mañana, llega al día siguiente en la
+                mañana.
               </p>
               <p className="leading-relaxed pl-4">
                 – Si lo haces en la tarde, llega al día siguiente en la tarde.

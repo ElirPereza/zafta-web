@@ -95,15 +95,34 @@ export function isValidDeliveryDate(date: Date): boolean {
 }
 
 /**
- * Get the minimum delivery date (at least 1 day from now, skipping invalid dates)
+ * Get the minimum delivery date based on current time and delivery rules
+ * Rules:
+ * - Pedido mañana (antes 12pm) → entrega mañana día siguiente
+ * - Pedido tarde (después 12pm) → entrega tarde día siguiente
+ * - Sábados solo hasta 12pm
+ * - No entregas domingos ni festivos
  */
 export function getMinDeliveryDate(): Date {
-  const today = new Date();
-  const minDate = new Date(today);
-  minDate.setDate(today.getDate() + 1); // At least tomorrow
+  const now = new Date();
+  const currentHour = now.getHours();
+  const currentDay = now.getDay(); // 0 = Sunday, 6 = Saturday
+
+  let minDate = new Date(now);
   minDate.setHours(0, 0, 0, 0);
 
-  // Skip to next valid date if needed
+  // Si es sábado después de las 12pm, saltar al lunes
+  if (currentDay === 6 && currentHour >= 12) {
+    // Sábado tarde → próximo lunes o siguiente día hábil
+    minDate.setDate(minDate.getDate() + 2); // Saltar domingo
+  } else if (currentDay === 0) {
+    // Si es domingo, saltar al lunes
+    minDate.setDate(minDate.getDate() + 1);
+  } else {
+    // Cualquier otro día → al menos mañana
+    minDate.setDate(minDate.getDate() + 1);
+  }
+
+  // Skip to next valid date if needed (skip holidays and Sundays)
   while (!isValidDeliveryDate(minDate)) {
     minDate.setDate(minDate.getDate() + 1);
   }
@@ -119,4 +138,51 @@ export function getMaxDeliveryDate(): Date {
   maxDate.setDate(maxDate.getDate() + 30);
   maxDate.setHours(23, 59, 59, 999);
   return maxDate;
+}
+
+/**
+ * Get info about when order can be delivered based on current time
+ */
+export function getDeliveryTimeInfo(): {
+  canOrderToday: boolean;
+  message: string;
+  isSaturdayAfternoon: boolean;
+} {
+  const now = new Date();
+  const currentHour = now.getHours();
+  const currentDay = now.getDay(); // 0 = Sunday, 6 = Saturday
+
+  // Domingo - no hay despachos
+  if (currentDay === 0) {
+    return {
+      canOrderToday: false,
+      message: "No realizamos despachos los domingos. Tu pedido se procesará el lunes.",
+      isSaturdayAfternoon: false,
+    };
+  }
+
+  // Sábado después de 12pm
+  if (currentDay === 6 && currentHour >= 12) {
+    return {
+      canOrderToday: false,
+      message: "Los sábados despachamos hasta las 12:00 p.m. Tu pedido se procesará el lunes.",
+      isSaturdayAfternoon: true,
+    };
+  }
+
+  // Pedido en la mañana (antes de 12pm)
+  if (currentHour < 12) {
+    return {
+      canOrderToday: true,
+      message: "Pedido realizado en la mañana - Entrega mañana en la mañana.",
+      isSaturdayAfternoon: false,
+    };
+  }
+
+  // Pedido en la tarde (después de 12pm)
+  return {
+    canOrderToday: true,
+    message: "Pedido realizado en la tarde - Entrega mañana en la tarde.",
+    isSaturdayAfternoon: false,
+  };
 }
