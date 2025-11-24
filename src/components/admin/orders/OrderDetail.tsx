@@ -334,29 +334,29 @@ export function OrderDetail({ order: initialOrder }: OrderDetailProps) {
               <CardTitle className="font-sans">Resumen</CardTitle>
             </CardHeader>
             <CardContent className="space-y-2">
-              <div className="flex items-center justify-between font-sans">
-                <span className="text-muted-foreground">Subtotal</span>
-                <span>{formatPrice(Number(order.subtotal))}</span>
+              <div className="flex items-center justify-between gap-2 font-sans text-sm">
+                <span className="text-muted-foreground shrink-0">Subtotal</span>
+                <span className="font-medium text-right wrap-break-word">{formatPrice(Number(order.subtotal))}</span>
               </div>
-              <div className="flex items-center justify-between font-sans">
-                <span className="text-muted-foreground">Envío</span>
-                <span>{formatPrice(Number(order.shippingCost))}</span>
+              <div className="flex items-center justify-between gap-2 font-sans text-sm">
+                <span className="text-muted-foreground shrink-0">Envío</span>
+                <span className="font-medium text-right wrap-break-word">{formatPrice(Number(order.shippingCost))}</span>
               </div>
               <div className="border-t pt-2 mt-2">
-                <div className="flex items-center justify-between font-sans font-semibold text-lg">
-                  <span>Total</span>
-                  <span>{formatPrice(Number(order.total))}</span>
+                <div className="flex items-center justify-between gap-2 font-sans font-semibold">
+                  <span className="shrink-0">Total</span>
+                  <span className="text-right wrap-break-word">{formatPrice(Number(order.total))}</span>
                 </div>
               </div>
-              <div className="text-xs text-muted-foreground font-sans pt-2 border-t mt-2 space-y-1">
-                <p className="flex justify-between">
-                  <span>Creado:</span>
-                  <span className="text-right">{formatDate(order.createdAt)}</span>
-                </p>
-                <p className="flex justify-between">
-                  <span>Actualizado:</span>
-                  <span className="text-right">{formatDate(order.updatedAt)}</span>
-                </p>
+              <div className="text-xs text-muted-foreground font-sans pt-2 border-t mt-2 space-y-2">
+                <div>
+                  <p className="font-medium">Creado:</p>
+                  <p className="text-foreground/80 wrap-break-word">{formatDate(order.createdAt)}</p>
+                </div>
+                <div>
+                  <p className="font-medium">Actualizado:</p>
+                  <p className="text-foreground/80 wrap-break-word">{formatDate(order.updatedAt)}</p>
+                </div>
               </div>
             </CardContent>
           </Card>
