@@ -348,9 +348,15 @@ export function OrderDetail({ order: initialOrder }: OrderDetailProps) {
                   <span>{formatPrice(Number(order.total))}</span>
                 </div>
               </div>
-              <div className="text-xs text-muted-foreground font-sans pt-2 border-t mt-2">
-                <p>Creado: {formatDate(order.createdAt)}</p>
-                <p>Actualizado: {formatDate(order.updatedAt)}</p>
+              <div className="text-xs text-muted-foreground font-sans pt-2 border-t mt-2 space-y-1">
+                <p className="flex justify-between">
+                  <span>Creado:</span>
+                  <span className="text-right">{formatDate(order.createdAt)}</span>
+                </p>
+                <p className="flex justify-between">
+                  <span>Actualizado:</span>
+                  <span className="text-right">{formatDate(order.updatedAt)}</span>
+                </p>
               </div>
             </CardContent>
           </Card>
