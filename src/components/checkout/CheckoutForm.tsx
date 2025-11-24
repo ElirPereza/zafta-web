@@ -18,7 +18,6 @@ import {
   CalendarDays,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 interface ShippingData {
   address: string;
@@ -65,8 +64,8 @@ export function CheckoutForm({
   // Delivery Date
   const [deliveryDate, setDeliveryDate] = useState<Date | undefined>();
 
-  // Payment Method
-  const [paymentMethod, setPaymentMethod] = useState("wompi");
+  // Payment Method - Solo Wompi
+  const paymentMethod = "wompi";
 
   const handleShippingChange = (data: ShippingData) => {
     setShippingData(data);
@@ -170,15 +169,9 @@ export function CheckoutForm({
 
       const order = await orderResponse.json();
 
-      // If payment is wompi, show payment widget
-      if (paymentMethod === "wompi") {
-        setCreatedOrderId(order.id);
-        setLoading(false);
-      } else {
-        // For other payment methods (cash on delivery, etc.)
-        clearCart();
-        router.push(`/pedido-confirmado/${order.id}`);
-      }
+      // Show Wompi payment widget
+      setCreatedOrderId(order.id);
+      setLoading(false);
     } catch (err) {
       console.error("Error processing order:", err);
       setError(
@@ -303,27 +296,12 @@ export function CheckoutForm({
           <CreditCard className="h-6 w-6 text-primary" />
           Método de Pago
         </h2>
-        <RadioGroup value={paymentMethod} onValueChange={setPaymentMethod}>
-          <div className="flex items-center space-x-2 p-4 border rounded-lg">
-            <RadioGroupItem value="wompi" id="wompi" />
-            <Label htmlFor="wompi" className="flex-1 cursor-pointer font-sans">
-              <div className="font-medium">Pago en Línea (Wompi)</div>
-              <div className="text-sm text-muted-foreground">
-                Tarjeta de crédito, débito, PSE, Nequi, etc.
-              </div>
-            </Label>
+        <div className="p-4 border rounded-lg bg-accent/50">
+          <div className="font-medium">Pago en Línea (Wompi)</div>
+          <div className="text-sm text-muted-foreground">
+            Tarjeta de crédito, débito, PSE, Nequi, Daviplata y más
           </div>
-
-          <div className="flex items-center space-x-2 p-4 border rounded-lg">
-            <RadioGroupItem value="cash" id="cash" />
-            <Label htmlFor="cash" className="flex-1 cursor-pointer font-sans">
-              <div className="font-medium">Pago Contra Entrega</div>
-              <div className="text-sm text-muted-foreground">
-                Paga en efectivo al recibir tu pedido
-              </div>
-            </Label>
-          </div>
-        </RadioGroup>
+        </div>
       </Card>
 
       {/* Error Message */}
@@ -346,7 +324,7 @@ export function CheckoutForm({
             Procesando...
           </>
         ) : (
-          <>{paymentMethod === "wompi" ? "Ir a Pagar" : "Confirmar Pedido"}</>
+          "Ir a Pagar"
         )}
       </Button>
 
