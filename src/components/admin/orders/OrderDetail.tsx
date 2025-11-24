@@ -84,13 +84,15 @@ export function OrderDetail({ order: initialOrder }: OrderDetailProps) {
   };
 
   const formatDate = (date: Date | string) => {
-    return new Date(date).toLocaleDateString("es-CO", {
+    const formatted = new Date(date).toLocaleDateString("es-CO", {
       year: "numeric",
       month: "long",
       day: "numeric",
       hour: "2-digit",
       minute: "2-digit",
     });
+    // Replace "p. m." and "a. m." with non-breaking versions
+    return formatted.replace(/p\.\s+m\./g, "p.m.").replace(/a\.\s+m\./g, "a.m.");
   };
 
   const handleStatusChange = async (newStatus: OrderStatus) => {
@@ -333,29 +335,29 @@ export function OrderDetail({ order: initialOrder }: OrderDetailProps) {
             <CardHeader>
               <CardTitle className="font-sans">Resumen</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-3">
-              <div className="flex items-center justify-between gap-3 font-sans text-sm">
-                <span className="text-muted-foreground shrink-0">Subtotal</span>
-                <span className="font-medium text-right min-w-0 break-all">{formatPrice(Number(order.subtotal))}</span>
+            <CardContent className="space-y-3 overflow-hidden">
+              <div className="flex items-center justify-between gap-2 font-sans text-sm">
+                <span className="text-muted-foreground shrink-0 text-xs">Subtotal</span>
+                <span className="font-medium text-right text-[11px]">{formatPrice(Number(order.subtotal))}</span>
               </div>
-              <div className="flex items-center justify-between gap-3 font-sans text-sm">
-                <span className="text-muted-foreground shrink-0">Envío</span>
-                <span className="font-medium text-right min-w-0 break-all">{formatPrice(Number(order.shippingCost))}</span>
+              <div className="flex items-center justify-between gap-2 font-sans text-sm">
+                <span className="text-muted-foreground shrink-0 text-xs">Envío</span>
+                <span className="font-medium text-right text-[11px]">{formatPrice(Number(order.shippingCost))}</span>
               </div>
               <div className="border-t pt-3 mt-3">
-                <div className="flex items-center justify-between gap-3 font-sans font-semibold">
-                  <span className="shrink-0">Total</span>
-                  <span className="text-right min-w-0 break-all">{formatPrice(Number(order.total))}</span>
+                <div className="flex items-center justify-between gap-2 font-sans font-semibold text-sm">
+                  <span className="shrink-0 text-xs">Total</span>
+                  <span className="text-right text-[11px]">{formatPrice(Number(order.total))}</span>
                 </div>
               </div>
               <div className="text-xs text-muted-foreground font-sans pt-3 border-t mt-3 space-y-2">
                 <div>
                   <p className="font-medium text-xs">Creado:</p>
-                  <p className="text-foreground/80 text-xs min-w-0 break-all">{formatDate(order.createdAt)}</p>
+                  <p className="text-foreground/80 text-[10px] leading-tight">{formatDate(order.createdAt)}</p>
                 </div>
                 <div>
                   <p className="font-medium text-xs">Actualizado:</p>
-                  <p className="text-foreground/80 text-xs min-w-0 break-all">{formatDate(order.updatedAt)}</p>
+                  <p className="text-foreground/80 text-[10px] leading-tight">{formatDate(order.updatedAt)}</p>
                 </div>
               </div>
             </CardContent>
