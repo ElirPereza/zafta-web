@@ -141,6 +141,22 @@ export async function DELETE(_request: Request, { params }: RouteParams) {
 
     const { id } = await params;
 
+    // Check if product has associated orders
+    const orderItemsCount = await prisma.orderItem.count({
+      where: { productId: id },
+    });
+
+    if (orderItemsCount > 0) {
+      return NextResponse.json(
+        {
+          error:
+            "No se puede eliminar este producto porque tiene pedidos asociados. Puedes marcarlo como fuera de stock en su lugar.",
+        },
+        { status: 400 },
+      );
+    }
+
+    // Delete product (sizes will be deleted automatically due to CASCADE)
     await prisma.product.delete({
       where: { id },
     });
