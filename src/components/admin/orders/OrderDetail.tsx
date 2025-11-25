@@ -196,9 +196,9 @@ export function OrderDetail({ order: initialOrder }: OrderDetailProps) {
                 {order.items.map((item) => (
                   <div
                     key={item.id}
-                    className="flex items-center gap-4 p-4 border border-beige-400 rounded-lg"
+                    className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 p-4 border border-beige-400 rounded-lg"
                   >
-                    <div className="relative w-20 h-20 rounded-lg overflow-hidden bg-beige-100 flex-shrink-0">
+                    <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden bg-beige-100 shrink-0">
                       {item.imageUrl ? (
                         <Image
                           src={item.imageUrl}
@@ -220,17 +220,17 @@ export function OrderDetail({ order: initialOrder }: OrderDetailProps) {
                         </div>
                       )}
                     </div>
-                    <div className="flex-1">
-                      <h4 className="font-sans font-medium">{item.name}</h4>
-                      <p className="text-sm text-muted-foreground font-sans">
+                    <div className="flex-1 min-w-0">
+                      <h4 className="font-sans font-medium text-sm sm:text-base">{item.name}</h4>
+                      <p className="text-xs sm:text-sm text-muted-foreground font-sans">
                         Cantidad: {item.quantity}
                       </p>
                     </div>
-                    <div className="text-right">
-                      <p className="font-sans font-medium">
+                    <div className="text-left sm:text-right w-full sm:w-auto">
+                      <p className="font-sans font-medium text-sm">
                         {formatPrice(Number(item.price))}
                       </p>
-                      <p className="text-sm text-muted-foreground font-sans">
+                      <p className="text-xs sm:text-sm text-muted-foreground font-sans">
                         Subtotal:{" "}
                         {formatPrice(Number(item.price) * item.quantity)}
                       </p>
@@ -335,29 +335,29 @@ export function OrderDetail({ order: initialOrder }: OrderDetailProps) {
             <CardHeader>
               <CardTitle className="font-sans">Resumen</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-3 overflow-hidden">
-              <div className="flex items-center justify-between gap-2 font-sans text-sm">
-                <span className="text-muted-foreground shrink-0 text-xs">Subtotal</span>
-                <span className="font-medium text-right text-[11px]">{formatPrice(Number(order.subtotal))}</span>
+            <CardContent className="space-y-3">
+              <div className="flex items-center justify-between gap-2 font-sans">
+                <span className="text-muted-foreground text-sm">Subtotal</span>
+                <span className="font-medium text-sm">{formatPrice(Number(order.subtotal))}</span>
               </div>
-              <div className="flex items-center justify-between gap-2 font-sans text-sm">
-                <span className="text-muted-foreground shrink-0 text-xs">Envío</span>
-                <span className="font-medium text-right text-[11px]">{formatPrice(Number(order.shippingCost))}</span>
+              <div className="flex items-center justify-between gap-2 font-sans">
+                <span className="text-muted-foreground text-sm">Envío</span>
+                <span className="font-medium text-sm">{formatPrice(Number(order.shippingCost))}</span>
               </div>
               <div className="border-t pt-3 mt-3">
-                <div className="flex items-center justify-between gap-2 font-sans font-semibold text-sm">
-                  <span className="shrink-0 text-xs">Total</span>
-                  <span className="text-right text-[11px]">{formatPrice(Number(order.total))}</span>
+                <div className="flex items-center justify-between gap-2 font-sans font-semibold">
+                  <span className="text-sm">Total</span>
+                  <span className="text-sm">{formatPrice(Number(order.total))}</span>
                 </div>
               </div>
               <div className="text-xs text-muted-foreground font-sans pt-3 border-t mt-3 space-y-2">
                 <div>
-                  <p className="font-medium text-xs">Creado:</p>
-                  <p className="text-foreground/80 text-[10px] leading-tight">{formatDate(order.createdAt)}</p>
+                  <p className="font-medium">Creado:</p>
+                  <p className="text-foreground/80">{formatDate(order.createdAt)}</p>
                 </div>
                 <div>
-                  <p className="font-medium text-xs">Actualizado:</p>
-                  <p className="text-foreground/80 text-[10px] leading-tight">{formatDate(order.updatedAt)}</p>
+                  <p className="font-medium">Actualizado:</p>
+                  <p className="text-foreground/80">{formatDate(order.updatedAt)}</p>
                 </div>
               </div>
             </CardContent>

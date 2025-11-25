@@ -6,6 +6,10 @@ import Link from "next/link";
 import { formatDistanceToNow } from "date-fns";
 import { es } from "date-fns/locale";
 
+// Disable caching for this page - always fetch fresh data
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 async function getStats() {
   const [totalProducts, totalOrders, pendingOrders, totalRevenue] =
     await Promise.all([
@@ -99,8 +103,7 @@ export default async function AdminDashboard() {
       icon: Package,
       description: "Productos en catálogo",
       iconColor: "text-blue-600",
-      bgColor:
-        "bg-gradient-to-br from-blue-50 to-blue-100",
+      bgColor: "bg-gradient-to-br from-blue-50 to-blue-100",
       borderColor: "border-blue-300",
     },
     {
@@ -109,8 +112,7 @@ export default async function AdminDashboard() {
       icon: ShoppingCart,
       description: "Pedidos realizados",
       iconColor: "text-green-600",
-      bgColor:
-        "bg-gradient-to-br from-green-50 to-green-100",
+      bgColor: "bg-gradient-to-br from-green-50 to-green-100",
       borderColor: "border-green-300",
     },
     {
@@ -131,8 +133,7 @@ export default async function AdminDashboard() {
       icon: DollarSign,
       description: "Ventas confirmadas",
       iconColor: "text-purple-600",
-      bgColor:
-        "bg-gradient-to-br from-purple-50 to-purple-100",
+      bgColor: "bg-gradient-to-br from-purple-50 to-purple-100",
       borderColor: "border-purple-300",
     },
   ];
@@ -234,7 +235,10 @@ export default async function AdminDashboard() {
                         >
                           {paymentStatusConfig[order.paymentStatus].label}
                         </Badge>
-                        <p className="text-sm font-bold font-sans mt-1 text-[hsl(var(--midnight-navy))]" style={{ fontFamily: 'Fredoka, sans-serif' }}>
+                        <p
+                          className="text-sm font-bold font-sans mt-1 text-[hsl(var(--midnight-navy))]"
+                          style={{ fontFamily: "Fredoka, sans-serif" }}
+                        >
                           $
                           {Number(order.total).toLocaleString("es-CO", {
                             minimumFractionDigits: 0,
