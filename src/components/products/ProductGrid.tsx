@@ -138,7 +138,16 @@ function ProductCard({
               onValueChange={setSelectedSizeId}
             >
               <SelectTrigger className="w-full text-left">
-                <SelectValue placeholder="Selecciona un tamaño" />
+                <SelectValue>
+                  {selectedSize && (
+                    <div className="flex items-center justify-between gap-2 w-full">
+                      <span className="truncate">{selectedSize.name}</span>
+                      <span className="font-semibold shrink-0 text-primary">
+                        {formatPrice(selectedSize.price)}
+                      </span>
+                    </div>
+                  )}
+                </SelectValue>
               </SelectTrigger>
               <SelectContent className="w-(--radix-select-trigger-width) max-w-full">
                 {product.sizes!.map((size) => (
