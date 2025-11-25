@@ -10,6 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Loader2, MapPin } from "lucide-react";
 import { useState } from "react";
 import {
@@ -136,38 +137,23 @@ export function ShippingForm({ onShippingChange }: ShippingFormProps) {
 
       {/* Shipping Cost Display */}
       {shippingCalculation.loading && (
-        <div className="flex items-center gap-3 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-          <Loader2 className="h-5 w-5 animate-spin text-blue-600 shrink-0" />
-          <p className="text-sm font-sans text-blue-900">
-            Calculando costo de envío...
-          </p>
-        </div>
+        <Alert>
+          <Loader2 className="h-4 w-4 animate-spin" />
+          <AlertDescription>Calculando costo de envío...</AlertDescription>
+        </Alert>
       )}
 
       {shippingCalculation.cost > 0 && !shippingCalculation.loading && (
-        <div className="p-4 bg-green-50 border-2 border-green-300 rounded-lg">
-          <div className="flex items-start gap-3">
-            <MapPin className="h-5 w-5 text-green-600 shrink-0 mt-0.5" />
-            <div className="flex-1 min-w-0">
-              <div className="flex flex-col gap-2">
-                <p className="text-sm font-sans font-semibold text-green-900">
-                  Costo de envío a {city}, {department}:
-                </p>
-                <p className="text-2xl font-bold text-green-700 font-sans">
-                  {shippingCalculation.formattedCost}
-                </p>
-              </div>
-            </div>
-          </div>
+        <div className="flex items-center gap-2 p-3 bg-green-50 border border-green-200 rounded-lg text-green-800 text-sm">
+          <MapPin className="h-4 w-4 shrink-0" />
+          <span>Costo de envío a <strong>{city}, {department}:</strong> <strong className="text-base">${new Intl.NumberFormat("es-CO").format(shippingCalculation.cost)}</strong></span>
         </div>
       )}
 
       {shippingCalculation.error && (
-        <div className="flex items-start gap-3 p-4 bg-red-50 border border-red-200 rounded-lg">
-          <div className="text-sm font-sans text-red-900">
-            {shippingCalculation.error}
-          </div>
-        </div>
+        <Alert variant="destructive">
+          <AlertDescription>{shippingCalculation.error}</AlertDescription>
+        </Alert>
       )}
     </div>
   );

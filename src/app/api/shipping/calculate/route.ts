@@ -22,15 +22,15 @@ export async function POST(request: Request) {
 
     const calculation = calculateShippingCost(department, city);
 
+    const formatted = new Intl.NumberFormat("es-CO", {
+      minimumFractionDigits: 0,
+    }).format(calculation.cost);
+
     return NextResponse.json({
       department: calculation.department,
       city: calculation.city,
       cost: calculation.cost,
-      formattedCost: new Intl.NumberFormat("es-CO", {
-        style: "currency",
-        currency: "COP",
-        minimumFractionDigits: 0,
-      }).format(calculation.cost),
+      formattedCost: `$${formatted}`,
     });
   } catch (error) {
     console.error("Error calculating shipping cost:", error);
