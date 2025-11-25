@@ -118,7 +118,7 @@ export async function PUT(request: Request, { params }: RouteParams) {
 }
 
 // DELETE - Delete a product (admin only)
-export async function DELETE(_request: Request, { params }: RouteParams) {
+export async function DELETE(request: Request, { params }: RouteParams) {
   try {
     const { userId } = await auth();
 
@@ -140,6 +140,8 @@ export async function DELETE(_request: Request, { params }: RouteParams) {
     }
 
     const { id } = await params;
+    const url = new URL(request.url);
+    const force = url.searchParams.get("force") === "true";
 
     // Check if product has associated orders
     const orderItemsCount = await prisma.orderItem.count({
@@ -147,13 +149,30 @@ export async function DELETE(_request: Request, { params }: RouteParams) {
     });
 
     if (orderItemsCount > 0) {
-      return NextResponse.json(
-        {
-          error:
-            "No se puede eliminar este producto porque tiene pedidos asociados. Puedes marcarlo como fuera de stock en su lugar.",
-        },
-        { status: 400 },
-      );
+      // Only SUPER_ADMIN can force delete products with orders
+      if (!force) {
+        return NextResponse.json(
+          {
+            error:
+              "No se puede eliminar este producto porque tiene pedidos asociados. Puedes marcarlo como fuera de stock en su lugar.",
+            canForceDelete: userMetadata.role === "SUPER_ADMIN",
+          },
+          { status: 400 },
+        );
+      }
+
+      // Verify user is SUPER_ADMIN for force delete
+      if (userMetadata.role !== "SUPER_ADMIN") {
+        return NextResponse.json(
+          { error: "Solo SUPER_ADMIN puede forzar la eliminación de productos con pedidos" },
+          { status: 403 },
+        );
+      }
+
+      // Force delete: remove all order items first
+      await prisma.orderItem.deleteMany({
+        where: { productId: id },
+      });
     }
 
     // Delete product (sizes will be deleted automatically due to CASCADE)
