@@ -138,7 +138,7 @@ function ProductCard({
               onValueChange={setSelectedSizeId}
             >
               <SelectTrigger className="w-full text-left">
-                <SelectValue>
+                <SelectValue placeholder="Tamaños">
                   {selectedSize && (
                     <div className="flex items-center justify-between gap-2 w-full">
                       <span className="truncate">{selectedSize.name}</span>
