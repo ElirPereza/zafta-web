@@ -167,7 +167,10 @@ export function OrdersTable() {
           </Select>
         </div>
         <div className="text-sm text-[hsl(var(--midnight-navy))]/70 font-sans">
-          <span className="font-bold text-[hsl(var(--midnight-navy))]" style={{ fontFamily: 'Fredoka, sans-serif' }}>
+          <span
+            className="font-bold text-[hsl(var(--midnight-navy))]"
+            style={{ fontFamily: "Fredoka, sans-serif" }}
+          >
             {filteredOrders.length}
           </span>{" "}
           {filteredOrders.length === 1 ? "pedido" : "pedidos"}
@@ -209,7 +212,10 @@ export function OrdersTable() {
                   key={order.id}
                   className="hover:bg-gradient-to-r hover:from-[hsl(var(--rose-gold))]/5 hover:to-transparent transition-colors border-b border-[hsl(var(--beige-300))]/50"
                 >
-                  <TableCell className="font-sans font-bold text-[hsl(var(--midnight-navy))]" style={{ fontFamily: 'Fredoka, sans-serif' }}>
+                  <TableCell
+                    className="font-sans font-bold text-[hsl(var(--midnight-navy))]"
+                    style={{ fontFamily: "Fredoka, sans-serif" }}
+                  >
                     #{order.orderNumber}
                   </TableCell>
                   <TableCell className="font-sans">
@@ -225,7 +231,10 @@ export function OrdersTable() {
                   <TableCell className="font-sans text-sm text-[hsl(var(--midnight-navy))]/70 whitespace-nowrap">
                     {formatDate(order.createdAt)}
                   </TableCell>
-                  <TableCell className="font-sans font-bold text-[hsl(var(--midnight-navy))]" style={{ fontFamily: 'Fredoka, sans-serif' }}>
+                  <TableCell
+                    className="font-sans font-bold text-[hsl(var(--midnight-navy))]"
+                    style={{ fontFamily: "Fredoka, sans-serif" }}
+                  >
                     {formatPrice(Number(order.total))}
                   </TableCell>
                   <TableCell>

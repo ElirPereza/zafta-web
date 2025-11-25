@@ -23,7 +23,10 @@
       "Bash(bun dev)",
       "Bash(deploy-db-prod.bat)",
       "Bash(cmd /c deploy-db-prod.bat)",
-      "Bash(dir:*)"
+      "Bash(dir:*)",
+      "Bash(bunx shadcn@latest add:*)",
+      "Bash(timeout:*)",
+      "Bash(NUL)"
     ],
     "deny": [],
     "ask": []

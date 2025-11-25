@@ -28,7 +28,9 @@ export function DiscountPopup({ onClose }: DiscountPopupProps) {
 
   useEffect(() => {
     // Check if user has completed their first purchase
-    const hasCompletedPurchase = localStorage.getItem("zafta-first-purchase-completed");
+    const hasCompletedPurchase = localStorage.getItem(
+      "zafta-first-purchase-completed",
+    );
     if (hasCompletedPurchase === "true") {
       setHasBeenShown(true);
       return;

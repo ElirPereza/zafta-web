@@ -18,7 +18,10 @@ export const SHIPPING_ZONES: ShippingZone[] = [
       { name: "Alto de Palmas", cost: 20000 },
       { name: "Mall Indiana", cost: 20000 },
       { name: "Palmas hasta la cola del zorro", cost: 12000 },
-      { name: "Palmas de la cola del zorro hasta la bomba Texaco", cost: 15000 },
+      {
+        name: "Palmas de la cola del zorro hasta la bomba Texaco",
+        cost: 15000,
+      },
       { name: "Poblado inferior hacia arriba", cost: 12000 },
       { name: "Poblado inferior hacia abajo", cost: 10000 },
       // Medellín barrios

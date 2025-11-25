@@ -20,9 +20,7 @@ export default function AccesoDenegadoPage() {
           </div>
         </div>
 
-        <h1 className="text-4xl mb-4 text-foreground">
-          Acceso Denegado
-        </h1>
+        <h1 className="text-4xl mb-4 text-foreground">Acceso Denegado</h1>
 
         <p className="text-lg text-muted-foreground font-sans mb-8 leading-relaxed">
           No tienes permisos para acceder al panel de administración.

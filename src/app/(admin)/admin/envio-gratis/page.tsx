@@ -38,9 +38,7 @@ export default function FreeShippingPage() {
   const [rules, setRules] = useState<FreeShippingRule[]>([]);
   const [loading, setLoading] = useState(true);
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [editingRule, setEditingRule] = useState<FreeShippingRule | null>(
-    null,
-  );
+  const [editingRule, setEditingRule] = useState<FreeShippingRule | null>(null);
 
   // Form state
   const [formData, setFormData] = useState({
@@ -243,18 +241,14 @@ export default function FreeShippingPage() {
                     <SelectItem value="SPECIFIC_LOCATION">
                       Ubicación Específica
                     </SelectItem>
-                    <SelectItem value="ALWAYS_FREE">
-                      Siempre Gratis
-                    </SelectItem>
+                    <SelectItem value="ALWAYS_FREE">Siempre Gratis</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
 
               {formData.type === "MINIMUM_PURCHASE" && (
                 <div>
-                  <Label htmlFor="minimumAmount">
-                    Monto Mínimo (COP)
-                  </Label>
+                  <Label htmlFor="minimumAmount">Monto Mínimo (COP)</Label>
                   <Input
                     id="minimumAmount"
                     type="number"

@@ -97,9 +97,7 @@ const ValuesSection = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="bg-card p-8 rounded-2xl shadow-card hover:shadow-medium transition-all duration-300"
             >
-              <h4 className="text-xl font-sans text-primary mb-4">
-                Misión
-              </h4>
+              <h4 className="text-xl font-sans text-primary mb-4">Misión</h4>
               <p className="text-base text-muted-foreground font-sans leading-relaxed">
                 Crear tortas y pasteles artesanales que unen familias,
                 celebrando los momentos más dulces de la vida con sabores
@@ -114,9 +112,7 @@ const ValuesSection = () => {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="bg-card p-8 rounded-2xl shadow-card hover:shadow-medium transition-all duration-300"
             >
-              <h4 className="text-xl font-sans text-primary mb-4">
-                Visión
-              </h4>
+              <h4 className="text-xl font-sans text-primary mb-4">Visión</h4>
               <p className="text-base text-muted-foreground font-sans leading-relaxed">
                 Ser reconocidos como el corazón de las celebraciones de nuestra
                 comunidad, donde cada torta cuenta una historia y cada bocado

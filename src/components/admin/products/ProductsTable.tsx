@@ -110,7 +110,10 @@ function SortableRow({ product, onDelete, formatPrice }: SortableRowProps) {
       </TableCell>
 
       {/* Price - Smaller font on mobile */}
-      <TableCell className="font-semibold text-sm md:text-base text-[hsl(var(--midnight-navy))]" style={{ fontFamily: 'Fredoka, sans-serif' }}>
+      <TableCell
+        className="font-semibold text-sm md:text-base text-[hsl(var(--midnight-navy))]"
+        style={{ fontFamily: "Fredoka, sans-serif" }}
+      >
         {formatPrice(Number(product.price))}
       </TableCell>
 
