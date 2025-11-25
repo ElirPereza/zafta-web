@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 
 export default function PoliticaDeDatosPage() {
   return (
-    <div className="container max-w-4xl mx-auto py-12 px-4">
+    <div className="container max-w-4xl mx-auto pt-32 pb-12 px-4">
       <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 text-center leading-tight">
         Política de Tratamiento de Datos Personales
       </h1>
