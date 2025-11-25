@@ -53,10 +53,8 @@ function ProductCard({
   const addItem = useCartStore((state) => state.addItem);
   const hasSizes = product.sizes && product.sizes.length > 0;
 
-  // Initialize with first size or null
-  const [selectedSizeId, setSelectedSizeId] = useState<string | null>(
-    hasSizes ? product.sizes![0].id : null,
-  );
+  // Initialize without selection to show placeholder
+  const [selectedSizeId, setSelectedSizeId] = useState<string | null>(null);
 
   const selectedSize = hasSizes
     ? product.sizes!.find((s) => s.id === selectedSizeId)
