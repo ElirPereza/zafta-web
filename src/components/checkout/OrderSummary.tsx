@@ -257,10 +257,10 @@ export function OrderSummary({
 
       {/* Price Breakdown */}
       <div className="space-y-3">
-        <div className="flex justify-between text-sm font-sans">
-          <span className="text-muted-foreground">Subtotal</span>
+        <div className="flex justify-between items-center gap-4 text-sm font-sans">
+          <span className="text-muted-foreground shrink-0">Subtotal</span>
           <span
-            className="font-medium"
+            className="font-medium text-right wrap-break-word"
             style={{ fontFamily: "Fredoka, sans-serif" }}
           >
             {formatPrice(subtotal)}
@@ -268,12 +268,12 @@ export function OrderSummary({
         </div>
 
         {appliedDiscount && (
-          <div className="flex justify-between text-sm font-sans">
-            <span className="text-green-600">
+          <div className="flex justify-between items-center gap-4 text-sm font-sans">
+            <span className="text-green-600 shrink-0">
               Descuento ({appliedDiscount.percent}%)
             </span>
             <span
-              className="font-medium text-green-600"
+              className="font-medium text-green-600 text-right wrap-break-word"
               style={{ fontFamily: "Fredoka, sans-serif" }}
             >
               -{formatPrice(appliedDiscount.amount)}
@@ -281,8 +281,8 @@ export function OrderSummary({
           </div>
         )}
 
-        <div className="flex justify-between text-sm font-sans">
-          <span className="text-muted-foreground flex items-center gap-2">
+        <div className="flex justify-between items-center gap-4 text-sm font-sans">
+          <span className="text-muted-foreground flex items-center gap-2 shrink-0">
             Envío
             {freeShippingQualified?.qualifies && (
               <Badge
@@ -295,7 +295,7 @@ export function OrderSummary({
             )}
           </span>
           <span
-            className="font-medium"
+            className="font-medium text-right wrap-break-word"
             style={{ fontFamily: "Fredoka, sans-serif" }}
           >
             {freeShippingQualified?.qualifies
@@ -308,10 +308,10 @@ export function OrderSummary({
 
         <Separator />
 
-        <div className="flex justify-between text-lg font-sans">
-          <span className="font-semibold">Total</span>
+        <div className="flex justify-between items-center gap-4 text-lg font-sans">
+          <span className="font-semibold shrink-0">Total</span>
           <span
-            className="font-bold text-primary text-xl"
+            className="font-bold text-primary text-xl text-right wrap-break-word"
             style={{ fontFamily: "Fredoka, sans-serif" }}
           >
             {formatPrice(total)}
