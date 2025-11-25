@@ -145,14 +145,16 @@ export function ShippingForm({ onShippingChange }: ShippingFormProps) {
 
       {shippingCalculation.cost > 0 && !shippingCalculation.loading && (
         <Alert className="bg-green-50 border-green-200">
-          <MapPin className="h-4 w-4 text-green-600" />
+          <MapPin className="h-4 w-4 text-green-600 shrink-0" />
           <AlertDescription className="text-green-800">
-            <span className="font-semibold">
-              Costo de envío a {city}, {department}:
-            </span>{" "}
-            <span className="text-lg font-bold">
-              {shippingCalculation.formattedCost}
-            </span>
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+              <span className="font-semibold text-sm">
+                Costo de envío a {city}, {department}:
+              </span>
+              <span className="text-lg font-bold shrink-0">
+                {shippingCalculation.formattedCost}
+              </span>
+            </div>
           </AlertDescription>
         </Alert>
       )}
