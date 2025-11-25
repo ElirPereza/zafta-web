@@ -7,6 +7,8 @@ export async function POST(request: Request) {
     const body = await request.json();
     const { subtotal, city, department } = body;
 
+    console.log("[FREE SHIPPING] Validating:", { subtotal, city, department });
+
     if (!subtotal || !city || !department) {
       return NextResponse.json(
         { error: "Subtotal, city, and department are required" },
@@ -20,13 +22,24 @@ export async function POST(request: Request) {
       orderBy: { priority: "desc" },
     });
 
+    console.log("[FREE SHIPPING] Found rules:", rules.length, rules.map(r => ({ name: r.name, type: r.type })));
+
     // Check each rule
     for (const rule of rules) {
+      console.log("[FREE SHIPPING] Evaluating rule:", {
+        id: rule.id,
+        name: rule.name,
+        type: rule.type,
+        isActive: rule.isActive,
+        priority: rule.priority
+      });
+
       let qualifies = false;
 
       switch (rule.type) {
         case "ALWAYS_FREE":
           qualifies = true;
+          console.log("[FREE SHIPPING] ALWAYS_FREE rule qualifies:", qualifies);
           break;
 
         case "MINIMUM_PURCHASE":
@@ -36,6 +49,10 @@ export async function POST(request: Request) {
           ) {
             qualifies = true;
           }
+          console.log("[FREE SHIPPING] MINIMUM_PURCHASE rule qualifies:", qualifies, {
+            minimumAmount: rule.minimumAmount,
+            subtotal,
+          });
           break;
 
         case "SPECIFIC_LOCATION":
@@ -52,11 +69,21 @@ export async function POST(request: Request) {
             );
 
           qualifies = cityMatches && departmentMatches;
+          console.log("[FREE SHIPPING] SPECIFIC_LOCATION rule qualifies:", qualifies, {
+            cityMatches,
+            departmentMatches,
+            ruleCities: rule.cities,
+            ruleDepartments: rule.departments,
+          });
           break;
       }
 
       // If this rule qualifies, return immediately (highest priority rule wins)
       if (qualifies) {
+        console.log("[FREE SHIPPING] Rule QUALIFIED! Returning:", {
+          qualifies: true,
+          rule: { id: rule.id, name: rule.name, type: rule.type },
+        });
         return NextResponse.json({
           qualifies: true,
           rule: {
@@ -67,6 +94,8 @@ export async function POST(request: Request) {
         });
       }
     }
+
+    console.log("[FREE SHIPPING] No rules matched - returning qualifies: false");
 
     // No rules matched
     return NextResponse.json({

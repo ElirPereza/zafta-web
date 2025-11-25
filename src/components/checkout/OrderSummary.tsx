@@ -47,17 +47,25 @@ export function OrderSummary({
   } | null>(null);
 
   const discountAmount = appliedDiscount ? appliedDiscount.amount : 0;
-  const actualShippingCost =
-    freeShippingQualified?.qualifies ? 0 : shippingCost;
+  const actualShippingCost = freeShippingQualified?.qualifies
+    ? 0
+    : shippingCost;
   const total = subtotal + actualShippingCost - discountAmount;
 
   // Check for free shipping whenever location or subtotal changes
   useEffect(() => {
     const checkFreeShipping = async () => {
       if (!shippingLocation?.city || !shippingLocation?.department) {
+        console.log("[FREE SHIPPING CLIENT] No location set");
         setFreeShippingQualified(null);
         return;
       }
+
+      console.log("[FREE SHIPPING CLIENT] Checking with:", {
+        subtotal,
+        city: shippingLocation.city,
+        department: shippingLocation.department,
+      });
 
       try {
         const response = await fetch("/api/free-shipping/validate", {
@@ -71,9 +79,10 @@ export function OrderSummary({
         });
 
         const data = await response.json();
+        console.log("[FREE SHIPPING CLIENT] Response:", data);
         setFreeShippingQualified(data);
       } catch (error) {
-        console.error("Error checking free shipping:", error);
+        console.error("[FREE SHIPPING CLIENT] Error:", error);
         setFreeShippingQualified(null);
       }
     };
@@ -169,7 +178,10 @@ export function OrderSummary({
               <p className="text-sm text-muted-foreground font-sans">
                 Cantidad: {item.quantity}
               </p>
-              <p className="text-sm text-primary font-semibold mt-1" style={{ fontFamily: 'Fredoka, sans-serif' }}>
+              <p
+                className="text-sm text-primary font-semibold mt-1"
+                style={{ fontFamily: "Fredoka, sans-serif" }}
+              >
                 {formatPrice(item.price * item.quantity)}
               </p>
             </div>
@@ -254,7 +266,12 @@ export function OrderSummary({
       <div className="space-y-3">
         <div className="flex justify-between text-sm font-sans">
           <span className="text-muted-foreground">Subtotal</span>
-          <span className="font-medium" style={{ fontFamily: 'Fredoka, sans-serif' }}>{formatPrice(subtotal)}</span>
+          <span
+            className="font-medium"
+            style={{ fontFamily: "Fredoka, sans-serif" }}
+          >
+            {formatPrice(subtotal)}
+          </span>
         </div>
 
         {appliedDiscount && (
@@ -262,7 +279,10 @@ export function OrderSummary({
             <span className="text-green-600">
               Descuento ({appliedDiscount.percent}%)
             </span>
-            <span className="font-medium text-green-600" style={{ fontFamily: 'Fredoka, sans-serif' }}>
+            <span
+              className="font-medium text-green-600"
+              style={{ fontFamily: "Fredoka, sans-serif" }}
+            >
               -{formatPrice(appliedDiscount.amount)}
             </span>
           </div>
@@ -281,7 +301,10 @@ export function OrderSummary({
               </Badge>
             )}
           </span>
-          <span className="font-medium" style={{ fontFamily: 'Fredoka, sans-serif' }}>
+          <span
+            className="font-medium"
+            style={{ fontFamily: "Fredoka, sans-serif" }}
+          >
             {freeShippingQualified?.qualifies
               ? formatPrice(0)
               : shippingCost > 0
@@ -294,7 +317,10 @@ export function OrderSummary({
 
         <div className="flex justify-between text-lg font-sans">
           <span className="font-semibold">Total</span>
-          <span className="font-bold text-primary text-xl" style={{ fontFamily: 'Fredoka, sans-serif' }}>
+          <span
+            className="font-bold text-primary text-xl"
+            style={{ fontFamily: "Fredoka, sans-serif" }}
+          >
             {formatPrice(total)}
           </span>
         </div>
