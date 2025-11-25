@@ -94,9 +94,18 @@ export async function POST(request: Request) {
     // Validar que todos los items tengan los campos requeridos
     for (const item of body.items) {
       if (!item.productId || !item.name || !item.price || !item.quantity) {
-        console.error("❌ Invalid item data:", item);
+        console.error("❌ Invalid item data:", JSON.stringify(item, null, 2));
+        console.error("❌ Missing fields:", {
+          hasProductId: !!item.productId,
+          hasName: !!item.name,
+          hasPrice: !!item.price,
+          hasQuantity: !!item.quantity,
+        });
         return NextResponse.json(
-          { error: "Datos de producto incompletos" },
+          {
+            error: "Datos de producto incompletos",
+            details: `Producto sin ${!item.productId ? "productId" : !item.name ? "nombre" : !item.price ? "precio" : "cantidad"}`,
+          },
           { status: 400 },
         );
       }
