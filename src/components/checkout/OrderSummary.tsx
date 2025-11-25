@@ -55,17 +55,11 @@ export function OrderSummary({
   // Check for free shipping whenever location or subtotal changes
   useEffect(() => {
     const checkFreeShipping = async () => {
-      if (!shippingLocation?.city || !shippingLocation?.department) {
-        console.log("[FREE SHIPPING CLIENT] No location set");
+      // Don't check if location is missing or subtotal is 0
+      if (!shippingLocation?.city || !shippingLocation?.department || subtotal <= 0) {
         setFreeShippingQualified(null);
         return;
       }
-
-      console.log("[FREE SHIPPING CLIENT] Checking with:", {
-        subtotal,
-        city: shippingLocation.city,
-        department: shippingLocation.department,
-      });
 
       try {
         const response = await fetch("/api/free-shipping/validate", {
@@ -79,10 +73,9 @@ export function OrderSummary({
         });
 
         const data = await response.json();
-        console.log("[FREE SHIPPING CLIENT] Response:", data);
         setFreeShippingQualified(data);
       } catch (error) {
-        console.error("[FREE SHIPPING CLIENT] Error:", error);
+        console.error("[FREE SHIPPING] Error checking free shipping:", error);
         setFreeShippingQualified(null);
       }
     };
