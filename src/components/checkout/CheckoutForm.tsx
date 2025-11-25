@@ -329,7 +329,24 @@ export function CheckoutForm({
       </Button>
 
       <p className="text-center text-sm text-muted-foreground font-sans">
-        Al confirmar tu pedido, aceptas nuestros términos y condiciones
+        Al confirmar tu pedido, aceptas nuestro{" "}
+        <a
+          href="/aviso-de-privacidad"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-primary hover:underline font-medium"
+        >
+          Aviso de Privacidad
+        </a>
+        {" "}y nuestra{" "}
+        <a
+          href="/politica-de-datos"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-primary hover:underline font-medium"
+        >
+          Política de Datos
+        </a>
       </p>
     </form>
   );
