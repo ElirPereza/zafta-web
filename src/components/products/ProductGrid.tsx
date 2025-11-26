@@ -135,25 +135,13 @@ function ProductCard({
               value={selectedSizeId || undefined}
               onValueChange={setSelectedSizeId}
             >
-              <SelectTrigger className="w-full text-left">
-                <SelectValue placeholder="Tamaños">
-                  {selectedSize && (
-                    <div className="flex items-center justify-between gap-2 w-full">
-                      <span className="truncate">{selectedSize.name}</span>
-                      <span className="font-semibold shrink-0 text-primary">
-                        {formatPrice(selectedSize.price)}
-                      </span>
-                    </div>
-                  )}
-                </SelectValue>
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Selecciona un tamaño" />
               </SelectTrigger>
-              <SelectContent className="w-(--radix-select-trigger-width) max-w-full">
+              <SelectContent>
                 {product.sizes!.map((size) => (
                   <SelectItem key={size.id} value={size.id} className="cursor-pointer">
-                    <div className="flex items-center justify-between gap-2 w-full">
-                      <span className="truncate">{size.name}</span>
-                      <span className="font-semibold shrink-0">{formatPrice(size.price)}</span>
-                    </div>
+                    {size.name}
                   </SelectItem>
                 ))}
               </SelectContent>

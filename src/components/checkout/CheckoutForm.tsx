@@ -16,6 +16,7 @@ import {
   Phone,
   CreditCard,
   CalendarDays,
+  IdCard,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 
@@ -55,6 +56,7 @@ export function CheckoutForm({
 
   // Guest User Information
   const [name, setName] = useState("");
+  const [documentId, setDocumentId] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
 
@@ -85,8 +87,15 @@ export function CheckoutForm({
     setError(null);
 
     // Validación
-    if (!name || !email || !phone) {
+    if (!name || !documentId || !email || !phone) {
       setError("Por favor completa todos los campos de información personal");
+      return;
+    }
+
+    // Validar formato de cédula colombiana (6-10 dígitos)
+    const cedulaRegex = /^\d{6,10}$/;
+    if (!cedulaRegex.test(documentId.replace(/\s/g, ""))) {
+      setError("La cédula de ciudadanía debe tener entre 6 y 10 dígitos");
       return;
     }
 
@@ -136,6 +145,7 @@ export function CheckoutForm({
         body: JSON.stringify({
           customerEmail: email,
           customerName: name,
+          customerDocumentId: documentId.replace(/\s/g, ""),
           customerPhone: phone,
           shippingAddress: shippingData.address,
           shippingCity: shippingData.city,
@@ -238,6 +248,30 @@ export function CheckoutForm({
               placeholder="María García"
               required
             />
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="documentId" className="flex items-center gap-2">
+              <IdCard className="h-4 w-4" />
+              Cédula de Ciudadanía *
+            </Label>
+            <Input
+              id="documentId"
+              type="text"
+              inputMode="numeric"
+              value={documentId}
+              onChange={(e) => {
+                // Solo permitir números
+                const value = e.target.value.replace(/\D/g, "");
+                setDocumentId(value);
+              }}
+              placeholder="1234567890"
+              maxLength={10}
+              required
+            />
+            <p className="text-xs text-muted-foreground font-sans">
+              Solo números, sin puntos ni espacios
+            </p>
           </div>
 
           <div className="space-y-2">

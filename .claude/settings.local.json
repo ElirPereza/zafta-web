@@ -26,7 +26,9 @@
       "Bash(dir:*)",
       "Bash(bunx shadcn@latest add:*)",
       "Bash(timeout:*)",
-      "Bash(NUL)"
+      "Bash(NUL)",
+      "Bash(curl:*)",
+      "Bash(cmd /c \"timeout /t 3 /nobreak >NUL && bun run build\")"
     ],
     "deny": [],
     "ask": []

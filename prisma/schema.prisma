@@ -64,6 +64,7 @@ model Order {
   customerName           String        // Guest customer name
   customerEmail          String        // Guest customer email
   customerPhone          String        // Guest customer phone
+  customerDocumentId     String        // Cédula de ciudadanía colombiana
   shippingAddress        String        // Shipping address as string
   shippingCity           String        // Shipping city
   shippingDepartment     String        // Shipping department

@@ -39,6 +39,7 @@ async function testOrderCreation() {
         customerName: "Test User",
         customerEmail: "test@example.com",
         customerPhone: "+57 300 123 4567",
+        customerDocumentId: "1234567890",
         shippingAddress: "Calle 123 #45-67",
         shippingCity: "Bogotá",
         shippingDepartment: "Cundinamarca",

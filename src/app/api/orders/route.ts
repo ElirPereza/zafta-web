@@ -67,10 +67,25 @@ export async function POST(request: Request) {
     });
 
     // Validar campos requeridos
-    if (!body.customerName || !body.customerEmail || !body.customerPhone) {
+    if (
+      !body.customerName ||
+      !body.customerEmail ||
+      !body.customerPhone ||
+      !body.customerDocumentId
+    ) {
       console.error("❌ Missing required customer fields");
       return NextResponse.json(
         { error: "Faltan campos requeridos de cliente" },
+        { status: 400 },
+      );
+    }
+
+    // Validar formato de cédula colombiana (6-10 dígitos)
+    const cedulaRegex = /^\d{6,10}$/;
+    if (!cedulaRegex.test(body.customerDocumentId)) {
+      console.error("❌ Invalid document ID format");
+      return NextResponse.json(
+        { error: "La cédula de ciudadanía debe tener entre 6 y 10 dígitos" },
         { status: 400 },
       );
     }
@@ -124,6 +139,7 @@ export async function POST(request: Request) {
         customerName: body.customerName,
         customerEmail: body.customerEmail,
         customerPhone: body.customerPhone,
+        customerDocumentId: body.customerDocumentId,
         shippingAddress: body.shippingAddress,
         shippingCity: body.shippingCity,
         shippingDepartment: body.shippingDepartment || "Cundinamarca",
