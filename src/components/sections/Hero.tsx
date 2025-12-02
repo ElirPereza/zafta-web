@@ -72,8 +72,8 @@ const Hero = () => {
         ))}
       </div>
 
-      {/* Carousel Indicators */}
-      <div className="absolute top-8 left-1/2 transform -translate-x-1/2 z-20 flex gap-2">
+      {/* Carousel Indicators - debajo del navbar */}
+      <div className="absolute top-32 left-1/2 transform -translate-x-1/2 z-20 flex gap-2">
         {bannerImages.map((_, index) => (
           <button
             key={index}

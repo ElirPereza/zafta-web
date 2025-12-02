@@ -133,7 +133,7 @@ export function CartDrawer({ open, onClose }: CartDrawerProps) {
               </div>
 
               {/* Footer */}
-              <div className="border-t pt-4 mt-4 space-y-4">
+              <div className="border-t pt-4 mt-4 pb-8 space-y-4">
                 {/* Total */}
                 <div className="flex items-center justify-between">
                   <span className="font-sans text-lg font-semibold">Total</span>

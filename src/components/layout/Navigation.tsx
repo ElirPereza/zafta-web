@@ -13,7 +13,6 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import { Logo } from "@/components/ui/logo";
-import { Button } from "@/components/ui/button";
 import { CartButton } from "@/components/cart/CartButton";
 import { CartDrawer } from "@/components/cart/CartDrawer";
 
@@ -29,12 +28,8 @@ const Navigation = () => {
   const pathname = usePathname();
   const { user, isLoaded } = useUser();
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isVisible, setIsVisible] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
-
-  // Check if we're on the home page
-  const isHomePage = pathname === "/inicio" || pathname === "/";
 
   // Check if current user is admin
   const isAdmin =
@@ -55,21 +50,11 @@ const Navigation = () => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
       setIsScrolled(scrollPosition > 50);
-      // Show navbar after scrolling down 100px only on home page
-      if (isHomePage) {
-        setIsVisible(scrollPosition > 100);
-      } else {
-        // Always visible on other pages
-        setIsVisible(true);
-      }
     };
-
-    // Check initial scroll position
-    handleScroll();
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [isHomePage]);
+  }, []);
 
   const isActive = (href: string) => {
     if (href === "/inicio" && pathname === "/inicio") return true;
@@ -80,11 +65,7 @@ const Navigation = () => {
   return (
     <motion.nav
       initial={{ y: 0, opacity: 1 }}
-      animate={{
-        y: isVisible ? 0 : -150,
-        opacity: isVisible ? 1 : 0,
-      }}
-      transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+      animate={{ y: 0, opacity: 1 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled ? "shadow-medium" : ""
       }`}
