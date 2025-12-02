@@ -29,7 +29,7 @@ const Navigation = () => {
   const pathname = usePathname();
   const { user, isLoaded } = useUser();
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
 
@@ -79,7 +79,7 @@ const Navigation = () => {
 
   return (
     <motion.nav
-      initial={{ y: isHomePage ? -150 : 0, opacity: isHomePage ? 0 : 1 }}
+      initial={{ y: 0, opacity: 1 }}
       animate={{
         y: isVisible ? 0 : -150,
         opacity: isVisible ? 1 : 0,
