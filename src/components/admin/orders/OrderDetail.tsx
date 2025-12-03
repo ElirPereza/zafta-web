@@ -76,11 +76,11 @@ export function OrderDetail({ order: initialOrder }: OrderDetailProps) {
 
   const formatPrice = (price: number | string) => {
     const numPrice = typeof price === "string" ? parseFloat(price) : price;
-    return new Intl.NumberFormat("es-CO", {
-      style: "currency",
-      currency: "COP",
+    // Formato simple sin espacio entre $ y número
+    return `$${new Intl.NumberFormat("es-CO", {
       minimumFractionDigits: 0,
-    }).format(numPrice);
+      maximumFractionDigits: 0,
+    }).format(numPrice)}`;
   };
 
   const formatDate = (date: Date | string) => {
@@ -342,20 +342,20 @@ export function OrderDetail({ order: initialOrder }: OrderDetailProps) {
             <CardContent className="space-y-3">
               <div className="flex items-center justify-between gap-2 font-sans">
                 <span className="text-muted-foreground text-sm">Subtotal</span>
-                <span className="font-medium text-sm">
+                <span className="font-medium text-sm whitespace-nowrap">
                   {formatPrice(Number(order.subtotal))}
                 </span>
               </div>
               <div className="flex items-center justify-between gap-2 font-sans">
                 <span className="text-muted-foreground text-sm">Envío</span>
-                <span className="font-medium text-sm">
+                <span className="font-medium text-sm whitespace-nowrap">
                   {formatPrice(Number(order.shippingCost))}
                 </span>
               </div>
               <div className="border-t pt-3 mt-3">
                 <div className="flex items-center justify-between gap-2 font-sans font-semibold">
                   <span className="text-sm">Total</span>
-                  <span className="text-sm">
+                  <span className="text-sm whitespace-nowrap">
                     {formatPrice(Number(order.total))}
                   </span>
                 </div>
