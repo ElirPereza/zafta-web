@@ -56,7 +56,11 @@ export function OrderSummary({
   useEffect(() => {
     const checkFreeShipping = async () => {
       // Don't check if location is missing or subtotal is 0
-      if (!shippingLocation?.city || !shippingLocation?.department || subtotal <= 0) {
+      if (
+        !shippingLocation?.city ||
+        !shippingLocation?.department ||
+        subtotal <= 0
+      ) {
         setFreeShippingQualified(null);
         return;
       }
@@ -146,15 +150,15 @@ export function OrderSummary({
   };
 
   return (
-    <Card className="p-6 sticky top-32">
-      <h2 className="text-2xl mb-6">Resumen del Pedido</h2>
+    <Card className="p-4 sm:p-6 lg:sticky lg:top-32">
+      <h2 className="text-xl sm:text-2xl mb-4 sm:mb-6">Resumen del Pedido</h2>
 
       {/* Items List */}
-      <div className="space-y-4 mb-6">
+      <div className="space-y-3 sm:space-y-4 mb-4 sm:mb-6">
         {items.map((item) => (
-          <div key={item.id} className="flex gap-4">
+          <div key={item.id} className="flex gap-3 sm:gap-4">
             {/* Image */}
-            <div className="relative w-20 h-20 flex-shrink-0 rounded-lg overflow-hidden bg-beige-100">
+            <div className="relative w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0 rounded-lg overflow-hidden bg-beige-100">
               <Image
                 src={item.image}
                 alt={item.name}
@@ -165,14 +169,14 @@ export function OrderSummary({
 
             {/* Details */}
             <div className="flex-1 min-w-0">
-              <h4 className="font-sans font-medium text-sm mb-1 truncate">
+              <h4 className="font-sans font-medium text-xs sm:text-sm mb-1 truncate">
                 {item.name}
               </h4>
-              <p className="text-sm text-muted-foreground font-sans">
+              <p className="text-xs sm:text-sm text-muted-foreground font-sans">
                 Cantidad: {item.quantity}
               </p>
               <p
-                className="text-sm text-primary font-semibold mt-1"
+                className="text-xs sm:text-sm text-primary font-semibold mt-1"
                 style={{ fontFamily: "Fredoka, sans-serif" }}
               >
                 {formatPrice(item.price * item.quantity)}
@@ -182,12 +186,12 @@ export function OrderSummary({
         ))}
       </div>
 
-      <Separator className="my-6" />
+      <Separator className="my-4 sm:my-6" />
 
       {/* Discount Code Section */}
-      <div className="space-y-3 mb-6">
-        <div className="flex items-center gap-2 text-sm font-sans text-muted-foreground">
-          <Tag className="h-4 w-4" />
+      <div className="space-y-2 sm:space-y-3 mb-4 sm:mb-6">
+        <div className="flex items-center gap-2 text-xs sm:text-sm font-sans text-muted-foreground">
+          <Tag className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
           <span>¿Tienes un código de descuento?</span>
         </div>
 
@@ -253,11 +257,11 @@ export function OrderSummary({
         )}
       </div>
 
-      <Separator className="my-6" />
+      <Separator className="my-4 sm:my-6" />
 
       {/* Price Breakdown */}
-      <div className="space-y-3">
-        <div className="flex justify-between items-center gap-3 text-sm font-sans">
+      <div className="space-y-2 sm:space-y-3">
+        <div className="flex justify-between items-center gap-2 sm:gap-3 text-xs sm:text-sm font-sans">
           <span className="text-muted-foreground shrink-0">Subtotal</span>
           <span
             className="font-medium text-right min-w-0 overflow-hidden text-ellipsis"
@@ -268,7 +272,7 @@ export function OrderSummary({
         </div>
 
         {appliedDiscount && (
-          <div className="flex justify-between items-center gap-3 text-sm font-sans">
+          <div className="flex justify-between items-center gap-2 sm:gap-3 text-xs sm:text-sm font-sans">
             <span className="text-green-600 shrink-0">
               Descuento ({appliedDiscount.percent}%)
             </span>
@@ -281,15 +285,15 @@ export function OrderSummary({
           </div>
         )}
 
-        <div className="flex justify-between items-center gap-3 text-sm font-sans">
-          <span className="text-muted-foreground flex items-center gap-2 shrink-0">
-            Envío
+        <div className="flex justify-between items-center gap-2 sm:gap-3 text-xs sm:text-sm font-sans">
+          <span className="text-muted-foreground flex items-center gap-1 sm:gap-2 shrink-0 flex-wrap">
+            <span>Envío</span>
             {freeShippingQualified?.qualifies && (
               <Badge
                 variant="outline"
-                className="bg-green-50 text-green-700 border-green-300 font-sans text-xs"
+                className="bg-green-50 text-green-700 border-green-300 font-sans text-[10px] sm:text-xs px-1.5 py-0.5"
               >
-                <Truck className="h-3 w-3 mr-1" />
+                <Truck className="h-2.5 w-2.5 sm:h-3 sm:w-3 mr-0.5 sm:mr-1" />
                 ¡Gratis!
               </Badge>
             )}
@@ -308,10 +312,10 @@ export function OrderSummary({
 
         <Separator />
 
-        <div className="flex justify-between items-center gap-3 text-lg font-sans">
+        <div className="flex justify-between items-center gap-2 sm:gap-3 text-base sm:text-lg font-sans">
           <span className="font-semibold shrink-0">Total</span>
           <span
-            className="font-bold text-primary text-xl text-right min-w-0 overflow-hidden text-ellipsis"
+            className="font-bold text-primary text-lg sm:text-xl text-right min-w-0 overflow-hidden text-ellipsis"
             style={{ fontFamily: "Fredoka, sans-serif" }}
           >
             {formatPrice(total)}
@@ -320,8 +324,8 @@ export function OrderSummary({
       </div>
 
       {/* Note */}
-      <div className="mt-6 p-4 bg-primary/30 rounded-lg">
-        <p className="text-xs font-sans text-muted-foreground leading-relaxed">
+      <div className="mt-4 sm:mt-6 p-3 sm:p-4 bg-primary/30 rounded-lg">
+        <p className="text-[11px] sm:text-xs font-sans text-muted-foreground leading-relaxed">
           El costo de envío se calculará automáticamente según tu dirección.
         </p>
       </div>

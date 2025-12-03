@@ -164,7 +164,10 @@ export async function DELETE(request: Request, { params }: RouteParams) {
       // Verify user is SUPER_ADMIN for force delete
       if (userMetadata.role !== "SUPER_ADMIN") {
         return NextResponse.json(
-          { error: "Solo SUPER_ADMIN puede forzar la eliminación de productos con pedidos" },
+          {
+            error:
+              "Solo SUPER_ADMIN puede forzar la eliminación de productos con pedidos",
+          },
           { status: 403 },
         );
       }

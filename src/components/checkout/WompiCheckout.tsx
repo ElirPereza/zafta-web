@@ -109,7 +109,7 @@ export function WompiCheckout({
 
   if (error) {
     return (
-      <div className="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-lg font-sans text-sm">
+      <div className="bg-red-50 border border-red-200 text-red-800 px-3 sm:px-4 py-2 sm:py-3 rounded-lg font-sans text-xs sm:text-sm">
         {error}
       </div>
     );
@@ -117,9 +117,9 @@ export function WompiCheckout({
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center py-8">
-        <Loader2 className="h-8 w-8 animate-spin text-primary" />
-        <span className="ml-3 text-muted-foreground font-sans">
+      <div className="flex items-center justify-center py-6 sm:py-8">
+        <Loader2 className="h-6 w-6 sm:h-8 sm:w-8 animate-spin text-primary" />
+        <span className="ml-2 sm:ml-3 text-muted-foreground font-sans text-sm sm:text-base">
           Cargando método de pago...
         </span>
       </div>
@@ -131,7 +131,7 @@ export function WompiCheckout({
       <button
         type="button"
         onClick={handlePayment}
-        className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-sans font-medium py-3 px-4 rounded-lg transition-colors"
+        className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-sans font-medium py-3 sm:py-4 px-4 rounded-lg transition-colors text-sm sm:text-base"
       >
         Pagar con Wompi
       </button>

@@ -156,7 +156,8 @@ export function getDeliveryTimeInfo(): {
   if (currentDay === 0) {
     return {
       canOrderToday: false,
-      message: "No realizamos despachos los domingos. Tu pedido se procesará el lunes.",
+      message:
+        "No realizamos despachos los domingos. Tu pedido se procesará el lunes.",
       isSaturdayAfternoon: false,
     };
   }
@@ -165,7 +166,8 @@ export function getDeliveryTimeInfo(): {
   if (currentDay === 6 && currentHour >= 12) {
     return {
       canOrderToday: false,
-      message: "Los sábados despachamos hasta las 12:00 p.m. Tu pedido se procesará el lunes.",
+      message:
+        "Los sábados despachamos hasta las 12:00 p.m. Tu pedido se procesará el lunes.",
       isSaturdayAfternoon: true,
     };
   }

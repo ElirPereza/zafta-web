@@ -74,34 +74,36 @@ export function OrderConfirmation({ order }: OrderConfirmationProps) {
   };
 
   return (
-    <div className="pt-32 min-h-screen bg-gradient-to-b from-background via-primary/5 to-background">
-      <div className="container mx-auto px-6 py-8 md:py-12 max-w-4xl">
+    <div className="pt-20 md:pt-32 min-h-screen bg-gradient-to-b from-background via-primary/5 to-background">
+      <div className="container mx-auto px-4 sm:px-6 py-6 md:py-12 max-w-4xl">
         {/* Success Message */}
-        <div className="text-center mb-8">
-          <CheckCircle2 className="h-16 w-16 text-green-600 mx-auto mb-4" />
-          <h1 className="text-4xl md:text-5xl mb-4 text-foreground">
+        <div className="text-center mb-6 md:mb-8">
+          <CheckCircle2 className="h-12 w-12 sm:h-16 sm:w-16 text-green-600 mx-auto mb-3 sm:mb-4" />
+          <h1 className="text-2xl sm:text-4xl md:text-5xl mb-2 sm:mb-4 text-foreground">
             ¡Pedido Confirmado!
           </h1>
-          <p className="text-lg text-muted-foreground font-sans mb-2">
+          <p className="text-base sm:text-lg text-muted-foreground font-sans mb-1 sm:mb-2">
             Gracias por tu compra, {order.customerName}
           </p>
-          <p className="text-sm text-muted-foreground font-sans">
+          <p className="text-xs sm:text-sm text-muted-foreground font-sans">
             Número de pedido:{" "}
             <span className="font-semibold">{order.orderNumber}</span>
           </p>
         </div>
 
         {/* Order Status */}
-        <Card className="p-6 mb-6">
-          <div className="flex items-center justify-between">
+        <Card className="p-4 sm:p-6 mb-4 sm:mb-6">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
             <div>
-              <h2 className="text-xl mb-2">Estado del Pedido</h2>
-              <p className="text-sm text-muted-foreground font-sans">
+              <h2 className="text-lg sm:text-xl mb-1 sm:mb-2">
+                Estado del Pedido
+              </h2>
+              <p className="text-xs sm:text-sm text-muted-foreground font-sans">
                 Pedido realizado el {formatDate(order.createdAt)}
               </p>
             </div>
             <div
-              className={`px-4 py-2 rounded-full border font-sans font-medium ${getStatusColor(
+              className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border font-sans font-medium text-xs sm:text-sm self-start sm:self-auto ${getStatusColor(
                 order.status,
               )}`}
             >
@@ -110,22 +112,22 @@ export function OrderConfirmation({ order }: OrderConfirmationProps) {
           </div>
         </Card>
 
-        <div className="grid md:grid-cols-2 gap-6 mb-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-4 sm:mb-6">
           {/* Contact Information */}
-          <Card className="p-6">
-            <h2 className="text-xl mb-4 flex items-center gap-2">
-              <Mail className="h-5 w-5 text-primary" />
+          <Card className="p-4 sm:p-6">
+            <h2 className="text-base sm:text-xl mb-3 sm:mb-4 flex items-center gap-2">
+              <Mail className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
               Información de Contacto
             </h2>
-            <div className="space-y-2 font-sans text-sm">
+            <div className="space-y-2 font-sans text-xs sm:text-sm">
               <div className="flex items-start gap-2">
-                <Mail className="h-4 w-4 text-muted-foreground mt-0.5" />
+                <Mail className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-muted-foreground mt-0.5 shrink-0" />
                 <span className="text-muted-foreground break-all">
                   {order.customerEmail}
                 </span>
               </div>
               <div className="flex items-start gap-2">
-                <Phone className="h-4 w-4 text-muted-foreground mt-0.5" />
+                <Phone className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-muted-foreground mt-0.5 shrink-0" />
                 <span className="text-muted-foreground">
                   {order.customerPhone}
                 </span>
@@ -134,18 +136,18 @@ export function OrderConfirmation({ order }: OrderConfirmationProps) {
           </Card>
 
           {/* Shipping Address */}
-          <Card className="p-6">
-            <h2 className="text-xl mb-4 flex items-center gap-2">
-              <MapPin className="h-5 w-5 text-primary" />
+          <Card className="p-4 sm:p-6">
+            <h2 className="text-base sm:text-xl mb-3 sm:mb-4 flex items-center gap-2">
+              <MapPin className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
               Dirección de Envío
             </h2>
-            <div className="space-y-1 font-sans text-sm text-muted-foreground">
+            <div className="space-y-1 font-sans text-xs sm:text-sm text-muted-foreground">
               <p>{order.shippingAddress}</p>
               <p>
                 {order.shippingCity}, {order.shippingDepartment}
               </p>
               {order.deliveryNotes && (
-                <p className="mt-2 text-xs">
+                <p className="mt-2 text-[11px] sm:text-xs">
                   <span className="font-medium">Notas:</span>{" "}
                   {order.deliveryNotes}
                 </p>
@@ -155,16 +157,16 @@ export function OrderConfirmation({ order }: OrderConfirmationProps) {
         </div>
 
         {/* Order Items */}
-        <Card className="p-6 mb-6">
-          <h2 className="text-xl mb-4 flex items-center gap-2">
-            <Package className="h-5 w-5 text-primary" />
+        <Card className="p-4 sm:p-6 mb-4 sm:mb-6">
+          <h2 className="text-base sm:text-xl mb-3 sm:mb-4 flex items-center gap-2">
+            <Package className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
             Productos
           </h2>
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             {order.items.map((item) => (
-              <div key={item.id} className="flex gap-4">
+              <div key={item.id} className="flex gap-3 sm:gap-4">
                 {/* Image */}
-                <div className="relative w-20 h-20 flex-shrink-0 rounded-lg overflow-hidden bg-beige-100">
+                <div className="relative w-16 h-16 sm:w-20 sm:h-20 shrink-0 rounded-lg overflow-hidden bg-beige-100">
                   {item.product.images && item.product.images.length > 0 ? (
                     <Image
                       src={item.product.images[0]}
@@ -174,25 +176,25 @@ export function OrderConfirmation({ order }: OrderConfirmationProps) {
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center">
-                      <Package className="h-8 w-8 text-beige-400" />
+                      <Package className="h-6 w-6 sm:h-8 sm:w-8 text-beige-400" />
                     </div>
                   )}
                 </div>
 
                 {/* Details */}
                 <div className="flex-1 min-w-0">
-                  <h4 className="font-sans font-medium text-sm mb-1">
+                  <h4 className="font-sans font-medium text-xs sm:text-sm mb-1">
                     {item.product.name}
                   </h4>
-                  <p className="text-sm text-muted-foreground font-sans">
+                  <p className="text-xs sm:text-sm text-muted-foreground font-sans">
                     Cantidad: {item.quantity} ×{" "}
                     {formatPrice(Number(item.price))}
                   </p>
                 </div>
 
                 {/* Price */}
-                <div className="text-right">
-                  <p className="font-sans text-sm font-semibold">
+                <div className="text-right shrink-0">
+                  <p className="font-sans text-xs sm:text-sm font-semibold">
                     {formatPrice(Number(item.price) * item.quantity)}
                   </p>
                 </div>
@@ -200,26 +202,26 @@ export function OrderConfirmation({ order }: OrderConfirmationProps) {
             ))}
           </div>
 
-          <Separator className="my-4" />
+          <Separator className="my-3 sm:my-4" />
 
           {/* Price Summary */}
           <div className="space-y-2">
-            <div className="flex justify-between text-sm font-sans">
+            <div className="flex justify-between text-xs sm:text-sm font-sans">
               <span className="text-muted-foreground">Subtotal</span>
               <span className="font-medium">
                 {formatPrice(Number(order.subtotal))}
               </span>
             </div>
-            <div className="flex justify-between text-sm font-sans">
+            <div className="flex justify-between text-xs sm:text-sm font-sans">
               <span className="text-muted-foreground">Envío</span>
               <span className="font-medium">
                 {formatPrice(Number(order.shippingCost))}
               </span>
             </div>
             <Separator />
-            <div className="flex justify-between text-lg font-sans">
+            <div className="flex justify-between text-base sm:text-lg font-sans">
               <span className="font-semibold">Total</span>
-              <span className="font-bold text-primary text-xl">
+              <span className="font-bold text-primary text-lg sm:text-xl">
                 {formatPrice(Number(order.total))}
               </span>
             </div>
@@ -227,25 +229,27 @@ export function OrderConfirmation({ order }: OrderConfirmationProps) {
         </Card>
 
         {/* Next Steps */}
-        <Card className="p-6 mb-6 bg-primary/30">
-          <h3 className="font-sans text-lg mb-3">¿Qué sigue?</h3>
-          <ul className="space-y-2 font-sans text-sm text-muted-foreground">
+        <Card className="p-4 sm:p-6 mb-4 sm:mb-6 bg-primary/30">
+          <h3 className="font-sans text-base sm:text-lg mb-2 sm:mb-3">
+            ¿Qué sigue?
+          </h3>
+          <ul className="space-y-2 font-sans text-xs sm:text-sm text-muted-foreground">
             <li className="flex items-start gap-2">
-              <span className="text-primary font-bold">1.</span>
+              <span className="text-primary font-bold shrink-0">1.</span>
               <span>
                 Recibirás un correo de confirmación en{" "}
-                <strong>{order.customerEmail}</strong>
+                <strong className="break-all">{order.customerEmail}</strong>
               </span>
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-primary font-bold">2.</span>
+              <span className="text-primary font-bold shrink-0">2.</span>
               <span>
                 Te contactaremos por WhatsApp al{" "}
                 <strong>{order.customerPhone}</strong> para coordinar la entrega
               </span>
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-primary font-bold">3.</span>
+              <span className="text-primary font-bold shrink-0">3.</span>
               <span>
                 Tu pedido será preparado con amor y entregado en la dirección
                 indicada
@@ -255,18 +259,18 @@ export function OrderConfirmation({ order }: OrderConfirmationProps) {
         </Card>
 
         {/* Action Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link href="/productos">
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
+          <Link href="/productos" className="w-full sm:w-auto">
             <Button
               variant="outline"
               size="lg"
-              className="w-full sm:w-auto font-sans"
+              className="w-full font-sans text-sm sm:text-base"
             >
               Seguir Comprando
             </Button>
           </Link>
-          <Link href="/inicio">
-            <Button size="lg" className="w-full sm:w-auto font-sans">
+          <Link href="/inicio" className="w-full sm:w-auto">
+            <Button size="lg" className="w-full font-sans text-sm sm:text-base">
               Volver al Inicio
             </Button>
           </Link>

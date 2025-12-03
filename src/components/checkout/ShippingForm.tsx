@@ -57,9 +57,11 @@ export function ShippingForm({ onShippingChange }: ShippingFormProps) {
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-3 sm:space-y-4">
       <div className="space-y-2">
-        <Label htmlFor="address">Dirección Completa *</Label>
+        <Label htmlFor="address" className="text-sm">
+          Dirección Completa *
+        </Label>
         <Textarea
           id="address"
           value={address}
@@ -69,34 +71,39 @@ export function ShippingForm({ onShippingChange }: ShippingFormProps) {
           }}
           placeholder="Calle 123 #45-67, Apto 102, Torre 3"
           rows={2}
+          className="text-sm"
           required
         />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
         <div className="space-y-2">
-          <Label htmlFor="department">Departamento *</Label>
+          <Label htmlFor="department" className="text-sm">
+            Departamento *
+          </Label>
           <Select value={department} disabled>
-            <SelectTrigger>
+            <SelectTrigger className="text-sm">
               <SelectValue placeholder="Antioquia" />
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="Antioquia">Antioquia</SelectItem>
             </SelectContent>
           </Select>
-          <p className="text-xs text-muted-foreground">
+          <p className="text-[11px] sm:text-xs text-muted-foreground">
             Por ahora solo entregas en Antioquia
           </p>
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="city">Ciudad/Municipio *</Label>
+          <Label htmlFor="city" className="text-sm">
+            Ciudad/Municipio *
+          </Label>
           <Select
             value={city || ""}
             onValueChange={handleCityChange}
             disabled={!department || loadingCities}
           >
-            <SelectTrigger>
+            <SelectTrigger className="text-sm">
               <SelectValue
                 placeholder={
                   department
@@ -122,7 +129,9 @@ export function ShippingForm({ onShippingChange }: ShippingFormProps) {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="notes">Notas de Entrega (Opcional)</Label>
+        <Label htmlFor="notes" className="text-sm">
+          Notas de Entrega (Opcional)
+        </Label>
         <Textarea
           id="notes"
           value={notes}
@@ -132,27 +141,40 @@ export function ShippingForm({ onShippingChange }: ShippingFormProps) {
           }}
           placeholder="Ej: Portería en el edificio, timbre 302, etc."
           rows={2}
+          className="text-sm"
         />
       </div>
 
       {/* Shipping Cost Display */}
       {shippingCalculation.loading && (
-        <Alert>
-          <Loader2 className="h-4 w-4 animate-spin" />
-          <AlertDescription>Calculando costo de envío...</AlertDescription>
+        <Alert className="py-2 sm:py-3">
+          <Loader2 className="h-3.5 w-3.5 sm:h-4 sm:w-4 animate-spin" />
+          <AlertDescription className="text-xs sm:text-sm">
+            Calculando costo de envío...
+          </AlertDescription>
         </Alert>
       )}
 
       {shippingCalculation.cost > 0 && !shippingCalculation.loading && (
-        <div className="flex items-center gap-2 p-3 bg-green-50 border border-green-200 rounded-lg text-green-800 text-sm">
-          <MapPin className="h-4 w-4 shrink-0" />
-          <span>Costo de envío a <strong>{city}, {department}:</strong> <strong className="text-base">${new Intl.NumberFormat("es-CO").format(shippingCalculation.cost)}</strong></span>
+        <div className="flex items-start sm:items-center gap-2 p-2.5 sm:p-3 bg-green-50 border border-green-200 rounded-lg text-green-800 text-xs sm:text-sm">
+          <MapPin className="h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0 mt-0.5 sm:mt-0" />
+          <span className="leading-relaxed">
+            Costo de envío a{" "}
+            <strong>
+              {city}, {department}:
+            </strong>{" "}
+            <strong className="text-sm sm:text-base">
+              ${new Intl.NumberFormat("es-CO").format(shippingCalculation.cost)}
+            </strong>
+          </span>
         </div>
       )}
 
       {shippingCalculation.error && (
-        <Alert variant="destructive">
-          <AlertDescription>{shippingCalculation.error}</AlertDescription>
+        <Alert variant="destructive" className="py-2 sm:py-3">
+          <AlertDescription className="text-xs sm:text-sm">
+            {shippingCalculation.error}
+          </AlertDescription>
         </Alert>
       )}
     </div>

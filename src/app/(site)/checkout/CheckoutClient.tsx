@@ -56,20 +56,20 @@ export default function CheckoutClient() {
   }
 
   return (
-    <div className="pt-32 min-h-screen bg-gradient-to-b from-background via-primary/5 to-background">
-      <div className="container mx-auto px-6 py-8 md:py-12">
+    <div className="pt-20 md:pt-32 min-h-screen bg-gradient-to-b from-background via-primary/5 to-background">
+      <div className="container mx-auto px-4 sm:px-6 py-6 md:py-12">
         {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-4xl md:text-5xl mb-4 text-foreground">
+        <div className="text-center mb-6 md:mb-8">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl mb-2 md:mb-4 text-foreground">
             Finalizar Pedido
           </h1>
-          <p className="text-lg text-muted-foreground font-sans">
+          <p className="text-base md:text-lg text-muted-foreground font-sans">
             Completa tus datos para procesar tu pedido
           </p>
         </div>
 
         {/* Important Notice */}
-        <div className="max-w-3xl mx-auto mb-6 md:mb-8 px-4 sm:px-0 space-y-4">
+        <div className="max-w-3xl mx-auto mb-4 md:mb-8 space-y-3 md:space-y-4">
           {/* Dynamic delivery time message */}
           <Alert
             className={
@@ -117,9 +117,9 @@ export default function CheckoutClient() {
         </div>
 
         {/* Checkout Grid */}
-        <div className="grid lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-6 md:gap-8 max-w-7xl mx-auto">
           {/* Left Column: Forms */}
-          <div>
+          <div className="order-2 lg:order-1">
             <CheckoutForm
               onShippingCostChange={setShippingCost}
               onEmailChange={setCustomerEmail}
@@ -129,7 +129,7 @@ export default function CheckoutClient() {
           </div>
 
           {/* Right Column: Order Summary */}
-          <div>
+          <div className="order-1 lg:order-2">
             <OrderSummary
               shippingCost={shippingCost}
               customerEmail={customerEmail}

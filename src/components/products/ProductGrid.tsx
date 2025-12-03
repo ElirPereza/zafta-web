@@ -140,7 +140,11 @@ function ProductCard({
               </SelectTrigger>
               <SelectContent>
                 {product.sizes!.map((size) => (
-                  <SelectItem key={size.id} value={size.id} className="cursor-pointer">
+                  <SelectItem
+                    key={size.id}
+                    value={size.id}
+                    className="cursor-pointer"
+                  >
                     {size.name}
                   </SelectItem>
                 ))}

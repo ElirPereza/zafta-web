@@ -206,8 +206,10 @@ export function CheckoutForm({
   // Si ya se creó la orden con Wompi, mostrar el widget de pago
   if (createdOrderId) {
     return (
-      <Card className="p-6">
-        <h2 className="text-2xl mb-6 text-center">Completa tu Pago</h2>
+      <Card className="p-4 sm:p-6">
+        <h2 className="text-xl sm:text-2xl mb-4 sm:mb-6 text-center">
+          Completa tu Pago
+        </h2>
         <WompiCheckout
           orderId={createdOrderId}
           onSuccess={handleWompiSuccess}
@@ -231,11 +233,11 @@ export function CheckoutForm({
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
       {/* Personal Information */}
-      <Card className="p-6">
-        <h2 className="text-2xl mb-6 flex items-center gap-2">
-          <User className="h-6 w-6 text-primary" />
+      <Card className="p-4 sm:p-6">
+        <h2 className="text-lg sm:text-2xl mb-4 sm:mb-6 flex items-center gap-2">
+          <User className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
           Información Personal
         </h2>
         <div className="space-y-4">
@@ -307,32 +309,34 @@ export function CheckoutForm({
       </Card>
 
       {/* Shipping Address */}
-      <Card className="p-6">
-        <h2 className="text-2xl mb-6 flex items-center gap-2">
-          <Mail className="h-6 w-6 text-primary" />
+      <Card className="p-4 sm:p-6">
+        <h2 className="text-lg sm:text-2xl mb-4 sm:mb-6 flex items-center gap-2">
+          <Mail className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
           Dirección de Envío
         </h2>
         <ShippingForm onShippingChange={handleShippingChange} />
       </Card>
 
       {/* Delivery Date */}
-      <Card className="p-6">
-        <h2 className="text-2xl mb-6 flex items-center gap-2">
-          <CalendarDays className="h-6 w-6 text-primary" />
+      <Card className="p-4 sm:p-6">
+        <h2 className="text-lg sm:text-2xl mb-4 sm:mb-6 flex items-center gap-2">
+          <CalendarDays className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
           Fecha de Entrega
         </h2>
         <DeliveryDatePicker value={deliveryDate} onChange={setDeliveryDate} />
       </Card>
 
       {/* Payment Method */}
-      <Card className="p-6">
-        <h2 className="text-2xl mb-6 flex items-center gap-2">
-          <CreditCard className="h-6 w-6 text-primary" />
+      <Card className="p-4 sm:p-6">
+        <h2 className="text-lg sm:text-2xl mb-4 sm:mb-6 flex items-center gap-2">
+          <CreditCard className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
           Método de Pago
         </h2>
-        <div className="p-4 border rounded-lg bg-accent/50">
-          <div className="font-medium">Pago en Línea (Wompi)</div>
-          <div className="text-sm text-muted-foreground">
+        <div className="p-3 sm:p-4 border rounded-lg bg-accent/50">
+          <div className="font-medium text-sm sm:text-base">
+            Pago en Línea (Wompi)
+          </div>
+          <div className="text-xs sm:text-sm text-muted-foreground">
             Tarjeta de crédito, débito, PSE, Nequi, Daviplata y más
           </div>
         </div>
@@ -340,7 +344,7 @@ export function CheckoutForm({
 
       {/* Error Message */}
       {error && (
-        <div className="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-lg font-sans text-sm">
+        <div className="bg-red-50 border border-red-200 text-red-800 px-3 sm:px-4 py-2 sm:py-3 rounded-lg font-sans text-xs sm:text-sm">
           {error}
         </div>
       )}
@@ -349,12 +353,12 @@ export function CheckoutForm({
       <Button
         type="submit"
         size="lg"
-        className="w-full font-sans text-lg"
+        className="w-full font-sans text-base sm:text-lg py-5 sm:py-6"
         disabled={loading}
       >
         {loading ? (
           <>
-            <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+            <Loader2 className="mr-2 h-4 w-4 sm:h-5 sm:w-5 animate-spin" />
             Procesando...
           </>
         ) : (
@@ -362,7 +366,7 @@ export function CheckoutForm({
         )}
       </Button>
 
-      <p className="text-center text-sm text-muted-foreground font-sans">
+      <p className="text-center text-xs sm:text-sm text-muted-foreground font-sans">
         Al confirmar tu pedido, aceptas nuestro{" "}
         <a
           href="/aviso-de-privacidad"
@@ -371,8 +375,8 @@ export function CheckoutForm({
           className="text-primary hover:underline font-medium"
         >
           Aviso de Privacidad
-        </a>
-        {" "}y nuestra{" "}
+        </a>{" "}
+        y nuestra{" "}
         <a
           href="/politica-de-datos"
           target="_blank"
