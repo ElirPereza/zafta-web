@@ -3,6 +3,7 @@ import { Fredoka } from "next/font/google";
 import localFont from "next/font/local";
 import { ClerkProvider } from "@clerk/nextjs";
 import { esES } from "@clerk/localizations";
+import { Analytics } from "@vercel/analytics/next";
 import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 // Zafta Brand Fonts (del BrandBook)
@@ -67,6 +68,7 @@ export default function RootLayout({
         <body>
           {children}
           <Toaster />
+          <Analytics />
         </body>
       </html>
     </ClerkProvider>
