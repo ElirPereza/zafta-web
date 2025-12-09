@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 // Base site configuration
 export const SITE_CONFIG = {
   name: "Zafta",
-  title: "Zafta - Tortas Artesanales con Legado Familiar",
+  title: "Repostería Zafta",
   description:
     "Más que un postre, un legado auténtico. Tortas artesanales hechas con amor y tradición familiar de más de 30 años en Bogotá, Colombia.",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://zafta.com",
