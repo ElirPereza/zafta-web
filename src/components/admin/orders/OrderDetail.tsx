@@ -268,6 +268,35 @@ export function OrderDetail({ order: initialOrder }: OrderDetailProps) {
                 </p>
                 <p className="font-sans">{order.customerPhone}</p>
               </div>
+              <div>
+                <p className="text-sm text-muted-foreground font-sans">
+                  Cédula
+                </p>
+                <p className="font-sans">{order.customerDocumentId || "No especificada"}</p>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Delivery Date */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="font-sans">Fecha de Entrega</CardTitle>
+            </CardHeader>
+            <CardContent>
+              {order.deliveryDate ? (
+                <p className="font-sans font-medium text-burgundy-700">
+                  {new Date(order.deliveryDate).toLocaleDateString("es-CO", {
+                    weekday: "long",
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </p>
+              ) : (
+                <p className="font-sans text-muted-foreground">
+                  No especificada
+                </p>
+              )}
             </CardContent>
           </Card>
 
