@@ -122,8 +122,6 @@ export function OrderDetail({ order: initialOrder }: OrderDetailProps) {
     }
   };
 
-  const shippingAddress = order.shippingAddress as any;
-
   return (
     <div className="space-y-6">
       {/* Back button */}
@@ -280,19 +278,19 @@ export function OrderDetail({ order: initialOrder }: OrderDetailProps) {
             </CardHeader>
             <CardContent className="space-y-2">
               <p className="font-sans">
-                {shippingAddress?.address || "No especificada"}
+                {order.shippingAddress || "No especificada"}
               </p>
-              {shippingAddress?.city && (
+              {order.shippingCity && (
                 <p className="text-sm font-sans">
-                  {shippingAddress.city}, {shippingAddress.department}
+                  {order.shippingCity}, {order.shippingDepartment}
                 </p>
               )}
-              {shippingAddress?.notes && (
+              {order.deliveryNotes && (
                 <div className="mt-3 pt-3 border-t">
                   <p className="text-sm text-muted-foreground font-sans">
                     Notas:
                   </p>
-                  <p className="text-sm font-sans">{shippingAddress.notes}</p>
+                  <p className="text-sm font-sans">{order.deliveryNotes}</p>
                 </div>
               )}
             </CardContent>

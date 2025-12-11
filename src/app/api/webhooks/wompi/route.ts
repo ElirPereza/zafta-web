@@ -62,15 +62,26 @@ export async function POST(request: NextRequest) {
 
     const { transaction } = event.data;
 
-    // Buscar la orden por el reference de Wompi
-    const order = await prisma.order.findFirst({
+    console.log(`Processing Wompi webhook: ${transaction.status} for reference: ${transaction.reference}, transaction_id: ${transaction.id}`);
+
+    // Buscar la orden por el reference de Wompi (puede estar guardado como reference o como transaction.id)
+    let order = await prisma.order.findFirst({
       where: {
         paymentTransactionId: transaction.reference,
       },
     });
 
+    // Si no se encuentra por reference, buscar por transaction.id (por si ya se actualizó)
     if (!order) {
-      console.error(`Order not found for reference: ${transaction.reference}`);
+      order = await prisma.order.findFirst({
+        where: {
+          paymentTransactionId: transaction.id,
+        },
+      });
+    }
+
+    if (!order) {
+      console.error(`Order not found for reference: ${transaction.reference} or transaction_id: ${transaction.id}`);
       return NextResponse.json({ error: "Order not found" }, { status: 404 });
     }
 
@@ -102,16 +113,21 @@ export async function POST(request: NextRequest) {
     }
 
     // Actualizar orden en la base de datos
+    // NOTA: Mantenemos el reference original para poder recibir múltiples webhooks
+    // Si ya tenemos el transaction.id guardado, no lo cambiamos
+    const shouldUpdateTransactionId = order.paymentTransactionId === transaction.reference;
+
     await prisma.order.update({
       where: { id: order.id },
       data: {
         paymentStatus,
         status: orderStatus,
-        paymentTransactionId: transaction.id, // Actualizar con el ID real de la transacción
+        // Solo actualizar el transaction ID si aún tenemos el reference guardado
+        ...(shouldUpdateTransactionId && { paymentTransactionId: transaction.id }),
       },
     });
 
-    console.log(`Order ${order.orderNumber} updated: ${paymentStatus}`);
+    console.log(`Order ${order.orderNumber} updated: paymentStatus=${paymentStatus}, orderStatus=${orderStatus}`);
 
     return NextResponse.json({ received: true });
   } catch (error) {
