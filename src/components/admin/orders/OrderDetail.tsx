@@ -379,6 +379,16 @@ export function OrderDetail({ order: initialOrder }: OrderDetailProps) {
                   {formatPrice(Number(order.shippingCost))}
                 </span>
               </div>
+              {Number(order.discountAmount) > 0 && (
+                <div className="flex items-center justify-between gap-2 font-sans">
+                  <span className="text-muted-foreground text-sm">
+                    Descuento{order.discountCode && ` (${order.discountCode})`}
+                  </span>
+                  <span className="font-medium text-sm whitespace-nowrap text-green-600">
+                    -{formatPrice(Number(order.discountAmount))}
+                  </span>
+                </div>
+              )}
               <div className="border-t pt-3 mt-3">
                 <div className="flex items-center justify-between gap-2 font-sans font-semibold">
                   <span className="text-sm">Total</span>
