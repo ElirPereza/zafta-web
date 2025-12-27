@@ -10,6 +10,7 @@ import {
   Images,
   Gift,
   Truck,
+  CalendarOff,
   X,
 } from "lucide-react";
 import { Logo } from "@/components/ui/logo";
@@ -50,6 +51,11 @@ const navigation = [
     name: "Envío Gratis",
     href: "/admin/envio-gratis",
     icon: Truck,
+  },
+  {
+    name: "Días Bloqueados",
+    href: "/admin/dias-bloqueados",
+    icon: CalendarOff,
   },
 ];
 

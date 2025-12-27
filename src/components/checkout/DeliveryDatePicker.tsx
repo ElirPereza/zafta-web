@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Calendar } from "@/components/ui/calendar";
 import { Label } from "@/components/ui/label";
 import {
@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { CalendarIcon } from "lucide-react";
-import { format } from "date-fns";
+import { format, isSameDay } from "date-fns";
 import { es } from "date-fns/locale";
 import { cn } from "@/lib/utils";
 import {
@@ -33,27 +33,55 @@ export function DeliveryDatePicker({
   const [open, setOpen] = useState(false);
   const [minDate, setMinDate] = useState<Date>(new Date());
   const [maxDate, setMaxDate] = useState<Date>(new Date());
+  const [blockedDates, setBlockedDates] = useState<Date[]>([]);
+
+  // Fetch blocked dates from the API
+  const fetchBlockedDates = useCallback(async () => {
+    try {
+      const response = await fetch("/api/blocked-dates");
+      const data = await response.json();
+      if (data.blockedDates) {
+        setBlockedDates(data.blockedDates.map((bd: { date: string }) => new Date(bd.date)));
+      }
+    } catch (error) {
+      console.error("Error fetching blocked dates:", error);
+    }
+  }, []);
 
   useEffect(() => {
     setMinDate(getMinDeliveryDate());
     setMaxDate(getMaxDeliveryDate());
-  }, []);
+    fetchBlockedDates();
+  }, [fetchBlockedDates]);
 
   const handleSelect = (date: Date | undefined) => {
     onChange(date);
     setOpen(false);
   };
 
-  // Disable invalid dates (Sundays and holidays)
-  const disabledDays = (date: Date) => {
-    // Before minimum date
-    if (date < minDate) return true;
-    // After maximum date
-    if (date > maxDate) return true;
-    // Invalid delivery date (Sunday or holiday)
-    if (!isValidDeliveryDate(date)) return true;
-    return false;
-  };
+  // Check if a date is blocked by admin
+  const isBlockedByAdmin = useCallback(
+    (date: Date) => {
+      return blockedDates.some((blockedDate) => isSameDay(blockedDate, date));
+    },
+    [blockedDates],
+  );
+
+  // Disable invalid dates (Sundays, holidays, and admin-blocked dates)
+  const disabledDays = useCallback(
+    (date: Date) => {
+      // Before minimum date
+      if (date < minDate) return true;
+      // After maximum date
+      if (date > maxDate) return true;
+      // Invalid delivery date (Sunday or holiday)
+      if (!isValidDeliveryDate(date)) return true;
+      // Blocked by admin
+      if (isBlockedByAdmin(date)) return true;
+      return false;
+    },
+    [minDate, maxDate, isBlockedByAdmin],
+  );
 
   return (
     <div className="space-y-2">

@@ -58,31 +58,32 @@ model ProductSize {
 // ============================================================================
 
 model Order {
-  id                     String        @id @default(cuid())
-  orderNumber            String        @unique
-  userId                 String?       // Optional for guest checkout
-  customerName           String        // Guest customer name
-  customerEmail          String        // Guest customer email
-  customerPhone          String        // Guest customer phone
-  customerDocumentId     String        // Cédula de ciudadanía colombiana
-  shippingAddress        String        // Shipping address as string
-  shippingCity           String        // Shipping city
-  shippingDepartment     String        // Shipping department
-  deliveryDate           DateTime?     // Requested delivery date
-  deliveryNotes          String?       // Optional delivery notes
-  status                 OrderStatus   @default(PENDING)
+  id                     String         @id @default(cuid())
+  orderNumber            String         @unique
+  userId                 String?        // Optional for guest checkout
+  customerName           String         // Guest customer name
+  customerEmail          String         // Guest customer email
+  customerPhone          String         // Guest customer phone
+  customerDocumentId     String         // Cédula de ciudadanía colombiana
+  deliveryMethod         DeliveryMethod @default(DELIVERY) // DELIVERY o PICKUP
+  shippingAddress        String?        // Shipping address (optional for PICKUP)
+  shippingCity           String?        // Shipping city (optional for PICKUP)
+  shippingDepartment     String?        // Shipping department (optional for PICKUP)
+  deliveryDate           DateTime?      // Requested delivery date
+  deliveryNotes          String?        // Optional delivery notes
+  status                 OrderStatus    @default(PENDING)
   paymentMethod          String
-  paymentStatus          PaymentStatus @default(PENDING)
-  paymentTransactionId   String?       // Wompi transaction ID
-  subtotal               Decimal       @db.Decimal(10, 2)
-  shippingCost           Decimal       @db.Decimal(10, 2) @default(0)
-  discountCode           String?       // Discount code used (if any)
-  discountAmount         Decimal       @db.Decimal(10, 2) @default(0) // Discount amount applied
-  total                  Decimal       @db.Decimal(10, 2)
+  paymentStatus          PaymentStatus  @default(PENDING)
+  paymentTransactionId   String?        // Wompi transaction ID
+  subtotal               Decimal        @db.Decimal(10, 2)
+  shippingCost           Decimal        @db.Decimal(10, 2) @default(0)
+  discountCode           String?        // Discount code used (if any)
+  discountAmount         Decimal        @db.Decimal(10, 2) @default(0) // Discount amount applied
+  total                  Decimal        @db.Decimal(10, 2)
   items                  OrderItem[]
   invoice                Invoice?
-  createdAt              DateTime      @default(now())
-  updatedAt              DateTime      @updatedAt
+  createdAt              DateTime       @default(now())
+  updatedAt              DateTime       @updatedAt
 
   @@index([userId])
   @@index([orderNumber])
@@ -90,6 +91,7 @@ model Order {
   @@index([paymentStatus])
   @@index([customerEmail]) // Index for checking used discount codes
   @@index([deliveryDate])
+  @@index([deliveryMethod])
 }
 
 model OrderItem {
@@ -123,6 +125,11 @@ enum PaymentStatus {
   PAID
   FAILED
   REFUNDED
+}
+
+enum DeliveryMethod {
+  DELIVERY  // Envío a domicilio
+  PICKUP    // Recoger en tienda
 }
 
 // ============================================================================
@@ -247,4 +254,19 @@ enum ShippingRuleType {
   MINIMUM_PURCHASE  // Free shipping when purchase exceeds minimumAmount
   SPECIFIC_LOCATION // Free shipping for specific cities/departments
   ALWAYS_FREE       // Always free shipping
+}
+
+// ============================================================================
+// BLOCKED DATES MODELS (Admin-defined non-working days)
+// ============================================================================
+
+model BlockedDate {
+  id        String   @id @default(cuid())
+  date      DateTime @db.Date // The blocked date
+  reason    String?  // Optional reason (e.g., "Vacaciones", "Inventario")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([date]) // Prevent duplicate dates
+  @@index([date])
 }
