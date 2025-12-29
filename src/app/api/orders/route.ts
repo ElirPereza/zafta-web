@@ -60,9 +60,13 @@ export async function POST(request: Request) {
   try {
     const body = await request.json();
 
+    // Determinar método de entrega (default: DELIVERY para compatibilidad)
+    const deliveryMethod = body.deliveryMethod || "DELIVERY";
+
     console.log("📦 Creating order with data:", {
       customerName: body.customerName,
       customerEmail: body.customerEmail,
+      deliveryMethod,
       itemsCount: body.items?.length,
     });
 
@@ -80,6 +84,16 @@ export async function POST(request: Request) {
       );
     }
 
+    // Validar formato de email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(body.customerEmail)) {
+      console.error("❌ Invalid email format");
+      return NextResponse.json(
+        { error: "El formato del correo electrónico no es válido" },
+        { status: 400 },
+      );
+    }
+
     // Validar formato de cédula colombiana (6-10 dígitos)
     const cedulaRegex = /^\d{6,10}$/;
     if (!cedulaRegex.test(body.customerDocumentId)) {
@@ -90,12 +104,26 @@ export async function POST(request: Request) {
       );
     }
 
-    if (!body.shippingAddress || !body.shippingCity) {
-      console.error("❌ Missing required shipping fields");
+    // Validar formato de teléfono colombiano (10 dígitos, empieza con 3)
+    const phoneRegex = /^3\d{9}$/;
+    const cleanPhone = body.customerPhone.replace(/\D/g, "");
+    if (!phoneRegex.test(cleanPhone)) {
+      console.error("❌ Invalid phone format");
       return NextResponse.json(
-        { error: "Faltan campos requeridos de envío" },
+        { error: "El teléfono debe ser un número celular colombiano válido (10 dígitos)" },
         { status: 400 },
       );
+    }
+
+    // Solo validar campos de envío si es DELIVERY
+    if (deliveryMethod === "DELIVERY") {
+      if (!body.shippingAddress || !body.shippingCity) {
+        console.error("❌ Missing required shipping fields");
+        return NextResponse.json(
+          { error: "Faltan campos requeridos de envío" },
+          { status: 400 },
+        );
+      }
     }
 
     if (!body.items || body.items.length === 0) {
@@ -124,6 +152,45 @@ export async function POST(request: Request) {
           { status: 400 },
         );
       }
+
+      // Validar que precio y cantidad sean números positivos
+      if (typeof item.price !== "number" || item.price <= 0) {
+        console.error("❌ Invalid item price:", item.price);
+        return NextResponse.json(
+          { error: "El precio del producto debe ser un número positivo" },
+          { status: 400 },
+        );
+      }
+      if (typeof item.quantity !== "number" || item.quantity <= 0 || !Number.isInteger(item.quantity)) {
+        console.error("❌ Invalid item quantity:", item.quantity);
+        return NextResponse.json(
+          { error: "La cantidad debe ser un número entero positivo" },
+          { status: 400 },
+        );
+      }
+    }
+
+    // Validar totales numéricos positivos
+    if (typeof body.subtotal !== "number" || body.subtotal <= 0) {
+      console.error("❌ Invalid subtotal:", body.subtotal);
+      return NextResponse.json(
+        { error: "El subtotal debe ser un número positivo" },
+        { status: 400 },
+      );
+    }
+    if (typeof body.total !== "number" || body.total <= 0) {
+      console.error("❌ Invalid total:", body.total);
+      return NextResponse.json(
+        { error: "El total debe ser un número positivo" },
+        { status: 400 },
+      );
+    }
+    if (body.shippingCost !== undefined && (typeof body.shippingCost !== "number" || body.shippingCost < 0)) {
+      console.error("❌ Invalid shipping cost:", body.shippingCost);
+      return NextResponse.json(
+        { error: "El costo de envío debe ser un número no negativo" },
+        { status: 400 },
+      );
     }
 
     // Generate order number
@@ -140,14 +207,15 @@ export async function POST(request: Request) {
         customerEmail: body.customerEmail,
         customerPhone: body.customerPhone,
         customerDocumentId: body.customerDocumentId,
-        shippingAddress: body.shippingAddress,
-        shippingCity: body.shippingCity,
-        shippingDepartment: body.shippingDepartment || "Cundinamarca",
+        deliveryMethod: deliveryMethod as "DELIVERY" | "PICKUP",
+        shippingAddress: body.shippingAddress || null,
+        shippingCity: body.shippingCity || null,
+        shippingDepartment: body.shippingDepartment || null,
         deliveryDate: body.deliveryDate ? new Date(body.deliveryDate) : null,
         deliveryNotes: body.deliveryNotes || "",
         paymentMethod: body.paymentMethod || "WOMPI",
         subtotal: body.subtotal,
-        shippingCost: body.shippingCost || 0,
+        shippingCost: deliveryMethod === "PICKUP" ? 0 : body.shippingCost || 0,
         discountCode: body.discountCode || null,
         discountAmount: body.discountAmount || 0,
         total: body.total,
