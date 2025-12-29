@@ -8,6 +8,11 @@ import { Button } from "@/components/ui/button";
 import { ShippingForm } from "./ShippingForm";
 import { WompiCheckout } from "./WompiCheckout";
 import { DeliveryDatePicker } from "./DeliveryDatePicker";
+import {
+  DeliveryMethodSelector,
+  type DeliveryMethodType,
+  STORE_INFO,
+} from "./DeliveryMethodSelector";
 import { useCartStore } from "@/store/cartStore";
 import {
   Loader2,
@@ -17,6 +22,7 @@ import {
   CreditCard,
   CalendarDays,
   IdCard,
+  Package,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 
@@ -60,7 +66,11 @@ export function CheckoutForm({
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
 
-  // Shipping Information
+  // Delivery Method
+  const [deliveryMethod, setDeliveryMethod] =
+    useState<DeliveryMethodType>("DELIVERY");
+
+  // Shipping Information (solo para DELIVERY)
   const [shippingData, setShippingData] = useState<ShippingData | null>(null);
 
   // Delivery Date
@@ -68,6 +78,24 @@ export function CheckoutForm({
 
   // Payment Method - Solo Wompi
   const paymentMethod = "wompi";
+
+  const handleDeliveryMethodChange = (method: DeliveryMethodType) => {
+    setDeliveryMethod(method);
+    if (method === "PICKUP") {
+      // Cuando es recogida en tienda, el costo de envío es 0
+      if (onShippingCostChange) {
+        onShippingCostChange(0);
+      }
+      if (onLocationChange) {
+        onLocationChange({
+          city: STORE_INFO.city,
+          department: STORE_INFO.department,
+        });
+      }
+      // Limpiar datos de envío
+      setShippingData(null);
+    }
+  };
 
   const handleShippingChange = (data: ShippingData) => {
     setShippingData(data);
@@ -99,19 +127,22 @@ export function CheckoutForm({
       return;
     }
 
-    if (
-      !shippingData ||
-      !shippingData.address ||
-      !shippingData.department ||
-      !shippingData.city
-    ) {
-      setError("Por favor completa todos los campos de dirección de envío");
-      return;
-    }
+    // Solo validar dirección de envío si es DELIVERY
+    if (deliveryMethod === "DELIVERY") {
+      if (
+        !shippingData ||
+        !shippingData.address ||
+        !shippingData.department ||
+        !shippingData.city
+      ) {
+        setError("Por favor completa todos los campos de dirección de envío");
+        return;
+      }
 
-    if (shippingData.shippingCost === 0) {
-      setError("Esperando cálculo del costo de envío");
-      return;
+      if (shippingData.shippingCost === 0) {
+        setError("Esperando cálculo del costo de envío");
+        return;
+      }
     }
 
     if (!deliveryDate) {
@@ -125,12 +156,15 @@ export function CheckoutForm({
       // Calculate totals
       const subtotal = getTotalPrice;
       const discountAmount = discount ? discount.amount : 0;
-      const total = subtotal + shippingData.shippingCost - discountAmount;
+      const shippingCost =
+        deliveryMethod === "PICKUP" ? 0 : shippingData?.shippingCost || 0;
+      const total = subtotal + shippingCost - discountAmount;
 
       console.log("📦 Creating order with:", {
         itemsCount: items.length,
+        deliveryMethod,
         subtotal,
-        shippingCost: shippingData.shippingCost,
+        shippingCost,
         discount: discount
           ? `${discount.code} (${discount.percent}%)`
           : "No discount",
@@ -147,12 +181,24 @@ export function CheckoutForm({
           customerName: name,
           customerDocumentId: documentId.replace(/\s/g, ""),
           customerPhone: phone,
-          shippingAddress: shippingData.address,
-          shippingCity: shippingData.city,
-          shippingDepartment: shippingData.department,
+          deliveryMethod,
+          // Datos de envío solo si es DELIVERY
+          shippingAddress:
+            deliveryMethod === "DELIVERY" ? shippingData?.address : null,
+          shippingCity:
+            deliveryMethod === "DELIVERY"
+              ? shippingData?.city
+              : STORE_INFO.city,
+          shippingDepartment:
+            deliveryMethod === "DELIVERY"
+              ? shippingData?.department
+              : STORE_INFO.department,
           deliveryDate: deliveryDate.toISOString(),
-          deliveryNotes: shippingData.notes,
-          shippingCost: shippingData.shippingCost,
+          deliveryNotes:
+            deliveryMethod === "PICKUP"
+              ? "RECOGIDA EN LOCAL"
+              : shippingData?.notes,
+          shippingCost,
           subtotal,
           total,
           discountCode: discount?.code,
@@ -308,14 +354,28 @@ export function CheckoutForm({
         </div>
       </Card>
 
-      {/* Shipping Address */}
+      {/* Delivery Method */}
       <Card className="p-4 sm:p-6">
         <h2 className="text-lg sm:text-2xl mb-4 sm:mb-6 flex items-center gap-2">
-          <Mail className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
-          Dirección de Envío
+          <Package className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
+          ¿Cómo deseas recibir tu pedido?
         </h2>
-        <ShippingForm onShippingChange={handleShippingChange} />
+        <DeliveryMethodSelector
+          value={deliveryMethod}
+          onChange={handleDeliveryMethodChange}
+        />
       </Card>
+
+      {/* Shipping Address - Solo si es DELIVERY */}
+      {deliveryMethod === "DELIVERY" && (
+        <Card className="p-4 sm:p-6">
+          <h2 className="text-lg sm:text-2xl mb-4 sm:mb-6 flex items-center gap-2">
+            <Mail className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
+            Dirección de Envío
+          </h2>
+          <ShippingForm onShippingChange={handleShippingChange} />
+        </Card>
+      )}
 
       {/* Delivery Date */}
       <Card className="p-4 sm:p-6">

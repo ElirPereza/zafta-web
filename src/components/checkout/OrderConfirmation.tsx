@@ -1,13 +1,13 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { CheckCircle2, Phone, Mail, MapPin, Package } from "lucide-react";
+import { CheckCircle2, Phone, Mail, MapPin, Package, Clock, XCircle, Loader2, Store, Truck } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import type { Order, OrderItem, Product } from "@prisma/client";
+import type { Order, OrderItem, Product, PaymentStatus, OrderStatus } from "@prisma/client";
 
 interface OrderConfirmationProps {
   order: Order & {
@@ -17,11 +17,46 @@ interface OrderConfirmationProps {
   };
 }
 
-export function OrderConfirmation({ order }: OrderConfirmationProps) {
-  // Mark first purchase as completed - this will hide the discount popup forever
+export function OrderConfirmation({ order: initialOrder }: OrderConfirmationProps) {
+  const [order, setOrder] = useState(initialOrder);
+  const [verifying, setVerifying] = useState(false);
+
+  // Mark first purchase as completed and verify payment status
   useEffect(() => {
     localStorage.setItem("zafta-first-purchase-completed", "true");
+
+    // Verificar el estado del pago con Wompi si está pendiente
+    if (order.paymentStatus === "PENDING" && order.paymentMethod === "Wompi") {
+      verifyPayment();
+    }
   }, []);
+
+  const verifyPayment = async () => {
+    setVerifying(true);
+    try {
+      const response = await fetch("/api/wompi/verify-transaction", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ orderId: order.id }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        if (data.updated) {
+          // Actualizar el estado local
+          setOrder((prev) => ({
+            ...prev,
+            paymentStatus: data.paymentStatus as PaymentStatus,
+            status: data.orderStatus as OrderStatus,
+          }));
+        }
+      }
+    } catch (error) {
+      console.error("Error verifying payment:", error);
+    } finally {
+      setVerifying(false);
+    }
+  };
   const formatPrice = (price: number | string) => {
     const numPrice = typeof price === "string" ? parseFloat(price) : price;
     return new Intl.NumberFormat("es-CO", {
@@ -73,17 +108,38 @@ export function OrderConfirmation({ order }: OrderConfirmationProps) {
     return labels[status] || status;
   };
 
+  const getPaymentIcon = () => {
+    if (verifying) return <Loader2 className="h-12 w-12 sm:h-16 sm:w-16 text-primary mx-auto mb-3 sm:mb-4 animate-spin" />;
+    if (order.paymentStatus === "PAID") return <CheckCircle2 className="h-12 w-12 sm:h-16 sm:w-16 text-green-600 mx-auto mb-3 sm:mb-4" />;
+    if (order.paymentStatus === "FAILED") return <XCircle className="h-12 w-12 sm:h-16 sm:w-16 text-red-600 mx-auto mb-3 sm:mb-4" />;
+    return <Clock className="h-12 w-12 sm:h-16 sm:w-16 text-yellow-600 mx-auto mb-3 sm:mb-4" />;
+  };
+
+  const getPaymentTitle = () => {
+    if (verifying) return "Verificando Pago...";
+    if (order.paymentStatus === "PAID") return "¡Pedido Confirmado!";
+    if (order.paymentStatus === "FAILED") return "Pago Fallido";
+    return "Pedido Recibido";
+  };
+
+  const getPaymentMessage = () => {
+    if (verifying) return "Estamos verificando el estado de tu pago...";
+    if (order.paymentStatus === "PAID") return `Gracias por tu compra, ${order.customerName}`;
+    if (order.paymentStatus === "FAILED") return "Hubo un problema con tu pago. Por favor intenta nuevamente.";
+    return `Tu pedido ha sido recibido, ${order.customerName}. Estamos procesando tu pago.`;
+  };
+
   return (
     <div className="pt-20 md:pt-32 min-h-screen bg-gradient-to-b from-background via-primary/5 to-background">
       <div className="container mx-auto px-4 sm:px-6 py-6 md:py-12 max-w-4xl">
         {/* Success Message */}
         <div className="text-center mb-6 md:mb-8">
-          <CheckCircle2 className="h-12 w-12 sm:h-16 sm:w-16 text-green-600 mx-auto mb-3 sm:mb-4" />
+          {getPaymentIcon()}
           <h1 className="text-2xl sm:text-4xl md:text-5xl mb-2 sm:mb-4 text-foreground">
-            ¡Pedido Confirmado!
+            {getPaymentTitle()}
           </h1>
           <p className="text-base sm:text-lg text-muted-foreground font-sans mb-1 sm:mb-2">
-            Gracias por tu compra, {order.customerName}
+            {getPaymentMessage()}
           </p>
           <p className="text-xs sm:text-sm text-muted-foreground font-sans">
             Número de pedido:{" "}
@@ -135,22 +191,44 @@ export function OrderConfirmation({ order }: OrderConfirmationProps) {
             </div>
           </Card>
 
-          {/* Shipping Address */}
+          {/* Delivery Info */}
           <Card className="p-4 sm:p-6">
             <h2 className="text-base sm:text-xl mb-3 sm:mb-4 flex items-center gap-2">
-              <MapPin className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
-              Dirección de Envío
+              {order.deliveryMethod === "PICKUP" ? (
+                <>
+                  <Store className="h-4 w-4 sm:h-5 sm:w-5 text-green-600" />
+                  Recoger en Tienda
+                </>
+              ) : (
+                <>
+                  <Truck className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
+                  Envío a Domicilio
+                </>
+              )}
             </h2>
             <div className="space-y-1 font-sans text-xs sm:text-sm text-muted-foreground">
-              <p>{order.shippingAddress}</p>
-              <p>
-                {order.shippingCity}, {order.shippingDepartment}
-              </p>
-              {order.deliveryNotes && (
-                <p className="mt-2 text-[11px] sm:text-xs">
-                  <span className="font-medium">Notas:</span>{" "}
-                  {order.deliveryNotes}
-                </p>
+              {order.deliveryMethod === "PICKUP" ? (
+                <div className="p-3 bg-green-50 rounded-lg border border-green-200">
+                  <p className="font-semibold text-green-800 mb-1">
+                    Recogida en local
+                  </p>
+                  <p className="text-green-700 text-[11px] sm:text-xs">
+                    Te contactaremos por WhatsApp para coordinar la recogida y darte la ubicación exacta.
+                  </p>
+                </div>
+              ) : (
+                <>
+                  <p>{order.shippingAddress}</p>
+                  <p>
+                    {order.shippingCity}, {order.shippingDepartment}
+                  </p>
+                  {order.deliveryNotes && order.deliveryNotes !== "RECOGIDA EN LOCAL" && (
+                    <p className="mt-2 text-[11px] sm:text-xs">
+                      <span className="font-medium">Notas:</span>{" "}
+                      {order.deliveryNotes}
+                    </p>
+                  )}
+                </>
               )}
             </div>
           </Card>
@@ -213,9 +291,11 @@ export function OrderConfirmation({ order }: OrderConfirmationProps) {
               </span>
             </div>
             <div className="flex justify-between text-xs sm:text-sm font-sans">
-              <span className="text-muted-foreground">Envío</span>
-              <span className="font-medium">
-                {formatPrice(Number(order.shippingCost))}
+              <span className="text-muted-foreground">
+                {order.deliveryMethod === "PICKUP" ? "Recogida en tienda" : "Envío"}
+              </span>
+              <span className={`font-medium ${order.deliveryMethod === "PICKUP" ? "text-green-600" : ""}`}>
+                {order.deliveryMethod === "PICKUP" ? "Gratis" : formatPrice(Number(order.shippingCost))}
               </span>
             </div>
             <Separator />
@@ -245,14 +325,22 @@ export function OrderConfirmation({ order }: OrderConfirmationProps) {
               <span className="text-primary font-bold shrink-0">2.</span>
               <span>
                 Te contactaremos por WhatsApp al{" "}
-                <strong>{order.customerPhone}</strong> para coordinar la entrega
+                <strong>{order.customerPhone}</strong> para coordinar{" "}
+                {order.deliveryMethod === "PICKUP" ? "la recogida" : "la entrega"}
               </span>
             </li>
             <li className="flex items-start gap-2">
               <span className="text-primary font-bold shrink-0">3.</span>
               <span>
-                Tu pedido será preparado con amor y entregado en la dirección
-                indicada
+                {order.deliveryMethod === "PICKUP" ? (
+                  <>
+                    Tu pedido será preparado con amor y te notificaremos cuando esté listo para recoger
+                  </>
+                ) : (
+                  <>
+                    Tu pedido será preparado con amor y entregado en la dirección indicada
+                  </>
+                )}
               </span>
             </li>
           </ul>
