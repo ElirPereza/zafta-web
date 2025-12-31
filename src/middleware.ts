@@ -23,6 +23,7 @@ const isPublicRoute = createRouteMatcher([
   "/api/wompi(.*)", // Wompi payment integration
   "/api/gallery(.*)", // Public gallery images API
   "/api/discount-popup(.*)", // Public discount popup API
+  "/api/blocked-dates", // Public blocked dates for calendar (GET only)
   "/api/auth/check-role", // Allow access to role checking API
 ]);
 

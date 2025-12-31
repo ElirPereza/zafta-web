@@ -41,7 +41,16 @@ export function DeliveryDatePicker({
       const response = await fetch("/api/blocked-dates");
       const data = await response.json();
       if (data.blockedDates) {
-        setBlockedDates(data.blockedDates.map((bd: { date: string }) => new Date(bd.date)));
+        // Parse dates correctly to avoid timezone issues
+        // When date comes as "2025-12-30" or "2025-12-30T00:00:00.000Z",
+        // we need to extract just the date part and create a local date
+        setBlockedDates(
+          data.blockedDates.map((bd: { date: string }) => {
+            const dateStr = bd.date.split("T")[0]; // Get just "YYYY-MM-DD"
+            const [year, month, day] = dateStr.split("-").map(Number);
+            return new Date(year, month - 1, day); // Create local date
+          })
+        );
       }
     } catch (error) {
       console.error("Error fetching blocked dates:", error);
