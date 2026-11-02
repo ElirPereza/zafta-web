@@ -95,6 +95,21 @@ export async function POST(request: NextRequest) {
       | "DELIVERED"
       | "CANCELLED" = order.status;
 
+    // Un pago aprobado solo confirma el pedido si Wompi cobró exactamente
+    // el total del pedido (misma fórmula que en /api/wompi/init-transaction).
+    if (transaction.status === "APPROVED") {
+      const expectedAmountInCents = Math.floor(Number(order.total) * 100);
+      if (
+        transaction.amount_in_cents !== expectedAmountInCents ||
+        transaction.currency !== "COP"
+      ) {
+        console.error(
+          `🚨 Amount mismatch for order ${order.orderNumber}: paid ${transaction.amount_in_cents} ${transaction.currency}, expected ${expectedAmountInCents} COP. Order NOT marked as paid.`,
+        );
+        return NextResponse.json({ received: true, amountMismatch: true });
+      }
+    }
+
     switch (transaction.status) {
       case "APPROVED":
         paymentStatus = "PAID";

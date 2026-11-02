@@ -218,6 +218,13 @@ export function CheckoutForm({
       if (!orderResponse.ok) {
         const errorData = await orderResponse.json();
         console.error("Order creation failed:", errorData);
+        // Los errores 400 traen un mensaje pensado para el cliente
+        // (producto agotado, tamaño no disponible, código inválido...)
+        if (orderResponse.status === 400 && errorData.error) {
+          setError(errorData.error);
+          setLoading(false);
+          return;
+        }
         throw new Error(
           errorData.error || errorData.details || "Error al crear el pedido",
         );

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
+import { lookupDiscount } from "@/lib/discounts";
 
 // POST /api/discount-popup/validate - Validate discount code
 export async function POST(request: NextRequest) {
@@ -13,72 +13,19 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const now = new Date();
+    const result = await lookupDiscount(code, customerEmail);
 
-    // Check if this email has already used this discount code
-    if (customerEmail) {
-      const existingOrder = await prisma.order.findFirst({
-        where: {
-          customerEmail: customerEmail,
-          discountCode: code.toUpperCase(),
-        },
-      });
-
-      if (existingOrder) {
-        return NextResponse.json(
-          { error: "Este código ya fue utilizado en una compra anterior" },
-          { status: 400 },
-        );
-      }
-    }
-
-    // Find active discount with matching code
-    const popup = await prisma.discountPopup.findFirst({
-      where: {
-        discountCode: code.toUpperCase(),
-        isActive: true,
-        OR: [
-          // Case 1: Both dates are null (always active)
-          {
-            AND: [{ startDate: null }, { endDate: null }],
-          },
-          // Case 2: Only startDate is set (active after start)
-          {
-            AND: [{ startDate: { lte: now } }, { endDate: null }],
-          },
-          // Case 3: Only endDate is set (active until end)
-          {
-            AND: [{ startDate: null }, { endDate: { gte: now } }],
-          },
-          // Case 4: Both dates are set (active in range)
-          {
-            AND: [{ startDate: { lte: now } }, { endDate: { gte: now } }],
-          },
-        ],
-      },
-      select: {
-        id: true,
-        discountCode: true,
-        discountPercent: true,
-        title: true,
-      },
-    });
-
-    if (!popup) {
+    if (!result.valid) {
       return NextResponse.json(
-        { error: "Código de descuento inválido o expirado" },
-        { status: 404 },
+        { error: result.message },
+        { status: result.reason === "ALREADY_USED" ? 400 : 404 },
       );
     }
 
     return NextResponse.json(
       {
         valid: true,
-        discount: {
-          code: popup.discountCode,
-          percent: popup.discountPercent,
-          title: popup.title,
-        },
+        discount: result.discount,
       },
       { status: 200 },
     );

@@ -1,5 +1,6 @@
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
+import { PricingError, priceOrder } from "@/lib/orders/pricing";
 import { prisma } from "@/lib/prisma";
 
 export const runtime = "nodejs";
@@ -115,9 +116,20 @@ export async function POST(request: Request) {
       );
     }
 
+    if (deliveryMethod !== "DELIVERY" && deliveryMethod !== "PICKUP") {
+      return NextResponse.json(
+        { error: "Método de entrega inválido" },
+        { status: 400 },
+      );
+    }
+
     // Solo validar campos de envío si es DELIVERY
     if (deliveryMethod === "DELIVERY") {
-      if (!body.shippingAddress || !body.shippingCity) {
+      if (
+        !body.shippingAddress ||
+        !body.shippingCity ||
+        !body.shippingDepartment
+      ) {
         console.error("❌ Missing required shipping fields");
         return NextResponse.json(
           { error: "Faltan campos requeridos de envío" },
@@ -126,7 +138,7 @@ export async function POST(request: Request) {
       }
     }
 
-    if (!body.items || body.items.length === 0) {
+    if (!Array.isArray(body.items) || body.items.length === 0) {
       console.error("❌ No items in order");
       return NextResponse.json(
         { error: "El pedido debe tener al menos un producto" },
@@ -134,34 +146,24 @@ export async function POST(request: Request) {
       );
     }
 
-    // Validar que todos los items tengan los campos requeridos
+    // Validar que todos los items tengan producto y cantidad.
+    // El precio que envía el navegador se ignora: se toma del catálogo.
     for (const item of body.items) {
-      if (!item.productId || !item.name || !item.price || !item.quantity) {
+      if (!item?.productId || typeof item.productId !== "string") {
         console.error("❌ Invalid item data:", JSON.stringify(item, null, 2));
-        console.error("❌ Missing fields:", {
-          hasProductId: !!item.productId,
-          hasName: !!item.name,
-          hasPrice: !!item.price,
-          hasQuantity: !!item.quantity,
-        });
         return NextResponse.json(
           {
             error: "Datos de producto incompletos",
-            details: `Producto sin ${!item.productId ? "productId" : !item.name ? "nombre" : !item.price ? "precio" : "cantidad"}`,
+            details: "Producto sin productId",
           },
           { status: 400 },
         );
       }
-
-      // Validar que precio y cantidad sean números positivos
-      if (typeof item.price !== "number" || item.price <= 0) {
-        console.error("❌ Invalid item price:", item.price);
-        return NextResponse.json(
-          { error: "El precio del producto debe ser un número positivo" },
-          { status: 400 },
-        );
-      }
-      if (typeof item.quantity !== "number" || item.quantity <= 0 || !Number.isInteger(item.quantity)) {
+      if (
+        typeof item.quantity !== "number" ||
+        item.quantity <= 0 ||
+        !Number.isInteger(item.quantity)
+      ) {
         console.error("❌ Invalid item quantity:", item.quantity);
         return NextResponse.json(
           { error: "La cantidad debe ser un número entero positivo" },
@@ -170,27 +172,49 @@ export async function POST(request: Request) {
       }
     }
 
-    // Validar totales numéricos positivos
-    if (typeof body.subtotal !== "number" || body.subtotal <= 0) {
-      console.error("❌ Invalid subtotal:", body.subtotal);
+    // Recalcular precios, envío, descuento y total en el servidor
+    let pricing: Awaited<ReturnType<typeof priceOrder>>;
+    try {
+      pricing = await priceOrder({
+        items: body.items.map((item: Record<string, unknown>) => ({
+          productId: item.productId as string,
+          sizeName: (item.sizeName as string | undefined) || null,
+          quantity: item.quantity as number,
+          imageUrl: ((item.imageUrl || item.image) as string | undefined) || null,
+        })),
+        deliveryMethod,
+        city: deliveryMethod === "DELIVERY" ? body.shippingCity : null,
+        department: deliveryMethod === "DELIVERY" ? body.shippingDepartment : null,
+        discountCode: body.discountCode || null,
+        customerEmail: body.customerEmail,
+      });
+    } catch (error) {
+      if (error instanceof PricingError) {
+        console.error("❌ Pricing error:", error.message);
+        return NextResponse.json({ error: error.message }, { status: 400 });
+      }
+      throw error;
+    }
+
+    if (pricing.total <= 0) {
+      console.error("❌ Invalid computed total:", pricing.total);
       return NextResponse.json(
-        { error: "El subtotal debe ser un número positivo" },
+        { error: "El total del pedido debe ser mayor a cero" },
         { status: 400 },
       );
     }
-    if (typeof body.total !== "number" || body.total <= 0) {
-      console.error("❌ Invalid total:", body.total);
-      return NextResponse.json(
-        { error: "El total debe ser un número positivo" },
-        { status: 400 },
-      );
-    }
-    if (body.shippingCost !== undefined && (typeof body.shippingCost !== "number" || body.shippingCost < 0)) {
-      console.error("❌ Invalid shipping cost:", body.shippingCost);
-      return NextResponse.json(
-        { error: "El costo de envío debe ser un número no negativo" },
-        { status: 400 },
-      );
+
+    // Si el navegador mostraba otro monto (carrito viejo, precio cambiado o
+    // manipulación), se registra y se cobra el valor calculado en el servidor.
+    if (typeof body.total === "number" && body.total !== pricing.total) {
+      console.warn("⚠️ Client total differs from server total", {
+        clientTotal: body.total,
+        serverTotal: pricing.total,
+        clientShipping: body.shippingCost,
+        serverShipping: pricing.shippingCost,
+        clientDiscount: body.discountAmount,
+        serverDiscount: pricing.discountAmount,
+      });
     }
 
     // Generate order number
@@ -214,19 +238,19 @@ export async function POST(request: Request) {
         deliveryDate: body.deliveryDate ? new Date(body.deliveryDate) : null,
         deliveryNotes: body.deliveryNotes || "",
         paymentMethod: body.paymentMethod || "WOMPI",
-        subtotal: body.subtotal,
-        shippingCost: deliveryMethod === "PICKUP" ? 0 : body.shippingCost || 0,
-        discountCode: body.discountCode || null,
-        discountAmount: body.discountAmount || 0,
-        total: body.total,
+        subtotal: pricing.subtotal,
+        shippingCost: pricing.shippingCost,
+        discountCode: pricing.discountCode,
+        discountAmount: pricing.discountAmount,
+        total: pricing.total,
         items: {
-          create: body.items.map((item: any) => ({
-            productId: item.productId,
-            name: item.name,
-            sizeName: item.sizeName || null,
-            price: item.price,
-            quantity: item.quantity,
-            imageUrl: item.imageUrl || item.image || "",
+          create: pricing.lines.map((line) => ({
+            productId: line.productId,
+            name: line.name,
+            sizeName: line.sizeName,
+            price: line.price,
+            quantity: line.quantity,
+            imageUrl: line.imageUrl,
           })),
         },
       },

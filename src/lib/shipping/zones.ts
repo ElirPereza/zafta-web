@@ -1,5 +1,9 @@
 // Configuración de zonas de envío para Colombia
 // Los costos están en COP (Pesos Colombianos)
+// Tarifario de destinos 2026-2027.
+//
+// OJO: las reglas de envío gratis (admin > Envío gratis) comparan por nombre
+// de zona. Si renombras una zona, revisa también esas reglas.
 
 export interface ShippingZone {
   department: string;
@@ -15,46 +19,47 @@ export const SHIPPING_ZONES: ShippingZone[] = [
     department: "Antioquia",
     cities: [
       // Zona Palmas y El Poblado
-      { name: "Alto de Palmas", cost: 20000 },
-      { name: "Mall Indiana", cost: 20000 },
-      { name: "Palmas hasta la cola del zorro", cost: 12000 },
+      { name: "Alto de Palmas", cost: 20000 }, // No está en el tarifario 2026-2027; se mantiene
+      { name: "Indiana (y un kilómetro a la redonda)", cost: 22000 },
+      { name: "Palmas hasta la cola del zorro", cost: 14000 },
       {
         name: "Palmas de la cola del zorro hasta la bomba Texaco",
-        cost: 15000,
+        cost: 18000,
       },
-      { name: "Poblado inferior hacia arriba", cost: 12000 },
-      { name: "Poblado inferior hacia abajo", cost: 10000 },
+      { name: "Poblado superior hacia abajo", cost: 12000 },
+      { name: "Poblado superior hacia arriba", cost: 13000 },
       // Medellín barrios
-      { name: "Medellín", cost: 12000 },
-      { name: "Robledo", cost: 15000 },
-      { name: "Castilla", cost: 15000 },
-      { name: "Manrique", cost: 15000 },
-      { name: "Villa Hermosa", cost: 15000 },
-      { name: "Aranjuez", cost: 15000 },
-      { name: "Loreto", cost: 15000 },
-      { name: "La Milagrosa", cost: 15000 },
-      { name: "Buenos Aires", cost: 15000 },
-      { name: "Rodeo Alto", cost: 15000 },
-      { name: "Belén Alta Vista", cost: 15000 },
-      { name: "Belén Las Violetas", cost: 15000 },
-      { name: "Robledo La Colina", cost: 15000 },
+      // El tarifario trae "Medellín BB" ($15.000) y "Medellín BA" ($16.000);
+      // se unifican en una sola zona con el precio más alto.
+      { name: "Medellín", cost: 16000 },
+      { name: "Robledo", cost: 16000 },
+      { name: "Castilla", cost: 16000 },
+      { name: "Manrique", cost: 16000 },
+      { name: "Villa Hermosa", cost: 16000 },
+      { name: "Aranjuez", cost: 16000 },
+      { name: "Loreto", cost: 16000 },
+      { name: "La Milagrosa", cost: 16000 },
+      { name: "Buenos Aires", cost: 16000 },
+      { name: "Rodeo Alto", cost: 16000 },
+      { name: "Belén Las Violetas", cost: 16000 },
+      { name: "Robledo La Colina", cost: 16000 },
       // Área metropolitana
-      { name: "Envigado", cost: 12000 },
-      { name: "Escobero", cost: 15000 },
-      { name: "Sabaneta", cost: 15000 },
-      { name: "Itagüí", cost: 15000 },
-      { name: "La Estrella", cost: 18000 },
-      { name: "San Antonio", cost: 18000 },
-      { name: "Bello", cost: 20000 },
-      { name: "Copacabana", cost: 18000 },
+      { name: "Envigado", cost: 15000 },
+      { name: "Escobero", cost: 18000 },
+      { name: "Sabaneta", cost: 16000 },
+      { name: "Itagüí", cost: 17000 },
+      { name: "La Estrella", cost: 19000 },
+      { name: "San Antonio", cost: 20000 },
+      { name: "Bello", cost: 21000 },
+      { name: "Copacabana", cost: 25000 },
       { name: "Caldas", cost: 25000 },
       // Oriente y zonas alejadas
-      { name: "Rotonda del aeropuerto JMC", cost: 35000 },
-      { name: "Rionegro", cost: 50000 },
+      { name: "Rotonda del aeropuerto JMC", cost: 40000 },
+      { name: "Rionegro", cost: 60000 },
       { name: "El Retiro", cost: 45000 },
       { name: "Santa Elena", cost: 45000 },
-      { name: "Llano Grande", cost: 45000 },
-      { name: "La Ceja", cost: 45000 },
+      { name: "Llano Grande", cost: 48000 },
+      { name: "La Ceja", cost: 48000 },
     ],
     defaultCost: 30000, // Otras ciudades de Antioquia
   },
