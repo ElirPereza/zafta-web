@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
+import { requireAdmin } from "@/lib/auth/admin";
 import { prisma } from "@/lib/prisma";
-import { auth } from "@clerk/nextjs/server";
 
 // GET /api/free-shipping - Get all free shipping rules or active rules
 export async function GET(request: Request) {
@@ -26,9 +26,9 @@ export async function GET(request: Request) {
 // POST /api/free-shipping - Create new free shipping rule
 export async function POST(request: Request) {
   try {
-    const session = await auth();
-    if (!session.userId) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    const admin = await requireAdmin();
+    if (!admin.ok) {
+      return admin.response;
     }
 
     const body = await request.json();

@@ -1,29 +1,6 @@
-import { NextRequest, NextResponse } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
+import { requireAdmin } from "@/lib/auth/admin";
 import { prisma } from "@/lib/prisma";
-import { currentUser } from "@clerk/nextjs/server";
-
-async function checkAdmin() {
-  const user = await currentUser();
-
-  if (!user) {
-    return { authorized: false, error: "No autorizado" };
-  }
-
-  const adminEmail = process.env.ADMIN_EMAIL;
-  const userEmail = user.emailAddresses.find(
-    (email) => email.id === user.primaryEmailAddressId,
-  )?.emailAddress;
-
-  if (
-    !adminEmail ||
-    !userEmail ||
-    userEmail.toLowerCase() !== adminEmail.toLowerCase()
-  ) {
-    return { authorized: false, error: "No autorizado - Solo administradores" };
-  }
-
-  return { authorized: true };
-}
 
 // PUT /api/gallery/[id] - Update gallery image
 export async function PUT(
@@ -31,9 +8,9 @@ export async function PUT(
   { params }: { params: Promise<{ id: string }> },
 ) {
   try {
-    const auth = await checkAdmin();
-    if (!auth.authorized) {
-      return NextResponse.json({ error: auth.error }, { status: 403 });
+    const admin = await requireAdmin();
+    if (!admin.ok) {
+      return admin.response;
     }
 
     const { id } = await params;
@@ -66,9 +43,9 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> },
 ) {
   try {
-    const auth = await checkAdmin();
-    if (!auth.authorized) {
-      return NextResponse.json({ error: auth.error }, { status: 403 });
+    const admin = await requireAdmin();
+    if (!admin.ok) {
+      return admin.response;
     }
 
     const { id } = await params;

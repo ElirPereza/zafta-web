@@ -1,8 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { Images, Plus, Trash2, Upload } from "lucide-react";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -10,16 +12,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import {
   Dialog,
   DialogContent,
@@ -29,8 +21,15 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Upload, Trash2, Plus, Images } from "lucide-react";
-import { createClient } from "@supabase/supabase-js";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface GalleryImage {
   id: string;
@@ -44,11 +43,6 @@ interface GalleryImage {
 }
 
 export default function GaleriasPage() {
-  // Initialize Supabase client inside component
-  const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-  );
   const [images, setImages] = useState<GalleryImage[]>([]);
   const [loading, setLoading] = useState(true);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -104,22 +98,23 @@ export default function GaleriasPage() {
     setUploading(true);
 
     try {
-      // Upload to Supabase Storage
-      const fileExt = file.name.split(".").pop();
-      const fileName = `${section.toLowerCase()}/${Date.now()}.${fileExt}`;
+      // Subir por el servidor (clave de servicio + verificación de administrador)
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("bucket", "gallery");
+      formData.append("folder", section.toLowerCase());
 
-      const { data: uploadData, error: uploadError } = await supabase.storage
-        .from("gallery")
-        .upload(fileName, file);
+      const uploadResponse = await fetch("/api/upload", {
+        method: "POST",
+        body: formData,
+      });
 
-      if (uploadError) {
-        throw uploadError;
+      if (!uploadResponse.ok) {
+        const uploadError = await uploadResponse.json().catch(() => ({}));
+        throw new Error(uploadError.error || "Error al subir la imagen");
       }
 
-      // Get public URL
-      const {
-        data: { publicUrl },
-      } = supabase.storage.from("gallery").getPublicUrl(fileName);
+      const { url: publicUrl } = await uploadResponse.json();
 
       // Create gallery image record
       const response = await fetch("/api/gallery", {
@@ -164,10 +159,14 @@ export default function GaleriasPage() {
       });
 
       if (response.ok) {
-        // Delete from Supabase Storage
+        // Borrar el archivo del almacenamiento por el servidor
         const fileName = image.imageUrl.split("/gallery/")[1];
         if (fileName) {
-          await supabase.storage.from("gallery").remove([fileName]);
+          await fetch("/api/upload", {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ bucket: "gallery", path: fileName }),
+          });
         }
 
         toast.success("Imagen eliminada correctamente");

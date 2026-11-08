@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
+import { requireAdmin } from "@/lib/auth/admin";
 import { prisma } from "@/lib/prisma";
-import { auth } from "@clerk/nextjs/server";
 
 // GET /api/blocked-dates - Get all blocked dates
 // Public endpoint for the calendar to fetch blocked dates
@@ -20,7 +20,8 @@ export async function GET(request: Request) {
     }
 
     const blockedDates = await prisma.blockedDate.findMany({
-      where: Object.keys(dateFilter).length > 0 ? { date: dateFilter } : undefined,
+      where:
+        Object.keys(dateFilter).length > 0 ? { date: dateFilter } : undefined,
       orderBy: { date: "asc" },
     });
 
@@ -38,9 +39,9 @@ export async function GET(request: Request) {
 // Admin only endpoint
 export async function POST(request: Request) {
   try {
-    const session = await auth();
-    if (!session.userId) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    const admin = await requireAdmin();
+    if (!admin.ok) {
+      return admin.response;
     }
 
     const body = await request.json();
@@ -72,7 +73,12 @@ export async function POST(request: Request) {
         createdDates.push(blockedDate);
       } catch (err: unknown) {
         // If date already exists (unique constraint), skip it
-        if (err && typeof err === "object" && "code" in err && err.code === "P2002") {
+        if (
+          err &&
+          typeof err === "object" &&
+          "code" in err &&
+          err.code === "P2002"
+        ) {
           skippedDates.push(dateStr);
         } else {
           throw err;

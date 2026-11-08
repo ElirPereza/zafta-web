@@ -1,6 +1,6 @@
-import { NextRequest, NextResponse } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
+import { requireAdmin } from "@/lib/auth/admin";
 import { prisma } from "@/lib/prisma";
-import { currentUser } from "@clerk/nextjs/server";
 
 // GET /api/gallery - Get all gallery images or filter by section
 export async function GET(request: NextRequest) {
@@ -30,27 +30,9 @@ export async function GET(request: NextRequest) {
 // POST /api/gallery - Create a new gallery image (Admin only)
 export async function POST(request: NextRequest) {
   try {
-    const user = await currentUser();
-
-    if (!user) {
-      return NextResponse.json({ error: "No autorizado" }, { status: 401 });
-    }
-
-    // Check if user is admin
-    const adminEmail = process.env.ADMIN_EMAIL;
-    const userEmail = user.emailAddresses.find(
-      (email) => email.id === user.primaryEmailAddressId,
-    )?.emailAddress;
-
-    if (
-      !adminEmail ||
-      !userEmail ||
-      userEmail.toLowerCase() !== adminEmail.toLowerCase()
-    ) {
-      return NextResponse.json(
-        { error: "No autorizado - Solo administradores" },
-        { status: 403 },
-      );
+    const admin = await requireAdmin();
+    if (!admin.ok) {
+      return admin.response;
     }
 
     const body = await request.json();

@@ -7,10 +7,15 @@ const isPublicRoute = createRouteMatcher([
   "/productos(.*)",
   "/nuestras-tortas(.*)",
   "/nuestra-historia",
-  "/valores-proposito",
+  "/valores",
   "/como-comprar",
   "/faq",
   "/contacto",
+  "/instagram",
+  "/aviso-de-privacidad",
+  "/politica-de-datos",
+  "/sitemap.xml",
+  "/robots.txt",
   "/checkout(.*)", // Guest checkout flow
   "/pedido-confirmado(.*)", // Order confirmation page
   "/auth/sign-in(.*)",

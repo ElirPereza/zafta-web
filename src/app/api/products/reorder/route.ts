@@ -1,14 +1,14 @@
-import { auth } from "@clerk/nextjs/server";
-import { prisma } from "@/lib/prisma";
-import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
+import { NextResponse } from "next/server";
+import { requireAdmin } from "@/lib/auth/admin";
+import { prisma } from "@/lib/prisma";
 
 export async function POST(request: Request) {
   try {
-    // Check authentication
-    const { userId } = await auth();
-    if (!userId) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    // Solo administradores pueden reordenar productos
+    const admin = await requireAdmin();
+    if (!admin.ok) {
+      return admin.response;
     }
 
     const body = await request.json();
@@ -27,7 +27,6 @@ export async function POST(request: Request) {
         updates.map((update: { id: string; displayOrder: number }) =>
           prisma.product.update({
             where: { id: update.id },
-            // @ts-ignore - displayOrder might not exist in local Prisma client
             data: { displayOrder: update.displayOrder },
           }),
         ),

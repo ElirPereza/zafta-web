@@ -1,12 +1,13 @@
-import { prisma } from "@/lib/prisma";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { OrderConfirmation } from "@/components/checkout/OrderConfirmation";
-import type { Metadata } from "next";
+import { prisma } from "@/lib/prisma";
 
 interface OrderConfirmationPageProps {
   params: Promise<{
     id: string;
   }>;
+  searchParams: Promise<{ id?: string | string[] }>;
 }
 
 export async function generateMetadata({
@@ -35,8 +36,13 @@ export async function generateMetadata({
 
 export default async function OrderConfirmationPage({
   params,
+  searchParams,
 }: OrderConfirmationPageProps) {
   const { id } = await params;
+  // Wompi redirige a esta página con ?id=<transacción>
+  const { id: wompiTransactionId } = await searchParams;
+  const transactionId =
+    typeof wompiTransactionId === "string" ? wompiTransactionId : null;
 
   // Fetch order from database
   const order = await prisma.order.findUnique({
@@ -59,5 +65,5 @@ export default async function OrderConfirmationPage({
     notFound();
   }
 
-  return <OrderConfirmation order={order} />;
+  return <OrderConfirmation order={order} transactionId={transactionId} />;
 }
