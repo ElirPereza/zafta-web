@@ -2,7 +2,8 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { X, Plus, Minus, Send } from "lucide-react";
+import { X, Plus, Minus, Instagram, Mail } from "lucide-react";
+import { mailtoUrl, openInstagramChat } from "@/lib/contact";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -91,10 +92,11 @@ const OrderSidebar = ({
   const deliveryCost = 5000;
   const total = subtotal + deliveryCost;
 
-  const handleWhatsAppOrder = () => {
+  // Arma el mensaje del pedido; devuelve null si faltan datos
+  const buildOrderMessage = (): string | null => {
     if (!name) {
       toast.error("Por favor completa tu nombre");
-      return;
+      return null;
     }
 
     let message = "";
@@ -107,7 +109,7 @@ const OrderSidebar = ({
             ? "Por favor describe tu evento"
             : "Por favor describe tu pedido personalizado",
         );
-        return;
+        return null;
       }
 
       const emoji = orderType === "event" ? "🎉" : "🍰";
@@ -137,10 +139,32 @@ const OrderSidebar = ({
         `¡Espero tu confirmación! 😊`;
     }
 
-    const whatsappUrl = `https://wa.me/573217590897?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, "_blank");
+    return message;
+  };
 
-    toast.success("Redirigiendo a WhatsApp...");
+  const handleInstagramOrder = async () => {
+    const message = buildOrderMessage();
+    if (!message) return;
+    // Instagram no admite texto precargado: lo copiamos para que solo lo peguen
+    const copied = await openInstagramChat(message.replace(/\*/g, ""));
+    if (copied) {
+      toast.success("Copiamos tu pedido. Pégalo en el chat de Instagram 💌", {
+        duration: 8000,
+      });
+    } else {
+      toast.success("Abriendo Instagram... cuéntanos tu pedido por mensaje.");
+    }
+  };
+
+  const handleEmailOrder = () => {
+    const message = buildOrderMessage();
+    if (!message) return;
+    const subject = isCustomOrder
+      ? orderType === "event"
+        ? "Cotización para evento"
+        : "Pedido personalizado"
+      : `Cotización: ${initialProduct?.name}`;
+    window.location.href = mailtoUrl(subject, message.replace(/\*/g, ""));
   };
 
   const incrementQuantity = () => setQuantity((q) => q + 1);
@@ -292,7 +316,7 @@ const OrderSidebar = ({
                   className="border-2 focus:border-primary transition-all h-10"
                 />
                 <p className="text-xs text-muted-foreground">
-                  Confirmaremos los detalles de entrega por WhatsApp.
+                  Confirmaremos los detalles de entrega contigo por mensaje.
                 </p>
               </div>
 
@@ -338,7 +362,7 @@ const OrderSidebar = ({
                     ¿Cómo funciona?
                   </h3>
                   <div className="space-y-2 text-sm text-foreground/80 font-sans leading-relaxed">
-                    <p>1️⃣ Envíanos tu solicitud por WhatsApp</p>
+                    <p>1️⃣ Envíanos tu solicitud por Instagram o correo</p>
                     <p>2️⃣ Te responderemos con una cotización personalizada</p>
                     <p>3️⃣ Ajustamos los detalles según tus preferencias</p>
                     <p>4️⃣ ¡Creamos tu torta perfecta con amor!</p>
@@ -346,17 +370,28 @@ const OrderSidebar = ({
                 </div>
               )}
 
-              {/* WhatsApp Button */}
-              <Button
-                variant="whatsapp"
-                size="lg"
-                onClick={handleWhatsAppOrder}
-                className="w-full gap-2 text-sm font-semibold h-12 shadow-warm hover:shadow-medium"
-              >
-                <Send className="h-4 w-4" />
-                {isCustomOrder ? "Enviar solicitud" : "Enviar cotización"} por
-                WhatsApp
-              </Button>
+              {/* Botones de envío: Instagram (principal) y correo */}
+              <div className="space-y-2">
+                <Button
+                  variant="default"
+                  size="lg"
+                  onClick={handleInstagramOrder}
+                  className="w-full gap-2 text-sm font-semibold h-12 shadow-warm hover:shadow-medium"
+                >
+                  <Instagram className="h-4 w-4" />
+                  {isCustomOrder ? "Enviar solicitud" : "Enviar cotización"} por
+                  Instagram
+                </Button>
+                <Button
+                  variant="outline"
+                  size="lg"
+                  onClick={handleEmailOrder}
+                  className="w-full gap-2 text-sm font-semibold h-11 border-2"
+                >
+                  <Mail className="h-4 w-4" />
+                  Enviar por correo
+                </Button>
+              </div>
             </div>
           </motion.div>
         </>

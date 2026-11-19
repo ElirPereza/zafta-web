@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Instagram, Phone } from "lucide-react";
+import { Instagram, Mail } from "lucide-react";
+import { CONTACT_EMAIL } from "@/lib/contact";
 import Link from "next/link";
 import { Logo } from "@/components/ui/logo";
 import { FaTiktok, FaFacebook } from "react-icons/fa";
@@ -119,13 +120,11 @@ const Footer = () => {
               <motion.a
                 whileHover={{ scale: 1.05, x: 5 }}
                 transition={{ duration: 0.2 }}
-                href="https://wa.me/573217590897"
-                target="_blank"
-                rel="noopener noreferrer"
+                href={`mailto:${CONTACT_EMAIL}`}
                 className="flex items-center gap-2 text-sm sm:text-base text-muted-foreground hover:text-primary transition-all duration-300 group"
               >
-                <Phone className="h-4 w-4 sm:h-5 sm:w-5 text-primary group-hover:text-primary-dark transition-colors" />
-                <span>WhatsApp: +57 321 759 0897</span>
+                <Mail className="h-4 w-4 sm:h-5 sm:w-5 text-primary group-hover:text-primary-dark transition-colors" />
+                <span className="break-all">{CONTACT_EMAIL}</span>
               </motion.a>
               <motion.a
                 whileHover={{ scale: 1.05, x: 5 }}

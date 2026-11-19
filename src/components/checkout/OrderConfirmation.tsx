@@ -213,7 +213,7 @@ export function OrderConfirmation({ order: initialOrder }: OrderConfirmationProp
                     Recogida en local
                   </p>
                   <p className="text-green-700 text-[11px] sm:text-xs">
-                    Te contactaremos por WhatsApp para coordinar la recogida y darte la ubicación exacta.
+                    Te contactaremos para coordinar la recogida y darte la ubicación exacta.
                   </p>
                 </div>
               ) : (
@@ -324,8 +324,9 @@ export function OrderConfirmation({ order: initialOrder }: OrderConfirmationProp
             <li className="flex items-start gap-2">
               <span className="text-primary font-bold shrink-0">2.</span>
               <span>
-                Te contactaremos por WhatsApp al{" "}
-                <strong>{order.customerPhone}</strong> para coordinar{" "}
+                Te contactaremos al{" "}
+                <strong>{order.customerPhone}</strong> o a tu correo para
+                coordinar{" "}
                 {order.deliveryMethod === "PICKUP" ? "la recogida" : "la entrega"}
               </span>
             </li>

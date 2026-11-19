@@ -24,9 +24,8 @@ export const SITE_CONFIG = {
     "tradición repostera",
   ],
   contact: {
-    phone: "+57 300 123 4567",
-    whatsapp: "573001234567",
-    email: "hola@zafta.com",
+    // Sin teléfono/WhatsApp: la línea anterior fue robada (ver src/lib/contact.ts)
+    email: "ventas@zaftareposteria.com",
     instagram: "@zafta_reposteria",
   },
 };
@@ -116,7 +115,6 @@ export function generateOrganizationSchema() {
     url: SITE_CONFIG.url,
     logo: `${SITE_CONFIG.url}/SVG/logo-header.svg`,
     image: `${SITE_CONFIG.url}${SITE_CONFIG.ogImage}`,
-    telephone: SITE_CONFIG.contact.phone,
     email: SITE_CONFIG.contact.email,
     address: {
       "@type": "PostalAddress",
@@ -125,7 +123,6 @@ export function generateOrganizationSchema() {
     },
     sameAs: [
       `https://instagram.com/${SITE_CONFIG.contact.instagram.replace("@", "")}`,
-      `https://wa.me/${SITE_CONFIG.contact.whatsapp}`,
     ],
     servesCuisine: "Repostería Artesanal",
     priceRange: "$$",

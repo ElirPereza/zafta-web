@@ -30,9 +30,6 @@ export default function PoliticaDeDatosPage() {
               <strong>Domicilio:</strong> Medellín, Antioquia
             </p>
             <p>
-              <strong>Teléfono:</strong> 3217590897
-            </p>
-            <p>
               <strong>E-mail:</strong>{" "}
               <a
                 href="mailto:ventas@zaftareposteria.com"
@@ -330,9 +327,6 @@ export default function PoliticaDeDatosPage() {
               >
                 ventas@zaftareposteria.com
               </a>
-            </p>
-            <p>
-              <strong>Teléfono:</strong> 3217590897
             </p>
             <p>
               <strong>Horario:</strong> Lunes a viernes: 7:30 a.m. a 5:30 p.m

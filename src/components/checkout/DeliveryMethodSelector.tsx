@@ -17,7 +17,6 @@ interface DeliveryMethodSelectorProps {
 export const STORE_INFO = {
   city: "Medellín",
   department: "Antioquia",
-  whatsapp: "+57 321 759 0897",
 };
 
 export function DeliveryMethodSelector({
@@ -94,7 +93,7 @@ export function DeliveryMethodSelector({
             </h4>
 
             <p className="text-sm text-green-700 font-sans">
-              Te contactaremos por WhatsApp para coordinar la recogida de tu pedido y darte la ubicación exacta.
+              Te contactaremos para coordinar la recogida de tu pedido y darte la ubicación exacta.
             </p>
 
             <p className="text-xs text-green-600 font-sans pt-2 border-t border-green-200">

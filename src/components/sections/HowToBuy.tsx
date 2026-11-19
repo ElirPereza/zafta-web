@@ -12,7 +12,7 @@ const steps = [
   {
     title: "Personalízalo.",
     description:
-      "¿Tienes una idea diferente? ¡Contáctanos por WhatsApp y la hacemos realidad!",
+      "¿Tienes una idea diferente? ¡Escríbenos por Instagram y la hacemos realidad!",
   },
   {
     title: "Haz tu pedido.",

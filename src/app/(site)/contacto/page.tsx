@@ -1,20 +1,20 @@
-import { Phone, Instagram } from "lucide-react";
+import { Mail, Instagram } from "lucide-react";
 import { FaTiktok, FaFacebook } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
+import { CONTACT_EMAIL, INSTAGRAM_DM_URL, mailtoUrl } from "@/lib/contact";
 import { generateMetadata as genMetadata } from "@/lib/metadata";
 
 export const metadata = genMetadata({
   title: "Contacto",
   description:
-    "Contáctanos por WhatsApp, Instagram, TikTok o Facebook para hacer tu pedido o resolver tus dudas. Estamos en Bogotá, Colombia. Respuesta rápida garantizada.",
+    "Contáctanos por Instagram, correo, TikTok o Facebook para hacer tu pedido o resolver tus dudas. Estamos en Bogotá, Colombia.",
   path: "/contacto",
   keywords: [
     "contacto",
-    "WhatsApp",
     "Instagram",
     "TikTok",
     "Facebook",
-    "teléfono",
+    "correo",
     "hacer pedido",
     "atención al cliente",
   ],
@@ -35,25 +35,7 @@ export default function ContactoPage() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-5xl mx-auto">
             <a
-              href="https://wa.me/573217590897"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block"
-            >
-              <div className="p-8 bg-card rounded-2xl shadow-soft hover:shadow-warm transition-all duration-300 hover:-translate-y-1">
-                <Phone className="w-12 h-12 text-primary mx-auto mb-4" />
-                <h3 className="text-xl font-gotham font-semibold mb-2">
-                  WhatsApp
-                </h3>
-                <p className="text-muted-foreground mb-4">+57 321 759 0897</p>
-                <Button variant="default" className="w-full">
-                  Enviar mensaje
-                </Button>
-              </div>
-            </a>
-
-            <a
-              href="https://instagram.com/zafta_reposteria"
+              href={INSTAGRAM_DM_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="block"
@@ -65,7 +47,22 @@ export default function ContactoPage() {
                 </h3>
                 <p className="text-muted-foreground mb-4">@zafta_reposteria</p>
                 <Button variant="default" className="w-full">
-                  Seguir
+                  Enviar mensaje
+                </Button>
+              </div>
+            </a>
+
+            <a href={mailtoUrl("Contacto desde la web")} className="block">
+              <div className="p-8 bg-card rounded-2xl shadow-soft hover:shadow-warm transition-all duration-300 hover:-translate-y-1">
+                <Mail className="w-12 h-12 text-primary mx-auto mb-4" />
+                <h3 className="text-xl font-gotham font-semibold mb-2">
+                  Correo
+                </h3>
+                <p className="text-muted-foreground mb-4 break-all text-sm">
+                  {CONTACT_EMAIL}
+                </p>
+                <Button variant="default" className="w-full">
+                  Escribir correo
                 </Button>
               </div>
             </a>

@@ -2,8 +2,9 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { ChevronDown, MessageCircle } from "lucide-react";
+import { ChevronDown, Instagram, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { CONTACT_EMAIL, INSTAGRAM_DM_URL, mailtoUrl } from "@/lib/contact";
 import {
   Accordion,
   AccordionContent,
@@ -47,7 +48,7 @@ const faqs = [
     category: "Pedidos y entregas",
     question: "¿Cómo puedo hacer mi pedido?",
     answer:
-      "Puedes realizar tu pedido a través de nuestra tienda en línea (próximamente), nuestro catálogo en WhatsApp Business: 321 759 0897, o por mensaje directo en nuestras redes sociales (Instagram, Facebook, TikTok). Como lo hacía Fanny: con cercanía, atención y todo el amor del mundo ❤️",
+      `Puedes realizar tu pedido a través de nuestra tienda en línea, por mensaje directo en Instagram (@zafta_reposteria) o escribiéndonos a ${CONTACT_EMAIL}. Como lo hacía Fanny: con cercanía, atención y todo el amor del mundo ❤️`,
   },
   // Productos
   {
@@ -147,14 +148,14 @@ const faqs = [
     category: "Canales de contacto",
     question: "¿Por dónde puedo hacer mi pedido?",
     answer:
-      "Puedes pedir desde la tienda en línea, por WhatsApp Business (catálogo o mensaje), o escribiéndonos en Instagram, TikTok o Facebook. Coordinamos contigo todo con la misma calidez de siempre ❤️",
+      `Puedes pedir desde la tienda en línea, por mensaje directo en Instagram o escribiéndonos a ${CONTACT_EMAIL}. Coordinamos contigo todo con la misma calidez de siempre ❤️`,
   },
   {
     id: "20",
     category: "Canales de contacto",
     question: "¿Tienen catálogo digital o tienda en línea?",
     answer:
-      "Sí ✨ Puedes ver nuestro catálogo por WhatsApp y muy pronto hacer tus pedidos en nuestra tienda online. Queremos que te sientas como en casa desde la primera pantalla.",
+      "Sí ✨ Puedes ver nuestro catálogo y hacer tus pedidos en nuestra tienda online. Queremos que te sientas como en casa desde la primera pantalla.",
   },
   {
     id: "21",
@@ -170,18 +171,11 @@ const faqs = [
     question:
       "¿Dónde puedo dejar una reseña o comentario sobre mi experiencia?",
     answer:
-      "Puedes dejar tu reseña en nuestro perfil de Google My Business o escribirnos por WhatsApp. Cada mensaje es como una receta que guardamos con cariño. Nos ayuda a crecer, a mejorar, y a seguir horneando con propósito.",
+      "Puedes dejar tu reseña en nuestro perfil de Google My Business o escribirnos por Instagram. Cada mensaje es como una receta que guardamos con cariño. Nos ayuda a crecer, a mejorar, y a seguir horneando con propósito.",
   },
 ];
 
 const FAQ = () => {
-  const handleWhatsAppContact = () => {
-    const message =
-      "¡Hola! Tengo algunas dudas sobre sus productos. ¿Me pueden ayudar? 😊";
-    const whatsappUrl = `https://wa.me/573217590897?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, "_blank");
-  };
-
   return (
     <section
       id="faq"
@@ -310,24 +304,53 @@ const FAQ = () => {
               ¿Aún tienes dudas?
             </h3>
             <p className="text-base md:text-lg text-muted-foreground mb-6 font-sans">
-              Hablemos por WhatsApp. Estamos aquí para ayudarte a escoger la
-              torta perfecta para tu momento especial.
+              Escríbenos por Instagram o por correo. Estamos aquí para ayudarte
+              a escoger la torta perfecta para tu momento especial.
             </p>
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.98 }}
-              transition={{ duration: 0.2 }}
-            >
-              <Button
-                onClick={handleWhatsAppContact}
-                size="lg"
-                variant="whatsapp"
-                className="px-8 py-6 text-lg font-semibold"
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ duration: 0.2 }}
               >
-                <MessageCircle className="h-5 w-5 mr-2" />
-                Escríbenos por WhatsApp
-              </Button>
-            </motion.div>
+                <Button
+                  asChild
+                  size="lg"
+                  className="px-8 py-6 text-lg font-semibold w-full"
+                >
+                  <a
+                    href={INSTAGRAM_DM_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Instagram className="h-5 w-5 mr-2" />
+                    Escríbenos por Instagram
+                  </a>
+                </Button>
+              </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ duration: 0.2 }}
+              >
+                <Button
+                  asChild
+                  size="lg"
+                  variant="outline"
+                  className="px-8 py-6 text-lg font-semibold w-full border-2"
+                >
+                  <a
+                    href={mailtoUrl(
+                      "Dudas sobre sus productos",
+                      "¡Hola! Tengo algunas dudas sobre sus productos. ¿Me pueden ayudar? 😊",
+                    )}
+                  >
+                    <Mail className="h-5 w-5 mr-2" />
+                    Escríbenos por correo
+                  </a>
+                </Button>
+              </motion.div>
+            </div>
           </div>
         </motion.div>
       </div>
